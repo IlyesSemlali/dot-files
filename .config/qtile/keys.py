@@ -40,10 +40,6 @@ keys = [
              lazy.shutdown(),
              desc='Shutdown Qtile'
              ),
-         Key(["control", "shift"], "e",
-             lazy.spawn("emacsclient -c -a emacs"),
-             desc='Doom Emacs'
-             ),
          ### Switch focus to specific monitor (out of three)
 #         Key([settings.mod], "w",
 #             lazy.to_screen(0),
@@ -119,7 +115,7 @@ keys = [
              lazy.layout.next(),
              desc='Switch window focus to other pane(s) of stack'
              ),
-         Key([settings.mod, "control"], "Return",
+         Key([settings.mod, "shift"], "Return",
              lazy.layout.toggle_split(),
              desc='Toggle between split and unsplit sides of stack'
              ),
