@@ -1,5 +1,4 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/ilyes/.oh-my-zsh"
@@ -70,7 +69,7 @@ GIT_PROMPT_EXCLUDES=($USER)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose)
+plugins=(zsh-completions git docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,7 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-
 # needs merge
 alias e=exa
 alias ll='ls -l -t -r -h'
@@ -118,4 +116,8 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 function w3mimg () {
 	#w3m -o imgdisplay=/usr/libexec/w3m/w3mimgdisplay $1
 	w3m -o imgdisplay=/usr/local/bin//w3mdisplayhack $1
+}
+
+function ko () {
+	kdeconnect-handler --open $@
 }
