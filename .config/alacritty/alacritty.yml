@@ -324,7 +324,7 @@ colors:
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
 # background_opacity: 1.0
-background_opacity: 0.9
+background_opacity: 0.90
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -408,7 +408,7 @@ background_opacity: 0.9
   # Record all characters and escape sequences as test data.
   #ref_test: false
 
-#mouse:
+mouse:
   # Click settings
   #
   # The `double_click` and `triple_click` settings control the time
@@ -420,7 +420,7 @@ background_opacity: 0.9
   # If this is `true`, the cursor is temporarily hidden when typing.
   #hide_when_typing: false
 
-  #url:
+  url:
     # URL launcher
     #
     # This program is executed when clicking on a text which is recognized as a URL.
@@ -432,8 +432,8 @@ background_opacity: 0.9
     #   - (macOS) open
     #   - (Linux/BSD) xdg-open
     #   - (Windows) explorer
-    #launcher:
-    #  program: xdg-open
+    launcher:
+      program: qutebrowser
     #  args: []
 
     # URL modifiers
