@@ -12,7 +12,7 @@ Config {
                            , "xft:Font Awesome 5 Brands:pixelsize=13"   ]
   , bgColor = "#292d3e"
   , fgColor = "#ABABAB"
-  , iconRoot = "/home/ilyes/.xmonad/xpm/"  -- default: "."
+  , iconRoot = ".xmonad/xpm/"  -- default: "."
   , position =     Top
 
   -- layout
