@@ -82,26 +82,32 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
 
+   -- Config
+import Config as C
+
+myHomeDir :: String
+myHomeDir = C.configHomeDir
+
 myFont :: String
-myFont = "xft:SourceCodePro:bold:size=9:antialias=true:hinting=true"
+myFont = C.configFont 
 
 myMenuManager :: String
-myMenuManager = "rofi -terminal alacritty -combi-modi window,drun,ssh -drun-show-actions -font 'hack 10' -show combi"
+myMenuManager = C.configMenuManager 
 
 myModMask :: KeyMask
 myModMask = mod4Mask       -- Sets modkey to super/windows key
 
 myTerminal :: String
-myTerminal = "alacritty"   -- Sets default terminal
+myTerminal = C.configTerminal 
 
 myBrowser :: String
-myBrowser = "qutebrowser "               -- Sets firefox as browser for tree select
+myBrowser = C.configBrowser 
 
 myEditor :: String
-myEditor = myTerminal ++ " -e vim "    -- Sets vim as editor for tree select
+myEditor = C.configEditor 
 
 myBorderWidth :: Dimension
-myBorderWidth = 1          -- Sets border width for windows
+myBorderWidth = C.configBorderWidth 
 
 myNormColor :: String
 myNormColor   = "#292d3e"  -- Border color of normal windows
