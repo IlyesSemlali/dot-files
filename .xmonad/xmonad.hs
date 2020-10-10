@@ -86,28 +86,31 @@ import XMonad.Util.SpawnOnce
 import Config as C
 
 myHomeDir :: String
-myHomeDir = C.configHomeDir
+myHomeDir = C.homeDir
 
 myFont :: String
-myFont = C.configFont 
+myFont = C.font
 
 myMenuManager :: String
-myMenuManager = C.configMenuManager 
+myMenuManager = C.menuManager
 
 myModMask :: KeyMask
 myModMask = mod4Mask       -- Sets modkey to super/windows key
 
 myTerminal :: String
-myTerminal = C.configTerminal 
+myTerminal = C.terminalEmulator
 
 myBrowser :: String
-myBrowser = C.configBrowser 
+myBrowser = C.browser
 
 myEditor :: String
-myEditor = C.configEditor 
+myEditor = C.editor
 
 myBorderWidth :: Dimension
-myBorderWidth = C.configBorderWidth 
+myBorderWidth = 1
+
+myXmobarCommand :: String
+myXmobarCommand = "xmobar -x 0 " ++ myHomeDir ++ ".xmonad/xmobar.hs"
 
 myNormColor :: String
 myNormColor   = "#292d3e"  -- Border color of normal windows
@@ -363,7 +366,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5%+ unmute")
         , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight -inc 5 -time 300")
         , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -dec 5 -time 300")
-        -- , ((0, xF86XK_Search), safeSpawn "firefox" ["https://www.google.com/"])
         , ((0, xK_Print), spawn "scrotd")
         ]
         -- The following lines are needed for named scratchpads.
@@ -374,7 +376,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 main :: IO ()
 main = do
     -- Launching one instance of xmobar on one monitor
-    xmproc0 <- spawnPipe "xmobar -x 0 /home/ilyes/.xmonad/xmobar.hs"
+    xmproc0 <- spawnPipe myXmobarCommand
     -- Start xmonad
     xmonad $ ewmh def
         { manageHook = myManageHook <+> manageDocks
