@@ -20,3 +20,9 @@
 
 [mergetool]
 	promt = false
+
+[core]
+	excludefiles = ~/.gitignore
+
+[include]
+	path = ~/.gitconfig.local
