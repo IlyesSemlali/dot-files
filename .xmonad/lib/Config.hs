@@ -1,18 +1,13 @@
 module Config where
 
-import XMonad (Dimension)
+homeDir = "/home/ilyes/"
 
-configHomeDir = "/home/ilyes"
+font = "xft:SourceCodePro:bold:size=9:antialias=true:hinting=true"
 
-configFont = "xft:SourceCodePro:bold:size=9:antialias=true:hinting=true"
+menuManager = "rofi -terminal alacritty -combi-modi window,drun,ssh -drun-show-actions -font 'hack 10' -show combi"
 
-configMenuManager = "rofi -terminal alacritty -combi-modi window,drun,ssh -drun-show-actions -font 'hack 10' -show combi"
+terminalEmulator = "alacritty"   -- Sets default terminal
 
-configTerminal = "alacritty"   -- Sets default terminal
+browser = "qutebrowser "               -- Sets firefox as browser for tree select
 
-configBrowser = "qutebrowser "               -- Sets firefox as browser for tree select
-
-configEditor = configTerminal ++ " -e vim "    -- Sets vim as editor for tree select
-
-configBorderWidth :: Dimension
-configBorderWidth = 1          -- Sets border width for windows
+editor = terminalEmulator ++ " -e vim "    -- Sets vim as editor for tree select
