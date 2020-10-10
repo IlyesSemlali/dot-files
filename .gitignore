@@ -1,1 +1,14 @@
 *
+<<<<<<< HEAD
+||||||| parent of 77f55f6 (added includes for gitconfig)
+!.gitignore
+!.vimrc
+!.zshrc
+!.gitconfig
+=======
+!.gitignore
+!.vimrc
+!.zshrc
+!.gitconfig
+.ctags
+>>>>>>> 77f55f6 (added includes for gitconfig)
