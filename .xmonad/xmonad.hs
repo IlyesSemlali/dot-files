@@ -296,7 +296,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Xmonad
         [ ((modMask .|. controlMask, xK_r),                                    spawn "xmonad --recompile")      -- Recompiles xmonad
         , ((modMask .|. shiftMask, xK_r),                                      spawn "xmonad --restart")        -- Restarts xmonad
-        -- , ((modMask .|. shiftMask, xK_Escape),                                 io exitSuccess)           -- Quits xmonad
+        , ((modMask .|. shiftMask, xK_Escape),                                 io exitSuccess)           -- Quits xmonad
         -- , ((modMask, xK_Escape),                                               io exitSuccess)             -- TODO: lock sreen
 
     -- Open my preferred terminal
