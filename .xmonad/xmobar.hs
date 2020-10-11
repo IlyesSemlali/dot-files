@@ -18,7 +18,7 @@ Config {
   -- layout
   , sepChar =  "%"   -- delineator between plugin names and straight text
   , alignSep = "}{"  -- separator between left-right alignment
-  , template = "<icon=haskell_20.xpm/> %UnsafeStdinReader% }{ <fn=4></fn> %uname% | %battery% | %cpu% | %LFLL% | %date% "
+  , template = "<icon=haskell_20.xpm/> %UnsafeStdinReader% }{ <fn=4></fn> %uname% | %wlp59s0wi% | %battery% | %cpu% | %LFLL% | %date% "
 
   -- general behavior
   , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -58,7 +58,7 @@ Config {
                             ] 10
 
        -- Cpu usage in percent
-       , Run Cpu            ["--template", "Cpu: (<total>%)"
+       , Run Cpu            ["--template", "CPU: (<total>%)"
                             , "--High"     , "85"         -- units: %
                             , "--high"     , "darkorange"
                             ] 10
@@ -68,15 +68,6 @@ Config {
                             , "--High"     , "85"         -- units: %
                             , "--high"     , "darkorange"
                             ] 10
-
-       -- cpu core temperature monitor
-       , Run CoreTemp       [ "--template" , "Temp: <core0>°C|<core1>°C"
-                            , "--Low"      , "70"        -- units: °C
-                            , "--High"     , "80"        -- units: °C
-                            , "--low"      , "darkgreen"
-                            , "--normal"   , "darkorange"
-                            , "--high"     , "darkred"
-                            ] 50
 
        -- Disk space free
        , Run DiskU [("/", "<free> free")] [] 60
@@ -106,6 +97,9 @@ Config {
 
        -- Runs a standard shell command 'uname -r' to get kernel version
        , Run Com "uname" ["-r"] "" 3600
+
+       -- Gets current connection name
+       , Run Wireless "wlp59s0" [ "--template", "<essid>" ] 10
 
        -- time and date indicator
        --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
