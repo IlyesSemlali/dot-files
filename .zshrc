@@ -27,4 +27,16 @@ export SYSTEMD_PAGER=''
 export DISABLE_UPDATE_PROMPT=true
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
+<<<<<<< HEAD
 source ~/.zshrc.d/*.zsh
+||||||| parent of 08434e6 (added powerline fonts and config in vimrc)
+if [ -f .zshrc.local ]
+then
+	source .zshrc.local
+fi
+=======
+if [ -f ~/.zshrc.local ]
+then
+	source ~/.zshrc.local
+fi
+>>>>>>> 08434e6 (added powerline fonts and config in vimrc)
