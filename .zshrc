@@ -27,7 +27,7 @@ export SYSTEMD_PAGER=''
 export DISABLE_UPDATE_PROMPT=true
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
-if [ -f .zshrc.local ]
+if [ -f ~/.zshrc.local ]
 then
-	source .zshrc.local
+	source ~/.zshrc.local
 fi
