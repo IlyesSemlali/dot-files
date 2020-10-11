@@ -27,6 +27,12 @@ filetype plugin indent on
 " Full custom configuration "
 """""""""""""""""""""""""""""
 
+" Powerline fonts
+set guifont=DroidSansMono\ Nerd\ Font\ 14
+let g:airline_left_sep = "\uE0CC"
+let g:airline_right_sep = "\uE0CC"
+let g:airline_section_z = airline#section#create(["\uE0A1 " . '%{line(".")}' . " \uE0A3 " . '%{col(".")}'])
+
 set splitright
 
 " Automatic reload of .vimrc
@@ -46,7 +52,7 @@ set pastetoggle=<F2>
 set clipboard=unnamed
 
 " Disable highlighting after a search
-" TODO: Use <leader> 
+" TODO: Use <leader>
 " noremap <C-n> :nohl<CR>
 " vnoremap <C-n> :nohl<CR>
 " inoremap <C-n> :nohl<CR>
@@ -58,11 +64,11 @@ set wildmenu
 " Custom function
 
 function! GitStatus()
-	vert term git status
+  vert term git status
 endfunction
 
 function! GitDiff()
-	vert terminal git diff -- %
+  vert terminal git diff -- %
 endfunction
 
 " handle indent text object
@@ -101,5 +107,5 @@ endfunction
 
 "" TODO
 
-" Rice up vim so it rocks when coding python 
+" Rice up vim so it rocks when coding python
 " checkout he YT video called "Vim as a Python IDE - Martin Brochhaus"
