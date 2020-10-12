@@ -127,7 +127,7 @@ myStartupHook = do
           spawnPipe "picom --experimental-backends -b"
           spawnPipe "unclutter --timeout 1 &"
           spawnPipe "dunst &"
-          spawnPipe "copyq &"
+          spawnPipe "greenclip daemon &"
           spawnPipe "pkill redshift && sleep 5; redshift"
           spawnPipe "nm-applet &"
           spawnPipe "volumeicon &"
@@ -366,6 +366,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5%+ unmute")
         , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight -inc 5 -time 300")
         , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -dec 5 -time 300")
+        , ((0, xK_Menu), spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'")
         , ((0, xK_Print), spawn "scrotd")
         ]
         -- The following lines are needed for named scratchpads.
