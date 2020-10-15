@@ -38,9 +38,9 @@
     lightbg:                     rgba ( 238, 232, 213, 100 % );
     bordercolor:                 rgba ( 17, 170, 170, 100 % );
     lightfg:                     rgba ( 88, 104, 117, 100 % );
-    border-color:                @color6;
+    border-color:                @color5;
     spacing:                     2;
-    separatorcolor:              @color6;
+    separatorcolor:              @color5;
 }
 #window {
     background-color: @background;
