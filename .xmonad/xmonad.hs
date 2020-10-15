@@ -216,7 +216,7 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm mediumNSP
     spawnTerm  = myTerminal ++ " -t scratchpad"
     findTerm   = title=? "scratchpad"
 
-    spawnWeechat  = myTerminal ++ "-t weechat"
+    spawnWeechat  = myTerminal ++ " -t weechat -e weechat"
     findWeechat   = title=? "weechat"
 
     spawnKeepass  = "keepassxc"
@@ -354,7 +354,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Scratchpads
         , ((modMask, xK_F1),                                                   namedScratchpadAction myScratchPads "terminal")
         , ((modMask, xK_F2),                                                   namedScratchpadAction myScratchPads "keepass")
-        , ((modMask, xK_F4),                                                   namedScratchpadAction myScratchPads "weechat")
+        , ((modMask, xK_F3),                                                   namedScratchpadAction myScratchPads "weechat")
         , ((modMask, xK_F5),                                                   namedScratchpadAction myScratchPads "netflix")
         , ((modMask, xK_F8),                                                   namedScratchpadAction myScratchPads "youtube-music")
 
