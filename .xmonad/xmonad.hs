@@ -131,7 +131,6 @@ myStartupHook = do
           spawnPipe "pkill redshift && sleep 5; redshift"
           spawnPipe "nm-applet &"
           spawnPipe "volumeicon &"
-          -- spawnPipe "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x292d3e --height 22 &"
           setWMName "LG3D"
 
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
@@ -187,17 +186,17 @@ myAppGrid = [ ("Audacity", "audacity")
 
 smallNSP = customFloating $ W.RationalRect l t w h
                where
-                 h = 0.9
-                 w = 0.9
-                 t = 0.95 -h
-                 l = 0.95 -w
+                 h = 0.6
+                 w = 0.6
+                 t = 0.8 -h
+                 l = 0.8 -w
 
 mediumNSP = customFloating $ W.RationalRect l t w h
                where
-                 h = 0.9
-                 w = 0.9
-                 t = 0.95 -h
-                 l = 0.95 -w
+                 h = 0.8
+                 w = 0.8
+                 t = 0.9 -h
+                 l = 0.9 -w
 
 fullNSP = customFloating $ W.RationalRect l t w h
                where
@@ -208,12 +207,20 @@ fullNSP = customFloating $ W.RationalRect l t w h
 
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "terminal" spawnTerm findTerm mediumNSP
+                , NS "keepass" spawnKeepass findKeepass smallNSP
+                , NS "weechat" spawnWeechat findWeechat mediumNSP
                 , NS "youtube-music" spawnMocp findMocp fullNSP
                 , NS "netflix" spawnNetflix findNetflix fullNSP
                 ]
   where
     spawnTerm  = myTerminal ++ " -t scratchpad"
     findTerm   = title=? "scratchpad"
+
+    spawnWeechat  = myTerminal ++ "-t weechat"
+    findWeechat   = title=? "weechat"
+
+    spawnKeepass  = "keepassxc"
+    findKeepass   = className=? "KeePassXC"
 
     spawnMocp  = myBrowser ++ " --qt-arg name ytmusic --basedir .cache/qutebrowser-ytmusic music.youtube.com"
     findMocp   = resource =? "ytmusic"
@@ -326,8 +333,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((modMask, xK_BackSpace),                                            promote)            -- Moves focused window to master, others maintain order
         , ((mod1Mask .|. shiftMask, xK_Tab),                                   rotSlavesDown)         -- Rotate all windows except master and keep focus in place
         , ((mod1Mask .|. controlMask, xK_Tab),                                 rotAllDown)            -- Rotate all the windows in the current stack
-        -- , ((modMask .|. shiftMask, xK_s), windows copyToAll)
-        -- , ((modMask .|. controlMask, xK_s), killAllOtherCopies)
 
      -- Layouts
         , ((modMask, xK_Tab),                                                  sendMessage NextLayout)                -- Switch to next layout
@@ -338,8 +343,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((modMask .|. shiftMask, xK_n),                                      sendMessage $ MT.Toggle NOBORDERS)      -- Toggles noborder
         , ((modMask, xK_exclam),                                               sendMessage (IncMasterN 1))   -- Increase number of clients in master pane
         , ((modMask .|. shiftMask, xK_exclam),                                 sendMessage (IncMasterN (-1)))  -- Decrease number of clients in master pane
-        -- , ((modMask .|. shiftMask <KP_Multiply>"), increaseLimit)              -- Increase number of windows
-        -- , ((modMask .|. shiftMask <KP_Divide>"), decreaseLimit)                -- Decrease number of windows
 
         , ((modMask, xK_h),                                                    windows W.focusMaster)                    -- Move focus to the master window
         , ((modMask, xK_l),                                                    windows W.focusMaster >> windows W.focusDown)  -- Move focus to the stack
@@ -350,17 +353,21 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- Scratchpads
         , ((modMask, xK_F1),                                                   namedScratchpadAction myScratchPads "terminal")
-        , ((modMask, xK_F8),                                                   namedScratchpadAction myScratchPads "youtube-music")
+        , ((modMask, xK_F2),                                                   namedScratchpadAction myScratchPads "keepass")
+        , ((modMask, xK_F4),                                                   namedScratchpadAction myScratchPads "weechat")
         , ((modMask, xK_F5),                                                   namedScratchpadAction myScratchPads "netflix")
+        , ((modMask, xK_F8),                                                   namedScratchpadAction myScratchPads "youtube-music")
 
     -- Applications
         , ((modMask .|. mod1Mask, xK_Return),                                  spawn (myBrowser))
         , ((modMask .|. mod1Mask, xK_v),                                       spawn ("vivaldi --new-window"))
 
     -- Multimedia Keys
-        -- , ((0, xF86XK_AudioPlay), spawn "cmus toggle")
-        -- , ((0, xF86XK_AudioPrev), spawn "cmus prev")
-        -- , ((0, xF86XK_AudioNext), spawn "cmus next")
+        , ((0, xF86XK_AudioPlay), spawn "playerctl play-pause")
+        , ((shiftMask, xF86XK_AudioPlay), spawn "playerctl --all-players stop")
+        , ((0, xF86XK_AudioPrev), spawn "playerctl previous")
+        , ((shiftMask, xF86XK_AudioPrev), spawn "playerctl position 0")
+        , ((0, xF86XK_AudioNext), spawn "playerctl next")
         , ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
         , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5%-")
         , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5%+ unmute")
