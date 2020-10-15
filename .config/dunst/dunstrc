@@ -10,17 +10,17 @@ alignment = left
 show_age_threshold = -1
 word_wrap = yes
 ignore_newline = no
-geometry = "300x0-12+12"
-transparency = 50
+geometry = "300x0-8+30"
+transparency = 30
 idle_threshold = 120
 monitor = 0
 follow = mouse
 sticky_history = yes
 line_height = 0
-separator_height = 3
+separator_height = 2
 padding = 8
 horizontal_padding = 8
-separator_color = foreground
+separator_color = "#374242"
 startup_notification = false
 dmenu = /usr/bin/dmenu -p dunst:
 browser = /usr/bin/vivaldi --new-tab
@@ -36,11 +36,11 @@ history = ctrl+comma
 context = ctrl+shift+c
 
 [urgency_low]
-background = "#0F1D25"
+background = "#292d3e"
 foreground = "#ffffff"
 timeout = 10
 [urgency_normal]
-background = "#0F1D25"
+background = "#292d3e"
 foreground = "#ffffff"
 timeout = 10
 
