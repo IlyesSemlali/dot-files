@@ -1,7 +1,7 @@
--- Run xmonad commands from command line with "xmonadctl command". Commands include:
--- shrink, expand, next-layout, default-layout, restart-wm, xterm, kill, refresh, run,
--- focus-up, focus-down, swap-up, swap-down, swap-master, sink, quit-wm. You can run
--- "xmonadctl 0" to generate full list of commands written to ~/.xsession-errors.
+-- Before runing this, you need to add a config file and compile it:
+--   cd lib/
+--   cp Config.hs{.tpl,} && vim $_ 
+--   ghc --make Config.hs
 
     -- Base
 import XMonad
@@ -112,6 +112,9 @@ myBorderWidth = 1
 myXmobarCommand :: String
 myXmobarCommand = "xmobar -x 0 " ++ myHomeDir ++ ".xmonad/xmobar.hs"
 
+myFehCommand :: String
+myFehCommand = "feh --bg-fill " ++ C.wallpaper ++ "&"
+
 myNormColor :: String
 myNormColor   = "#292d3e"  -- Border color of normal windows
 
@@ -123,14 +126,12 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 myStartupHook :: X ()
 myStartupHook = do
-          spawnPipe "nitrogen --restore &"
+          spawnPipe myFehCommand
           spawnPipe "picom --experimental-backends -b"
           spawnPipe "unclutter --timeout 1 &"
           spawnPipe "dunst &"
           spawnPipe "greenclip daemon &"
           spawnPipe "pkill redshift && sleep 5; redshift"
-          spawnPipe "nm-applet &"
-          spawnPipe "volumeicon &"
           setWMName "LG3D"
 
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
@@ -225,8 +226,8 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm mediumNSP
     spawnMocp  = myBrowser ++ " --qt-arg name ytmusic --basedir .cache/qutebrowser-ytmusic music.youtube.com"
     findMocp   = resource =? "ytmusic"
 
-    spawnNetflix = "netflix"
-    findNetflix   = title =? "netflix"
+    spawnNetflix = "firefox --kiosk https://netflix.com"
+    findNetflix   = className =? "Firefox"
 
 -- Layouts definitions
 tall     = renamed [Replace "tall"]
