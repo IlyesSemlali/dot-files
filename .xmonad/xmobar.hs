@@ -1,113 +1,71 @@
---  -- http://projects.haskell.org/xmobar/
---  -- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
---  -- you can find weather location codes here: http://weather.noaa.gov/index.html
+-- http://projects.haskell.org/xmobar/
+-- you can find weather location codes here: http://weather.noaa.gov/index.html
 
 Config {
 
- -- appearance
-    font =         "xft:SourceCodePro Light:pixelsize=14:antialias=true:hinting=true"
-  , additionalFonts = [ "xft:SourceCodePro:pixelsize=11:antialias=true:hinting=true"
-                           , "xft:SourceCodePro:pixelsize=16:antialias=true:hinting=true"
-                           , "xft:Font Awesome 5 Free:pixelsize=13"
-                           , "xft:Font Awesome 5 Brands:pixelsize=13"   ]
-  , bgColor = "#292d3e"
-  , fgColor = "#ABABAB"
-  , iconRoot = ".xmonad/xpm/"  -- default: "."
-  , position =     Top
-
-  -- layout
-  , sepChar =  "%"   -- delineator between plugin names and straight text
-  , alignSep = "}{"  -- separator between left-right alignment
-  , template = "<icon=haskell_20.xpm/> %UnsafeStdinReader% }{ <fn=4></fn> %uname% | %wlp59s0wi% | %battery% | %cpu% | %LFLL% | %date% "
-
   -- general behavior
-  , lowerOnStart =     True    -- send to bottom of window stack on start
+    lowerOnStart =     True    -- send to bottom of window stack on start
   , hideOnStart =      False   -- start with window unmapped (hidden)
   , allDesktops =      True    -- show on all desktops
   , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
   , pickBroadest =     False   -- choose widest display (multi-monitor)
   , persistent =       True    -- enable/disable hiding (True = disabled)
 
-  -- plugins
-  --   Numbers can be automatically colored according to their value. xmobar
-  --   decides color based on a three-tier/two-cutoff system, controlled by
-  --   command options:
-  --     --Low sets the low cutoff
-  --     --High sets the high cutoff
-  --
-  --     --low sets the color below --Low cutoff
-  --     --normal sets the color between --Low and --High cutoffs
-  --     --High sets the color above --High cutoff
-  --
-  --   The --template option controls how the plugin is displayed. Text
-  --   color can be set by enclosing in <fc></fc> tags. For more details
-  --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
-  , commands =
+ -- appearance
+  , font =         "xft:SourceCodePro Light:pixelsize=14:antialias=true:hinting=true"
+  , additionalFonts = [ "xft:SourceCodePro:pixelsize=11:antialias=true:hinting=true"
+                           , "xft:SourceCodePro:pixelsize=16:antialias=true:hinting=true"
+                           , "xft:Font Awesome 5 Free:pixelsize=13"
+                           , "xft:Font Awesome 5 Brands:pixelsize=13"   ]
+  , bgColor = "#292d3e"
+  , fgColor = "#ABABAB"
+  , iconRoot = ".xmonad/xpm/"
+  , position =     Top
 
-       -- weather monitor
-       [ Run Weather "LFLL" [ "--template", "<tempC>°C"
-                            ] 36000
+  -- layout
+  , sepChar =  "%"   -- delineator between plugin names and straight text
+  , alignSep = "}{"  -- separator between left-right alignment
+  , template = "<icon=haskell_20.xpm/> %UnsafeStdinReader% }{ <fn=4></fn> %uname% | %cpu% | %wlp59s0wi% | %default:Master% | %battery% | %LFLL% | %date% "
 
-       -- network activity monitor (dynamic interface resolution)
-       , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
-                            , "--Low"      , "1000"       -- units: B/s
-                            , "--High"     , "5000"       -- units: B/s
-                            , "--low"      , "darkgreen"
-                            , "--normal"   , "darkorange"
-                            , "--high"     , "darkred"
-                            ] 10
+  , commands = [
+         Run Weather "LFLL" [ "--template", "<tempC>°C"] 36000
 
-       -- Cpu usage in percent
-       , Run Cpu            ["--template", "CPU: (<total>%)"
-                            , "--High"     , "85"         -- units: %
-                            , "--high"     , "darkorange"
-                            ] 10
+       , Run Volume "default" "Master" [ "--template", " <volumeipat> <volume> %"
+                                       , "--"
+                                       , "--volume-icon-pattern", "<icon=volume/volume_%%.xpm/>"
+                                       ] 1
 
-       -- cpu activity monitor
-       , Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%"
-                            , "--High"     , "85"         -- units: %
-                            , "--high"     , "darkorange"
-                            ] 10
-
-       -- Disk space free
-       , Run DiskU [("/", "<free> free")] [] 60
-
-       -- memory usage monitor
-       , Run Memory         [ "--template" ,"Mem: <usedratio>%"
-                            , "--Low"      , "20"        -- units: %
-                            , "--High"     , "90"        -- units: %
-                            , "--low"      , "darkgreen"
-                            , "--normal"   , "darkorange"
-                            , "--high"     , "darkred"
-                            ] 10
-
-       -- battery monitor
-       , Run Battery        [ "--template" , "Batt: <acstatus>"
-                            , "--Low"      , "15"        -- units: %
-                            , "--low"      , "darkorange"
-
-                            , "--" -- battery specific options
-                                      -- discharging status
-                                      , "-o"	, "<left>% (<timeleft>)"
-                                      -- AC "on" status
-                                      , "-O"	, "<fc=#dAA520>Charging</fc>"
-                                      -- charged status
-                                      , "-i"	, "<fc=#006000>Charged</fc>"
-                            ] 50
-
-       -- Runs a standard shell command 'uname -r' to get kernel version
        , Run Com "uname" ["-r"] "" 3600
 
-       -- Gets current connection name
-       , Run Wireless "wlp59s0" [ "--template", "<essid>" ] 10
+       , Run Wireless "wlp59s0" [ "--template", "<qualityipat> <quality> %"
+                                , "--"
+                                , "--quality-icon-pattern", "<icon=wireless/wireless_%%.xpm/>"
+                 ] 30
 
-       -- time and date indicator
-       --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
-       -- , Run Date           "<fc=#ABABAB>%F (%a) %T</fc>" "date" 10
        , Run Date "%d %b. %Y - %H:%M" "date" 50
 
        -- Prints out the left side items such as workspaces, layout, etc.
-       -- The workspaces are 'clickable' in my configs.
        , Run UnsafeStdinReader
-       ]
-  }
+
+       , Run Cpu [ "--template" , "<ipat> <total> %"
+                 , "--Low"      , "55"      -- units: %
+                 , "--High"     , "77"      -- units: %
+                 , "--low"      , "#b5bd68"
+                 , "--normal"   , "#de935f"
+                 , "--high"     , "#a54242"
+                 , "--"
+                    , "--load-icon-pattern" , "<icon=cpu/cpu_%%.xpm/>"
+                 ] 10
+
+              , Run Battery [ "--template"  , "<leftipat> <timeleft>"
+                     , "--maxtwidth" , "10"
+                     , "--"
+                       , "--on-icon-pattern"   , "<icon=battery/on/battery_on_%%.xpm/>"
+                       , "--off-icon-pattern"  , "<icon=battery/off/battery_off_%%.xpm/>"
+                       , "--idle-icon-pattern" , "<icon=battery/idle/battery_idle_%%.xpm/>"
+                       , "-o" , "<left><fc=#c5c8c6>%</fc> <timeleft>" -- discharging status
+                       , "-O" , "<left><fc=#c5c8c6>% <timeleft></fc>" -- plugged in status
+                       , "-i" , "<fc=#707880>IDLE</fc>"               -- charged status
+                 ] 50
+     ]
+}
