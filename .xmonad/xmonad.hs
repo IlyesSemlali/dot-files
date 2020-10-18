@@ -1,6 +1,6 @@
 -- Before runing this, you need to add a config file and compile it:
 --   cd lib/
---   cp Config.hs{.tpl,} && vim $_ 
+--   cp Config.hs{.tpl,} && vim $_
 --   ghc --make Config.hs
 
     -- Base
@@ -41,6 +41,7 @@ import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, doRectFloat)
 import XMonad.Hooks.ServerMode
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.WorkspaceHistory
+import XMonad.Hooks.ManageHelpers
 
     -- Layouts
 import XMonad.Layout.GridVariants (Grid(Grid))
@@ -275,7 +276,7 @@ myWorkspaceMap =
                , (xK_x, "rand")]
 
 myWorkspaces :: [String]
-myWorkspaces = ["term", "www", "sys", "edit", "rand"]
+myWorkspaces = map snd myWorkspaceMap
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
@@ -283,10 +284,12 @@ myManageHook = composeAll
      , className =? "Gimp"               --> doShift "edit"
      , (className =? "Vivaldi-stable" <&&> role =? "pop-up") --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      , (role =? "GtkFileChooserDialog") --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
+     , (className =? "VirtualBox Manager") --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      ]
      <+> ( isFullscreen --> doFullFloat )
      <+> namedScratchpadManageHook myScratchPads
      <+> insertPosition Below Newer
+     <+> ( isDialog --> doF W.swapUp )
        where
              role = stringProperty "WM_WINDOW_ROLE"
 
