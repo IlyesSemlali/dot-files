@@ -154,6 +154,7 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm mediumNSP
                 , NS "weechat" spawnWeechat findWeechat mediumNSP
                 , NS "youtube-music" spawnMocp findMocp fullNSP
                 , NS "netflix" spawnNetflix findNetflix fullNSP
+                , NS "kdeconnect-sms" spawnKSMS findKSMS smallNSP
                 ]
   where
     spawnTerm  = myTerminal ++ " -t scratchpad"
@@ -168,6 +169,9 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm mediumNSP
     spawnMocp  = myBrowser ++ " --qt-arg name ytmusic --basedir .cache/qutebrowser-ytmusic music.youtube.com"
     findMocp   = resource =? "ytmusic"
 
+    spawnKSMS = "kdeconnect-sms"
+    findKSMS = className =? "kdeconnect.sms"
+
     spawnNetflix = "firefox --kiosk https://netflix.com"
     findNetflix   = className =? "Firefox"
 
@@ -179,6 +183,7 @@ myStartupHook = do
           spawnPipe "unclutter --timeout 1 &"
           spawnPipe "dunst &"
           spawnPipe "greenclip daemon &"
+          spawnPipe "kdeconnect-cli --refresh &"
           spawnPipe "pkill redshift && sleep 5; redshift"
           setWMName "LG3D"
 
@@ -272,6 +277,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((modMask, xK_F3),                                     namedScratchpadAction myScratchPads "weechat")
         , ((modMask, xK_F5),                                     namedScratchpadAction myScratchPads "netflix")
         , ((modMask, xK_F8),                                     namedScratchpadAction myScratchPads "youtube-music")
+        -- , ((modMask, xK_F9),                                     namedScratchpadAction myScratchPads "kdeconnect-sms")
 
     -- Applications
         , ((modMask .|. mod1Mask, xK_Return),                    spawn (myBrowser))
