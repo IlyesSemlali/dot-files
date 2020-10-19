@@ -22,7 +22,7 @@
 	promt = false
 
 [core]
-	excludefiles = ~/.gitignore
+	excludesfile = ~/.gitignore_global
 
 [include]
 	path = ~/.gitconfig.local
