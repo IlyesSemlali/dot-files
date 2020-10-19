@@ -2,6 +2,7 @@
 --   cd lib/
 --   cp Config.hs{.tpl,} && vim $_
 --   ghc --make Config.hs
+--   You can find key symbols here: https://pastebin.com/zHxgcrKD
 
 import Data.Maybe (isJust)
 import Data.Monoid
@@ -105,21 +106,15 @@ myWorkspaceMap :: [(KeySym, String)]
 myWorkspaceMap =
                [ (xK_a, "term")
                , (xK_z, "www")
-               , (xK_q, "sys")
-               , (xK_s, "edit")
-               , (xK_x, "rand")]
+               , (xK_q, "com")
+               , (xK_s, "sys")
+               , (xK_e, "edit")]
 
 myWorkspaces :: [String]
 myWorkspaces = map snd myWorkspaceMap
 
 -- Layouts
 tall     = renamed [Replace "tall"]
-           $ limitWindows 12
-           $ mySpacing 4
-           $ ResizableTall 1 (3/100) (1/2) []
-
-magnify  = renamed [Replace "magnify"]
-           $ magnifier
            $ limitWindows 12
            $ mySpacing 4
            $ ResizableTall 1 (3/100) (1/2) []
@@ -196,7 +191,7 @@ myLayoutHook =  smartBorders
                 $ onWorkspaces ["www", "edit"] (monocle ||| tall)
                 myDefaultLayout
              where
-               myDefaultLayout = tall ||| monocle ||| magnify
+               myDefaultLayout = tall ||| monocle
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
@@ -207,9 +202,9 @@ myManageHook = composeAll
      , className =? "VirtualBox Manager" --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      ]
      <+> ( isFullscreen --> doFullFloat )
-     <+> namedScratchpadManageHook myScratchPads
-     <+> insertPosition Below Newer
      <+> ( isDialog --> doF W.swapUp )
+     <+> insertPosition Below Newer
+     <+> namedScratchpadManageHook myScratchPads
        where
              role = stringProperty "WM_WINDOW_ROLE"
 
