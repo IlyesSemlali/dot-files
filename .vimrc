@@ -16,7 +16,7 @@ Plugin 'pearofducks/ansible-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
-Plugin 'ap/vim-css-color'
+Plugin 'lilydjwg/colorizer'
 
 call vundle#end()
 filetype plugin indent on
