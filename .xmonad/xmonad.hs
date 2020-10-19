@@ -1,8 +1,7 @@
 -- Before runing this, you need to add a config file and compile it:
 --   cd lib/
 --   cp Config.hs{.tpl,} && vim $_
---   ghc --make Config.hs
---   You can find key symbols here: https://pastebin.com/zHxgcrKD
+--   ghc --make *.hs
 
 import Data.Maybe (isJust)
 import Data.Monoid
@@ -56,37 +55,13 @@ import XMonad.Util.SpawnOnce
 import qualified XMonad.StackSet as W
 
    -- Config
-import Config as C
-
-myHomeDir :: String
-myHomeDir = C.homeDir
-
-myFont :: String
-myFont = C.font
-
-myMenuManager :: String
-myMenuManager = C.menuManager
-
-myModMask :: KeyMask
-myModMask = mod4Mask
-
-myTerminal :: String
-myTerminal = C.terminalEmulator
-
-myBrowser :: String
-myBrowser = C.browser
-
-myEditor :: String
-myEditor = C.editor
+import Config
+import Scratchpads
+import Workspaces
+import Keybindings
 
 myBorderWidth :: Dimension
 myBorderWidth = 1
-
-myXmobarCommand :: String
-myXmobarCommand = "xmobar -x 0 " ++ myHomeDir ++ ".xmonad/xmobar.hs"
-
-myFehCommand :: String
-myFehCommand = "feh --bg-fill " ++ C.wallpaper ++ "&"
 
 myNormColor :: String
 myNormColor   = "#292d3e"
@@ -101,18 +76,6 @@ mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
--- Workspaces
-myWorkspaceMap :: [(KeySym, String)]
-myWorkspaceMap =
-               [ (xK_a, "term")
-               , (xK_z, "www")
-               , (xK_q, "com")
-               , (xK_s, "sys")
-               , (xK_e, "edit")]
-
-myWorkspaces :: [String]
-myWorkspaces = map snd myWorkspaceMap
-
 -- Layouts
 tall     = renamed [Replace "tall"]
            $ limitWindows 12
@@ -126,59 +89,10 @@ monocle  = renamed [Replace "monocle"]
 floats   = renamed [Replace "floats"]
            $ limitWindows 20 simplestFloat
 
--- Scrathpads
-smallNSP = customFloating $ W.RationalRect l t w h
-               where
-                 h = 0.6
-                 w = 0.6
-                 t = 0.8 -h
-                 l = 0.8 -w
-
-mediumNSP = customFloating $ W.RationalRect l t w h
-               where
-                 h = 0.8
-                 w = 0.8
-                 t = 0.9 -h
-                 l = 0.9 -w
-
-fullNSP = customFloating $ W.RationalRect l t w h
-               where
-                 h = 1
-                 w = 1
-                 t = 1 -h
-                 l = 1 -w
-
-myScratchPads :: [NamedScratchpad]
-myScratchPads = [ NS "terminal" spawnTerm findTerm mediumNSP
-                , NS "keepass" spawnKeepass findKeepass smallNSP
-                , NS "weechat" spawnWeechat findWeechat mediumNSP
-                , NS "youtube-music" spawnMocp findMocp fullNSP
-                , NS "netflix" spawnNetflix findNetflix fullNSP
-                , NS "kdeconnect-sms" spawnKSMS findKSMS smallNSP
-                ]
-  where
-    spawnTerm  = myTerminal ++ " -t scratchpad"
-    findTerm   = title=? "scratchpad"
-
-    spawnWeechat  = myTerminal ++ " -t weechat -e weechat"
-    findWeechat   = title=? "weechat"
-
-    spawnKeepass  = "keepassxc"
-    findKeepass   = className=? "KeePassXC"
-
-    spawnMocp  = myBrowser ++ " --qt-arg name ytmusic --basedir .cache/qutebrowser-ytmusic music.youtube.com"
-    findMocp   = resource =? "ytmusic"
-
-    spawnKSMS = "kdeconnect-sms"
-    findKSMS = className =? "kdeconnect.sms"
-
-    spawnNetflix = "firefox --kiosk https://netflix.com"
-    findNetflix   = className =? "Firefox"
-
 -- Hooks
 myStartupHook :: X ()
 myStartupHook = do
-          spawnPipe myFehCommand
+          spawnPipe Config.wallpaperCommand
           spawnPipe "picom --experimental-backends -b"
           spawnPipe "unclutter --timeout 1 &"
           spawnPipe "dunst &"
@@ -209,101 +123,13 @@ myManageHook = composeAll
      <+> ( isFullscreen --> doFullFloat )
      <+> ( isDialog --> doF W.swapUp )
      <+> insertPosition Below Newer
-     <+> namedScratchpadManageHook myScratchPads
+     <+> namedScratchpadManageHook Scratchpads.pads
        where
              role = stringProperty "WM_WINDOW_ROLE"
 
 myLogHook :: X ()
 myLogHook = fadeInactiveLogHook fadeAmount
     where fadeAmount = 1.0
-
-
-myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
-myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
-    -- Workspaces
-        [ ((m .|. modMask, k), windows $ f i)                                   --Switch to n workspaces and send client to n workspaces
-          | (i, k) <- zip (XMonad.workspaces conf) (map fst myWorkspaceMap)
-          , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
-        ] ++
-    -- Xmonad
-        [ ((modMask .|. controlMask, xK_r),                      spawn "xmonad --recompile")
-        , ((modMask .|. shiftMask, xK_r),                        spawn "xmonad --restart")
-        , ((modMask .|. shiftMask, xK_Escape),                   io exitSuccess)
-        -- , ((modMask, xK_Escape),                                 io exitSuccess)             -- TODO: lock sreen
-
-    -- Open my preferred terminal
-        , ((modMask, xK_Return),                                 spawn myTerminal)
-        , ((modMask .|. shiftMask, xK_Return),                   spawn myMenuManager)
-
-    -- Windows
-        , ((modMask, xK_c),                                      kill1)
-        , ((modMask .|. shiftMask, xK_c),                        killAll)
-
-    -- Floating windows
-        , ((modMask, xK_f),                                      sendMessage (T.Toggle "floats"))
-        , ((modMask, xK_Delete),                                 withFocused $ windows . W.sink)
-        , ((modMask .|. shiftMask, xK_Delete),                   sinkAll)
-
-    -- Windows navigation
-        , ((modMask, xK_k),                                      windows W.focusUp)
-        , ((modMask, xK_j),                                      windows W.focusDown)
-        , ((modMask .|. shiftMask, xK_m),                        windows W.swapMaster)
-        , ((modMask .|. shiftMask, xK_k),                        windows W.swapUp)
-        , ((modMask .|. shiftMask, xK_j),                        windows W.swapDown)
-        , ((modMask, xK_BackSpace),                              promote)
-        , ((modMask .|. shiftMask, xK_BackSpace),                rotSlavesDown)
-        , ((mod1Mask .|. controlMask, xK_Tab),                   rotAllDown)
-
-     -- Layouts
-        , ((modMask, xK_Tab),                                    sendMessage NextLayout)
-        , ((modMask .|. controlMask .|. mod1Mask, xK_Up),        sendMessage Arrange)
-        , ((modMask .|. controlMask .|. mod1Mask, xK_Down),      sendMessage DeArrange)
-        , ((modMask, xK_space),                                  sendMessage (MT.Toggle NBFULL))
-        , ((modMask .|. shiftMask, xK_space),                    sendMessage ToggleStruts)
-        , ((modMask .|. shiftMask, xK_n),                        sendMessage $ MT.Toggle NOBORDERS)
-        , ((modMask, xK_exclam),                                 sendMessage (IncMasterN 1))
-        , ((modMask .|. shiftMask, xK_exclam),                   sendMessage (IncMasterN (-1)))
-
-        , ((modMask, xK_h),                                      windows W.focusMaster)
-        , ((modMask, xK_l),                                      windows W.focusMaster >> windows W.focusDown)
-        , ((modMask .|. controlMask, xK_h),                      sendMessage Shrink)
-        , ((modMask .|. controlMask, xK_l),                      sendMessage Expand)
-        , ((modMask .|. controlMask, xK_k),                      sendMessage MirrorShrink)
-        , ((modMask .|. controlMask, xK_j),                      sendMessage MirrorExpand)
-
-    -- Scratchpads
-        , ((modMask, xK_F1),                                     namedScratchpadAction myScratchPads "terminal")
-        , ((modMask, xK_F2),                                     namedScratchpadAction myScratchPads "keepass")
-        , ((modMask, xK_F3),                                     namedScratchpadAction myScratchPads "weechat")
-        , ((modMask, xK_F5),                                     namedScratchpadAction myScratchPads "netflix")
-        , ((modMask, xK_F8),                                     namedScratchpadAction myScratchPads "youtube-music")
-        -- , ((modMask, xK_F9),                                     namedScratchpadAction myScratchPads "kdeconnect-sms")
-
-    -- Applications
-        , ((modMask .|. mod1Mask, xK_Return),                    spawn (myBrowser))
-        , ((modMask .|. mod1Mask, xK_v),                         spawn ("vivaldi --new-window"))
-
-    -- Multimedia Keys
-        , ((0, xF86XK_AudioPlay),                                spawn "playerctl play-pause")
-        , ((shiftMask, xF86XK_AudioPlay),                        spawn "playerctl --all-players stop")
-        , ((0, xF86XK_AudioPrev),                                spawn "playerctl previous")
-        , ((shiftMask, xF86XK_AudioPrev),                        spawn "playerctl position 0")
-        , ((0, xF86XK_AudioNext),                                spawn "playerctl next")
-        , ((0, xF86XK_AudioMute),                                spawn "amixer set Master toggle")
-
-        , ((0, xF86XK_AudioLowerVolume),                         spawn "amixer set Master 5%-")
-        , ((0, xF86XK_AudioRaiseVolume),                         spawn "amixer set Master 5%+ unmute")
-
-        , ((0, xF86XK_MonBrightnessUp),                          spawn "xbacklight -inc 5 -time 300")
-        , ((0, xF86XK_MonBrightnessDown),                        spawn "xbacklight -dec 5 -time 300")
-
-        , ((modMask, xK_Control_R),                              spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'")
-        , ((0, xK_Print), spawn "scrotd")
-        ]
-        -- The following lines are needed for named scratchpads.
-          where nonNSP          = WSIs (return (\ws -> W.tag ws /= "nsp"))
-                nonEmptyNonNSP  = WSIs (return (\ws -> isJust (W.stack ws) && W.tag ws /= "nsp"))
-
 
 main :: IO ()
 main = do
@@ -317,12 +143,12 @@ main = do
                                <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn)
                                <+> docksEventHook
                                <+> fullscreenEventHook
-        , modMask            = myModMask
-        , terminal           = myTerminal
-        , keys               = myKeys
+        , XMonad.modMask            = Config.modMask
+        , terminal           = Config.term
+        , keys               = Keybindings.bindings
         , startupHook        = myStartupHook
         , layoutHook         = myLayoutHook
-        , workspaces         = myWorkspaces
+        , workspaces         = map snd Workspaces.spaces
         , borderWidth        = myBorderWidth
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor
