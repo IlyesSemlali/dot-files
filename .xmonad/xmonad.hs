@@ -108,6 +108,7 @@ myLayoutHook =  smartBorders
                 $ T.toggleLayouts floats
                 $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
                 $ onWorkspaces ["www", "edit"] (monocle ||| tall)
+                $ onWorkspace "vm" (floats ||| tall)
                 myDefaultLayout
              where
                myDefaultLayout = tall ||| monocle
@@ -119,9 +120,9 @@ myManageHook = composeAll
      , (className  =? "Vivaldi-stable"
                   <&&> role =? "pop-up")         --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      , (role       =? "GtkFileChooserDialog")    --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
-     , className   =? "VirtualBox Manager"       --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
-     , className   =? "VirtualBoxVM"             --> doFloat
-     , className   =? "VirtualBox Machine"       --> doFullFloat >> doF W.swapUp
+     , className   =? "VirtualBox Manager"       --> doShift "vm"
+     , className   =? "VirtualBoxVM"             --> doShift "vm"
+     , className   =? "VirtualBox Machine"       --> doShift "vm" >> doFullFloat
      ]
      <+> ( isFullscreen --> doFullFloat )
      <+> ( isDialog     --> doF W.swapUp )
