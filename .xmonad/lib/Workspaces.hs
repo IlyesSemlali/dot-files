@@ -9,5 +9,6 @@ spaces =
                , (xK_z, "www")
                , (xK_q, "com")
                , (xK_s, "sys")
+               , (xK_w, "vm")
                , (xK_e, "edit")]
 
