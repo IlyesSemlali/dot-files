@@ -114,14 +114,17 @@ myLayoutHook =  smartBorders
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
-     [ className =? "Vivaldi-stable"     --> doShift "www"
-     , className =? "Gimp"               --> doShift "edit"
-     , (className =? "Vivaldi-stable" <&&> role =? "pop-up") --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
-     , (role =? "GtkFileChooserDialog") --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
-     , className =? "VirtualBox Manager" --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
+     [ className   =? "Vivaldi-stable"           --> doShift "www"
+     , className   =? "Gimp"                     --> doShift "edit"
+     , (className  =? "Vivaldi-stable"
+                  <&&> role =? "pop-up")         --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
+     , (role       =? "GtkFileChooserDialog")    --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
+     , className   =? "VirtualBox Manager"       --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
+     , className   =? "VirtualBoxVM"             --> doFloat
+     , className   =? "VirtualBox Machine"       --> doFullFloat >> doF W.swapUp
      ]
      <+> ( isFullscreen --> doFullFloat )
-     <+> ( isDialog --> doF W.swapUp )
+     <+> ( isDialog     --> doF W.swapUp )
      <+> insertPosition Below Newer
      <+> namedScratchpadManageHook Scratchpads.pads
        where
