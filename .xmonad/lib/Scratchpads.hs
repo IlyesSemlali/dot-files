@@ -48,6 +48,7 @@ pads = [ NS "terminal" spawnTerm findTerm mediumNSP
                 , NS "youtube-music" spawnMocp findMocp fullNSP
                 , NS "netflix" spawnNetflix findNetflix fullNSP
                 , NS "kdeconnect-sms" spawnKSMS findKSMS smallNSP
+                , NS "virtualmachine" spawnVM findVM fullNSP
                 ]
   where
     spawnTerm  = Config.term ++ " -t scratchpad"
@@ -64,6 +65,9 @@ pads = [ NS "terminal" spawnTerm findTerm mediumNSP
 
     spawnKSMS = "kdeconnect-sms"
     findKSMS = className =? "kdeconnect.sms"
+
+    spawnVM = Config.vmCommand
+    findVM = className =? "VirtualBox Machine"
 
     spawnNetflix = "firefox --kiosk https://netflix.com"
     findNetflix   = className =? "Firefox"
