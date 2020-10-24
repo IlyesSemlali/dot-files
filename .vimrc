@@ -17,6 +17,8 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
 Plugin 'lilydjwg/colorizer'
+Plugin 'rust-lang/rust.vim'
+Plugin 'rkitover/vimpager'
 
 call vundle#end()
 filetype plugin indent on
@@ -42,33 +44,30 @@ autocmd! bufwritepost .vimrc source %
 set relativenumber
 set nu
 set undofile
+
+" Leader based keybindings
+let mapleader = '!'
 nnoremap <leader>r :syn sync fromstart<CR>
-" add yaml stuffs
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent foldlevel=20
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+nnoremap <leader>! :nohl<CR>
+nnoremap <leader>d :call GitDiff()<CR>
 
 " Pasting options (to be tested)
 set pastetoggle=<F2>
 set clipboard=unnamed
 
-" Disable highlighting after a search
-" TODO: Use <leader>
-" noremap <C-n> :nohl<CR>
-" vnoremap <C-n> :nohl<CR>
-" inoremap <C-n> :nohl<CR>
-
 " set path and wildmenu to find all files under cwd
 set path+=**
 set wildmenu
 
-" Custom function
+" Custom functions
 
 function! GitStatus()
   vert term git status
 endfunction
 
 function! GitDiff()
-  vert terminal git diff -- %
+  vert term git --no-pager diff -- %
+    toto
 endfunction
 
 " handle indent text object
