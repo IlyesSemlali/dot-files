@@ -96,7 +96,7 @@ myStartupHook = do
           spawnPipe "picom --experimental-backends -b"
           spawnPipe "unclutter --timeout 1 &"
           spawnPipe "dunst &"
-          spawnPipe "greenclip daemon &"
+          spawnPipe "pkill greenclip; greenclip daemon &"
           spawnPipe "kdeconnect-cli --refresh &"
           spawnPipe "pkill redshift && sleep 5; redshift"
           setWMName "LG3D"
@@ -120,9 +120,8 @@ myManageHook = composeAll
      , (className  =? "Vivaldi-stable"
                   <&&> role =? "pop-up")         --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      , (role       =? "GtkFileChooserDialog")    --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
-     , className   =? "VirtualBox Manager"       --> doShift "vm"
-     , className   =? "VirtualBoxVM"             --> doShift "vm"
-     , className   =? "VirtualBox Machine"       --> doShift "vm" >> doFullFloat
+     , className   =? "VirtualBox Manager"       --> doFloat
+     , className   =? "VirtualBoxVM"             --> doFloat
      ]
      <+> ( isFullscreen --> doFullFloat )
      <+> ( isDialog     --> doF W.swapUp )
