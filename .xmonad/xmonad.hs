@@ -98,7 +98,7 @@ myStartupHook = do
           spawnPipe "dunst &"
           spawnPipe "pkill greenclip; greenclip daemon &"
           spawnPipe "kdeconnect-cli --refresh &"
-          spawnPipe "pkill redshift && sleep 5; redshift"
+          spawnPipe "pkill redshift; redshift"
           setWMName "LG3D"
 
 myLayoutHook =  smartBorders
