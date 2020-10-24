@@ -88,6 +88,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask, xK_F5),                                     namedScratchpadAction Scratchpads.pads "netflix")
         , ((Config.modMask, xK_F8),                                     namedScratchpadAction Scratchpads.pads "youtube-music")
         -- , ((Config.modMask, xK_F9),                                     namedScratchpadAction Scratchpads.pads "kdeconnect-sms")
+        , ((controlMask .|. Config.modMask, xK_w),                       namedScratchpadAction Scratchpads.pads "virtualmachine")
 
     -- Applications
         , ((Config.modMask .|. mod1Mask, xK_Return),                    spawn (Config.browser))
