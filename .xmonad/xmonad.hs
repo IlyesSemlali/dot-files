@@ -79,11 +79,11 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 -- Layouts
 tall     = renamed [Replace "tall"]
            $ limitWindows 12
-           $ mySpacing 4
+           $ mySpacing 2
            $ ResizableTall 1 (3/100) (1/2) []
 
 monocle  = renamed [Replace "monocle"]
-           $ mySpacing 6
+           $ mySpacing 4
            $ limitWindows 20 Full
 
 floats   = renamed [Replace "floats"]
@@ -93,12 +93,12 @@ floats   = renamed [Replace "floats"]
 myStartupHook :: X ()
 myStartupHook = do
           spawnPipe Config.wallpaperCommand
-          spawnPipe "picom --experimental-backends -b"
+          spawnPipe "pkill picom && sleep 0; picom --experimental-backends -b"
+          spawnPipe "pkill redshift; redshift"
           spawnPipe "unclutter --timeout 1 &"
           spawnPipe "dunst &"
           spawnPipe "pkill greenclip; greenclip daemon &"
           spawnPipe "kdeconnect-cli --refresh &"
-          spawnPipe "pkill redshift; redshift"
           setWMName "LG3D"
 
 myLayoutHook =  smartBorders
@@ -137,7 +137,7 @@ myLogHook = fadeInactiveLogHook fadeAmount
 main :: IO ()
 main = do
     -- Launching one instance of xmobar on one monitor
-    xmobarproc <- spawnPipe myXmobarCommand
+    xmobarproc <- spawnPipe Config.xmobarCommand
     -- Start xmonad
     xmonad $ ewmh def
         { manageHook = myManageHook <+> manageDocks
