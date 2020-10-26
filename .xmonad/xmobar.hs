@@ -19,7 +19,6 @@ Config {
                            , "xft:Font Awesome 5 Brands:pixelsize=13"   ]
   , bgColor = "#292d3e"
   , fgColor = "#ABABAB"
-  , iconRoot = ".xmonad/xpm/"
   , position =     Top
 
   -- layout
