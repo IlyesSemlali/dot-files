@@ -50,6 +50,8 @@ let mapleader = '!'
 nnoremap <leader>r :syn sync fromstart<CR>
 nnoremap <leader>! :nohl<CR>
 nnoremap <leader>d :call GitDiff()<CR>
+nnoremap <leader>s :call GitStatus()<CR>
+nnoremap <leader>$ :%s/\s\+$//<CR>
 
 " Pasting options (to be tested)
 set pastetoggle=<F2>
