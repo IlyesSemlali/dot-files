@@ -39,7 +39,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         [ ((Config.modMask .|. controlMask, xK_r),                      spawn "xmonad --recompile")
         , ((Config.modMask .|. shiftMask, xK_r),                        spawn "xmonad --restart")
         , ((Config.modMask .|. shiftMask, xK_Escape),                   io exitSuccess)
-        -- , ((Config.modMask, xK_Escape),                                 io exitSuccess)             -- TODO: lock sreen
+        , ((Config.modMask, xK_Escape),                                 spawn "xlock -lockdelay 5")
 
     -- Open my preferred terminal
         , ((Config.modMask, xK_Return),                                 spawn Config.term)
@@ -105,8 +105,10 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((0, xF86XK_AudioLowerVolume),                         spawn "amixer set Master 5%-")
         , ((0, xF86XK_AudioRaiseVolume),                         spawn "amixer set Master 5%+ unmute")
 
-        , ((0, xF86XK_MonBrightnessUp),                          spawn "xbacklight -inc 5 -time 300")
-        , ((0, xF86XK_MonBrightnessDown),                        spawn "xbacklight -dec 5 -time 300")
+        , ((0, xF86XK_MonBrightnessUp),                          spawn "xbacklight -inc 2 -perceived -fps 60")
+        , ((0, xF86XK_MonBrightnessDown),                        spawn "xbacklight -dec 2 -perceived -fps 60")
+        , ((shiftMask, xF86XK_MonBrightnessUp),                  spawn "xbacklight -set 100 -fps 60")
+        , ((shiftMask, xF86XK_MonBrightnessDown),                spawn "xbacklight -set 1 -fps 60")
 
         , ((Config.modMask, xK_Control_R),                              spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'")
         , ((0, xK_Print), spawn "scrotd")
