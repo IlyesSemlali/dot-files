@@ -92,12 +92,7 @@ floats   = renamed [Replace "floats"]
 -- Hooks
 myStartupHook :: X ()
 myStartupHook = do
-          spawnPipe Config.wallpaperCommand
-          spawnPipe "pkill picom && sleep 0; picom --experimental-backends -b"
-          spawnPipe "pkill redshift; redshift"
-          spawnPipe "unclutter --timeout 1 &"
-          spawnPipe "dunst &"
-          spawnPipe "pkill greenclip; greenclip daemon &"
+          spawnPipe "xrdb -nocpp -merge .Xresources"
           spawnPipe "kdeconnect-cli --refresh &"
           setWMName "LG3D"
 
@@ -120,6 +115,7 @@ myManageHook = composeAll
      , (className  =? "Vivaldi-stable"
                   <&&> role =? "pop-up")         --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      , (role       =? "GtkFileChooserDialog")    --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
+     , (role       =? "bubble")                  --> doFloat
      , className   =? "VirtualBox Manager"       --> doFloat
      , className   =? "VirtualBoxVM"             --> doFloat
      ]
