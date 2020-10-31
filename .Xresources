@@ -12,7 +12,7 @@ XLock.validsound: complete.au
 XLock.verbose: off
 XLock.visual:
 XLock.vtlock: off
-XLock.timeout: 30
+XLock.timeout: 5
 XLock.icongeometry:
 XLock.hide: on
 XLock.info:
@@ -21,7 +21,7 @@ XLock.install: on
 XLock.invalid: Nope.
 XLock.invalidCapsLock: Nope, nope nope..  Caps Lock is on BTW
 XLock.invalidsound: not-programmed.au
-XLock.lockdelay: 10
+XLock.lockdelay: 15
 XLock.locksound: thank-you.au
 XLock.logoutCmd:
 XLock.mailCmd:
@@ -48,8 +48,8 @@ XLock.geometry:
 XLock.font: -*-helvetica-medium-r-*-*-24-*-*-*-*-*-*
 XLock.foreground: White
 XLock.background: Black
-XLock.random.modelist: dilemma,fiberlamp,forest,loop,penrose
-XLock.dpmsoff: -1
+XLock.random.modelist: forest,fiberlamp,loop,penrose,dilemma
+XLock.dpmsoff: 60
 XLock.dpmsstandby: -1
 XLock.dpmssuspend: -1
 
