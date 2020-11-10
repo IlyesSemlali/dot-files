@@ -18,3 +18,4 @@ menuManager = "rofi -terminal alacritty -combi-modi window,drun,ssh -drun-show-a
 wallpaperCommand = "feh --bg-fill " ++ wallpaper ++ " &"
 xmobarCommand = "xmobar -i " ++ homeDir ++ ".xmonad/xpm/ " ++ homeDir ++ ".xmonad/xmobar.hs"
 vmCommand = "vboxmanage startvm \"Awesome Linux VM (of course)\""
+printScreenCommand = "scrot '%Y-%m-%d_%H%M%S.png' -e 'mkdir -p " ++ homeDir ++ "/Images/Screenshots/%Y-%m-%d/ && mv $f " ++ homeDir ++ "/Images/Screenshots/%Y-%m-%d/'"

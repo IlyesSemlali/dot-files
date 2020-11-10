@@ -5,20 +5,28 @@ XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
 
 
 function install_vim_plugins() {
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	vim +PluginInstall +qall
+	echo "-- Installing VIM Plugins --"
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
+	vim +PluginClean +PluginInstall +qall 2> /dev/null
 }
 
 function reset_omz() {
 	echo "-- Installing OhMyZSH --"
 
 	rm -rf .oh-my-zsh/
-	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	git -C ~ reset --hard
+	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --keep-zshrc --skip-chsh --unattended > /dev/null 2>&1"
+	git -C ~ reset --hard > /dev/null 2>&1
 }
 
 function _get_config_keys() {
 	grep '=' $1 | awk '{ print $1 }' | grep -v '^[\s-]*$'
+}
+
+function configure_dolphin() {
+	if [ ! -f ~/.config/dolphinrc ]
+	then
+		cp ~/.config/dolphinrc.tpl ~/.config/dolphinrc
+	fi
 }
 
 function configure_xmonad() {
@@ -40,5 +48,23 @@ function configure_xmonad() {
 	cd ~/.xmonad/lib/ && ghc --make Config.hs; cd
 }
 
-reset_omz
+install_vim_plugins
 configure_xmonad
+configure_dolphin
+
+while [[ $# -gt 0 ]]
+do
+	key="$1"
+
+	case $key in
+		-z|--zsh)
+			RESET_OMZ='true'
+			shift
+			;;
+	esac
+done
+
+if [[ $RESET_OMZ == 'true' ]]
+then
+	reset_omz
+fi
