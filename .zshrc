@@ -15,6 +15,11 @@ GIT_PROMPT_EXCLUDES=($USER)
 plugins=(git docker docker-compose)
 autoload -U compinit && compinit
 
+if [ -f ~/.zshrc.local ]
+then
+	source ~/.zshrc.local
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # needs merge
@@ -27,12 +32,6 @@ export EDITOR=vim
 export SYSTEMD_PAGER=''
 export DISABLE_UPDATE_PROMPT=true
 export QT_QPA_PLATFORMTHEME="qt5ct"
-
-source ~/.zshrc.d/*.zsh
-if [ -f .zshrc.local ]
-then
-	source .zshrc.local
-fi
 
 # Saves lasts CWD into a stack and start new instances
 # in the last CWD
