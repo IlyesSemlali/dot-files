@@ -111,7 +111,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
         , ((0, xF86XK_MonBrightnessUp),                          spawn "xbacklight -inc 2 -perceived -fps 60")
         , ((0, xF86XK_MonBrightnessDown),                        spawn "xbacklight -dec 2 -perceived -fps 60")
-        , ((shiftMask, xF86XK_MonBrightnessUp),                  spawn "xbacklight -set 100 -fps 60")
+        , ((shiftMask, xF86XK_MonBrightnessUp),                  spawn "xbacklight -set 80 -fps 60")
         , ((shiftMask, xF86XK_MonBrightnessDown),                spawn "xbacklight -set 1 -fps 60")
 
         , ((Config.modMask, xK_Control_R),                       spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'")
