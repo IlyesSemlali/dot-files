@@ -101,10 +101,13 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((0, xF86XK_AudioPrev),                                spawn "playerctl previous")
         , ((shiftMask, xF86XK_AudioPrev),                        spawn "playerctl position 0")
         , ((0, xF86XK_AudioNext),                                spawn "playerctl next")
-        , ((0, xF86XK_AudioMute),                                spawn "amixer set Master toggle")
 
+        , ((0, xF86XK_AudioMute),                                spawn "amixer set Master mute")
+        , ((shiftMask, xF86XK_AudioMute),                        spawn "amixer set Master unmute")
         , ((0, xF86XK_AudioLowerVolume),                         spawn "amixer set Master 5%-")
-        , ((0, xF86XK_AudioRaiseVolume),                         spawn "amixer set Master 5%+ unmute")
+        , ((shiftMask, xF86XK_AudioLowerVolume),                 spawn "amixer set Master 20%")
+        , ((0, xF86XK_AudioRaiseVolume),                         spawn "amixer set Master 5%+")
+        , ((shiftMask, xF86XK_AudioRaiseVolume),                  spawn "amixer set Master 50%")
 
         , ((0, xF86XK_MonBrightnessUp),                          spawn "xbacklight -inc 2 -perceived -fps 60")
         , ((0, xF86XK_MonBrightnessDown),                        spawn "xbacklight -dec 2 -perceived -fps 60")
