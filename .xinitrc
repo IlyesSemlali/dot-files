@@ -8,5 +8,6 @@ greenclip daemon &
 dunst &
 picom --experimental-backends -b
 feh --bg-fill ~/.config/wallpapers/pirogues.jpg &
+[ -f ~/.xinitrc.local ] && . ~/.xinitrc.local
 eval $(dbus-launch --sh-syntax --exit-with-session xmonad)
 quit
