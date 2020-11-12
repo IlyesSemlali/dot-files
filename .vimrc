@@ -19,6 +19,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'lilydjwg/colorizer'
 Plugin 'rust-lang/rust.vim'
 Plugin 'rkitover/vimpager'
+Plugin 'dense-analysis/ale'
 
 call vundle#end()
 filetype plugin indent on
@@ -51,7 +52,7 @@ nnoremap <leader>r :syn sync fromstart<CR>
 nnoremap <leader>! :nohl<CR>
 nnoremap <leader>d :call GitDiff()<CR>
 nnoremap <leader>s :call GitStatus()<CR>
-nnoremap <leader>$ :%s/\s\+$//<CR>:nohl<CR>
+nnoremap <leader>$ mz:%s/\s\+$//<CR>:nohl<CR>`zzz
 
 " Pasting options (to be tested)
 set pastetoggle=<F2>
