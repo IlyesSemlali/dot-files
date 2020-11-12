@@ -41,7 +41,7 @@ function configure_xmonad() {
 		if ! grep -q "^$config_key" $XMONAD_CONFIG
 		then
 			echo "-- Adding $config_key in Xmonad configuration --"
-			#grep "^$config_key" $XMONAD_CONFIG_TEMPLATE >> $XMONAD_CONFIG
+			grep "^$config_key" $XMONAD_CONFIG_TEMPLATE >> $XMONAD_CONFIG
 		fi
 	done
 
