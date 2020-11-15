@@ -1,4 +1,5 @@
 export PATH=$HOME/.local/bin:$PATH
+
 export PATH="$PATH:/usr/local/lib64/ruby/gems/2.5.0/bin/"
 
 # Change this to your oh-my-zsh installation.

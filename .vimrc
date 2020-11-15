@@ -7,8 +7,11 @@ set nocompatible
 set modeline
 set relativenumber
 set nu
+set nobackup
+set noswapfile
 set undofile
-
+set undodir=~/.vim/undo
+set hidden
 set updatetime=2000
 set splitright
 
