@@ -8,12 +8,16 @@ set relativenumber
 set nu
 set undofile
 
-set updatetime=500
+set updatetime=2000
 set splitright
 
 " Pasting options (to be tested)
 set pastetoggle=<F2>
 set clipboard=unnamed
+
+" Column Color
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 " set path and wildmenu to find all files under cwd
 set path+=**
@@ -43,6 +47,8 @@ Plugin 'rkitover/vimpager'
 Plugin 'dense-analysis/ale'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-eunuch'
+Plugin 'vim-utils/vim-man'
+Plugin 'mbbill/undotree'
 
 call vundle#end()
 filetype plugin indent on
@@ -68,12 +74,19 @@ nnoremap <leader>d :call GitDiff()<CR>
 nnoremap <leader>s :call GitStatus()<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>$ mz:%s/\s\+$//<CR>:nohl<CR>`zzz
+nnoremap <leader>u :UndotreeShow<CR>
 
 " handle indent text object
 onoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>
 onoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR>
 vnoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR><Esc>gv
 vnoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR><Esc>gv
+
+" switch between windows
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
 
 " Move selection
 vnoremap J :m '>+1<CR>gv=gv
