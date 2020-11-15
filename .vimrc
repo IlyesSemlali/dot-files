@@ -4,6 +4,7 @@
 
 " Use all the greatest and latest features of VIM
 set nocompatible
+set modeline
 set relativenumber
 set nu
 set undofile
@@ -67,7 +68,7 @@ let g:airline_right_sep = "\uE0CC"
 let g:airline_section_z = airline#section#create(["\uE0A1 " . '%{line(".")}' . " \uE0A3 " . '%{col(".")}'])
 
 " Leader based keybindings
-let mapleader = ' '
+let mapleader = '!'
 nnoremap <leader>r :syn sync fromstart<CR>
 nnoremap <leader>! :nohl<CR>
 nnoremap <leader>d :call GitDiff()<CR>
@@ -91,6 +92,10 @@ nnoremap <leader>l :wincmd l<CR>
 " Move selection
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+if (match ('xmonad', expand('%:p:h') > 0))
+	let ale_haskell_ghc_options='-fno-code -v0 -i ~/.xmonad/lib/'
+endif
 
 " Custom functions
 function! GitStatus()
