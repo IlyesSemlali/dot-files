@@ -36,7 +36,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
           , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
         ] ++
     -- Xmonad
-        [ ((Config.modMask .|. controlMask, xK_r),                      spawn "xmonad --recompile")
+        [ ((Config.modMask .|. controlMask, xK_r),                      spawn "sh -c 'cd ~/.xmonad/lib && ghc --make *.hs'" >> spawn "xmonad --recompile")
         , ((Config.modMask .|. shiftMask, xK_r),                        spawn "xmonad --restart")
         , ((Config.modMask .|. shiftMask, xK_Escape),                   io exitSuccess)
         , ((Config.modMask, xK_Escape),                                 spawn "xlock -lockdelay 5")
