@@ -110,7 +110,7 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     # family: SauceCodePro Nerd Font
-    family: SourceCodePro 
+    family: SourceCodePro
     # family: CodeNewRoman Nerd Font
     # family: RobotoMono Nerd Font
     # family: Hack
@@ -140,7 +140,7 @@ font:
     # family: Mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    style: Bold
+    style: Medium
 
   # Italic font face
   italic:
@@ -181,7 +181,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 7.0
+  size: 7.5
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
