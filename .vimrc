@@ -1,3 +1,24 @@
+let vim_logo = [
+	\'                                       .                    ',
+	\'                       ##############..... ##############   ',
+	\'                       ##############......##############   ',
+	\'                         ##########..........##########     ',
+	\'                         ##########........##########       ',
+	\'                         ##########.......##########        ',
+	\'                         ##########.....##########..        ',
+	\'                         ##########....##########.....      ',
+	\'                       ..##########..##########.........    ',
+	\'                     ....##########.#########.............  ',
+	\'                       ..################JJJ............    ',
+	\'                         ################.............      ',
+	\'                         ##############.JJJ.JJJJJJJJJJ      ',
+	\'                         ############...JJ...JJ..JJ  JJ     ',
+	\'                         ##########....JJ...JJ..JJ  JJ      ',
+	\'                         ########......JJJ..JJJ JJJ JJJ     ',
+	\'                         ######    .........                ',
+	\'                                     .....                  ',
+	\'                                       .                    ']
+
 """"""""""""""""""""""""""""
 " Native vim configuration "
 """"""""""""""""""""""""""""
@@ -38,20 +59,23 @@ call vundle#begin()
 " Lists of all plugins that should be installed
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'beloglazov/vim-online-thesaurus'
-Plugin 'martinda/Jenkinsfile-vim-syntax'
-Plugin 'pearofducks/ansible-vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-surround'
-Plugin 'lilydjwg/colorizer'
-Plugin 'rust-lang/rust.vim'
-Plugin 'rkitover/vimpager'
-Plugin 'dense-analysis/ale'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-eunuch'
-Plugin 'vim-utils/vim-man'
+Plugin 'beloglazov/vim-online-thesaurus'
+Plugin 'dense-analysis/ale'
+Plugin 'kien/ctrlp.vim'
+Plugin 'lilydjwg/colorizer'
+Plugin 'martinda/Jenkinsfile-vim-syntax'
 Plugin 'mbbill/undotree'
+Plugin 'mhinz/vim-startify'
+Plugin 'pearofducks/ansible-vim'
+Plugin 'rkitover/vimpager'
+Plugin 'rust-lang/rust.vim'
+Plugin 'szw/vim-maximizer'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-utils/vim-man'
 
 call vundle#end()
 filetype plugin indent on
@@ -78,6 +102,7 @@ nnoremap <leader>s :call GitStatus()<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>$ mz:%s/\s\+$//<CR>:nohl<CR>`zzz
 nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <leader>m :MaximizerToggle<CR>
 
 " handle indent text object
 onoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>
@@ -94,6 +119,16 @@ nnoremap <leader>l :wincmd l<CR>
 " Move selection
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" conditionnal settings
+" if (expand('%') == '')
+" 	autocmd VimEnter * CtrlPMRUFiles
+" endif
+
+
+if (match ('xmonad', expand('%:p:h') > 0))
+	let ale_haskell_ghc_options='-fno-code -v0 -i ~/.xmonad/lib/'
+endif
 
 " Custom functions
 function! GitStatus()
@@ -130,15 +165,26 @@ function! s:IndTxtObj(inner)
 	endif
 endfunction
 
-" ALE settings
+" Plugin settings
+
+" (built-in netrw)
+let netrw_banner=0
+let netrw_browse_split=2
+
+" ALE
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {
 			\   'python': ['flake8'],
 			\}
 
-"" TODO
+" CtrlP
+let g:ctrlp_cmd = 'CtrlPBuffer'
 
-" Install and configure keybindigs for szw/vim-maximizer
-
-" Rice up vim so it rocks when coding python
-" checkout he YT video called "Vim as a Python IDE - Martin Brochhaus"
+" Startify
+let g:startify_custom_header = vim_logo
+let g:startify_bookmarks = ["~/.vimrc", "~/.xmonad/lib/"]
+let g:startify_lists = [
+	\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+	\ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+	\ { 'type': 'sessions',  'header': ['   Sessions']       },
+	\ ]
