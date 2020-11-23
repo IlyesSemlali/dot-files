@@ -104,6 +104,7 @@ nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>$ mz:%s/\s\+$//<CR>:nohl<CR>`zzz
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>m :MaximizerToggle<CR>
+nnoremap <leader><SPACE> :Lex <bar> :vertical resize 30<CR>
 
 " handle indent text object
 onoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>
@@ -170,7 +171,6 @@ endfunction
 
 " (built-in netrw)
 let netrw_banner=0
-let netrw_browse_split=2
 
 " ALE
 let g:airline#extensions#ale#enabled = 1
