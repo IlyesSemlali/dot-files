@@ -49,6 +49,14 @@ background = "#5A2928"
 foreground = "#FFEFBC"
 timeout = 0
 
-[ignore]
+[ignore_memory]
 summary = "Mémoire"
+format = ""
+
+[ignore_kdeconnect]
+summary = "KDE Connect"
+format = ""
+
+[ignore_stamina]
+summary = "Mode STAMINA"
 format = ""
