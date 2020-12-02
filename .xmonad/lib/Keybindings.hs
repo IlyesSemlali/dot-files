@@ -88,7 +88,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask, xK_F5),                                     namedScratchpadAction Scratchpads.pads "netflix")
         , ((Config.modMask, xK_F7),                                     namedScratchpadAction Scratchpads.pads "screencast")
         , ((Config.modMask, xK_F8),                                     namedScratchpadAction Scratchpads.pads "youtube-music")
-        -- , ((Config.modMask, xK_F9),                                     namedScratchpadAction Scratchpads.pads "kdeconnect-sms")
+        , ((Config.modMask, xK_F9),                                     namedScratchpadAction Scratchpads.pads "kdeconnect-sms")
         , ((controlMask .|. Config.modMask, xK_w),                      namedScratchpadAction Scratchpads.pads "virtualmachine")
         , ((controlMask .|. Config.modMask .|. shiftMask, xK_w),        spawn "killall -9 VirtualBoxVM")
 
@@ -113,7 +113,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((0, xF86XK_MonBrightnessUp),                                 spawn "xbacklight -inc 2 -perceived -fps 60")
         , ((0, xF86XK_MonBrightnessDown),                               spawn "xbacklight -dec 2 -perceived -fps 60")
         , ((shiftMask, xF86XK_MonBrightnessUp),                         spawn "xbacklight -set 80 -fps 60")
-        , ((shiftMask, xF86XK_MonBrightnessDown),                       spawn "xbacklight -set 1 -fps 60")
+        , ((shiftMask, xF86XK_MonBrightnessDown),                       spawn "xbacklight -set 7 -fps 60")
 
         , ((Config.modMask, xK_Control_R),                              spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'")
         , ((0, xK_Print),                                               spawn Config.printScreenCommand)
