@@ -24,7 +24,8 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 # needs merge
-alias ll='ls -ltrh'
+alias dv="dirs -v"
+alias ll="ls -ltrh"
 alias git="git --no-pager"
 alias k=kubectl
 
@@ -57,3 +58,14 @@ setopt PUSHD_IGNORE_DUPS
 
 ## This reverts the +/- operators.
 setopt PUSHD_MINUS
+
+
+
+
+# TODO:
+# https://askubuntu.com/questions/360063/how-to-show-a-running-clock-in-terminal-before-the-command-prompt
+#
+# rgit command :
+# for i in `find . -name .git -type d`; do echo; dirname $i; git -C "$(dirname $i)" status; done
+# (this will be a function that sends git commands to all git repos under pwd)
+# (make sure to add colors to each git repo so it stands out)

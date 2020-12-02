@@ -35,6 +35,7 @@ set undodir=~/.vim/undo
 set hidden
 set updatetime=2000
 set splitright
+set spelllang=fr
 
 " Pasting options (to be tested)
 set pastetoggle=<F2>
@@ -63,6 +64,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'beloglazov/vim-online-thesaurus'
 Plugin 'dense-analysis/ale'
+"Plugin 'dpelle/vim-LanguageTool'
 Plugin 'kien/ctrlp.vim'
 Plugin 'lilydjwg/colorizer'
 Plugin 'martinda/Jenkinsfile-vim-syntax'
@@ -72,12 +74,12 @@ Plugin 'pearofducks/ansible-vim'
 Plugin 'rkitover/vimpager'
 Plugin 'rust-lang/rust.vim'
 Plugin 'szw/vim-maximizer'
+Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-utils/vim-man'
-Plugin 'tpope/vim-commentary'
 
 call vundle#end()
 filetype plugin indent on
@@ -93,6 +95,10 @@ let g:gitgutter_enabled = 0
 let g:airline_left_sep = "\uE0CC"
 let g:airline_right_sep = "\uE0CC"
 let g:airline_section_z = airline#section#create(["\uE0A1 " . '%{line(".")}' . " \uE0A3 " . '%{col(".")}'])
+
+" LanguageTool
+
+let g:languagetool_jar='/usr/share/languagetool/lib/languagetool-commandline.jar'
 
 " Leader based keybindings
 let mapleader = '!'
