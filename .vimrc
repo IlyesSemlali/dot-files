@@ -76,6 +76,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-utils/vim-man'
+Plugin 'tpope/vim-commentary'
 
 call vundle#end()
 filetype plugin indent on
@@ -88,7 +89,6 @@ filetype plugin indent on
 let g:gitgutter_enabled = 0
 
 " Powerline fonts
-set guifont=DroidSansMono\ Nerd\ Font\ 14
 let g:airline_left_sep = "\uE0CC"
 let g:airline_right_sep = "\uE0CC"
 let g:airline_section_z = airline#section#create(["\uE0A1 " . '%{line(".")}' . " \uE0A3 " . '%{col(".")}'])
@@ -97,13 +97,16 @@ let g:airline_section_z = airline#section#create(["\uE0A1 " . '%{line(".")}' . "
 let mapleader = ' '
 nnoremap <leader>r :syn sync fromstart<CR>
 nnoremap <leader>! :nohl<CR>
-nnoremap <leader>d :call GitDiff()<CR>
-nnoremap <leader>s :call GitStatus()<CR>
-nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>$ mz:%s/\s\+$//<CR>:nohl<CR>`zzz
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>m :MaximizerToggle<CR>
 nnoremap <leader><SPACE> :Lex <bar> :vertical resize 30<CR>
+
+" git related bindings
+nnoremap <leader>gg :GitGutterToggle<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gs :Gstatus<CR>
 
 " handle indent text object
 onoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>
@@ -120,6 +123,10 @@ nnoremap <leader>l :wincmd l<CR>
 " Move selection
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" Move around errors
+nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
+nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " conditionnal settings
 " if (expand('%') == '')
