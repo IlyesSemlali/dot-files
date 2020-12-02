@@ -62,7 +62,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask .|. shiftMask, xK_j),                        windows W.swapDown)
         , ((Config.modMask, xK_BackSpace),                              promote)
         , ((Config.modMask .|. shiftMask, xK_BackSpace),                rotSlavesDown)
-        , ((mod1Mask .|. controlMask, xK_Tab),                   rotAllDown)
+        , ((mod1Mask .|. controlMask, xK_Tab),                          rotAllDown)
 
      -- Layouts
         , ((Config.modMask, xK_Tab),                                    sendMessage NextLayout)
@@ -89,33 +89,34 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask, xK_F7),                                     namedScratchpadAction Scratchpads.pads "screencast")
         , ((Config.modMask, xK_F8),                                     namedScratchpadAction Scratchpads.pads "youtube-music")
         -- , ((Config.modMask, xK_F9),                                     namedScratchpadAction Scratchpads.pads "kdeconnect-sms")
-        , ((controlMask .|. Config.modMask, xK_w),                       namedScratchpadAction Scratchpads.pads "virtualmachine")
+        , ((controlMask .|. Config.modMask, xK_w),                      namedScratchpadAction Scratchpads.pads "virtualmachine")
+        , ((controlMask .|. Config.modMask .|. shiftMask, xK_w),        spawn "killall -9 VirtualBoxVM")
 
     -- Applications
         , ((Config.modMask .|. mod1Mask, xK_Return),                    spawn (Config.browser))
         , ((Config.modMask .|. mod1Mask, xK_v),                         spawn ("vivaldi --new-window"))
 
     -- Multimedia Keys
-        , ((0, xF86XK_AudioPlay),                                spawn "playerctl play-pause")
-        , ((shiftMask, xF86XK_AudioPlay),                        spawn "playerctl --all-players stop")
-        , ((0, xF86XK_AudioPrev),                                spawn "playerctl previous")
-        , ((shiftMask, xF86XK_AudioPrev),                        spawn "playerctl position 0")
-        , ((0, xF86XK_AudioNext),                                spawn "playerctl next")
+        , ((0, xF86XK_AudioPlay),                                       spawn "playerctl play-pause")
+        , ((shiftMask, xF86XK_AudioPlay),                               spawn "playerctl --all-players stop")
+        , ((0, xF86XK_AudioPrev),                                       spawn "playerctl previous")
+        , ((shiftMask, xF86XK_AudioPrev),                               spawn "playerctl position 0")
+        , ((0, xF86XK_AudioNext),                                       spawn "playerctl next")
 
-        , ((0, xF86XK_AudioMute),                                spawn "amixer set Master mute")
-        , ((shiftMask, xF86XK_AudioMute),                        spawn "amixer set Master unmute")
-        , ((0, xF86XK_AudioLowerVolume),                         spawn "amixer set Master 5%-")
-        , ((shiftMask, xF86XK_AudioLowerVolume),                 spawn "amixer set Master 20%")
-        , ((0, xF86XK_AudioRaiseVolume),                         spawn "amixer set Master 5%+")
-        , ((shiftMask, xF86XK_AudioRaiseVolume),                  spawn "amixer set Master 50%")
+        , ((0, xF86XK_AudioMute),                                       spawn "amixer set Master mute")
+        , ((shiftMask, xF86XK_AudioMute),                               spawn "amixer set Master unmute")
+        , ((0, xF86XK_AudioLowerVolume),                                spawn "amixer set Master 5%-")
+        , ((shiftMask, xF86XK_AudioLowerVolume),                        spawn "amixer set Master 20%")
+        , ((0, xF86XK_AudioRaiseVolume),                                spawn "amixer set Master 5%+")
+        , ((shiftMask, xF86XK_AudioRaiseVolume),                        spawn "amixer set Master 50%")
 
-        , ((0, xF86XK_MonBrightnessUp),                          spawn "xbacklight -inc 2 -perceived -fps 60")
-        , ((0, xF86XK_MonBrightnessDown),                        spawn "xbacklight -dec 2 -perceived -fps 60")
-        , ((shiftMask, xF86XK_MonBrightnessUp),                  spawn "xbacklight -set 80 -fps 60")
-        , ((shiftMask, xF86XK_MonBrightnessDown),                spawn "xbacklight -set 1 -fps 60")
+        , ((0, xF86XK_MonBrightnessUp),                                 spawn "xbacklight -inc 2 -perceived -fps 60")
+        , ((0, xF86XK_MonBrightnessDown),                               spawn "xbacklight -dec 2 -perceived -fps 60")
+        , ((shiftMask, xF86XK_MonBrightnessUp),                         spawn "xbacklight -set 80 -fps 60")
+        , ((shiftMask, xF86XK_MonBrightnessDown),                       spawn "xbacklight -set 1 -fps 60")
 
-        , ((Config.modMask, xK_Control_R),                       spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'")
-        , ((0, xK_Print),                                        spawn Config.printScreenCommand)
+        , ((Config.modMask, xK_Control_R),                              spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'")
+        , ((0, xK_Print),                                               spawn Config.printScreenCommand)
         ]
         -- The following lines are needed for named scratchpads.
           where nonNSP          = WSIs (return (\ws -> W.tag ws /= "nsp"))

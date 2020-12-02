@@ -118,6 +118,7 @@ myManageHook = composeAll
      , (role       =? "bubble")                  --> doFloat
      , className   =? "VirtualBox Manager"       --> doFloat
      , className   =? "VirtualBoxVM"             --> doFloat
+     , className   =? "Image Lounge"             --> doRectFloat (W.RationalRect 0 0 1 1)
      ]
      <+> ( isFullscreen --> doFullFloat )
      <+> ( isDialog     --> doF W.swapUp )
