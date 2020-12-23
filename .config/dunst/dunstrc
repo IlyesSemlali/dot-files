@@ -1,9 +1,14 @@
 [global]
-font = Source Code Pro Light 12
+font = Comfortaa Light 13
 
 icon_position = left
+icon_path = /home/ilyes/.icons/breeze-dark/status/16/
+min_icon_size = 64
+max_icon_size = 64
+
 allow_markup = yes
 format = "<b>%s</b>\n%b"
+show_indicators = no
 sort = yes
 indicate_hiddenl= no
 alignment = left
@@ -22,7 +27,7 @@ padding = 8
 horizontal_padding = 8
 separator_color = "#374242"
 startup_notification = false
-dmenu = /usr/bin/dmenu -p dunst:
+dmenu = /usr/bin/rofi -dmenu -p notif-actions
 browser = /usr/bin/vivaldi --new-tab
 
 [frame]
@@ -30,10 +35,10 @@ width = 2
 color = "#374242"
 
 [shortcuts]
-close = ctrl+space
-close_all = ctrl+Escape
-history = ctrl+comma
-context = ctrl+shift+c
+/* close = shift+alt+c */
+/* close_all = alt+c */
+/* history = alt+r */
+/* context = ctrl+shift+c */
 
 [urgency_low]
 background = "#292d3e"
