@@ -67,7 +67,7 @@ myNormColor :: String
 myNormColor   = "#292d3e"
 
 myFocusColor :: String
-myFocusColor  = "#bbc5ff"
+myFocusColor  = "#cbc5df"
 
 -- Functions
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
@@ -154,15 +154,16 @@ main = do
         , focusedBorderColor = myFocusColor
         , logHook = workspaceHistoryHook <+> myLogHook <+> dynamicLogWithPP xmobarPP
                         { ppOutput = \x -> hPutStrLn xmobarproc x
-                        , ppCurrent = xmobarColor "#c3e88d" ""                -- Current workspace in xmobar
-                        , ppVisible = xmobarColor "#c3e88d" ""                -- Visible but not current workspace
-                        , ppHidden = xmobarColor "#82AAFF" ""                 -- Hidden workspaces in xmobar
-                        , ppHiddenNoWindows = xmobarColor "#c792ea" ""        -- Hidden workspaces (no windows)
+                        , ppCurrent = xmobarColor "#C7A02a" ""                -- Current workspace in xmobar
+                        , ppVisible = xmobarColor "#C7A02a" ""                -- Visible but not current workspace
+                        , ppHidden = xmobarColor "#CCCCCC" ""                 -- Hidden workspaces in xmobar
+                        , ppHiddenNoWindows = xmobarColor "#828A8F" ""        -- Hidden workspaces (no windows)
                         , ppTitle = xmobarColor "#b3afc2" "" . shorten 60     -- Title of active window in xmobar
                         , ppSep =  "<fc=#666666> <fn=2>|</fn> </fc>"          -- Separators in xmobar
                         , ppUrgent = xmobarColor "#C45500" ""                 -- Urgent workspace
                         , ppExtras  = [windowCount]                           -- # of windows current workspace
-                        , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+                        , ppLayout = wrap "<icon=layouts/" ".xpm/>"
+                        , ppOrder  = \(ws:l:t:ex) -> [l]++ex++[ws,t]
                         , ppSort   = fmap (namedScratchpadFilterOutWorkspace.) DO.getSortByOrder
                         }
         }
