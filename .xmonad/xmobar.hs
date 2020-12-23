@@ -12,8 +12,8 @@ Config {
   , persistent =       True    -- enable/disable hiding (True = disabled)
 
  -- appearance
-  , font =         "xft:SourceCodePro Light:pixelsize=14:antialias=true:hinting=true"
-  , additionalFonts = [ "xft:SourceCodePro:pixelsize=11:antialias=true:hinting=true"
+  , font =         "xft:Comfortaa Light:pixelsize=16:antialias=true:hinting=true"
+  , additionalFonts = [ "xft:SourceCodePro:pixelsize=14:antialias=true:hinting=true"
                            , "xft:SourceCodePro:pixelsize=16:antialias=true:hinting=true"
                            , "xft:Font Awesome 5 Free:pixelsize=13"
                            , "xft:Font Awesome 5 Brands:pixelsize=13"   ]
@@ -24,7 +24,7 @@ Config {
   -- layout
   , sepChar =  "%"   -- delineator between plugin names and straight text
   , alignSep = "}{"  -- separator between left-right alignment
-  , template = "<icon=haskell_20.xpm/> %UnsafeStdinReader% }{ <fn=4></fn> %uname% | %cpu% | %wlp59s0wi% | %default:Master% | %battery% | %LFLL% | %date% "
+  , template = " %UnsafeStdinReader% }{ <fn=4></fn> %uname% | %cpu% | %wlp59s0wi% | %default:Master% | %battery% | %LFLL% | %date% "
 
   , commands = [
          Run Weather "LFLL" [ "--template", "<tempC>°C"] 36000
