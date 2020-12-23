@@ -41,10 +41,6 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask .|. shiftMask, xK_Escape),                   io exitSuccess)
         , ((Config.modMask, xK_Escape),                                 spawn "xlock -lockdelay 5")
 
-    -- Open my preferred terminal
-        , ((Config.modMask, xK_Return),                                 spawn Config.term)
-        , ((Config.modMask .|. shiftMask, xK_Return),                   spawn Config.menuManager)
-
     -- Windows
         , ((Config.modMask, xK_c),                                      kill1)
         , ((Config.modMask .|. shiftMask, xK_c),                        killAll)
@@ -57,12 +53,19 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Windows navigation
         , ((Config.modMask, xK_k),                                      windows W.focusUp)
         , ((Config.modMask, xK_j),                                      windows W.focusDown)
-        , ((Config.modMask .|. shiftMask, xK_m),                        windows W.swapMaster)
+        , ((Config.modMask .|. shiftMask, xK_h),                        windows W.swapMaster)
         , ((Config.modMask .|. shiftMask, xK_k),                        windows W.swapUp)
         , ((Config.modMask .|. shiftMask, xK_j),                        windows W.swapDown)
+        , ((Config.modMask .|. shiftMask, xK_l),                        windows W.swapMaster >> windows W.swapDown)
         , ((Config.modMask, xK_BackSpace),                              promote)
         , ((Config.modMask .|. shiftMask, xK_BackSpace),                rotSlavesDown)
-        , ((mod1Mask .|. controlMask, xK_Tab),                          rotAllDown)
+
+     -- Notifications
+        , ((mod1Mask, xK_p),                                            spawn "dunstctl close")
+        , ((mod1Mask .|. shiftMask, xK_p),                              spawn "dunstctl history-pop")
+        , ((mod1Mask .|. controlMask, xK_p),                            spawn "dunstctl context")
+        , ((mod1Mask, xK_BackSpace),                                    spawn "dunstctl set-paused true")
+        , ((mod1Mask .|. shiftMask, xK_BackSpace),                      spawn "dunstctl set-paused false")
 
      -- Layouts
         , ((Config.modMask, xK_Tab),                                    sendMessage NextLayout)
@@ -93,8 +96,11 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((controlMask .|. Config.modMask .|. shiftMask, xK_w),        spawn "killall -9 VirtualBoxVM")
 
     -- Applications
+        , ((Config.modMask, xK_Return),                                 spawn Config.term)
+        , ((Config.modMask .|. shiftMask, xK_Return),                   spawn Config.menuManager)
         , ((Config.modMask .|. mod1Mask, xK_Return),                    spawn (Config.browser))
         , ((Config.modMask .|. mod1Mask, xK_v),                         spawn ("vivaldi --new-window"))
+
 
     -- Multimedia Keys
         , ((0, xF86XK_AudioPlay),                                       spawn "playerctl play-pause")
