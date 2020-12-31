@@ -2,7 +2,7 @@ configuration {
  columns: 2;
  modi: "window,drun,ssh,combi";
  theme: "theme";
- font: "hack 10";
+ font: "comfortaa 12";
  combi-modi: "window,drun,ssh";
  show-icons: true;
 }
