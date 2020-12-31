@@ -100,6 +100,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask .|. shiftMask, xK_Return),                   spawn Config.menuManager)
         , ((Config.modMask .|. mod1Mask, xK_Return),                    spawn (Config.browser))
         , ((Config.modMask .|. mod1Mask, xK_v),                         spawn ("vivaldi --new-window"))
+        , ((Config.modMask .|. mod1Mask, xK_c),                         spawn ("dolphin"))
 
 
     -- Multimedia Keys
