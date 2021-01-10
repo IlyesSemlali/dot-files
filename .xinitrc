@@ -6,7 +6,6 @@ redshift &
 xss-lock xlock &
 greenclip daemon &
 dunst &
-picom --experimental-backends -b
 feh --bg-fill ~/.wallpapers/li-esteban-toro.jpg &
 [ -f ~/.xinitrc.local ] && . ~/.xinitrc.local
 eval $(dbus-launch --sh-syntax --exit-with-session xmonad)

@@ -94,6 +94,7 @@ myStartupHook :: X ()
 myStartupHook = do
           spawnPipe "xrdb -nocpp -merge .Xresources"
           spawnPipe "kdeconnect-cli --refresh &"
+          spawnPipe Config.compositorCommand
           setWMName "LG3D"
 
 myLayoutHook =  smartBorders
@@ -154,7 +155,7 @@ main = do
         , focusedBorderColor = myFocusColor
         , logHook = workspaceHistoryHook <+> myLogHook <+> dynamicLogWithPP xmobarPP
                         { ppOutput = \x -> hPutStrLn xmobarproc x
-                        , ppCurrent = xmobarColor "#C7A02a" ""                -- Current workspace in xmobar
+                        , ppCurrent = xmobarColor "#F7C42a" ""                -- Current workspace in xmobar
                         , ppVisible = xmobarColor "#C7A02a" ""                -- Visible but not current workspace
                         , ppHidden = xmobarColor "#CCCCCC" ""                 -- Hidden workspaces in xmobar
                         , ppHiddenNoWindows = xmobarColor "#828A8F" ""        -- Hidden workspaces (no windows)
