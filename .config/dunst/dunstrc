@@ -7,7 +7,7 @@ min_icon_size = 64
 max_icon_size = 64
 
 allow_markup = yes
-format = "<b>%s</b>\n%b"
+format = "<b>%s</b>\n\n%b"
 show_indicators = no
 sort = yes
 indicate_hiddenl= no
