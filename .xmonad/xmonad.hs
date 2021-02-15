@@ -94,6 +94,8 @@ myStartupHook :: X ()
 myStartupHook = do
           spawnPipe "xrdb -nocpp -merge .Xresources"
           spawnPipe "kdeconnect-cli --refresh &"
+          spawnPipe "amixer set Master mute"
+          spawnPipe "amixer set Master 20%"
           spawnPipe Config.compositorCommand
           setWMName "LG3D"
 
@@ -118,6 +120,7 @@ myManageHook = composeAll
      , (role       =? "GtkFileChooserDialog")    --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      , (role       =? "bubble")                  --> doFloat
      , className   =? "VirtualBox Manager"       --> doFloat
+     , className   =? "Pavucontrol"              --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      , className   =? "VirtualBoxVM"             --> doFloat
      , className   =? "Image Lounge"             --> doRectFloat (W.RationalRect 0 0 1 1)
      ]
