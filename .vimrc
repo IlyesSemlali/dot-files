@@ -59,9 +59,11 @@ call vundle#begin()
 " Lists of all plugins that should be installed
 Plugin 'VundleVim/Vundle.vim'
 
+"Plugin 'dpelle/vim-LanguageTool'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'beloglazov/vim-online-thesaurus'
 Plugin 'dense-analysis/ale'
+Plugin 'gentoo/gentoo-syntax'
 Plugin 'kien/ctrlp.vim'
 Plugin 'lilydjwg/colorizer'
 Plugin 'martinda/Jenkinsfile-vim-syntax'
