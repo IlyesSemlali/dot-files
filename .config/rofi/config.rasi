@@ -1,8 +1,8 @@
 configuration {
  columns: 2;
- modi: "window,drun,ssh,combi";
+ modi: "drun,window,ssh,combi";
  theme: "theme";
  font: "comfortaa 12";
- combi-modi: "window,drun,ssh";
+ combi-modi: "drun,window,ssh";
  show-icons: true;
 }
