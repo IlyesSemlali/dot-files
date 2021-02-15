@@ -61,9 +61,9 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask .|. shiftMask, xK_BackSpace),                rotSlavesDown)
 
      -- Notifications
-        , ((mod1Mask, xK_p),                                            spawn "dunstctl close")
-        , ((mod1Mask .|. shiftMask, xK_p),                              spawn "dunstctl history-pop")
-        , ((mod1Mask .|. controlMask, xK_p),                            spawn "dunstctl context")
+        , ((mod1Mask .|. shiftMask, xK_Delete),                         spawn "dunstctl close")
+        , ((mod1Mask, xK_Delete),                                       spawn "dunstctl history-pop")
+        , ((mod1Mask .|. controlMask, xK_Return),                       spawn "dunstctl context")
         , ((mod1Mask, xK_BackSpace),                                    spawn "dunstctl set-paused true")
         , ((mod1Mask .|. shiftMask, xK_BackSpace),                      spawn "dunstctl set-paused false")
 
@@ -123,6 +123,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((shiftMask, xF86XK_MonBrightnessDown),                       spawn "xbacklight -set 7 -fps 60")
 
         , ((Config.modMask, xK_Control_R),                              spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'")
+        , ((controlMask .|. Config.modMask, xK_Return),                 spawn "ambiances")
         , ((0, xK_Print),                                               spawn Config.printScreenCommand)
         ]
         -- The following lines are needed for named scratchpads.
