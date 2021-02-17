@@ -24,6 +24,7 @@ let vim_logo = [
 """"""""""""""""""""""""""""
 
 " Use all the greatest and latest features of VIM
+syntax on
 set nocompatible
 set modeline
 set relativenumber
