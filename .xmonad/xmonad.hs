@@ -106,23 +106,23 @@ myLayoutHook =  smartBorders
                 $ T.toggleLayouts floats
                 $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
                 $ onWorkspaces ["www", "edit"] (monocle ||| tall)
-                $ onWorkspace "vm" (floats ||| tall)
                 myDefaultLayout
              where
                myDefaultLayout = tall ||| monocle
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
-     [ className   =? "Vivaldi-stable"           --> doShift "www"
-     , className   =? "Gimp"                     --> doShift "edit"
+     [ className   =? "Vivaldi-stable"              --> doShift "www"
+     , className   =? "Gimp.bin"                    --> doShift "edit"
+     , role        =? "gimp-toolbox-color-dialog"   --> doCenterFloat
      , (className  =? "Vivaldi-stable"
-                  <&&> role =? "pop-up")         --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
-     , (role       =? "GtkFileChooserDialog")    --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
-     , (role       =? "bubble")                  --> doFloat
-     , className   =? "VirtualBox Manager"       --> doFloat
-     , className   =? "Pavucontrol"              --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
-     , className   =? "VirtualBoxVM"             --> doFloat
-     , className   =? "Image Lounge"             --> doRectFloat (W.RationalRect 0 0 1 1)
+                  <&&> role =? "pop-up")            --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
+     , role        =? "GtkFileChooserDialog"        --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
+     , role        =? "bubble"                      --> doCenterFloat
+     , className   =? "VirtualBox Manager"          --> doCenterFloat
+     , className   =? "Pavucontrol"                 --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
+     , className   =? "VirtualBoxVM"                --> doCenterFloat
+     , className   =? "Image Lounge"                --> doRectFloat (W.RationalRect 0 0 1 1)
      ]
      <+> ( isFullscreen --> doFullFloat )
      <+> ( isDialog     --> doF W.swapUp )
