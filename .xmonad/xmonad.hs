@@ -121,7 +121,7 @@ myManageHook = composeAll
      , role        =? "bubble"                      --> doCenterFloat
      , className   =? "VirtualBox Manager"          --> doCenterFloat
      , className   =? "Pavucontrol"                 --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
-     , className   =? "VirtualBoxVM"                --> doCenterFloat
+     , className   =? "VirtualBoxVM"                --> doFloat
      , className   =? "Image Lounge"                --> doRectFloat (W.RationalRect 0 0 1 1)
      ]
      <+> ( isFullscreen --> doFullFloat )
