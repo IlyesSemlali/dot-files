@@ -97,7 +97,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- Applications
         , ((Config.modMask, xK_Return),                                 spawn Config.term)
-        , ((Config.modMask .|. shiftMask, xK_Return),                   spawn Config.menuManager)
+        , ((controlMask, xK_Return),                                    spawn Config.menuManager)
         , ((Config.modMask .|. mod1Mask, xK_Return),                    spawn (Config.browser))
         , ((Config.modMask .|. mod1Mask, xK_v),                         spawn ("vivaldi --new-window"))
         , ((Config.modMask .|. mod1Mask, xK_c),                         spawn ("dolphin"))
