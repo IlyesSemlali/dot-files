@@ -117,8 +117,8 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((0, xF86XK_AudioRaiseVolume),                                spawn "amixer set Master 5%+")
         , ((shiftMask, xF86XK_AudioRaiseVolume),                        spawn "amixer set Master 50%")
 
-        , ((0, xF86XK_MonBrightnessUp),                                 spawn "xbacklight -inc 2 -perceived -fps 60")
-        , ((0, xF86XK_MonBrightnessDown),                               spawn "xbacklight -dec 2 -perceived -fps 60")
+        , ((0, xF86XK_MonBrightnessUp),                                 spawn ("xbacklight -inc 2 " ++ Config.xbacklightOptions))
+        , ((0, xF86XK_MonBrightnessDown),                               spawn ("xbacklight -dec 2 " ++ Config.xbacklightOptions))
         , ((shiftMask, xF86XK_MonBrightnessUp),                         spawn "xbacklight -set 80 -fps 60")
         , ((shiftMask, xF86XK_MonBrightnessDown),                       spawn "xbacklight -set 7 -fps 60")
 
