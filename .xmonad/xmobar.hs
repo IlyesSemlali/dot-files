@@ -24,7 +24,7 @@ Config {
   -- layout
   , sepChar =  "%"   -- delineator between plugin names and straight text
   , alignSep = "}{"  -- separator between left-right alignment
-  , template = " %UnsafeStdinReader% }{ <fn=4></fn> %uname% | %cpu% | %wlp59s0wi% | %default:Master% | %battery% | %LFLL% | %date% "
+  , template = " %UnsafeStdinReader% }{ <icon=linux.xpm/> %uname% | %cpu% | %wlp59s0wi% | %default:Master% | %battery% | %LFLL% | %date% "
 
   , commands = [
          Run Weather "LFLL" [ "--template", "<tempC>°C"] 36000
