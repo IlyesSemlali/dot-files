@@ -61,11 +61,11 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask .|. shiftMask, xK_BackSpace),                rotSlavesDown)
 
      -- Notifications
-        , ((mod1Mask .|. shiftMask, xK_Delete),                         spawn "dunstctl close")
-        , ((mod1Mask, xK_Delete),                                       spawn "dunstctl history-pop")
-        , ((mod1Mask .|. controlMask, xK_Return),                       spawn "dunstctl context")
-        , ((mod1Mask, xK_BackSpace),                                    spawn "dunstctl set-paused true")
-        , ((mod1Mask .|. shiftMask, xK_BackSpace),                      spawn "dunstctl set-paused false")
+        , ((mod5Mask, xK_Delete),                                       spawn "dunstctl close")
+        , ((mod5Mask .|. controlMask, xK_Delete),                       spawn "dunstctl history-pop")
+        , ((mod5Mask, xK_BackSpace),                                    spawn "dunstctl set-paused true")
+        , ((mod5Mask .|. controlMask, xK_BackSpace),                    spawn "dunstctl set-paused false")
+        , ((mod5Mask .|. shiftMask, xK_Return),                         spawn "dunstctl context")
 
      -- Layouts
         , ((Config.modMask, xK_Tab),                                    sendMessage NextLayout)
