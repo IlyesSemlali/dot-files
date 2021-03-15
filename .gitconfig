@@ -5,7 +5,7 @@
 	c = checkout
 	r = reflog -25
 	cb = checkout -b
-	plog = log --graph --abbrev-commit -15 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
+	plog = log --graph --abbrev-commit -10 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
 	wip = ! git commit -am \"WIP $(date)\" 
 
 	# Work done, interactively rebases from common ancestor
