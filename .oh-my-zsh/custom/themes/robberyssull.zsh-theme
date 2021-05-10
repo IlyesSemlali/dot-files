@@ -1,6 +1,6 @@
 PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
 
-PROMPT+=' %{$fg[cyan]%}%c%{$reset_color%} $( [ -v GIT_PROMPT_EXCLUDES ] && (( ${GIT_PROMPT_EXCLUDES[(I)$(git_repo_name)]} )) || git_prompt_info)'
+PROMPT+=' %{$fg[cyan]%}%c%{$reset_color%} $( [ ! -z GIT_PROMPT_EXCLUDES ] && (( ${GIT_PROMPT_EXCLUDES[(I)$(git_repo_name)]} )) || git_prompt_info)'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
