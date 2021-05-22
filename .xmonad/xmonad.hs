@@ -96,6 +96,7 @@ myStartupHook = do
           spawnPipe "kdeconnect-cli --refresh &"
           spawnPipe "amixer set Master mute"
           spawnPipe "amixer set Master 20%"
+          spawnPipe "isync; greenclip daemon&"
           spawnPipe Config.compositorCommand
           setWMName "LG3D"
 
