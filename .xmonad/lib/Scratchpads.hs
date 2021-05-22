@@ -70,7 +70,7 @@ pads = [ NS "terminal" spawnTerm findTerm mediumNSP
     spawnVM = Config.vmCommand
     findVM = className =? "VirtualBox Machine"
 
-    spawnNetflix = "firefox --kiosk https://netflix.com"
+    spawnNetflix = "firefox-bin --kiosk https://netflix.com"
     findNetflix   = className =? "Firefox"
 
     spawnScreencast = "screencast"
