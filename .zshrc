@@ -1,5 +1,4 @@
 export PATH=$HOME/.local/bin:$PATH
-
 export PATH="$PATH:/usr/local/lib64/ruby/gems/2.5.0/bin/"
 
 # Change this to your oh-my-zsh installation.
@@ -23,7 +22,6 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-# needs merge
 alias dv="dirs -v"
 alias ll="ls -ltrh"
 alias git="git --no-pager"
@@ -40,31 +38,32 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 autoload -Uz add-zsh-hook
 
 DIRSTACKFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zshdirs"
-if [[ -f "$DIRSTACKFILE" ]] && (( ${#dirstack} == 0 )); then
-	dirstack=("${(@f)"$(< "$DIRSTACKFILE")"}")
-	[[ -d "${dirstack[1]}" ]] && cd -- "${dirstack[1]}"
+if [[ -f "$DIRSTACKFILE" ]] && (( ${#dirstack} == 0 ))
+then
+	if echo $TTY | grep -q pts
+	then
+		dirstack=("${(@f)"$(< "$DIRSTACKFILE")"}")
+		[[ -d "${dirstack[1]}" ]] && cd -- "${dirstack[1]}"
+	fi
 fi
+
 chpwd_dirstack() {
-	print -l -- "$PWD" "${(u)dirstack[@]}" > "$DIRSTACKFILE"
+	if echo $TTY | grep -q pts
+	then
+		print -l -- "$PWD" "${(u)dirstack[@]}" > "$DIRSTACKFILE"
+	fi
 }
+
 add-zsh-hook -Uz chpwd chpwd_dirstack
 
 DIRSTACKSIZE='20'
 
 setopt AUTO_PUSHD PUSHD_SILENT PUSHD_TO_HOME
-
-## Remove duplicate entries
 setopt PUSHD_IGNORE_DUPS
-
-## This reverts the +/- operators.
 setopt PUSHD_MINUS
 
 
-
-
 # TODO:
-# https://askubuntu.com/questions/360063/how-to-show-a-running-clock-in-terminal-before-the-command-prompt
-#
 # rgit command :
 # for i in `find . -name .git -type d`; do echo; dirname $i; git -C "$(dirname $i)" status; done
 # (this will be a function that sends git commands to all git repos under pwd)
