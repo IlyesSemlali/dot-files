@@ -62,6 +62,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 "Plugin 'dpelle/vim-LanguageTool'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'arouene/vim-ansible-vault'
 Plugin 'beloglazov/vim-online-thesaurus'
 Plugin 'dense-analysis/ale'
 Plugin 'gentoo/gentoo-syntax'
@@ -188,7 +189,7 @@ let g:ale_linters = {
 			\}
 
 " CtrlP
-let g:ctrlp_cmd = 'CtrlPBuffer'
+let g:ctrlp_cmd = 'CtrlPMRU'
 
 " Startify
 let g:startify_custom_header = vim_logo
