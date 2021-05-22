@@ -42,8 +42,8 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask, xK_Escape),                                 spawn "xlock -lockdelay 5")
 
     -- Windows
-        , ((Config.modMask, xK_c),                                      kill1)
-        , ((Config.modMask .|. shiftMask, xK_c),                        killAll)
+        , ((Config.modMask, xK_c),                                      kill1 >> windows W.focusUp)
+        , ((Config.modMask .|. shiftMask, xK_c),                        killAll >> windows W.focusUp)
 
     -- Floating windows
         , ((Config.modMask, xK_f),                                      sendMessage (T.Toggle "floats"))
