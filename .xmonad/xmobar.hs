@@ -29,9 +29,13 @@ Config {
   , commands = [
          Run Weather "LFLL" [ "--template", "<tempC>°C"] 36000
 
-       , Run Volume "default" "Master" [ "--template", " <volumeipat> <volume> %"
-                                       , "--"
-                                       , "--volume-icon-pattern", "<icon=volume/volume_%%.xpm/>"
+       , Run Volume "default" "Master" [ "--template", " <volumeipat> <volume> % (<status>)"
+       , "--"
+				       , "--volume-icon-pattern", "<icon=volume/volume_%%.xpm/>"
+				       , "-C", "#ABABAB"
+				       , "-c", "#ABABAB"
+				       , "-O", "on"
+				       , "-o", "off"
                                        ] 1
 
        , Run Com "uname" ["-r"] "" 3600
