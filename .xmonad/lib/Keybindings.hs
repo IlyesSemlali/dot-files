@@ -85,10 +85,10 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask .|. controlMask, xK_j),                      sendMessage MirrorExpand)
 
     -- Scratchpads
-        , ((Config.modMask, xK_F1),                                     namedScratchpadAction Scratchpads.pads "terminal")
+        , ((Config.modMask, xK_F1),                                     namedScratchpadAction Scratchpads.pads Config.mainScratchpad)
         , ((Config.modMask, xK_F2),                                     namedScratchpadAction Scratchpads.pads "keepass")
-        , ((Config.modMask, xK_F3),                                     namedScratchpadAction Scratchpads.pads "weechat")
-        , ((Config.modMask, xK_F5),                                     namedScratchpadAction Scratchpads.pads "netflix")
+        , ((Config.modMask, xK_F3),                                     namedScratchpadAction Scratchpads.pads "terminal")
+        , ((Config.modMask, xK_F5),                                     namedScratchpadAction Scratchpads.pads "weechat")
         , ((Config.modMask, xK_F7),                                     namedScratchpadAction Scratchpads.pads "screencast")
         , ((Config.modMask, xK_F8),                                     namedScratchpadAction Scratchpads.pads "youtube-music")
         , ((Config.modMask, xK_F9),                                     namedScratchpadAction Scratchpads.pads "kdeconnect-sms")
