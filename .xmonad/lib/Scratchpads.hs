@@ -45,6 +45,7 @@ pads :: [NamedScratchpad]
 pads = [ NS "terminal" spawnTerm findTerm mediumNSP
                 , NS "keepass" spawnKeepass findKeepass smallNSP
                 , NS "weechat" spawnWeechat findWeechat mediumNSP
+                , NS "slack" spawnSlack findSlack mediumNSP
                 , NS "youtube-music" spawnMocp findMocp fullNSP
                 , NS "netflix" spawnNetflix findNetflix fullNSP
                 , NS "kdeconnect-sms" spawnKSMS findKSMS smallNSP
@@ -54,6 +55,9 @@ pads = [ NS "terminal" spawnTerm findTerm mediumNSP
   where
     spawnTerm  = Config.term ++ " -t scratchpad"
     findTerm   = title=? "scratchpad"
+
+    spawnSlack  = "slack"
+    findSlack   = className=? "Slack"
 
     spawnWeechat  = Config.term ++ " -t weechat -e weechat"
     findWeechat   = title=? "weechat"
