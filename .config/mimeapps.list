@@ -1,0 +1,26 @@
+[Added Associations]
+audio/flac=vlc.desktop;org.musicbrainz.Picard.desktop;audacity.desktop;org.kde.kdeconnect_open.desktop;
+audio/mp4=vlc.desktop;
+audio/mpeg=vlc.desktop;org.musicbrainz.Picard.desktop;audacity.desktop;org.kde.kdeconnect_open.desktop;
+audio/x-wav=org.kde.kdeconnect_open.desktop;vlc.desktop;audacity.desktop;org.musicbrainz.Picard.desktop;
+image/jpeg=org.nomacs.ImageLounge.desktop;org.kde.kdeconnect_open.desktop;org.kde.gwenview.desktop;gimp.desktop;
+image/png=org.nomacs.ImageLounge.desktop;org.kde.gwenview.desktop;google-chrome.desktop;org.kde.kolourpaint.desktop;okularApplication_kimgio.desktop;gimp.desktop;org.kde.kdeconnect_open.desktop;
+video/mp4=vlc.desktop;
+
+[Default Applications]
+audio/flac=vlc.desktop;
+audio/mp4=vlc.desktop;
+audio/mpeg=vlc.desktop;
+audio/x-wav=org.kde.kdeconnect_open.desktop;
+image/jpeg=org.nomacs.ImageLounge.desktop;
+image/png=org.nomacs.ImageLounge.desktop;
+text/html=vivaldi-stable.desktop
+video/mp4=vlc.desktop;
+x-scheme-handler/about=vivaldi-stable.desktop
+x-scheme-handler/http=vivaldi-stable.desktop
+x-scheme-handler/https=vivaldi-stable.desktop
+x-scheme-handler/msteams=teams.desktop
+x-scheme-handler/unknown=vivaldi-stable.desktop
+
+[Removed Associations]
+image/jpeg=google-chrome.desktop;org.kde.kolourpaint.desktop;okularApplication_kimgio.desktop;
