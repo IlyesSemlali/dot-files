@@ -1,5 +1,8 @@
+State=AAAA/wAAAAD9AAAAAgAAAAAAAAC0AAAD2/wCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAA+AAABkwAAAAIA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAA+AAAD2wAAAFwA////AAAAAwAAB4AAAAC2/AEAAAAB+wAAABgAdABlAHIAbQBpAG4AYQBsAEQAbwBjAGsAAAAAAAAAB4AAAAACAP///wAABsAAAAPbAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAA
+
 [CompactMode]
 FontWeight=50
+IconSize=22
 
 [Desktop Entry]
 DefaultProfile=Home.profile
@@ -15,24 +18,22 @@ Favorites=
 ConfirmClosingMultipleTabs=false
 GlobalViewProps=true
 RememberOpenedTabs=false
+UseTabForSwitchingSplitView=true
 Version=200
 ViewPropsTimestamp=2019,1,19,19,21,18
 
 [IconsMode]
 FontWeight=50
-PreviewSize=176
-
-[KPropertiesDialog]
-eDP-1 Height 1080=484
-eDP-1 Width 1920=545
+IconSize=64
 
 [MainWindow]
 MenuBar=Disabled
-State=AAAA/wAAAAD9AAAAAgAAAAAAAAC0AAAD8fwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAA+AAABkwAAAAIA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAoAAAD8QAAAFwA////AAAAAwAAB4AAAAC2/AEAAAAB+wAAABgAdABlAHIAbQBpAG4AYQBsAEQAbwBjAGsAAAAAAAAAB4AAAAACAP///wAABsAAAAPxAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAA
+RestorePositionForNextInstance=false
+State=AAAA/wAAAAD9AAAAAgAAAAAAAAC0AAAD+fwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAA+AAABkwAAAAIA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAoAAAD+QAAAFwA////AAAAAwAAB4AAAAC2/AEAAAAB+wAAABgAdABlAHIAbQBpAG4AYQBsAEQAbwBjAGsAAAAAAAAAB4AAAAACAP///wAABsgAAAP5AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAA
 ToolBarsMovable=Disabled
 
 [PlacesPanel]
 IconSize=22
 
 [PreviewSettings]
-Plugins=fontthumbnail,svgthumbnail,mobithumbnail,mltpreview,kraorathumbnail,jpegthumbnail,windowsimagethumbnail,gsthumbnail,audiothumbnail,windowsexethumbnail,rawthumbnail,djvuthumbnail,imagethumbnail,exrthumbnail,directorythumbnail,comicbookthumbnail,opendocumentthumbnail
+Plugins=comicbookthumbnail,kraorathumbnail,opendocumentthumbnail,directorythumbnail,windowsexethumbnail,djvuthumbnail,imagethumbnail,jpegthumbnail,windowsimagethumbnail,svgthumbnail
