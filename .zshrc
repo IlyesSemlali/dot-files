@@ -33,6 +33,12 @@ export SYSTEMD_PAGER=''
 export DISABLE_UPDATE_PROMPT=true
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
+# Use ESC to edit currunt command line in VIM
+export KEYTIMEOUT=1
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\033' edit-command-line
+
 # Saves lasts CWD into a stack and start new instances
 # in the last CWD
 autoload -Uz add-zsh-hook
