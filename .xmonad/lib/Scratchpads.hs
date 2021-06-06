@@ -33,6 +33,13 @@ mediumNSP = customFloating $ W.RationalRect l t w h
                  t = 0.9 -h
                  l = 0.9 -w
 
+bigNSP = customFloating $ W.RationalRect l t w h
+               where
+                 h = 0.95
+                 w = 0.95
+                 t = 0.975 -h
+                 l = 0.975 -w
+
 fullNSP = customFloating $ W.RationalRect l t w h
                where
                  h = 1
@@ -42,9 +49,9 @@ fullNSP = customFloating $ W.RationalRect l t w h
 
 
 pads :: [NamedScratchpad]
-pads = [ NS "terminal" spawnTerm findTerm mediumNSP
+pads = [
+                  NS "terminal" spawnTerm findTerm mediumNSP
                 , NS "keepass" spawnKeepass findKeepass smallNSP
-                , NS "weechat" spawnWeechat findWeechat mediumNSP
                 , NS "slack" spawnSlack findSlack mediumNSP
                 , NS "youtube-music" spawnMocp findMocp fullNSP
                 , NS "netflix" spawnNetflix findNetflix fullNSP
@@ -58,9 +65,6 @@ pads = [ NS "terminal" spawnTerm findTerm mediumNSP
 
     spawnSlack  = "slack"
     findSlack   = className=? "Slack"
-
-    spawnWeechat  = Config.term ++ " -t weechat -e weechat"
-    findWeechat   = title=? "weechat"
 
     spawnKeepass  = "keepassxc"
     findKeepass   = className=? "KeePassXC"
