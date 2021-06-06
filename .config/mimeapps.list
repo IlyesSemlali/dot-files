@@ -5,6 +5,7 @@ audio/mpeg=vlc.desktop;org.musicbrainz.Picard.desktop;audacity.desktop;org.kde.k
 audio/x-wav=org.kde.kdeconnect_open.desktop;vlc.desktop;audacity.desktop;org.musicbrainz.Picard.desktop;
 image/jpeg=org.nomacs.ImageLounge.desktop;org.kde.kdeconnect_open.desktop;org.kde.gwenview.desktop;gimp.desktop;
 image/png=org.nomacs.ImageLounge.desktop;org.kde.gwenview.desktop;google-chrome.desktop;org.kde.kolourpaint.desktop;okularApplication_kimgio.desktop;gimp.desktop;org.kde.kdeconnect_open.desktop;
+image/x-xcf=org.nomacs.ImageLounge.desktop;
 video/mp4=vlc.desktop;
 
 [Default Applications]
@@ -14,6 +15,7 @@ audio/mpeg=vlc.desktop;
 audio/x-wav=org.kde.kdeconnect_open.desktop;
 image/jpeg=org.nomacs.ImageLounge.desktop;
 image/png=org.nomacs.ImageLounge.desktop;
+image/x-xcf=org.nomacs.ImageLounge.desktop;
 text/html=vivaldi-stable.desktop
 video/mp4=vlc.desktop;
 x-scheme-handler/about=vivaldi-stable.desktop
