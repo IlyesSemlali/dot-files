@@ -48,21 +48,40 @@ function configure_xmonad() {
 	cd ~/.xmonad/lib/ && ghc --make Config.hs; cd
 }
 
-install_vim_plugins
-configure_xmonad
-configure_dolphin
-
 while [[ $# -gt 0 ]]
 do
 	key="$1"
 
 	case $key in
+		-v|--vim)
+			VIM='true'
+			shift
+			;;
+		-x|--xmonad)
+			XMONAD='true'
+			shift
+			;;
 		-z|--zsh)
 			RESET_OMZ='true'
 			shift
 			;;
 	esac
 done
+
+configure_dolphin
+
+
+if [[ $VIM == 'true' ]]
+then
+	install_vim_plugins
+fi
+
+
+if [[ $XMONAD == 'true' ]]
+then
+	configure_xmonad
+fi
+
 
 if [[ $RESET_OMZ == 'true' ]]
 then

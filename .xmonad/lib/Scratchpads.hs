@@ -71,7 +71,7 @@ pads = [
     spawnSlack  = "slack"
     findSlack   = className =? "Slack"
 
-    spawnMeet  = Config.browser ++ " --qt-arg name meet --basedir .cache/qutebrowser-meet meet.google.com"
+    spawnMeet  = Config.browser ++ " --qt-arg name meet --basedir .cache/qutebrowser-meet " ++ Config.meetRoom
     findMeet   = resource =? "meet"
 
     spawnMocp  = Config.browser ++ " --qt-arg name ytmusic --basedir .cache/qutebrowser-ytmusic music.youtube.com"
