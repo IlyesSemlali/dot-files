@@ -50,24 +50,29 @@ fullNSP = customFloating $ W.RationalRect l t w h
 
 pads :: [NamedScratchpad]
 pads = [
-                  NS "terminal" spawnTerm findTerm mediumNSP
-                , NS "keepass" spawnKeepass findKeepass smallNSP
-                , NS "slack" spawnSlack findSlack mediumNSP
-                , NS "youtube-music" spawnMocp findMocp fullNSP
-                , NS "netflix" spawnNetflix findNetflix fullNSP
-                , NS "kdeconnect-sms" spawnKSMS findKSMS smallNSP
-                , NS "virtualmachine" spawnVM findVM fullNSP
-                , NS "screencast" spawnScreencast findScreencast fullNSP
-                ]
+                  NS "keepass"          spawnKeepass    findKeepass     smallNSP
+                , NS "kdeconnect-sms"   spawnKSMS       findKSMS        smallNSP
+                , NS "terminal"         spawnTerm       findTerm        mediumNSP
+                , NS "slack"            spawnSlack      findSlack       mediumNSP
+                , NS "meet"             spawnMeet       findMeet        bigNSP
+                , NS "slack"            spawnSlack      findSlack       fullNSP
+                , NS "youtube-music"    spawnMocp       findMocp        fullNSP
+                , NS "netflix"          spawnNetflix    findNetflix     fullNSP
+                , NS "virtualmachine"   spawnVM         findVM          fullNSP
+                , NS "screencast"       spawnScreencast findScreencast  fullNSP
+        ]
   where
     spawnTerm  = Config.term ++ " -t scratchpad"
     findTerm   = title=? "scratchpad"
 
-    spawnSlack  = "slack"
-    findSlack   = className=? "Slack"
-
     spawnKeepass  = "keepassxc"
     findKeepass   = className=? "KeePassXC"
+
+    spawnSlack  = "slack"
+    findSlack   = className =? "Slack"
+
+    spawnMeet  = Config.browser ++ " --qt-arg name meet --basedir .cache/qutebrowser-meet " ++ Config.meetRoom
+    findMeet   = resource =? "meet"
 
     spawnMocp  = Config.browser ++ " --qt-arg name ytmusic --basedir .cache/qutebrowser-ytmusic music.youtube.com"
     findMocp   = resource =? "ytmusic"
