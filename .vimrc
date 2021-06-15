@@ -26,6 +26,7 @@ let vim_logo = [
 " Use all the greatest and latest features of VIM
 syntax on
 set nocompatible
+set modeline
 set relativenumber
 set nu
 set nobackup
@@ -35,70 +36,104 @@ set undodir=~/.vim/undo
 set hidden
 set updatetime=2000
 set splitright
+set spelllang=fr
 
 " Pasting options (to be tested)
 set pastetoggle=<F2>
-set clipboard=unnamed
+" set clipboard=unnamed
 
-" Column Color
-set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+" " Column Color
+" set colorcolumn=80
+" highlight ColorColumn ctermbg=red
 
 " set path and wildmenu to find all files under cwd
 set path+=**
 set wildmenu
 
-" Vundle requirements
-filetype off
-
 " Automatic reload of .vimrc
 autocmd! bufwritepost .vimrc source %
+
+
+"""""""""""""""""""""""
+" Vundle requirements "
+"""""""""""""""""""""""
+filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" Lists of all plugins that should be installed
 Plugin 'VundleVim/Vundle.vim'
 
-"Plugin 'dpelle/vim-LanguageTool'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'arouene/vim-ansible-vault'
-Plugin 'beloglazov/vim-online-thesaurus'
-Plugin 'dense-analysis/ale'
-Plugin 'gentoo/gentoo-syntax'
-Plugin 'kien/ctrlp.vim'
-Plugin 'lilydjwg/colorizer'
-Plugin 'martinda/Jenkinsfile-vim-syntax'
-Plugin 'mbbill/undotree'
-Plugin 'mhinz/vim-startify'
-Plugin 'pearofducks/ansible-vim'
-Plugin 'rkitover/vimpager'
-Plugin 'rust-lang/rust.vim'
-Plugin 'szw/vim-maximizer'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-utils/vim-man'
-Plugin 'tpope/vim-commentary'
+source ~/.vim/plugins.vim
 
 call vundle#end()
 filetype plugin indent on
-" End of Vundle requirements
+
 
 """""""""""""""""""""""""
 " Plugins configuration "
 """""""""""""""""""""""""
+
+" (built-in netrw)
+let netrw_banner=0
+
+
+" colorscheme
+set background=dark
+autocmd VimEnter * hi Normal ctermbg=none
+
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE
+colorscheme ghdark
+
+let g:gh_color = "soft"
+
+
+" Rooter
+let g:rooter_patterns = ['=.terraform']
+
 " Git Gutter
 let g:gitgutter_enabled = 0
+
 
 " Powerline fonts
 let g:airline_left_sep = "\uE0CC"
 let g:airline_right_sep = "\uE0CC"
 let g:airline_section_z = airline#section#create(["\uE0A1 " . '%{line(".")}' . " \uE0A3 " . '%{col(".")}'])
 
-" Leader based keybindings
-let mapleader = ' '
+
+" ALE
+let g:airline#extensions#ale#enabled = 1
+let g:ale_linters = {
+			\   'python': ['flake8'],
+			\}
+
+
+" CtrlP
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = "rc"
+let g:ctrlp_root_markers = ["terraform"]
+
+
+" Startify
+let g:startify_custom_header = vim_logo
+let g:startify_bookmarks = ["~/.vimrc", "~/.xmonad/lib/"]
+let g:startify_lists = [
+	\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+	\ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+	\ { 'type': 'sessions',  'header': ['   Sessions']       },
+	\ ]
+
+
+" CoC
+source ~/.vim/coc.vim
+
+
+""""""""""""""""
+" Key Bindings "
+""""""""""""""""
+
+let mapleader = '!'
 nnoremap <leader>r :syn sync fromstart<CR>
 nnoremap <leader>! :nohl<CR>
 nnoremap <leader>$ mz:%s/\s\+$//<CR>:nohl<CR>`zzz
@@ -132,24 +167,36 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" conditionnal settings
-" if (expand('%') == '')
-" 	autocmd VimEnter * CtrlPMRUFiles
-" endif
+" NetRW
+noremap <silent> <C-N> :call ToggleNetrw()<CR>
 
+
+""""""""""""""""""""""""""
+" Add some logic into it "
+""""""""""""""""""""""""""
+
+" NetRW
+let g:NetrwIsOpen=0
+
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent 30Lexplore
+    endif
+endfunction
 
 if (match ('xmonad', expand('%:p:h') > 0))
 	let ale_haskell_ghc_options='-fno-code -v0 -i ~/.xmonad/lib/'
 endif
-
-" Custom functions
-function! GitStatus()
-	vert term git status
-endfunction
-
-function! GitDiff()
-	vert term git --no-pager diff -- %
-endfunction
 
 function! s:IndTxtObj(inner)
 	let curline = line(".")
@@ -177,25 +224,9 @@ function! s:IndTxtObj(inner)
 	endif
 endfunction
 
-" Plugin settings
+augroup autocom
+    autocmd!
+    "execute the command on write
+    autocmd VimLeave *.tf silent !terraform fmt %
+augroup END
 
-" (built-in netrw)
-let netrw_banner=0
-
-" ALE
-let g:airline#extensions#ale#enabled = 1
-let g:ale_linters = {
-			\   'python': ['flake8'],
-			\}
-
-" CtrlP
-let g:ctrlp_cmd = 'CtrlPMRU'
-
-" Startify
-let g:startify_custom_header = vim_logo
-let g:startify_bookmarks = ["~/.vimrc", "~/.xmonad/lib/"]
-let g:startify_lists = [
-	\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-	\ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-	\ { 'type': 'sessions',  'header': ['   Sessions']       },
-	\ ]
