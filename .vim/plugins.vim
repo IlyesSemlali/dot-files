@@ -3,6 +3,7 @@
 """""""""""""""
 
 Plugin 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-rooter'
 Plugin 'arouene/vim-ansible-vault'
 Plugin 'beloglazov/vim-online-thesaurus'
 Plugin 'dense-analysis/ale'

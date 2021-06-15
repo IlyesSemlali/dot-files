@@ -89,6 +89,9 @@ colorscheme ghdark
 let g:gh_color = "soft"
 
 
+" Rooter
+let g:rooter_patterns = ['=.terraform']
+
 " Git Gutter
 let g:gitgutter_enabled = 0
 
@@ -107,7 +110,9 @@ let g:ale_linters = {
 
 
 " CtrlP
-let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = "rc"
+let g:ctrlp_root_markers = ["terraform"]
 
 
 " Startify
@@ -162,10 +167,32 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 
+" NetRW
+noremap <silent> <C-N> :call ToggleNetrw()<CR>
+
 
 """"""""""""""""""""""""""
 " Add some logic into it "
 """"""""""""""""""""""""""
+
+" NetRW
+let g:NetrwIsOpen=0
+
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent 30Lexplore
+    endif
+endfunction
 
 if (match ('xmonad', expand('%:p:h') > 0))
 	let ale_haskell_ghc_options='-fno-code -v0 -i ~/.xmonad/lib/'
@@ -196,4 +223,10 @@ function! s:IndTxtObj(inner)
 		normal! $
 	endif
 endfunction
+
+augroup autocom
+    autocmd!
+    "execute the command on write
+    autocmd VimLeave *.tf silent !terraform fmt %
+augroup END
 
