@@ -1,0 +1,47 @@
+#!/bin/bash
+
+PRIMARY=$(xrandr| grep ' primary' | awk '{ print $1 }')
+SECONDARY=$(xrandr| grep ' connected' | grep -v $PRIMARY | awk '{ print $1 }')
+PRIMARY_RES=$(xrandr | grep $PRIMARY -A 20 | grep \* | head -1 | awk '{print $1}')
+
+declare -a options=("expand left
+expand right
+expand above
+expand below
+duplicate
+--disconnect--")
+
+retries=7
+choice=$(echo -e "${options[@]}" | rofi -l 6 -width 13 -dmenu -p 'Monitor' | awk '{print $NF}')
+
+echo $choice
+
+function refresh() {
+	xdotool key super+shift+r
+	feh --bg-fill ~/.wallpapers/pirogues.jpg
+}
+
+case $choice in
+	left|right)
+		xrandr --output $SECONDARY --auto --${choice}-of $PRIMARY
+		refresh
+		;;
+	above|below)
+		xrandr --output $SECONDARY --auto --${choice} $PRIMARY
+		refresh
+		;;
+	duplicate)
+		xrandr --output $SECONDARY --mode $PRIMARY_RES --same-as $PRIMARY
+		refresh
+		;;
+	--disconnect--)
+		xrandr --output $SECONDARY --off
+		xrandr -s 0
+		refresh
+		
+		;;
+	*)
+		exit 1
+	;;
+esac
+
