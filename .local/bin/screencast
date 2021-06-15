@@ -1,1 +1,2 @@
+killall ffplay
 ffplay -fs $(ls -tr /dev/video* | tail -n 1)
