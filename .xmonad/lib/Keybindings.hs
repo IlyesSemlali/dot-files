@@ -106,7 +106,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask .|. mod1Mask, xK_Return),                    spawn (Config.browser))
         , ((Config.modMask .|. mod1Mask, xK_v),                         spawn ("vivaldi --new-window"))
         , ((Config.modMask .|. mod1Mask, xK_b),                         spawn ("bluetooth-selector"))
-        , ((Config.modMask .|. mod1Mask, xK_c),                         spawn ("dolphin"))
+        , ((Config.modMask .|. mod1Mask, xK_c),                         namedScratchpadAction Scratchpads.pads "dolphin")
 
 
     -- Multimedia Keys
