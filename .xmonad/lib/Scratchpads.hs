@@ -54,6 +54,7 @@ pads = [
                 , NS "kdeconnect-sms"   spawnKSMS       findKSMS        smallNSP
                 , NS "terminal"         spawnTerm       findTerm        mediumNSP
                 , NS "slack"            spawnSlack      findSlack       mediumNSP
+                , NS "dolphin"          spawnDolphin    findDolphin     mediumNSP
                 , NS "meet"             spawnMeet       findMeet        bigNSP
                 , NS "slack"            spawnSlack      findSlack       fullNSP
                 , NS "youtube-music"    spawnMocp       findMocp        fullNSP
@@ -64,6 +65,9 @@ pads = [
   where
     spawnTerm  = Config.term ++ " -t scratchpad"
     findTerm   = title=? "scratchpad"
+
+    spawnDolphin  = "dolphin"
+    findDolphin   = className=? "dolphin"
 
     spawnKeepass  = "keepassxc"
     findKeepass   = className=? "KeePassXC"
