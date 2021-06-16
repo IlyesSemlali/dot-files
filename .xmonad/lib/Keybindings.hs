@@ -9,6 +9,7 @@ import System.Exit (exitSuccess)
 import XMonad
 import XMonad.Actions.CopyWindow (kill1, killAllOtherCopies)
 import XMonad.Actions.CycleWS (WSType(..))
+import XMonad.Actions.CycleWS (nextScreen, prevScreen, WSType(..))
 import XMonad.Actions.Promote
 import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
 import XMonad.Actions.WithAll (sinkAll, killAll)
@@ -38,7 +39,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Xmonad
         [ ((Config.modMask .|. controlMask, xK_r),                      spawn "sh -c 'cd ~/.xmonad/lib && ghc --make *.hs'" >> spawn "xmonad --recompile")
         , ((Config.modMask .|. shiftMask, xK_r),                        spawn "xmonad --restart")
-        , ((Config.modMask .|. shiftMask, xK_Escape),                   io exitSuccess)
+        , ((Config.modMask .|. shiftMask, xK_Escape),                   spawn "sh -c 'pkill -f \"xinit.*$DISPLAY\"'")
         , ((Config.modMask, xK_Escape),                                 spawn "xlock -lockdelay 5")
 
     -- Windows
@@ -51,6 +52,8 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask .|. shiftMask, xK_Delete),                   sinkAll)
 
     -- Windows navigation
+        , ((Config.modMask, xK_o),                                      prevScreen)
+        , ((Config.modMask, xK_p),                                      nextScreen)
         , ((Config.modMask, xK_k),                                      windows W.focusUp)
         , ((Config.modMask, xK_j),                                      windows W.focusDown)
         , ((Config.modMask .|. shiftMask, xK_h),                        windows W.swapMaster)
