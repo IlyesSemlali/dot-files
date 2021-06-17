@@ -97,6 +97,7 @@ myStartupHook = do
           spawnPipe "amixer set Master mute"
           spawnPipe "amixer set Master 20%"
           spawnPipe "isync; greenclip daemon&"
+          spawnPipe "clipboard-sync"
           spawnPipe Config.compositorCommand
           setWMName "LG3D"
 
