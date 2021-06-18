@@ -26,6 +26,7 @@ alias dv="dirs -v"
 alias ll="ls -ltrh"
 alias git="git --no-pager"
 alias k=kubectl
+alias ct="ctags --options=$HOME/.ctags.d/terraform.ctags"
 
 unset SSH_ASKPASS
 export EDITOR=vim

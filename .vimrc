@@ -38,6 +38,7 @@ set updatetime=2000
 set splitright
 set spelllang=fr
 
+let &tags=expand('%:p:h') . "/.tags"
 " Pasting options (to be tested)
 set pastetoggle=<F2>
 " set clipboard=unnamed
@@ -170,6 +171,8 @@ nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 " NetRW
 noremap <silent> <C-N> :call ToggleNetrw()<CR>
 
+" Tagbar
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
 """"""""""""""""""""""""""
 " Add some logic into it "
