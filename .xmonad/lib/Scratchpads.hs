@@ -55,7 +55,7 @@ pads = [
                 , NS "terminal"         spawnTerm       findTerm        mediumNSP
                 , NS "slack"            spawnSlack      findSlack       mediumNSP
                 , NS "dolphin"          spawnDolphin    findDolphin     mediumNSP
-                , NS "meet"             spawnMeet       findMeet        bigNSP
+                , NS "meet"             spawnMeet       findMeet        fullNSP
                 , NS "slack"            spawnSlack      findSlack       fullNSP
                 , NS "youtube-music"    spawnMocp       findMocp        fullNSP
                 , NS "netflix"          spawnNetflix    findNetflix     fullNSP
