@@ -30,6 +30,7 @@ alias ct="ctags --options=$HOME/.ctags.d/terraform.ctags"
 
 unset SSH_ASKPASS
 export EDITOR=vim
+export BAT_PAGER=''
 export SYSTEMD_PAGER=''
 export DISABLE_UPDATE_PROMPT=true
 export QT_QPA_PLATFORMTHEME="qt5ct"
