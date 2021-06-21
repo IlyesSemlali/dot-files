@@ -5,8 +5,10 @@
 	c = checkout
 	r = reflog -25
 	cb = checkout -b
+	mt = mergetool
 	plog = log --graph --abbrev-commit -10 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
 	wip = ! git commit -am \"WIP $(date)\" 
+	dr = ! git diff origin/$(git branch --show-current)
 
 	# Work done, interactively rebases from common ancestor
 	wd = ! git rebase -i $(git merge-base origin/develop $(git rev-parse --abbrev-ref HEAD))~1
