@@ -133,6 +133,7 @@ myManageHook = composeAll
      <+> namedScratchpadManageHook Scratchpads.pads
        where
              role = stringProperty "WM_WINDOW_ROLE"
+             name = stringProperty "WM_NAME"
 
 myLogHook :: X ()
 myLogHook = fadeInactiveLogHook fadeAmount
