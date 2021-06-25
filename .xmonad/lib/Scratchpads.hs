@@ -52,12 +52,13 @@ pads :: [NamedScratchpad]
 pads = [
                   NS "keepass"          spawnKeepass    findKeepass     smallNSP
                 , NS "kdeconnect-sms"   spawnKSMS       findKSMS        smallNSP
+                , NS "obsidian"         spawnObsidian   findObsidian    mediumNSP
                 , NS "terminal"         spawnTerm       findTerm        mediumNSP
                 , NS "slack"            spawnSlack      findSlack       mediumNSP
                 , NS "dolphin"          spawnDolphin    findDolphin     mediumNSP
                 , NS "meet"             spawnMeet       findMeet        fullNSP
                 , NS "slack"            spawnSlack      findSlack       fullNSP
-                , NS "youtube-music"    spawnMocp       findMocp        fullNSP
+                , NS "music"            spawnMocp       findMocp        fullNSP
                 , NS "netflix"          spawnNetflix    findNetflix     fullNSP
                 , NS "virtualmachine"   spawnVM         findVM          fullNSP
                 , NS "screencast"       spawnScreencast findScreencast  fullNSP
@@ -83,6 +84,9 @@ pads = [
 
     spawnKSMS = "kdeconnect-sms"
     findKSMS = className =? "kdeconnect.sms"
+
+    spawnObsidian = "obsidian"
+    findObsidian = className =? "obsidian"
 
     spawnVM = Config.vmCommand
     findVM = className =? "VirtualBox Machine"
