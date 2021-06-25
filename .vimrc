@@ -38,7 +38,7 @@ set updatetime=2000
 set splitright
 set spelllang=fr
 
-let &tags=expand('%:p:h') . "/.tags"
+autocmd VimEnter * let &tags=FindRootDirectory() . "/.tags"
 " Pasting options (to be tested)
 set pastetoggle=<F2>
 " set clipboard=unnamed
@@ -91,7 +91,7 @@ let g:gh_color = "soft"
 
 
 " Rooter
-let g:rooter_patterns = ['=.terraform']
+let g:rooter_patterns = ['.terraform', '.cloud']
 
 " Git Gutter
 let g:gitgutter_enabled = 0
@@ -130,17 +130,28 @@ let g:startify_lists = [
 source ~/.vim/coc.vim
 
 
+" Terraform
+let g:terraform_fmt_on_save=1
+
+" NerdTree
+let NERDTreeQuitOnOpen=1
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+
+" editorconfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
 """"""""""""""""
 " Key Bindings "
 """"""""""""""""
 
-let mapleader = '!'
+let mapleader = ' '
 nnoremap <leader>r :syn sync fromstart<CR>
-nnoremap <leader>! :nohl<CR>
-nnoremap <leader>$ mz:%s/\s\+$//<CR>:nohl<CR>`zzz
+nnoremap <silent><leader>n :nohl<CR>
+nnoremap <silent><leader>$ mz:%s/\s\+$//<CR>:nohl<CR>`zz
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>m :MaximizerToggle<CR>
-nnoremap <leader><SPACE> :Lex <bar> :vertical resize 30<CR>
 
 " git related bindings
 nnoremap <leader>gg :GitGutterToggle<CR>
@@ -168,34 +179,18 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" NetRW
-noremap <silent> <C-N> :call ToggleNetrw()<CR>
+" NerdTree
+nnoremap <silent> <leader><space> :NERDTreeToggle<CR>
 
 " Tagbar
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
+nnoremap <silent> <leader>b :TagbarToggle<CR>
+
+" Add borders on # based comments
+nnoremap <silent> <leader>d yyP:s/./#/g<CR>jp:s/./#/g<CR>:nohl<CR>
 
 """"""""""""""""""""""""""
 " Add some logic into it "
 """"""""""""""""""""""""""
-
-" NetRW
-let g:NetrwIsOpen=0
-
-function! ToggleNetrw()
-    if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-    else
-        let g:NetrwIsOpen=1
-        silent 30Lexplore
-    endif
-endfunction
 
 if (match ('xmonad', expand('%:p:h') > 0))
 	let ale_haskell_ghc_options='-fno-code -v0 -i ~/.xmonad/lib/'
@@ -226,10 +221,3 @@ function! s:IndTxtObj(inner)
 		normal! $
 	endif
 endfunction
-
-augroup autocom
-    autocmd!
-    "execute the command on write
-    autocmd VimLeave *.tf silent !terraform fmt %
-augroup END
-
