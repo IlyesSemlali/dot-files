@@ -90,13 +90,13 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- Scratchpads
         , ((Config.modMask, xK_F1),                                     namedScratchpadAction Scratchpads.pads "terminal")
-        , ((Config.modMask, xK_F2),                                     namedScratchpadAction Scratchpads.pads "keepass")
+        , ((Config.modMask, xK_F2),                                     namedScratchpadAction Scratchpads.pads "obsidian")
         , ((Config.modMask, xK_F3),                                     namedScratchpadAction Scratchpads.pads Config.comScratchpad)
         , ((Config.modMask, xK_F4),                                     namedScratchpadAction Scratchpads.pads Config.confScratchpad)
         , ((Config.modMask, xK_F5),                                     namedScratchpadAction Scratchpads.pads Config.mainScratchpad)
-        , ((Config.modMask, xK_F6),                                     namedScratchpadAction Scratchpads.pads "youtube-music")
+        , ((Config.modMask, xK_F6),                                     namedScratchpadAction Scratchpads.pads "music")
         , ((Config.modMask, xK_F7),                                     namedScratchpadAction Scratchpads.pads "screencast")
-        , ((Config.modMask, xK_F9),                                     namedScratchpadAction Scratchpads.pads "kdeconnect-sms")
+        , ((Config.modMask, xK_F9),                                     namedScratchpadAction Scratchpads.pads "keepass")
         , ((controlMask .|. Config.modMask, xK_w),                      namedScratchpadAction Scratchpads.pads "virtualmachine")
         , ((controlMask .|. Config.modMask .|. shiftMask, xK_w),        spawn "killall -9 VirtualBoxVM")
 
