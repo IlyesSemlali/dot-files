@@ -1,6 +1,8 @@
 Xcursor.theme: Breeze
 Xcursor.size: 32
 
+# define FONT -*-*-*-*-*-*-20-*-*-*-*-*-*-1
+
 XLock.description: off
 XLock.timeelapsed: on
 XLock.unlockdelay: 0
@@ -8,30 +10,29 @@ XLock.use3d: off
 XLock.erasemode: no_fade
 XLock.usefirst: on
 XLock.username:
-XLock.validate: You think you pressed the right keys at the right time ?
+XLock.validate: Checking password
 XLock.validsound: complete.au
 XLock.verbose: off
 XLock.visual:
-XLock.vtlock: off
+XLock.vtlock: on
 XLock.timeout: 5
 XLock.icongeometry:
 XLock.hide: on
 XLock.info:
 XLock.infosound: identify-please.au
 XLock.install: on
-XLock.invalid: Nope.
-XLock.invalidCapsLock: Nope, nope nope..  Caps Lock is on !
+XLock.invalid: Wrong password
+XLock.invalidCapsLock: Caps Lock is on !
 XLock.invalidsound: not-programmed.au
-XLock.lockdelay: 15
+XLock.lockdelay: 60
 XLock.locksound: thank-you.au
 XLock.logoutCmd:
 XLock.mailCmd:
 XLock.mailIcon:
 XLock.message:
 XLock.messagefile:
-XLock.messagefont: -*-times-*-*-*-*-18-*-*-*-*-*-*-*
 XLock.messagesfile:
-XLock.mode: random
+XLock.mode: penrose
 XLock.mono: off
 XLock.mousemotion: off
 XLock.nice: 10
@@ -41,83 +42,20 @@ XLock.password:
 XLock.sound: off
 XLock.showdate: on
 XLock.showfps: off
-XLock.planfont: -*-fixed-medium-r-*-*-14-*-*-*-*-*-*
 
-XLock.grabmouse: off
-XLock.grabserver: off
+XLock.font: FONT
+XLock.planfont: FONT
+XLock.messagefont: FONT
+
+/* XLock.grabmouse: off */
+/* XLock.grabserver: off */
 XLock.geometry:
-XLock.font: -*-helvetica-medium-r-*-*-24-*-*-*-*-*-*
 XLock.foreground: White
 XLock.background: Black
-XLock.random.modelist: forest,loop,penrose,dilemma
-XLock.dpmsoff: 60
+XLock.random.modelist: penrose
+XLock.dpmsoff: 120
 XLock.dpmsstandby: -1
 XLock.dpmssuspend: 0
-
-XLock.dilemma.bitmap:
-XLock.dilemma.bonus: 1.85
-XLock.dilemma.conscious: True
-XLock.dilemma.count: 1
-XLock.dilemma.cycles: 100
-XLock.dilemma.delay: 100000
-XLock.dilemma.ncolors: 64
-XLock.dilemma.neighbors: 0
-XLock.dilemma.saturation: 1
-XLock.dilemma.size: 0
-XLock.dilemma.vertical: False
-
-XLock.dragon.bitmap:
-XLock.dragon.count: 1
-XLock.dragon.cycles: 128
-XLock.dragon.delay: 1000000
-XLock.dragon.ncolors: 64
-XLock.dragon.saturation: 1
-XLock.dragon.size: -24
-XLock.dragon.vertical: False
-
-XLock.fiberlamp.bitmap:
-XLock.fiberlamp.count: 500
-XLock.fiberlamp.cycles: 10000
-XLock.fiberlamp.delay: 10000
-XLock.fiberlamp.ncolors: 64
-XLock.fiberlamp.saturation: 1
-XLock.fiberlamp.size: 0
-XLock.fiberlamp.trackmouse: False
-
-XLock.forest.bitmap:
-XLock.forest.count: 8
-XLock.forest.cycles: 20
-XLock.forest.delay: 500000
-XLock.forest.ncolors: 64
-XLock.forest.saturation: 1
-XLock.forest.size: 1
-
-XLock.loop.bitmap:
-XLock.loop.byl: False
-XLock.loop.chou1: False
-XLock.loop.chou2: False
-XLock.loop.count: -5
-XLock.loop.cycles: 1600
-XLock.loop.delay: 100000
-XLock.loop.dissolve: False
-XLock.loop.evolve: False
-XLock.loop.langton: False
-XLock.loop.ncolors: 64
-XLock.loop.neighbors: 0
-XLock.loop.saturation: 1
-XLock.loop.sheath: False
-XLock.loop.size: -12
-XLock.loop.vertical: False
-XLock.loop.wrap: True
-
-XLock.pacman.bitmap:
-XLock.pacman.count: 10
-XLock.pacman.cycles: 1
-XLock.pacman.delay: 10000
-XLock.pacman.ncolors: 64
-XLock.pacman.saturation: 1
-XLock.pacman.size: 0
-XLock.pacman.trackmouse: False
 
 XLock.penrose.ammann: False
 XLock.penrose.bitmap:
@@ -137,123 +75,3 @@ XLock.random.fullrandom: False
 XLock.random.ncolors: 64
 XLock.random.saturation: 1
 XLock.random.sequential: True
-
-XLock.tetris.bitmap:
-XLock.tetris.bonus: False
-XLock.tetris.count: 1
-XLock.tetris.cycle: True
-XLock.tetris.cycles: 1
-XLock.tetris.delay: 50000
-XLock.tetris.ncolors: 64
-XLock.tetris.plain: False
-XLock.tetris.saturation: 1
-XLock.tetris.size: -100
-XLock.tetris.trackmouse: False
-XLock.tetris.well: False
-
-XLock.toneclock.bitmap:
-XLock.toneclock.count: -20
-XLock.toneclock.cycle: True
-XLock.toneclock.cycles: 200
-XLock.toneclock.delay: 60000
-XLock.toneclock.fill: 0
-XLock.toneclock.move: True
-XLock.toneclock.ncolors: 64
-XLock.toneclock.original: False
-XLock.toneclock.pulsating: False
-XLock.toneclock.saturation: 1
-XLock.toneclock.size: -1000
-XLock.triangle.bitmap:
-XLock.triangle.count: 1
-XLock.triangle.cycles: 1
-XLock.triangle.delay: 10000
-XLock.triangle.ncolors: 64
-XLock.triangle.saturation: 1
-XLock.triangle.size: 1
-XLock.tube.bitmap:
-XLock.tube.count: -9
-XLock.tube.cycle: True
-XLock.tube.cycles: 20000
-XLock.tube.delay: 25000
-XLock.tube.ncolors: 64
-XLock.tube.saturation: 1
-XLock.tube.size: -200
-XLock.turtle.bitmap:
-XLock.turtle.count: 1
-XLock.turtle.cycles: 20
-XLock.turtle.delay: 1000000
-XLock.turtle.ncolors: 64
-XLock.turtle.saturation: 1
-XLock.turtle.size: 1
-XLock.vines.bitmap:
-XLock.vines.count: 0
-XLock.vines.cycles: 1
-XLock.vines.delay: 200000
-XLock.vines.ncolors: 64
-XLock.vines.saturation: 1
-XLock.vines.size: 1
-XLock.voters.bitmap:
-XLock.voters.count: 0
-XLock.voters.cycles: 327670
-XLock.voters.delay: 1000
-XLock.voters.ncolors: 64
-XLock.voters.neighbors: 0
-XLock.voters.saturation: 1
-XLock.voters.size: 0
-XLock.voters.vertical: False
-XLock.wator.bitmap:
-XLock.wator.count: 1
-XLock.wator.cycles: 32767
-XLock.wator.delay: 750000
-XLock.wator.ncolors: 64
-XLock.wator.neighbors: 0
-XLock.wator.saturation: 1
-XLock.wator.size: 0
-XLock.wator.vertical: False
-XLock.wire.bitmap:
-XLock.wire.count: 1000
-XLock.wire.cycles: 150
-XLock.wire.delay: 500000
-XLock.wire.ncolors: 64
-XLock.wire.neighbors: 0
-XLock.wire.saturation: 1
-XLock.wire.size: -8
-XLock.wire.vertical: False
-XLock.wireframe: off
-XLock.world.bitmap:
-XLock.world.count: -16
-XLock.world.cycles: 1
-XLock.world.delay: 100000
-XLock.world.ncolors: 64
-XLock.world.saturation: 0.3
-XLock.world.size: 1
-XLock.worm.bitmap:
-XLock.worm.count: -20
-XLock.worm.cycles: 10
-XLock.worm.delay: 17000
-XLock.worm.ncolors: 64
-XLock.worm.saturation: 1
-XLock.worm.size: -3
-XLock.xcl.automatic: True
-XLock.xcl.bitmap:
-XLock.xcl.count: -3
-XLock.xcl.cycles: 1
-XLock.xcl.delay: 20000
-XLock.xcl.frametime: 45000
-XLock.xcl.line_length: 15910
-XLock.xcl.ncolors: 64
-XLock.xcl.oldcolor: False
-XLock.xcl.randomstart: False
-XLock.xcl.saturation: 1
-XLock.xcl.size: 1
-XLock.xcl.spectator: 22000
-XLock.xcl.speed: 105.0
-XLock.xcl.viewmodel: False
-XLock.xcl.xcldebug: False
-XLock.xjack.bitmap:
-XLock.xjack.count: 1
-XLock.xjack.cycles: 1
-XLock.xjack.delay: 50000
-XLock.xjack.ncolors: 64
-XLock.xjack.saturation: 1
-XLock.xjack.size: 1
