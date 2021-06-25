@@ -3,6 +3,7 @@
 	psu = push origin HEAD
 	p = push
 	c = checkout
+	coma = commit --amend -a -C HEAD
 	r = reflog -25
 	cb = checkout -b
 	mt = mergetool
