@@ -26,7 +26,9 @@ alias dv="dirs -v"
 alias ll="ls -ltrh"
 alias git="git --no-pager"
 alias k=kubectl
-alias ct="ctags --options=$HOME/.ctags.d/terraform.ctags"
+alias ct="ctags --options=$HOME/.ctags.d/terraform.ctags **/*.tf*"
+alias vim="nvim"
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform}'
 
 unset SSH_ASKPASS
 export EDITOR=vim
