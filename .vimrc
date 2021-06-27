@@ -38,14 +38,12 @@ set updatetime=2000
 set splitright
 set spelllang=fr
 
-autocmd VimEnter * let &tags=FindRootDirectory() . "/.tags"
+if exists("FindRootDirectory")
+	autocmd VimEnter * let &tags=FindRootDirectory() . "/.tags"
+endif
+
 " Pasting options (to be tested)
 set pastetoggle=<F2>
-" set clipboard=unnamed
-
-" " Column Color
-" set colorcolumn=80
-" highlight ColorColumn ctermbg=red
 
 " set path and wildmenu to find all files under cwd
 set path+=**
@@ -195,10 +193,14 @@ nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " NerdTree
-nnoremap <silent> <leader><space> :NERDTreeToggle<CR>
+if exists("NERDTree")
+	nnoremap <silent> <leader><space> :NERDTreeToggle<CR>
+endif
 
 " Tagbar
-nnoremap <silent> <leader>b :TagbarToggle<CR>
+if exists("Tagbar")
+	nnoremap <silent> <leader>b :TagbarToggle<CR>
+endif
 
 " Add borders on # based comments
 nnoremap <silent> <leader>d A<space>#<esc>yyP:s/./#/g<CR>jp:s/./#/g<CR>:nohl<CR>

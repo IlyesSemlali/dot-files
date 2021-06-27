@@ -27,8 +27,12 @@ alias ll="ls -ltrh"
 alias git="git --no-pager"
 alias k=kubectl
 alias ct="ctags --options=$HOME/.ctags.d/terraform.ctags **/*.tf*"
-alias vim="nvim"
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform}'
+
+if which nvim >/dev/null 2>&1
+then
+	alias vim="nvim"
+fi
 
 unset SSH_ASKPASS
 export EDITOR=vim
