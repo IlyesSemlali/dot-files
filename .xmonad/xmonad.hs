@@ -118,6 +118,7 @@ myManageHook = composeAll
      , className   =? "Gimp.bin"                    --> doShift "edit"
      , role        =? "gimp-toolbox-color-dialog"   --> doCenterFloat
      , role        =? "gimp-message-dialog"         --> doCenterFloat
+     , role        =? "gimp-decompose"              --> doCenterFloat
      , (className  =? "Vivaldi-stable"
                   <&&> role =? "pop-up")            --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      , role        =? "GtkFileChooserDialog"        --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
