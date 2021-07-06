@@ -91,7 +91,7 @@ let g:gh_color = "soft"
 
 
 " Rooter
-let g:rooter_patterns = ['.terraform', '.cloud']
+let g:rooter_patterns = ['.terraform', '.cloud', 'Chart.yaml']
 
 " Git Gutter
 let g:gitgutter_enabled = 0
@@ -111,7 +111,7 @@ let g:ale_linters = {
 
 
 " CtrlP
-let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_cmd = 'CtrlPBuffer'
 let g:ctrlp_working_path_mode = "rc"
 let g:ctrlp_root_markers = ["terraform"]
 
@@ -132,6 +132,21 @@ source ~/.vim/coc.vim
 
 " Terraform
 let g:terraform_fmt_on_save=1
+
+" TagBar
+let g:tagbar_type_terraform = {
+    \ 'ctagstype' : 'terraform',
+    \ 'kinds' : [
+        \ 'r:Resource',
+        \ 'd:Data',
+        \ 'v:Variable',
+        \ 'p:Provider',
+        \ 'm:Module',
+        \ 'o:Output',
+        \ 'f:TFVar'
+    \ ],
+    \ 'sort' : 0
+\ }
 
 " NerdTree
 let NERDTreeQuitOnOpen=1
@@ -186,7 +201,7 @@ nnoremap <silent> <leader><space> :NERDTreeToggle<CR>
 nnoremap <silent> <leader>b :TagbarToggle<CR>
 
 " Add borders on # based comments
-nnoremap <silent> <leader>d yyP:s/./#/g<CR>jp:s/./#/g<CR>:nohl<CR>
+nnoremap <silent> <leader>d A<space>#<esc>yyP:s/./#/g<CR>jp:s/./#/g<CR>:nohl<CR>
 
 """"""""""""""""""""""""""
 " Add some logic into it "
