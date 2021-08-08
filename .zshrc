@@ -22,31 +22,6 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-alias dv="dirs -v"
-alias ll="ls -ltrh"
-alias git="git --no-pager"
-alias k=kubectl
-alias ct="ctags --options=$HOME/.ctags.d/terraform.ctags **/*.tf*"
-alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform}'
-
-if which nvim >/dev/null 2>&1
-then
-	alias vim="nvim"
-fi
-
-unset SSH_ASKPASS
-export EDITOR=vim
-export BAT_PAGER=''
-export SYSTEMD_PAGER=''
-export DISABLE_UPDATE_PROMPT=true
-export QT_QPA_PLATFORMTHEME="qt5ct"
-
-# Use ESC to edit currunt command line in VIM
-export KEYTIMEOUT=1
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey '\033' edit-command-line
-
 # Saves lasts CWD into a stack and start new instances
 # in the last CWD
 autoload -Uz add-zsh-hook
@@ -76,9 +51,46 @@ setopt AUTO_PUSHD PUSHD_SILENT PUSHD_TO_HOME
 setopt PUSHD_IGNORE_DUPS
 setopt PUSHD_MINUS
 
+# # Use ESC to edit currunt command line in VIM
+# export KEYTIMEOUT=1
+# autoload -U edit-command-line
+# zle -N edit-command-line
+# bindkey '\033' edit-command-line
 
-# TODO:
-# rgit command :
-# for i in `find . -name .git -type d`; do echo; dirname $i; git -C "$(dirname $i)" status; done
-# (this will be a function that sends git commands to all git repos under pwd)
-# (make sure to add colors to each git repo so it stands out)
+precmd() {
+	if git status > /dev/null 2>&1
+	then
+		export PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+		# export DIRSTACKFILE="$PROJECT_ROOT/.dirstack"
+		touch $DIRSTACKFILE
+		fc -R
+		export HISTFILE="$PROJECT_ROOT/.zsh_history"
+		if which nvim > /dev/null 2>&1
+		then
+			touch "$PROJECT_ROOT/.vim_session"
+			alias vim="nvim -S $PROJECT_ROOT/.vim_session"
+		fi
+	fi
+}
+
+alias dv="dirs -v"
+alias ll="ls -ltrh"
+alias git="git --no-pager"
+alias k=kubectl
+alias ct="ctags --options=$HOME/.ctags.d/terraform.ctags **/*.tf*"
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
+
+if which nvim >/dev/null 2>&1
+then
+	alias vim="nvim"
+fi
+
+unset SSH_ASKPASS
+export EDITOR=vim
+export BAT_PAGER=''
+export SYSTEMD_PAGER=''
+export DISABLE_UPDATE_PROMPT=true
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /home/ilyes/bin/terraform-0.15.3 terraform-0.15.3

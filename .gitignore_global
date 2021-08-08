@@ -1,3 +1,6 @@
 .*.un~
 .terraform
 .tags
+.vim_session
+.zsh_history
+.dirstack
