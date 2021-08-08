@@ -193,14 +193,10 @@ nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " NerdTree
-if exists("NERDTree")
-	nnoremap <silent> <leader><space> :NERDTreeToggle<CR>
-endif
+nnoremap <silent> <leader><space> :NERDTreeToggle<CR>
 
 " Tagbar
-if exists("Tagbar")
-	nnoremap <silent> <leader>b :TagbarToggle<CR>
-endif
+nnoremap <silent> <leader>b :TagbarToggle<CR>
 
 " Add borders on # based comments
 nnoremap <silent> <leader>d A<space>#<esc>yyP:s/./#/g<CR>jp:s/./#/g<CR>:nohl<CR>
