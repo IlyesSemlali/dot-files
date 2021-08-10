@@ -39,7 +39,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Xmonad
         [ ((Config.modMask .|. controlMask, xK_r),                      spawn "sh -c 'cd ~/.xmonad/lib && ghc --make *.hs'" >> spawn "xmonad --recompile")
         , ((Config.modMask .|. shiftMask, xK_r),                        spawn "xmonad --restart")
-        , ((Config.modMask .|. shiftMask, xK_Escape),                   spawn "sh -c 'pkill -f \"xinit.*$DISPLAY\"'")
+        , ((Config.modMask .|. shiftMask, xK_Escape),                   spawn "sh -c 'pkill -f \"xinit.*$DISPLAY\"' -U $(id -u)")
         , ((Config.modMask, xK_Escape),                                 spawn "xlock -lockdelay 5")
 
     -- Windows
@@ -128,7 +128,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((shiftMask, xF86XK_MonBrightnessUp),                         spawn "xbacklight -set 80 -fps 60")
         , ((shiftMask, xF86XK_MonBrightnessDown),                       spawn "xbacklight -set 7 -fps 60")
 
-        , ((Config.modMask, xK_Control_R),                              spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'")
+        , ((Config.modMask, xK_Control_R),                              spawn "rofi -modi \"clipboard:clipmenu\" -show clipboard -run-command '{cmd}'")
         , ((controlMask .|. Config.modMask, xK_Return),                 spawn "ambiances")
         , ((0, xK_Print),                                               spawn Config.printScreenCommand)
         ]
