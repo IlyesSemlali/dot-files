@@ -92,12 +92,12 @@ floats   = renamed [Replace "floats"]
 -- Hooks
 myStartupHook :: X ()
 myStartupHook = do
+          spawn "clipmenud"
           spawnPipe "xrdb -nocpp -merge .Xresources"
           spawnPipe "kdeconnect-cli --refresh &"
           spawnPipe "amixer set Master mute"
           spawnPipe "amixer set Master 20%"
           spawnPipe "isync"
-          spawnPipe "clipmenud"
           spawnPipe Config.compositorCommand
           setWMName "LG3D"
 
