@@ -54,19 +54,14 @@ autocmd! bufwritepost .vimrc source %
 
 
 """""""""""""""""""""""
-" Vundle requirements "
+"       VIMPLUG       "
 """""""""""""""""""""""
-filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 source ~/.vim/plugins.vim
 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
 
 
 """""""""""""""""""""""""
