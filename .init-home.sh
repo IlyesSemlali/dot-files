@@ -6,8 +6,7 @@ XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
 
 function install_vim_plugins() {
 	echo "-- Installing VIM Plugins --"
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
-	vim +PluginClean +PluginInstall +qall 2> /dev/null
+	nvim -u ~/.viminitrc
 }
 
 function reset_omz() {
