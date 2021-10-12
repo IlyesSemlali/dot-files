@@ -8,8 +8,8 @@ echo "$(date +%F)" $@ >> /tmp/redshift_hook
 
 brightness_day=80
 brightness_transition=30
-brightness_evening=20
-brightness_night=7
+brightness_evening=30
+brightness_night=20
 
 set_brightness() {
 	kill $(pgrep -f '.*xbacklight.*')
