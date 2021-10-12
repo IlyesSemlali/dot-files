@@ -4,9 +4,9 @@ xsetroot -cursor_name left_ptr
 export QT_STYLE_OVERRIDE=kvantum
 export CM_LAUNCHER=rofi-script
 redshift &
-xss-lock xlock &
+xss-lock lock &
 dunst &
-feh --bg-fill ~/.wallpapers/li-esteban-toro.jpg &
+feh --bg-fill ~/.wallpaper &
 [ -f ~/.xinitrc.local ] && . ~/.xinitrc.local
 eval $(dbus-launch --sh-syntax --exit-with-session xmonad)
 quit
