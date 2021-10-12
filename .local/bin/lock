@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if ! [ -f ~/.lockscreen.png ]
+then
+	convert ~/.wallpaper -resize "$(xrandr | grep \* | awk '{print $1}')!" ~/.lockscreen.png
+fi
+
+i3lock -i ~/.lockscreen.png
