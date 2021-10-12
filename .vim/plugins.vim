@@ -16,7 +16,7 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'nvim-telescope/telescope.nvim'
 Plug 'pearofducks/ansible-vim'
 Plug 'preservim/nerdtree'
