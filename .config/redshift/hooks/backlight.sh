@@ -1,8 +1,6 @@
 #!/bin/sh
 # Set brightness via xbrightness when redshift status changes
 
-echo "$(date +%F)" $@ >> /tmp/redshift_hook
-
 # Set brightness values for each status.
 # Range from 1 to 100 is valid
 
@@ -12,8 +10,13 @@ brightness_evening=30
 brightness_night=20
 
 set_brightness() {
-	kill $(pgrep -f '.*xbacklight.*')
-	xbacklight -time 30000 -fps 10 -set $1 &
+	if ! [ -f /tmp/backlight.lock ]
+	then
+		id -u > /tmp/backlight.lock
+		pkill -f '.*xbacklight.*'
+		xbacklight -time 30000 -fps 10 -set $1 &
+		rm /tmp/backlight.lock
+	fi
 }
 
 if [ "$1" = period-changed ]; then
