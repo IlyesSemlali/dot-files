@@ -39,7 +39,8 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Xmonad
         [ ((Config.modMask .|. controlMask, xK_r),                      spawn "sh -c 'cd ~/.xmonad/lib && ghc --make *.hs'" >> spawn "xmonad --recompile")
         , ((Config.modMask .|. shiftMask, xK_r),                        spawn "xmonad --restart")
-        , ((Config.modMask .|. shiftMask, xK_Escape),                   spawn "sh -c 'pkill -f \"xinit.*$DISPLAY\"' -U $(id -u)")
+        , ((Config.modMask .|. shiftMask, xK_Escape),                   spawn "sh -c 'pkill -f \"xinit.*$DISPLAY\"' -U $(id -u)" >>
+                                                                        spawn "sh -c 'pkill -f \"clipmenud\"' -U $(id -u)")
         , ((Config.modMask, xK_Escape),                                 spawn "xlock -lockdelay 5")
 
     -- Windows
