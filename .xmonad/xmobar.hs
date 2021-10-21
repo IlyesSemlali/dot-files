@@ -24,7 +24,7 @@ Config {
   -- layout
   , sepChar  =  "%"   -- delineator between plugin names and straight text
   , alignSep = "}{"  -- separator between left-right alignment
-  , template = " %UnsafeStdinReader% }{ <icon=linux.xpm/> %uname% | %cpu% | %wlp59s0wi% | %default:Master% | %battery% | %date% "
+  , template = " %UnsafeStdinReader% }{ %id% | <icon=linux.xpm/> %uname% | %cpu% | %wlp59s0wi% | %default:Master% | %battery% | %date% "
 
   , commands = [
          Run Volume "default" "Master" [ "--template", " <volumeipat> <volume> % (<status>)"
@@ -35,6 +35,8 @@ Config {
 				               , "-O", "on"
 				               , "-o", "off"
                                        ] 1
+
+       , Run Com "id" ["-u", "--name"] "" 3600
 
        , Run Com "uname" ["-r"] "" 3600
 
