@@ -5,8 +5,7 @@ export PATH="$PATH:/usr/local/lib64/ruby/gems/2.5.0/bin/"
 export ZSH="$HOME/.oh-my-zsh"
 
 # Oh-My-ZSH Theme
-#ZSH_THEME="robbyrussell"
-ZSH_THEME="robberyssull"
+ZSH_THEME="agnoster"
 
 # Custom parameter to prevent folder from showing in the prompt
 GIT_PROMPT_EXCLUDES=($USER)
@@ -91,6 +90,43 @@ export BAT_PAGER=''
 export SYSTEMD_PAGER=''
 export DISABLE_UPDATE_PROMPT=true
 export QT_QPA_PLATFORMTHEME="qt5ct"
+
+# Prompt
+
+prompt_sign () {
+	echo -n '\n\n> '
+}
+
+prompt_dir () {
+	prompt_segment white $CURRENT_FG '%~'
+}
+
+prompt_begin () {
+	# TODO: Find a way to remove blank line on first run
+	echo -n '\n'
+}
+
+if [[ $TERM == "linux" ]]
+then
+	export SEGMENT_SEPARATOR=')'
+else
+	export SEGMENT_SEPARATOR='\ue0b4'
+fi
+
+build_prompt() {
+  RETVAL=$?
+  prompt_begin
+  prompt_status
+  prompt_context
+  prompt_git
+  prompt_bzr
+  prompt_hg
+  prompt_virtualenv
+  prompt_dir
+  prompt_end
+  prompt_sign
+}
+
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /home/ilyes/bin/terraform-0.15.3 terraform-0.15.3
