@@ -3,11 +3,18 @@
 XMONAD_CONFIG_TEMPLATE="/home/$USER/.xmonad/lib/Config.hs.tpl"
 XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
 
+OBSIDIAN_VERSION="0.12.19"
 
 function install_vim_plugins() {
 	echo "-- Installing VIM Plugins --"
 	nvim -u ~/.viminitrc
 	/usr/bin/vim -u ~/.viminitrc
+}
+
+function install_obsidian() {
+	wget https://github.com/obsidianmd/obsidian-releases/releases/download/v$OBSIDIAN_VERSION/Obsidian-$OBSIDIAN_VERSION.AppImage -O ~/.local/bin/Obsidian-$OBSIDIAN_VERSION.AppImage
+	ln -sf ~/.local/bin/{Obsidian-0.12.19.AppImage,obsidian}
+	chmod +x ~/.local/bin/Obsidian-$OBSIDIAN_VERSION.AppImage
 }
 
 function reset_omz() {
@@ -61,6 +68,10 @@ do
 			XMONAD='true'
 			shift
 			;;
+		-o|--obsidian)
+			OBSIDIAN='true'
+			shift
+			;;
 		-z|--zsh)
 			RESET_OMZ='true'
 			shift
@@ -80,6 +91,12 @@ fi
 if [[ $XMONAD == 'true' ]]
 then
 	configure_xmonad
+fi
+
+
+if [[ $OBSIDIAN == 'true' ]]
+then
+	install_obsidian
 fi
 
 
