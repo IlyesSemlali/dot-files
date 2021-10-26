@@ -7,6 +7,7 @@ XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
 function install_vim_plugins() {
 	echo "-- Installing VIM Plugins --"
 	nvim -u ~/.viminitrc
+	/usr/bin/vim -u ~/.viminitrc
 }
 
 function reset_omz() {
