@@ -1,7 +1,0 @@
-#!/bin/bash
-
-while true
-do
-	greenclip print "$(xclip -o -selection primary)"
-	sleep 0.25
-done
