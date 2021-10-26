@@ -3,11 +3,18 @@
 XMONAD_CONFIG_TEMPLATE="/home/$USER/.xmonad/lib/Config.hs.tpl"
 XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
 
+OBSIDIAN_VERSION="0.12.19"
 
 function install_vim_plugins() {
 	echo "-- Installing VIM Plugins --"
 	nvim -u ~/.viminitrc
 	/usr/bin/vim -u ~/.viminitrc
+}
+
+function install_obsidian() {
+	wget https://github.com/obsidianmd/obsidian-releases/releases/download/v$OBSIDIAN_VERSION/Obsidian-$OBSIDIAN_VERSION.AppImage -O ~/.local/bin/Obsidian-$OBSIDIAN_VERSION.AppImage
+	ln -sf ~/.local/bin/{Obsidian-0.12.19.AppImage,obsidian}
+	chmod +x ~/.local/bin/Obsidian-$OBSIDIAN_VERSION.AppImage
 }
 
 function reset_omz() {
@@ -48,21 +55,50 @@ function configure_xmonad() {
 	cd ~/.xmonad/lib/ && ghc --make Config.hs; cd
 }
 
-install_vim_plugins
-configure_xmonad
-configure_dolphin
-
 while [[ $# -gt 0 ]]
 do
 	key="$1"
 
 	case $key in
+		-v|--vim)
+			VIM='true'
+			shift
+			;;
+		-x|--xmonad)
+			XMONAD='true'
+			shift
+			;;
+		-o|--obsidian)
+			OBSIDIAN='true'
+			shift
+			;;
 		-z|--zsh)
 			RESET_OMZ='true'
 			shift
 			;;
 	esac
 done
+
+configure_dolphin
+
+
+if [[ $VIM == 'true' ]]
+then
+	install_vim_plugins
+fi
+
+
+if [[ $XMONAD == 'true' ]]
+then
+	configure_xmonad
+fi
+
+
+if [[ $OBSIDIAN == 'true' ]]
+then
+	install_obsidian
+fi
+
 
 if [[ $RESET_OMZ == 'true' ]]
 then
