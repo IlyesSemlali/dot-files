@@ -82,10 +82,12 @@ alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.
 if which nvim >/dev/null 2>&1
 then
 	alias vim="nvim"
+	export EDITOR=nvim
+else
+	export EDITOR=vim
 fi
 
 unset SSH_ASKPASS
-export EDITOR=vim
 export BAT_PAGER=''
 export SYSTEMD_PAGER=''
 export DISABLE_UPDATE_PROMPT=true
