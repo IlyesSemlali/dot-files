@@ -41,7 +41,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask .|. shiftMask, xK_r),                        spawn "xmonad --restart")
         , ((Config.modMask .|. shiftMask, xK_Escape),                   spawn "sh -c 'pkill -f \"xinit.*$DISPLAY\"' -U $(id -u)" >>
                                                                         spawn "sh -c 'pkill -f \"clipmenud\"' -U $(id -u)")
-        , ((Config.modMask, xK_Escape),                                 spawn "xlock -lockdelay 5")
+        , ((Config.modMask, xK_Escape),                                 spawn "lock")
 
     -- Windows
         , ((Config.modMask, xK_c),                                      kill1 >> windows W.focusUp)
