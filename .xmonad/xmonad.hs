@@ -95,8 +95,7 @@ myStartupHook = do
           spawn "clipmenud"
           spawnPipe "xrdb -nocpp -merge .Xresources"
           spawnPipe "kdeconnect-cli --refresh &"
-          spawnPipe "amixer set Master mute"
-          spawnPipe "amixer set Master 20%"
+          spawnPipe "amixer set Master 0%"
           spawnPipe "isync"
           spawnPipe Config.compositorCommand
           setWMName "LG3D"
