@@ -117,12 +117,17 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((shiftMask, xF86XK_AudioPrev),                               spawn "playerctl position 0")
         , ((0, xF86XK_AudioNext),                                       spawn "playerctl next")
 
-        , ((0, xF86XK_AudioMute),                                       spawn "amixer set Master mute")
-        , ((shiftMask, xF86XK_AudioMute),                               spawn "amixer set Master unmute")
-        , ((0, xF86XK_AudioLowerVolume),                                spawn "amixer set Master 5%-")
-        , ((shiftMask, xF86XK_AudioLowerVolume),                        spawn "amixer set Master 20%")
-        , ((0, xF86XK_AudioRaiseVolume),                                spawn "amixer set Master 5%+")
-        , ((shiftMask, xF86XK_AudioRaiseVolume),                        spawn "amixer set Master 50%")
+        , ((0, xF86XK_AudioMute),                                       spawn "amixer set Master unmute 0%")
+        , ((0, xF86XK_AudioLowerVolume),                                spawn "amixer set Master unmute 35%")
+        , ((0, xF86XK_AudioRaiseVolume),                                spawn "amixer set Master unmute 55%")
+
+        , ((shiftMask, xF86XK_AudioMute),                               spawn "pacmd set-source-volume 0 0"     >> spawn "pacmd set-source-volume 1 0")
+        , ((shiftMask, xF86XK_AudioLowerVolume),                        spawn "pacmd set-source-volume 0 10000" >> spawn "pacmd set-source-volume 1 10000")
+        , ((shiftMask, xF86XK_AudioRaiseVolume),                        spawn "pacmd set-source-volume 0 16000" >> spawn "pacmd set-source-volume 1 16000")
+
+        , ((controlMask, xF86XK_AudioMute),                             namedScratchpadAction Scratchpads.pads "pavucontrol")
+        , ((controlMask, xF86XK_AudioLowerVolume),                      spawn "amixer set Master 5%-")
+        , ((controlMask, xF86XK_AudioRaiseVolume),                      spawn "amixer set Master 5%+")
 
         , ((0, xF86XK_MonBrightnessUp),                                 spawn ("xbacklight -inc 2 " ++ Config.xbacklightOptions))
         , ((0, xF86XK_MonBrightnessDown),                               spawn ("xbacklight -dec 2 " ++ Config.xbacklightOptions))
