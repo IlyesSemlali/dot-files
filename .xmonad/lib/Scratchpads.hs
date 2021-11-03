@@ -51,6 +51,7 @@ fullNSP = customFloating $ W.RationalRect l t w h
 pads :: [NamedScratchpad]
 pads = [
                   NS "keepass"          spawnKeepass    findKeepass     smallNSP
+                , NS "pavucontrol"      spawnPavu       findPavu        smallNSP
                 , NS "kdeconnect-sms"   spawnKSMS       findKSMS        smallNSP
                 , NS "obsidian"         spawnObsidian   findObsidian    mediumNSP
                 , NS "terminal"         spawnTerm       findTerm        mediumNSP
@@ -69,6 +70,9 @@ pads = [
 
     spawnDolphin  = "dolphin"
     findDolphin   = className=? "dolphin"
+
+    spawnPavu  = "pavucontrol"
+    findPavu   = className=? "Pavucontrol"
 
     spawnKeepass  = "keepassxc"
     findKeepass   = className=? "KeePassXC"
