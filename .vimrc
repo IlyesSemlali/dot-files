@@ -158,7 +158,7 @@ let mapleader = ' '
 nnoremap <leader>r :syn sync fromstart<CR>
 nnoremap <silent><leader>n :nohl<CR>
 nnoremap <silent><leader>$ mz:%s/\s\+$//<CR>:nohl<CR>`zz
-nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <leader>m :MaximizerToggle<CR>
 
 " git related bindings
