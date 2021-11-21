@@ -105,7 +105,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask, xK_Return),                                 spawn Config.term)
         , ((controlMask, xK_Return),                                    spawn Config.menuManager)
         , ((Config.modMask .|. mod1Mask, xK_Return),                    spawn (Config.browser))
-        , ((Config.modMask .|. mod1Mask, xK_v),                         spawn ("vivaldi --new-window"))
+        , ((Config.modMask .|. mod1Mask, xK_v),                         spawn ("vivaldi --force-dark-mode --new-window"))
         , ((Config.modMask .|. mod1Mask, xK_b),                         spawn ("bluetooth-selector"))
         , ((Config.modMask .|. mod1Mask, xK_c),                         namedScratchpadAction Scratchpads.pads "dolphin")
 
