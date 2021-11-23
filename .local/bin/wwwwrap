@@ -1,0 +1,5 @@
+#!/bin/bash
+
+firefox-bin -CreateProfile $1
+
+firefox-bin -P $1 --class=$1 --kiosk $2
