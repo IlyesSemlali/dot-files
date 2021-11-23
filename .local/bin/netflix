@@ -1,4 +1,0 @@
-Xephyr -title netflix -once -name neflix -br -ac -noreset :1 -resizeable&
-sleep 1
-
-DISPLAY=:1 spectrwm

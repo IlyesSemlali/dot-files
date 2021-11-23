@@ -80,11 +80,11 @@ pads = [
     spawnSlack  = "slack"
     findSlack   = className =? "Slack"
 
-    spawnMeet  = Config.browser ++ " --qt-arg name meet --basedir .cache/qutebrowser-meet " ++ Config.meetRoom
-    findMeet   = resource =? "meet"
+    spawnMeet  = "wwwwrap meet https://apps.google.com/meet/"
+    findMeet   = className =? "meet"
 
-    spawnMocp  = Config.browser ++ " --qt-arg name ytmusic --basedir .cache/qutebrowser-ytmusic music.youtube.com"
-    findMocp   = resource =? "ytmusic"
+    spawnMocp  = "wwwwrap deezer https://deezer.com/fr"
+    findMocp   = className =? "deezer"
 
     spawnKSMS = "kdeconnect-sms"
     findKSMS = className =? "kdeconnect.sms"
@@ -95,8 +95,8 @@ pads = [
     spawnVM = Config.vmCommand
     findVM = className =? "VirtualBox Machine"
 
-    spawnNetflix = "firefox-bin --kiosk https://netflix.com"
-    findNetflix   = className =? "Firefox"
+    spawnNetflix = "wwwwrap netflix --kiosk https://netflix.com"
+    findNetflix   = className =? "netflix"
 
     spawnScreencast = "screencast"
     findScreencast = className =? "ffplay"
