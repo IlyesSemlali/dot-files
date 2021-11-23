@@ -10,7 +10,6 @@ wallpaper = homeDir ++ ".config/wallpapers/pirogues.jpg"
 
 -- apps
 term = "alacritty"
-browser = "qutebrowser "
 editor = term ++ " -e vim "
 
 -- commands
