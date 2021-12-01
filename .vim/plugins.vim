@@ -4,7 +4,6 @@
 
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'arouene/vim-ansible-vault'
 Plug 'beloglazov/vim-online-thesaurus'
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
@@ -19,7 +18,7 @@ Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'nvim-telescope/telescope.nvim'
 Plug 'pearofducks/ansible-vim'
-Plug 'preservim/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'preservim/tagbar'
 Plug 'rkitover/vimpager'
 Plug 'rust-lang/rust.vim'

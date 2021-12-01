@@ -7,8 +7,8 @@ OBSIDIAN_VERSION="0.12.19"
 
 function install_vim_plugins() {
 	echo "-- Installing VIM Plugins --"
-	nvim -u ~/.viminitrc
 	/usr/bin/vim -u ~/.viminitrc
+	nvim -u ~/.viminitrc
 }
 
 function install_obsidian() {
