@@ -50,26 +50,26 @@ fullNSP = customFloating $ W.RationalRect l t w h
 
 pads :: [NamedScratchpad]
 pads = [
-                  NS "keepass"          spawnKeepass    findKeepass     smallNSP
-                , NS "pavucontrol"      spawnPavu       findPavu        smallNSP
-                , NS "kdeconnect-sms"   spawnKSMS       findKSMS        smallNSP
-                , NS "obsidian"         spawnObsidian   findObsidian    mediumNSP
-                , NS "terminal"         spawnTerm       findTerm        mediumNSP
-                , NS "slack"            spawnSlack      findSlack       mediumNSP
-                , NS "dolphin"          spawnDolphin    findDolphin     mediumNSP
-                , NS "meet"             spawnMeet       findMeet        fullNSP
-                , NS "slack"            spawnSlack      findSlack       fullNSP
-                , NS "music"            spawnMocp       findMocp        fullNSP
-                , NS "netflix"          spawnNetflix    findNetflix     fullNSP
-                , NS "virtualmachine"   spawnVM         findVM          fullNSP
-                , NS "screencast"       spawnScreencast findScreencast  fullNSP
+                  NS "keepass"          spawnKeepass       findKeepass       smallNSP
+                , NS "pavucontrol"      spawnPavu          findPavu          smallNSP
+                , NS "kdeconnect-sms"   spawnKSMS          findKSMS          smallNSP
+                , NS "obsidian"         spawnObsidian      findObsidian      mediumNSP
+                , NS "terminal"         spawnTerm          findTerm          mediumNSP
+                , NS "slack"            spawnSlack         findSlack         mediumNSP
+                , NS "fileExplorer"     spawnFileExplorer  findFileExplorer  mediumNSP
+                , NS "meet"             spawnMeet          findMeet          fullNSP
+                , NS "slack"            spawnSlack         findSlack         fullNSP
+                , NS "music"            spawnMocp          findMocp          fullNSP
+                , NS "netflix"          spawnNetflix       findNetflix       fullNSP
+                , NS "virtualmachine"   spawnVM            findVM            fullNSP
+                , NS "screencast"       spawnScreencast    findScreencast    fullNSP
         ]
   where
     spawnTerm  = Config.term ++ " -t scratchpad"
     findTerm   = title=? "scratchpad"
 
-    spawnDolphin  = "dolphin"
-    findDolphin   = className=? "dolphin"
+    spawnFileExplorer  = "dolphin"
+    findFileExplorer   = ( className=? "dolphin" <&&> role=? "Dolphin#1" )
 
     spawnPavu  = "pavucontrol"
     findPavu   = className=? "Pavucontrol"
@@ -100,3 +100,5 @@ pads = [
 
     spawnScreencast = "screencast"
     findScreencast = className =? "ffplay"
+
+    role = stringProperty "WM_WINDOW_ROLE"
