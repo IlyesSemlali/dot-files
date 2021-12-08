@@ -123,9 +123,7 @@ myManageHook = composeAll
      , role        =? "GtkFileChooserDialog"        --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      , role        =? "bubble"                      --> doCenterFloat
      , className   =? "VirtualBox Manager"          --> doCenterFloat
-     , className   =? "Pavucontrol"                 --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      , className   =? "VirtualBoxVM"                --> doFloat
-     , className   =? "Image Lounge"                --> doRectFloat (W.RationalRect 0 0 1 1)
      ]
      <+> ( isFullscreen --> doFullFloat )
      <+> ( isDialog     --> doF W.swapUp )
