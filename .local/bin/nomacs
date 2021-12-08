@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# This wrapper is meant to work with xmonad, it handles a few tweaks to
+# provide a better user experience
+
+# Move file browser to NSP (Hidden Workspaces for Named Scratchpads)
+wmctrl -x -r 'FileManager' -t $( wmctrl -d | grep NSP | awk '{ print $1 }' )
+wmctrl -x -r 'dolphin' -t $( wmctrl -d | grep NSP | awk '{ print $1 }' )
+wmctrl -x -r 'Image Lounge' -T Nomacs
+
+pkill -f /usr/bin/nomacs
+
+/usr/bin/nomacs "$@"
