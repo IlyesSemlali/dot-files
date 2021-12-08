@@ -60,6 +60,7 @@ pads = [
                 , NS "meet"             spawnMeet          findMeet          fullNSP
                 , NS "slack"            spawnSlack         findSlack         fullNSP
                 , NS "music"            spawnMocp          findMocp          fullNSP
+                , NS "nomacs"           spawnNomacs        findNomacs        fullNSP
                 , NS "netflix"          spawnNetflix       findNetflix       fullNSP
                 , NS "virtualmachine"   spawnVM            findVM            fullNSP
                 , NS "screencast"       spawnScreencast    findScreencast    fullNSP
@@ -69,7 +70,10 @@ pads = [
     findTerm   = title=? "scratchpad"
 
     spawnFileExplorer  = "dolphin"
-    findFileExplorer   = ( className=? "dolphin" <&&> role=? "Dolphin#1" )
+    findFileExplorer   = ( className=? "dolphin" <&&> role =? "Dolphin#1" )
+
+    spawnNomacs  = "nomacs"
+    findNomacs   = ( className=? "Image Lounge" <&&> name =? "Nomacs" )
 
     spawnPavu  = "pavucontrol"
     findPavu   = className=? "Pavucontrol"
@@ -102,3 +106,4 @@ pads = [
     findScreencast = className =? "ffplay"
 
     role = stringProperty "WM_WINDOW_ROLE"
+    name = stringProperty "WM_NAME"
