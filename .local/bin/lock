@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# check if notifications were paused
-NOTIFICATIONS_PAUSED=$(dunstctl is-paused)
-
+# Generate lockscreen wallpaper
 if ! [ -f ~/.lockscreen.png ]
 then
 	convert ~/.wallpaper \
@@ -13,14 +11,24 @@ then
 		-resize "$(xrandr | grep \* | awk '{print $1}')!" ~/.lockscreen.png
 fi
 
-# deactivate notifications
-dunstctl set-paused true
 
-# lock screen
-i3lock -i ~/.lockscreen.png
-
-# reactivate notifications if needed
-if echo $NOTIFICATIONS_PAUSED | grep -q "false"
+if [[ $1 == '-f' ]] || [ ! -f ~/.nolock ]
 then
-	dunstctl set-paused false
+	# check if notifications were paused
+	NOTIFICATIONS_PAUSED=$(dunstctl is-paused)
+
+	# deactivate notifications
+	dunstctl set-paused true
+	echo pausing notifications
+
+	# lock screen
+	echo locking screen
+	i3lock -i ~/.lockscreen.png
+
+	# reactivate notifications if needed
+	if echo $NOTIFICATIONS_PAUSED | grep -q "false"
+	then
+		echo unpausing notifications
+		dunstctl set-paused false
+	fi
 fi
