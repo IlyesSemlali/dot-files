@@ -93,6 +93,7 @@ floats   = renamed [Replace "floats"]
 myStartupHook :: X ()
 myStartupHook = do
           spawn "clipmenud"
+          spawn "dunst"
           spawnPipe "xrdb -nocpp -merge .Xresources"
           spawnPipe "kdeconnect-cli --refresh &"
           spawnPipe "amixer set Master 0%"
