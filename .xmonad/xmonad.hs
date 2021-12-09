@@ -124,6 +124,7 @@ myManageHook = composeAll
 
      , role        =? "GtkFileChooserDialog"        --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      , role        =? "bubble"                      --> doCenterFloat
+     , role        =? "bubble"                      --> hasBorder False
      , className   =? "VirtualBox Manager"          --> doCenterFloat
      , className   =? "VirtualBoxVM"                --> doFloat
      ]
