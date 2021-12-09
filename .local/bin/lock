@@ -18,8 +18,8 @@ then
 	NOTIFICATIONS_PAUSED=$(dunstctl is-paused)
 
 	# deactivate notifications
-	dunstctl set-paused true
 	echo pausing notifications
+	dunstctl set-paused true
 
 	# set mic volumes to 0
 	pacmd set-source-volume 0 0
@@ -27,7 +27,7 @@ then
 
 	# lock screen
 	echo locking screen
-	i3lock -i ~/.lockscreen.png
+	i3lock -n -i ~/.lockscreen.png
 
 	# reactivate notifications if needed
 	if echo $NOTIFICATIONS_PAUSED | grep -q "false"
