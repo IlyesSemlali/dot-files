@@ -21,6 +21,10 @@ then
 	dunstctl set-paused true
 	echo pausing notifications
 
+	# set mic volumes to 0
+	pacmd set-source-volume 0 0
+	pacmd set-source-volume 1 0
+
 	# lock screen
 	echo locking screen
 	i3lock -i ~/.lockscreen.png
@@ -31,4 +35,9 @@ then
 		echo unpausing notifications
 		dunstctl set-paused false
 	fi
+
+	# set mic volumes to 17%
+	pacmd set-source-volume 0 10000
+	pacmd set-source-volume 1 10000
+
 fi
