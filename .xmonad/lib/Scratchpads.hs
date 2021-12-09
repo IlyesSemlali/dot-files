@@ -75,7 +75,7 @@ pads = [
     spawnNomacs  = "nomacs"
     findNomacs   = ( className=? "Image Lounge" <&&> name =? "Nomacs" )
 
-    spawnPavu  = "pavucontrol"
+    spawnPavu  = "pavucontrol --tab=4"
     findPavu   = className=? "Pavucontrol"
 
     spawnKeepass  = "keepassxc"
