@@ -94,8 +94,9 @@ myStartupHook :: X ()
 myStartupHook = do
           spawn "clipmenud"
           spawn "dunst"
+          spawn "battery-check"
           spawnPipe "xrdb -nocpp -merge .Xresources"
-          spawnPipe "kdeconnect-cli --refresh &"
+          spawnPipe "kdeconnect-cli --refresh"
           spawnPipe "amixer set Master 0%"
           spawnPipe "isync"
           spawnPipe Config.compositorCommand
