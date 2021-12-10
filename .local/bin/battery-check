@@ -12,7 +12,7 @@ while true ; do
 		if [[ $REMAINING < 00:20:00 ]] ; then
 
 			acpi -b | systemd-cat -t check-battery
-			sw-notify-send -i battery-low Battery "$REMAINING" -u 2
+			sw-notify-send -i battery-low Battery "Less than 20 minutes left" -u 2
 
             # renew message every 40 + 20 seconds
             sleep 40
