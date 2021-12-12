@@ -17,7 +17,7 @@ Config {
                            , "xft:SourceCodePro:pixelsize=16:antialias=true:hinting=true"
                            , "xft:Font Awesome 5 Free:pixelsize=13"
                            , "xft:Font Awesome 5 Brands:pixelsize=13"   ]
-  , bgColor  = "#292d3e"
+  , bgColor  = "#2b282a"
   , fgColor  = "#ABABAB"
   , position =     Top
 
