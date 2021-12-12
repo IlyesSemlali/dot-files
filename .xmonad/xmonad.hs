@@ -126,6 +126,7 @@ myManageHook = composeAll
      , role        =? "bubble"                      --> doCenterFloat
      , role        =? "bubble"                      --> hasBorder False
      , className   =? "VirtualBox Manager"          --> doCenterFloat
+     , className   =? "Kvantum Manager"             --> doCenterFloat
      , className   =? "VirtualBoxVM"                --> doFloat
      ]
      <+> ( isFullscreen --> doFullFloat )
