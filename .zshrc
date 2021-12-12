@@ -16,7 +16,7 @@ autoload -U compinit && compinit
 
 if [ -f ~/.zshrc.local ]
 then
-	source ~/.zshrc.local
+    source ~/.zshrc.local
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -28,18 +28,18 @@ autoload -Uz add-zsh-hook
 DIRSTACKFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zshdirs"
 if [[ -f "$DIRSTACKFILE" ]] && (( ${#dirstack} == 0 ))
 then
-	if echo $TTY | grep -q pts
-	then
-		dirstack=("${(@f)"$(< "$DIRSTACKFILE")"}")
-		[[ -d "${dirstack[1]}" ]] && cd -- "${dirstack[1]}"
-	fi
+    if echo $TTY | grep -q pts
+    then
+        dirstack=("${(@f)"$(< "$DIRSTACKFILE")"}")
+        [[ -d "${dirstack[1]}" ]] && cd -- "${dirstack[1]}"
+    fi
 fi
 
 chpwd_dirstack() {
-	if echo $TTY | grep -q pts
-	then
-		print -l -- "$PWD" "${(u)dirstack[@]}" > "$DIRSTACKFILE"
-	fi
+    if echo $TTY | grep -q pts
+    then
+        print -l -- "$PWD" "${(u)dirstack[@]}" > "$DIRSTACKFILE"
+    fi
 }
 
 add-zsh-hook -Uz chpwd chpwd_dirstack
@@ -57,19 +57,19 @@ setopt PUSHD_MINUS
 # bindkey '\033' edit-command-line
 
 precmd() {
-	if git status > /dev/null 2>&1
-	then
-		export PROJECT_ROOT="$(git rev-parse --show-toplevel)"
-		# export DIRSTACKFILE="$PROJECT_ROOT/.dirstack"
-		touch $DIRSTACKFILE
-		fc -R
-		export HISTFILE="$PROJECT_ROOT/.zsh_history"
-		if which nvim > /dev/null 2>&1
-		then
-			touch "$PROJECT_ROOT/.vim_session"
-			alias vim="nvim -S $PROJECT_ROOT/.vim_session"
-		fi
-	fi
+    if git status > /dev/null 2>&1
+    then
+        export PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+        # export DIRSTACKFILE="$PROJECT_ROOT/.dirstack"
+        touch $DIRSTACKFILE
+        fc -R
+        export HISTFILE="$PROJECT_ROOT/.zsh_history"
+        if which nvim > /dev/null 2>&1
+        then
+            touch "$PROJECT_ROOT/.vim_session"
+            alias vim="nvim -S $PROJECT_ROOT/.vim_session"
+        fi
+    fi
 }
 
 alias dv="dirs -v"
@@ -81,52 +81,51 @@ alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.
 
 if which nvim >/dev/null 2>&1
 then
-	alias vim="nvim"
-	export EDITOR=nvim
+    alias vim="nvim"
+    export EDITOR=nvim
 else
-	export EDITOR=vim
+    export EDITOR=vim
 fi
 
 unset SSH_ASKPASS
 export BAT_PAGER=''
 export SYSTEMD_PAGER=''
 export DISABLE_UPDATE_PROMPT=true
-export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # Prompt
 
 prompt_sign () {
-	echo -n '\n\n> '
+    echo -n '\n\n> '
 }
 
 prompt_dir () {
-	prompt_segment white $CURRENT_FG '%~'
+    prompt_segment white $CURRENT_FG '%~'
 }
 
 prompt_begin () {
-	# TODO: Find a way to remove blank line on first run
-	echo -n '\n'
+    # TODO: Find a way to remove blank line on first run
+    echo -n '\n'
 }
 
 if [[ $TERM == "linux" ]]
 then
-	export SEGMENT_SEPARATOR=')'
+    export SEGMENT_SEPARATOR=')'
 else
-	export SEGMENT_SEPARATOR='\ue0b4'
+    export SEGMENT_SEPARATOR='\ue0b4'
 fi
 
 build_prompt() {
-  RETVAL=$?
-  prompt_begin
-  prompt_status
-  prompt_context
-  prompt_git
-  prompt_bzr
-  prompt_hg
-  prompt_virtualenv
-  prompt_dir
-  prompt_end
-  prompt_sign
+    RETVAL=$?
+    prompt_begin
+    prompt_status
+    prompt_context
+    prompt_git
+    prompt_bzr
+    prompt_hg
+    prompt_virtualenv
+    prompt_dir
+    prompt_end
+    prompt_sign
 }
 
 
