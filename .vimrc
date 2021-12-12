@@ -51,6 +51,7 @@ set wildmenu
 
 " Automatic reload of .vimrc
 autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost plugins.vim source ~/.vimrc
 
 
 """""""""""""""""""""""
@@ -73,15 +74,8 @@ let netrw_banner=0
 
 
 " colorscheme
-set background=dark
-autocmd VimEnter * hi Normal ctermbg=none
-
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
-colorscheme ghdark
-
-let g:gh_color = "soft"
-
+colorscheme spaceway
+let g:airline_theme='ravenpower'
 
 " Rooter
 let g:rooter_patterns = ['.terraform', '.cloud', 'Chart.yaml']
@@ -90,9 +84,7 @@ let g:rooter_patterns = ['.terraform', '.cloud', 'Chart.yaml']
 let g:gitgutter_enabled = 0
 
 
-" Powerline fonts
-let g:airline_left_sep = "\uE0CC"
-let g:airline_right_sep = "\uE0CC"
+" Powerline
 let g:airline_section_z = airline#section#create(["\uE0A1 " . '%{line(".")}' . " \uE0A3 " . '%{col(".")}'])
 
 
