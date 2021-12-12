@@ -1,23 +1,23 @@
 let vim_logo = [
-	\'                                       .                    ',
-	\'                       ##############..... ##############   ',
-	\'                       ##############......##############   ',
-	\'                         ##########..........##########     ',
-	\'                         ##########........##########       ',
-	\'                         ##########.......##########        ',
-	\'                         ##########.....##########..        ',
-	\'                         ##########....##########.....      ',
-	\'                       ..##########..##########.........    ',
-	\'                     ....##########.#########.............  ',
-	\'                       ..################JJJ............    ',
-	\'                         ################.............      ',
-	\'                         ##############.JJJ.JJJJJJJJJJ      ',
-	\'                         ############...JJ...JJ..JJ  JJ     ',
-	\'                         ##########....JJ...JJ..JJ  JJ      ',
-	\'                         ########......JJJ..JJJ JJJ JJJ     ',
-	\'                         ######    .........                ',
-	\'                                     .....                  ',
-	\'                                       .                    ']
+            \'                                       .                    ',
+            \'                       ##############..... ##############   ',
+            \'                       ##############......##############   ',
+            \'                         ##########..........##########     ',
+            \'                         ##########........##########       ',
+            \'                         ##########.......##########        ',
+            \'                         ##########.....##########..        ',
+            \'                         ##########....##########.....      ',
+            \'                       ..##########..##########.........    ',
+            \'                     ....##########.#########.............  ',
+            \'                       ..################JJJ............    ',
+            \'                         ################.............      ',
+            \'                         ##############.JJJ.JJJJJJJJJJ      ',
+            \'                         ############...JJ...JJ..JJ  JJ     ',
+            \'                         ##########....JJ...JJ..JJ  JJ      ',
+            \'                         ########......JJJ..JJJ JJJ JJJ     ',
+            \'                         ######    .........                ',
+            \'                                     .....                  ',
+            \'                                       .                    ']
 
 """"""""""""""""""""""""""""
 " Native vim configuration "
@@ -39,7 +39,7 @@ set splitright
 set spelllang=fr
 
 if exists("FindRootDirectory")
-	autocmd VimEnter * let &tags=FindRootDirectory() . "/.tags"
+    autocmd VimEnter * let &tags=FindRootDirectory() . "/.tags"
 endif
 
 " Pasting options (to be tested)
@@ -91,8 +91,8 @@ let g:airline_section_z = airline#section#create(["\uE0A1 " . '%{line(".")}' . "
 " ALE
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {
-			\   'python': ['flake8'],
-			\}
+            \   'python': ['flake8'],
+            \}
 
 
 " CtrlP
@@ -105,10 +105,10 @@ let g:ctrlp_root_markers = ["terraform"]
 let g:startify_custom_header = vim_logo
 let g:startify_bookmarks = ["~/.vimrc", "~/.xmonad/lib/"]
 let g:startify_lists = [
-	\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-	\ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-	\ { 'type': 'sessions',  'header': ['   Sessions']       },
-	\ ]
+            \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+            \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+            \ { 'type': 'sessions',  'header': ['   Sessions']       },
+            \ ]
 
 
 " CoC
@@ -120,24 +120,24 @@ let g:terraform_fmt_on_save=1
 
 " TagBar
 let g:tagbar_type_terraform = {
-    \ 'ctagstype' : 'terraform',
-    \ 'kinds' : [
-        \ 'r:Resource',
-        \ 'd:Data',
-        \ 'v:Variable',
-        \ 'p:Provider',
-        \ 'm:Module',
-        \ 'o:Output',
-        \ 'f:TFVar'
-    \ ],
-    \ 'sort' : 0
-\ }
+            \ 'ctagstype' : 'terraform',
+            \ 'kinds' : [
+                \ 'r:Resource',
+                \ 'd:Data',
+                \ 'v:Variable',
+                \ 'p:Provider',
+                \ 'm:Module',
+                \ 'o:Output',
+                \ 'f:TFVar'
+                \ ],
+                \ 'sort' : 0
+                \ }
 
 " NerdTree
 let NERDTreeQuitOnOpen=1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
-    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+            \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
 
 " editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
@@ -193,31 +193,31 @@ nnoremap <silent> <leader>d A<space>#<esc>yyP:s/./#/g<CR>jp:s/./#/g<CR>:nohl<CR>
 """"""""""""""""""""""""""
 
 if (match ('xmonad', expand('%:p:h') > 0))
-	let ale_haskell_ghc_options='-fno-code -v0 -i ~/.xmonad/lib/'
+    let ale_haskell_ghc_options='-fno-code -v0 -i ~/.xmonad/lib/'
 endif
 
 function! s:IndTxtObj(inner)
-	let curline = line(".")
-	let lastline = line("$")
-	let i = indent(line(".")) - &shiftwidth * (v:count1 - 1)
-	let i = i < 0 ? 0 : i
-	if getline(".") !~ "^\\s*$"
-		let p = line(".") - 1
-		let nextblank = getline(p) =~ "^\\s*$"
-		while p > 0 && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
-			-
-			let p = line(".") - 1
-			let nextblank = getline(p) =~ "^\\s*$"
-		endwhile
-		normal! 0V
-		call cursor(curline, 0)
-		let p = line(".") + 1
-		let nextblank = getline(p) =~ "^\\s*$"
-		while p <= lastline && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
-			+
-			let p = line(".") + 1
-			let nextblank = getline(p) =~ "^\\s*$"
-		endwhile
-		normal! $
-	endif
+    let curline = line(".")
+    let lastline = line("$")
+    let i = indent(line(".")) - &shiftwidth * (v:count1 - 1)
+    let i = i < 0 ? 0 : i
+    if getline(".") !~ "^\\s*$"
+        let p = line(".") - 1
+        let nextblank = getline(p) =~ "^\\s*$"
+        while p > 0 && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
+            -
+            let p = line(".") - 1
+            let nextblank = getline(p) =~ "^\\s*$"
+        endwhile
+        normal! 0V
+        call cursor(curline, 0)
+        let p = line(".") + 1
+        let nextblank = getline(p) =~ "^\\s*$"
+        while p <= lastline && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
+            +
+            let p = line(".") + 1
+            let nextblank = getline(p) =~ "^\\s*$"
+        endwhile
+        normal! $
+    endif
 endfunction
