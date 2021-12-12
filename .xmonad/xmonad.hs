@@ -67,7 +67,7 @@ myNormColor :: String
 myNormColor   = "#292d3e"
 
 myFocusColor :: String
-myFocusColor  = "#cbc5df"
+myFocusColor  = "#75512b"
 
 -- Functions
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
