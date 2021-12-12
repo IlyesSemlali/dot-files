@@ -4,9 +4,9 @@ configuration {
       action: "kb-cancel";
   }
   modi: "drun,window,ssh,combi";
-  theme: "theme";
   font: "comfortaa 12";
   combi-modi: "drun,window,ssh";
   show-icons: true;
 }
 
+@theme "pumpkin"
