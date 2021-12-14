@@ -115,19 +115,16 @@ myLayoutHook =  smartBorders
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
-     [ className   =? "Vivaldi-stable"              --> doShift "www"
-     , ( className   =? "Gimp.bin"
-           <&&> role =? "gimp-image-window-1" )     --> doShift "edit"
-
-     , ( className  =? "Vivaldi-stable"
-           <&&> role =? "pop-up")                   --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
-
-     , role        =? "GtkFileChooserDialog"        --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
-     , role        =? "bubble"                      --> doCenterFloat
-     , role        =? "bubble"                      --> hasBorder False
-     , className   =? "VirtualBox Manager"          --> doCenterFloat
-     , className   =? "Kvantum Manager"             --> doCenterFloat
-     , className   =? "VirtualBoxVM"                --> doFloat
+     [ className   =? "Vivaldi-stable"                                        --> doShift "www"
+     , ( className =? "Gimp.bin"       <&&> role =? "gimp-image-window-1" )   --> doShift "edit"
+     , ( className =? "Vivaldi-stable" <&&> role =? "pop-up" )                --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
+     , role        =? "GtkFileChooserDialog"                                  --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
+     , role        =? "bubble"                                                --> doFloat
+     , role        =? "bubble"                                                --> hasBorder False
+     , role        =? "bubble"                                                --> doF W.swapUp
+     , className   =? "VirtualBox Manager"                                    --> doCenterFloat
+     , className   =? "Kvantum Manager"                                       --> doCenterFloat
+     , className   =? "VirtualBoxVM"                                          --> doFloat
      ]
      <+> ( isFullscreen --> doFullFloat )
      <+> ( isDialog     --> doF W.swapUp )
