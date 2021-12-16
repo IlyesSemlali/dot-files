@@ -4,6 +4,8 @@ export PATH="$PATH:/usr/local/lib64/ruby/gems/2.5.0/bin/"
 # Change this to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+zstyle ':urlglobber' url-other-schema
+
 # Oh-My-ZSH Theme
 ZSH_THEME="agnoster"
 
