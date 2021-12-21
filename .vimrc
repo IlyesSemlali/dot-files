@@ -89,17 +89,13 @@ let g:airline_section_z = airline#section#create(["\uE0A1 " . '%{line(".")}' . "
 
 
 " ALE
-let g:airline#extensions#ale#enabled = 1
+" Write this in your vimrc file
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:airline#extensions#ale#enabled = 0
 let g:ale_linters = {
             \   'python': ['flake8'],
             \}
-
-
-" CtrlP
-let g:ctrlp_cmd = 'CtrlPBuffer'
-let g:ctrlp_working_path_mode = "rc"
-let g:ctrlp_root_markers = ["terraform"]
-
 
 " Startify
 let g:startify_custom_header = vim_logo
@@ -109,10 +105,6 @@ let g:startify_lists = [
             \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
             \ { 'type': 'sessions',  'header': ['   Sessions']       },
             \ ]
-
-
-" CoC
-source ~/.vim/coc.vim
 
 
 " Terraform
@@ -147,11 +139,12 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 """"""""""""""""
 
 let mapleader = ' '
-nnoremap <leader>r :syn sync fromstart<CR>
 nnoremap <silent><leader>n :nohl<CR>
 nnoremap <silent><leader>$ mz:%s/\s\+$//<CR>:nohl<CR>`zz
 nnoremap <leader>u :UndotreeToggle<CR>
-nnoremap <leader>m :MaximizerToggle<CR>
+nnoremap cc <cmd>cclose<CR>
+
+nnoremap <silent><leader>o :only<CR>
 
 " git related bindings
 nnoremap <leader>gg :GitGutterToggle<CR>
@@ -165,12 +158,6 @@ onoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR>
 vnoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR><Esc>gv
 vnoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR><Esc>gv
 
-" switch between windows
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-
 " Move selection
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
@@ -183,10 +170,40 @@ nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 nnoremap <silent> <leader><space> :NERDTreeToggle<CR>
 
 " Tagbar
-nnoremap <silent> <leader>b :TagbarToggle<CR>
+nnoremap <silent> <leader>t :TagbarToggle<CR>
 
 " Add borders on # based comments
 nnoremap <silent> <leader>d A<space>#<esc>yyP:s/./#/g<CR>jp:s/./#/g<CR>:nohl<CR>
+
+
+" LSP
+
+" nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<CR>
+" nnoremap <silent> <leader>e <cmd>lua vim.diagnostic.open_float()<CR>
+" nnoremap <silent> <leader>wa <cmd>lua vim.lsp.buf.add_workspace_folder()<CR>
+" nnoremap <silent> <leader>wl <cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>
+" nnoremap <silent> <leader>wr <cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>
+" nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <leader>D <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> <leader>F <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> [d <cmd>lua vim.diagnostic.goto_prev()<CR>
+nnoremap <silent> ]d <cmd>lua vim.diagnostic.goto_next()<CR>
+nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> gq <cmd>lua vim.diagnostic.setqflist()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+
+" Telescope
+nnoremap <silent> <leader>f     <cmd>Telescope find_files<CR>
+nnoremap <silent> <leader><tab> <cmd>Telescope buffers<cr>
+nnoremap <silent> <leader>g     <cmd>Telescope grep_string<cr>
+nnoremap <silent> <leader>q     <cmd>Telescope quickfix<cr>
+nnoremap <silent> <leader>e     <cmd>Telescope diagnostics<cr>
+nnoremap <silent> <leader>m     <cmd>Telescope marks<cr>
+nnoremap <silent> <leader>j     <cmd>Telescope jumplist<cr>
 
 """"""""""""""""""""""""""
 " Add some logic into it "
