@@ -55,6 +55,13 @@ function configure_xmonad() {
 	cd ~/.xmonad/lib/ && ghc --make Config.hs; cd
 }
 
+function install_language_servers() {
+	yarn add ansible-language-server
+	pip3 install --user ansible-lint
+	npm i bash-language-server
+	# https://releases.hashicorp.com/terraform-ls/0.25.0/terraform-ls_0.25.0_linux_amd64.zip
+}
+
 while [[ $# -gt 0 ]]
 do
 	key="$1"
