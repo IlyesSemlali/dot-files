@@ -12,7 +12,6 @@ Gimp
 git
 Images
 Musique
-nouveau
 projects
 Téléchargements
 Videos
@@ -30,6 +29,8 @@ Videos
 !.Xresources
 !.config/mimeapps.list
 !.npmrc
+
+!.zsh/
 
 !.oh-my-zsh/custom/themes/robberyssull.zsh-theme
 !.spectrwm.conf
