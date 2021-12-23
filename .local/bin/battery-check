@@ -5,20 +5,20 @@ kill $(cat ~/.cache/battery-check.pid)
 echo $$ > ~/.cache/battery-check.pid
 
 while true ; do
-	if acpi -b | grep -q Discharging ; then
+    if acpi -b | grep -q Discharging ; then
 
-		REMAINING=`acpi -b | grep Discharging | cut -f 5 -d " "`
+        REMAINING=`acpi -b | grep Discharging | cut -f 5 -d " "`
 
-		if [[ $REMAINING < 00:20:00 ]] ; then
+        if [[ $REMAINING < 00:20:00 ]] ; then
 
-			acpi -b | systemd-cat -t check-battery
-			sw-notify-send -i battery-low Battery "Less than 20 minutes left" -u 2
+            acpi -b | systemd-cat -t check-battery
+            sw-notify-send -i battery-low Battery "Less than 20 minutes left" -u 2
 
             # renew message every 40 + 20 seconds
             sleep 40
-		fi
-	fi
+        fi
+    fi
 
     # check every 20 seconds for low battery
-	sleep 20
+    sleep 20
 done
