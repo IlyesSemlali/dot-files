@@ -17,31 +17,31 @@ choice=$(echo -e "${options[@]}" | rofi -l 6 -width 13 -dmenu -p 'Monitor' | awk
 echo $choice
 
 function refresh() {
-	xdotool key super+shift+r
-	feh --bg-fill ~/.wallpaper
+    xdotool key super+shift+r
+    feh --bg-fill ~/.wallpaper
 }
 
 case $choice in
-	left|right)
-		xrandr --output $SECONDARY --auto --${choice}-of $PRIMARY
-		refresh
-		;;
-	above|below)
-		xrandr --output $SECONDARY --auto --${choice} $PRIMARY
-		refresh
-		;;
-	duplicate)
-		xrandr --output $SECONDARY --mode $PRIMARY_RES --same-as $PRIMARY
-		refresh
-		;;
-	--disconnect--)
-		xrandr --output $SECONDARY --off
-		xrandr -s 0
-		refresh
-		
-		;;
-	*)
-		exit 1
-	;;
+    left|right)
+        xrandr --output $SECONDARY --auto --${choice}-of $PRIMARY
+        refresh
+        ;;
+    above|below)
+        xrandr --output $SECONDARY --auto --${choice} $PRIMARY
+        refresh
+        ;;
+    duplicate)
+        xrandr --output $SECONDARY --mode $PRIMARY_RES --same-as $PRIMARY
+        refresh
+        ;;
+    --disconnect--)
+        xrandr --output $SECONDARY --off
+        xrandr -s 0
+        refresh
+
+        ;;
+    *)
+        exit 1
+        ;;
 esac
 
