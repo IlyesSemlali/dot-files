@@ -38,6 +38,11 @@ set updatetime=2000
 set splitright
 set spelllang=fr
 
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
 if exists("FindRootDirectory")
     autocmd VimEnter * let &tags=FindRootDirectory() . "/.tags"
 endif
@@ -73,9 +78,15 @@ call plug#end()
 let netrw_banner=0
 
 
-" colorscheme
+" appearances
 colorscheme spaceway
 let g:airline_theme='ravenpower'
+if len(getbufinfo({'buflisted':1})) > 1
+    let g:airline#extensions#tabline#enabled = 1
+else
+    let g:airline#extensions#tabline#enabled = 0
+endif
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Rooter
 let g:rooter_patterns = ['.terraform', '.cloud', 'Chart.yaml']
