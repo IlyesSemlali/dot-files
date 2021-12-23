@@ -29,11 +29,11 @@ Config {
   , commands = [
          Run Volume "default" "Master" [ "--template", " <volumeipat> <volume> % (<status>)"
                                            , "--"
-				               , "--volume-icon-pattern", "<icon=volume/volume_%%.xpm/>"
-				               , "-C", "#ABABAB"
-				               , "-c", "#ABABAB"
-				               , "-O", "on"
-				               , "-o", "off"
+                                              , "--volume-icon-pattern", "<icon=volume/volume_%%.xpm/>"
+                                              , "-C", "#ABABAB"
+                                              , "-c", "#ABABAB"
+                                              , "-O", "on"
+                                              , "-o", "off"
                                        ] 1
 
        , Run Com "id" ["-u", "--name"] "" 3600
