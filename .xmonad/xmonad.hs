@@ -28,6 +28,7 @@ import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, doRectFloat)
+import XMonad.Hooks.RefocusLast
 import XMonad.Hooks.ServerMode
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.WorkspaceHistory
@@ -114,8 +115,12 @@ myLayoutHook =  smartBorders
                myDefaultLayout = tall ||| monocle
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
-myManageHook = composeAll
-     [ className   =? "Vivaldi-stable"                                        --> doShift "www"
+myManageHook = composeAll [
+       insertPosition Below Newer
+     , namedScratchpadManageHook Scratchpads.pads
+     , isFullscreen                                                           --> doFullFloat
+     , isDialog                                                               --> doF W.swapUp
+     , className   =? "Vivaldi-stable"                                        --> doShift "www"
      , ( className =? "Gimp.bin"       <&&> role =? "gimp-image-window-1" )   --> doShift "edit"
      , ( className =? "Vivaldi-stable" <&&> role =? "pop-up" )                --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      , role        =? "GtkFileChooserDialog"                                  --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
@@ -126,10 +131,6 @@ myManageHook = composeAll
      , className   =? "Kvantum Manager"                                       --> doCenterFloat
      , className   =? "VirtualBoxVM"                                          --> doFloat
      ]
-     <+> ( isFullscreen --> doFullFloat )
-     <+> ( isDialog     --> doF W.swapUp )
-     <+> insertPosition Below Newer
-     <+> namedScratchpadManageHook Scratchpads.pads
        where
              role = stringProperty "WM_WINDOW_ROLE"
              name = stringProperty "WM_NAME"
@@ -159,7 +160,10 @@ main = do
         , borderWidth        = myBorderWidth
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor
-        , logHook = workspaceHistoryHook <+> myLogHook <+> dynamicLogWithPP xmobarPP
+        , logHook = workspaceHistoryHook
+                <+> myLogHook
+                <+> refocusLastLogHook
+                <+> dynamicLogWithPP xmobarPP
                         { ppOutput = \x -> hPutStrLn xmobarproc x
                         , ppCurrent = xmobarColor "#F7C42a" ""                -- Current workspace in xmobar
                         , ppVisible = xmobarColor "#C7A02a" ""                -- Visible but not current workspace
