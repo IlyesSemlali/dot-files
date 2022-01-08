@@ -116,8 +116,8 @@ myLayoutHook =  smartBorders
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll [
-       insertPosition Below Newer
-     , namedScratchpadManageHook Scratchpads.pads
+       isDialog --> insertPosition Above Newer
+     , insertPosition Below Newer
      , isFullscreen                                                           --> doFullFloat
      , isDialog                                                               --> doF W.swapUp
      , className   =? "Vivaldi-stable"                                        --> doShift "www"
@@ -130,6 +130,7 @@ myManageHook = composeAll [
      , className   =? "VirtualBox Manager"                                    --> doCenterFloat
      , className   =? "Kvantum Manager"                                       --> doCenterFloat
      , className   =? "VirtualBoxVM"                                          --> doFloat
+     , namedScratchpadManageHook Scratchpads.pads
      ]
        where
              role = stringProperty "WM_WINDOW_ROLE"
