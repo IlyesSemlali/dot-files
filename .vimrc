@@ -158,6 +158,8 @@ nnoremap cc <cmd>cclose<CR>
 
 nnoremap <silent><leader>o :only<CR>
 
+nnoremap <silent><leader>vs vip:sort<CR>
+
 " git related bindings
 nnoremap <leader>gg :GitGutterToggle<CR>
 nnoremap <leader>gd :Gdiff<CR>
