@@ -8,7 +8,7 @@ OBSIDIAN_VERSION="0.12.19"
 function install_vim_plugins() {
     echo "-- Installing VIM Plugins --"
     /usr/bin/vim -N -u ~/.viminitrc
-    nvim -N -u ~/.viminitrc
+    which nvim 2>&1 > /dev/null && nvim -N -u ~/.viminitrc
 }
 
 function install_obsidian() {
@@ -53,7 +53,9 @@ function configure_xmonad() {
         fi
     done
 
-    cd ~/.xmonad/lib/ && ghc --make Config.hs; cd
+    cd ~/.xmonad/lib/
+    which ghc 2>&1 > /dev/null && ghc --make Config.hs
+    cd
 }
 
 function install_language_servers() {
