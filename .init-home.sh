@@ -21,6 +21,7 @@ function reset_omz() {
 	echo "-- Installing OhMyZSH --"
 
 	rm -rf .oh-my-zsh/
+    mkdir -p ~/.cache/zshdirs
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --keep-zshrc --skip-chsh --unattended > /dev/null 2>&1"
 	git -C ~ reset --hard > /dev/null 2>&1
 }
