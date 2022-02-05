@@ -150,6 +150,10 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 " Key Bindings "
 """"""""""""""""
 
+" Disable 's' command and use 'cl' instead
+nmap s <Nop>
+xmap s <Nop>
+
 let mapleader = ' '
 nnoremap <silent><leader>n :nohl<CR>
 nnoremap <silent><leader>$ mz:%s/\s\+$//<CR>:nohl<CR>`zz
