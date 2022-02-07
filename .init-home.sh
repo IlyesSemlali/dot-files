@@ -11,12 +11,6 @@ function install_vim_plugins() {
     which nvim 2>&1 > /dev/null && nvim -N -u ~/.viminitrc
 }
 
-function install_obsidian() {
-    wget https://github.com/obsidianmd/obsidian-releases/releases/download/v$OBSIDIAN_VERSION/Obsidian-$OBSIDIAN_VERSION.AppImage -O ~/.local/bin/Obsidian-$OBSIDIAN_VERSION.AppImage
-    ln -sf ~/.local/bin/{Obsidian-0.12.19.AppImage,obsidian}
-    chmod +x ~/.local/bin/Obsidian-$OBSIDIAN_VERSION.AppImage
-}
-
 function reset_omz() {
     echo "-- Installing OhMyZSH --"
 
@@ -78,10 +72,6 @@ do
             XMONAD='true'
             shift
             ;;
-        -o|--obsidian)
-            OBSIDIAN='true'
-            shift
-            ;;
         -z|--zsh)
             RESET_OMZ='true'
             shift
@@ -101,12 +91,6 @@ fi
 if [[ $XMONAD == 'true' ]]
 then
     configure_xmonad
-fi
-
-
-if [[ $OBSIDIAN == 'true' ]]
-then
-    install_obsidian
 fi
 
 
