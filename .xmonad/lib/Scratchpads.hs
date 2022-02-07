@@ -57,7 +57,6 @@ pads = [
                 , NS "slack"            spawnSlack         findSlack         mediumNSP
                 , NS "fileExplorer"     spawnFileExplorer  findFileExplorer  mediumNSP
                 , NS "meet"             spawnMeet          findMeet          fullNSP
-                , NS "slack"            spawnSlack         findSlack         fullNSP
                 , NS "music"            spawnMocp          findMocp          fullNSP
                 , NS "nomacs"           spawnNomacs        findNomacs        fullNSP
                 , NS "netflix"          spawnNetflix       findNetflix       fullNSP
