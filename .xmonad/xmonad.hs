@@ -164,6 +164,7 @@ main = do
         , borderWidth        = myBorderWidth
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor
+        , focusFollowsMouse  = False
         , logHook = workspaceHistoryHook
                 <+> myLogHook
                 <+> refocusLastLogHook
