@@ -53,7 +53,6 @@ pads = [
                   NS "keepass"          spawnKeepass       findKeepass       smallNSP
                 , NS "pavucontrol"      spawnPavu          findPavu          smallNSP
                 , NS "kdeconnect-sms"   spawnKSMS          findKSMS          smallNSP
-                , NS "obsidian"         spawnObsidian      findObsidian      mediumNSP
                 , NS "terminal"         spawnTerm          findTerm          mediumNSP
                 , NS "slack"            spawnSlack         findSlack         mediumNSP
                 , NS "fileExplorer"     spawnFileExplorer  findFileExplorer  mediumNSP
@@ -92,9 +91,6 @@ pads = [
 
     spawnKSMS = "kdeconnect-sms"
     findKSMS = className =? "kdeconnect.sms"
-
-    spawnObsidian = "obsidian"
-    findObsidian = className =? "obsidian"
 
     spawnVM = Config.vmCommand
     findVM = className =? "VirtualBox Machine"
