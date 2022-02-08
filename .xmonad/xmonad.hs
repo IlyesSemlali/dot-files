@@ -124,9 +124,10 @@ myManageHook = composeAll [
      , ( className      =? "Vivaldi-stable" <&&> role =? "pop-up" )
        <||> role        =? "GtkFileChooserDialog"                                  --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
 
+     -- "bubble" is for the "google cast" popup window
      , isDialog <||> role =? "bubble"                                              --> doFloat
-     , isDialog <||> role =? "bubble"                                              --> hasBorder False
      , isDialog <||> role =? "bubble"                                              --> doF W.swapUp
+     , role =? "bubble"                                                            --> hasBorder False
 
      , className        =? "VirtualBox Manager"
        <||> className   =? "Kvantum Manager"                                       --> doCenterFloat
