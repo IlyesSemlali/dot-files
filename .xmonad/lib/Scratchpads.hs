@@ -3,6 +3,8 @@ module Scratchpads where
 import System.Exit (exitSuccess)
 import System.IO (hPutStrLn)
 
+import Data.List as L
+
 import XMonad
 
 import XMonad.Hooks.EwmhDesktops
@@ -18,6 +20,9 @@ import XMonad.Util.NamedScratchpad
 import qualified XMonad.StackSet as W
 
 import Config
+
+(~?) :: Eq a => Query [a] -> [a] -> Query Bool
+q ~? x = fmap (x `L.isInfixOf`) q
 
 smallNSP = customFloating $ W.RationalRect l t w h
                where
@@ -77,10 +82,10 @@ pads = [
     findPavu   = className=? "Pavucontrol"
 
     spawnKeepass  = "keepassxc"
-    findKeepass   = className=? "KeePassXC"
+    findKeepass   = className ~? "KeePassXC"
 
     spawnSlack  = "slack"
-    findSlack   = className =? "Slack"
+    findSlack   = title ~? "Slack | "
 
     spawnMeet  = "wwwwrap meet https://apps.google.com/meet/"
     findMeet   = className =? "meet"
