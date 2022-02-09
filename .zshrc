@@ -2,9 +2,9 @@ source $HOME/.zsh/utils.zsh
 
 # PATH
 append_path "$HOME/.local/bin"
-append_path "/usr/local/lib64/ruby/gems/2.5.0/bin/"
-insert_path "$HOME/.local/share/npm/bin/"
-insert_path "$HOME/.yarn/bin/"
+append_path "/usr/local/lib64/ruby/gems/2.5.0/bin"
+insert_path "$HOME/.local/share/npm/bin"
+insert_path "$HOME/.local/node_modules/.bin"
 
 
 # ZSH config

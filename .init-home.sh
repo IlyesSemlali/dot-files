@@ -59,10 +59,12 @@ function configure_xmonad() {
 }
 
 function install_language_servers() {
+    cd ~/.local/
     yarn add ansible-language-server
     pip3 install --user ansible-lint
     npm i bash-language-server
     # https://releases.hashicorp.com/terraform-ls/0.25.0/terraform-ls_0.25.0_linux_amd64.zip
+    cd -
 }
 
 while [[ $# -gt 0 ]]
@@ -95,6 +97,7 @@ configure_dolphin
 if [[ $VIM == 'true' ]]
 then
     install_vim_plugins
+    install_language_servers
 fi
 
 
