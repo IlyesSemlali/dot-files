@@ -116,8 +116,8 @@ myLayoutHook =  smartBorders
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll [
-       isDialog --> insertPosition Above Newer
-     , insertPosition Below Newer
+       insertPosition Below Newer
+     , className        =? "Alacritty" --> insertPosition Above Newer
      , className        =? "Vivaldi-stable"                                        --> doShift "www"
      , ( className      =? "Gimp.bin"       <&&> role =? "gimp-image-window-1" )   --> doShift "edit"
 
@@ -126,7 +126,6 @@ myManageHook = composeAll [
 
      -- "bubble" is for the "google cast" popup window
      , isDialog <||> role =? "bubble"                                              --> doFloat
-     , isDialog <||> role =? "bubble"                                              --> doF W.swapUp
      , role =? "bubble"                                                            --> hasBorder False
 
      , className        =? "VirtualBox Manager"
