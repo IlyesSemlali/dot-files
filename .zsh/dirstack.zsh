@@ -42,3 +42,7 @@ precmd() {
         fi
     fi
 }
+
+dv() {
+    cd $(cat $DIRSTACKFILE | fzf)
+}
