@@ -22,7 +22,6 @@ source $ZSH/oh-my-zsh.sh
 
 
 # Aliases and exports
-alias dv="dirs -v"
 alias ll="ls -ltrh"
 alias git="git --no-pager"
 alias k=kubectl
