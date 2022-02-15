@@ -4,6 +4,7 @@ import System.Exit (exitSuccess)
 import System.IO (hPutStrLn)
 
 import Data.List as L
+import Data.List (isSuffixOf)
 
 import XMonad
 
@@ -82,7 +83,7 @@ pads = [
     findPavu   = className=? "Pavucontrol"
 
     spawnKeepass  = "keepassxc"
-    findKeepass   = className ~? "KeePassXC"
+    findKeepass   = ( "KeePassXC" `isSuffixOf` ) <$> name
 
     spawnSlack  = "slack"
     findSlack   = title ~? "Slack | "
