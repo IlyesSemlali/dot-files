@@ -15,7 +15,7 @@ zstyle ':urlglobber' url-other-schema
 # Oh-My-ZSH Config
 ZSH_THEME="agnoster"
 DISABLE_UPDATE_PROMPT=true
-plugins=(git docker docker-compose)
+plugins=(git docker docker-compose terraform)
 
 export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
