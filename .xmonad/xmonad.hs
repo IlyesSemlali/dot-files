@@ -103,6 +103,9 @@ myStartupHook = do
           spawnPipe Config.compositorCommand
           setWMName "LG3D"
 
+
+
+
 myLayoutHook =  smartBorders
                 $ avoidStruts
                 $ mouseResize
@@ -114,34 +117,55 @@ myLayoutHook =  smartBorders
              where
                myDefaultLayout = tall ||| monocle
 
+
+
+
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll [
+     -- This defines where new Windows are created
        insertPosition Below Newer
      , className        =? "Alacritty" --> insertPosition Above Newer
+
+     -- Place windows on the right workspace
      , className        =? "Vivaldi-stable"                                        --> doShift "www"
      , ( className      =? "Gimp.bin"       <&&> role =? "gimp-image-window-1" )   --> doShift "edit"
 
+     -- Handle File Dialogs
      , ( className      =? "Vivaldi-stable" <&&> role =? "pop-up" )
-       <||> role        =? "GtkFileChooserDialog"                                  --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
-
+       <||> role        =? "GtkFileChooserDialog"
+                                                                                   --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      -- "bubble" is for the "google cast" popup window
      , isDialog <||> role =? "bubble"                                              --> doFloat
      , role =? "bubble"                                                            --> hasBorder False
 
+     --
      , className        =? "VirtualBox Manager"
-       <||> className   =? "Kvantum Manager"                                       --> doCenterFloat
+       <||> className   =? "Kvantum Manager"
+                                                                                   --> doCenterFloat
 
+     --
      , className        =? "VirtualBoxVM"                                          --> doFloat
      , isFullscreen                                                                --> doFullFloat
+
+     -- Scratchpad related rules
      , namedScratchpadManageHook Scratchpads.pads
+     , className =? "dolphin"
+       <||> className =? "KeePassXC"
+                                                                                   --> doCenterFloat <+> doF W.swapUp
      ]
        where
              role = stringProperty "WM_WINDOW_ROLE"
              name = stringProperty "WM_NAME"
 
+
+
+
 myLogHook :: X ()
 myLogHook = fadeInactiveLogHook fadeAmount
     where fadeAmount = 1.0
+
+
+
 
 main :: IO ()
 main = do
