@@ -64,7 +64,12 @@ function install_language_servers() {
     yarn add ansible-language-server
     pip3 install --user ansible-lint
     npm i bash-language-server
-    # https://releases.hashicorp.com/terraform-ls/0.25.0/terraform-ls_0.25.0_linux_amd64.zip
+    cd -
+
+    cd ~/.local/bin
+    wget https://releases.hashicorp.com/terraform-ls/0.25.0/terraform-ls_0.25.0_linux_amd64.zip
+    unzip terraform-ls_0.25.0_linux_amd64.zip
+    rm terraform-ls_0.25.0_linux_amd64.zip
     cd -
 }
 
