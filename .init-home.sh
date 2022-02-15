@@ -23,6 +23,7 @@ function reset_omz() {
     rm -rf .oh-my-zsh/
     mkdir -p ~/.cache/zshdirs
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --keep-zshrc --skip-chsh --unattended > /dev/null 2>&1"
+    git clone https://github.com/macunha1/zsh-terraform ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/terraform
     git -C ~ reset --hard > /dev/null 2>&1
 }
 
