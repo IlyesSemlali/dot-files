@@ -1,36 +1,38 @@
 [alias]
-	alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
-	psu = ! git push --set-upstream origin $(git branch --show-current)
-	p = push
-	c = checkout
-	coma = commit --amend -a -C HEAD
-	r = reflog -25
-	cb = checkout -b
-	mt = mergetool
-	plog = log --graph --abbrev-commit -10 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
-	wip = ! git commit -am \"WIP $(date)\" 
-	dr = ! git diff origin/$(git branch --show-current)
-	b = branch 
-	br = branch -r
+    alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+    psu = ! git push --set-upstream origin $(git branch --show-current)
+    p = pull
+    c = checkout
+    com = ! git commit -am \"$COMMIT_MESSAGE\"
+    coma = commit --amend
+    comac = commit --amend -a -C HEAD
+    r = reflog -25
+    cb = checkout -b
+    mt = mergetool
+    plog = log --graph --abbrev-commit -10 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
+    wip = ! git commit -am \"WIP: $COMMIT_MESSAGE - $(date)\"
+    dr = ! git diff origin/$(git branch --show-current)
+    b = branch
+    br = branch -r
 
-	# Work done, interactively rebases from common ancestor
-	wd = ! git rebase -i $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD))~1
+    # Work done, interactively rebases from common ancestor
+    wd = ! git rebase -i $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD))~1
 
 [credential]
-	helper = store
+    helper = store
 
 [merge]
-	tool = vimdiff
-	conflictstyle = diff3
+    tool = vimdiff
+    conflictstyle = diff3
 
 [mergetool]
-	promt = false
+    promt = false
 
 [core]
-	excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore_global
 
 [include]
-	path = ~/.gitconfig.local
+    path = ~/.gitconfig.local
 
 [pull]
-	rebase = true
+    rebase = true
