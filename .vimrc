@@ -214,8 +214,7 @@ nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 " Telescope
 nnoremap <silent> <leader>tf        <cmd>Telescope find_files<CR>
 nnoremap <silent> <leader>ff        <cmd>Telescope git_files<cr>
-nnoremap <silent> <leader>tb        <cmd>Telescope file_browser<CR>
-" nnoremap <silent> <leader>          <cmd>Telescope buffers<cr>
+nnoremap <silent> <leader>tb        <cmd>Telescope buffers<cr>
 nnoremap <silent> <leader>tg        <cmd>Telescope grep_string<cr>
 nnoremap <silent> <leader>tq        <cmd>Telescope quickfix<cr>
 nnoremap <silent> <leader>te        <cmd>Telescope diagnostics<cr>
