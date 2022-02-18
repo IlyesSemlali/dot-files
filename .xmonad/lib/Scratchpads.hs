@@ -86,7 +86,7 @@ pads = [
     findKeepass   = ( "KeePassXC" `isSuffixOf` ) <$> name
 
     spawnSlack  = "slack"
-    findSlack   = title ~? "Slack | "
+    findSlack   = ( title ~? "Slack | " <||> title =? "Slack" )
 
     spawnMeet  = "wwwwrap meet https://apps.google.com/meet/"
     findMeet   = className =? "meet"
