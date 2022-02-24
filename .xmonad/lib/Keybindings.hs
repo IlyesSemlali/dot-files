@@ -116,8 +116,8 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((0, xF86XK_AudioNext),                                       spawn "playerctl next")
 
         , ((0, xF86XK_AudioMute),                                       spawn "amixer set Master unmute 0%")
-        , ((0, xF86XK_AudioLowerVolume),                                spawn "amixer set Master unmute 35%")
-        , ((0, xF86XK_AudioRaiseVolume),                                spawn "amixer set Master unmute 55%")
+        , ((0, xF86XK_AudioLowerVolume),                                spawn "amixer set Master unmute 40%")
+        , ((0, xF86XK_AudioRaiseVolume),                                spawn "amixer set Master unmute 60%")
 
         , ((shiftMask, xF86XK_AudioMute),                               spawn "pacmd set-source-volume 0 0"     >> spawn "pacmd set-source-volume 1 0")
         , ((shiftMask, xF86XK_AudioLowerVolume),                        spawn "pacmd set-source-volume 0 10000" >> spawn "pacmd set-source-volume 1 10000")
