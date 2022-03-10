@@ -13,6 +13,19 @@ prompt_begin () {
     echo -n '\n'
 }
 
+prompt_tf () {
+    if [[ -d .terraform ]]
+    then
+        local tf_workspace=$(terraform workspace show)
+        prompt_segment blue $CURRENT_FG $tf_workspace
+    fi
+}
+
+prompt_virtualenv () {
+    [[ -n ${VIRTUAL_ENV} ]] || return
+    prompt_segment red $CURRENT_FG $(basename "$VIRTUAL_ENV")
+}
+
 if [[ $TERM == "linux" ]]
 then
     export SEGMENT_SEPARATOR=')'
@@ -20,7 +33,7 @@ else
     export SEGMENT_SEPARATOR='\ue0b4'
 fi
 
-build_prompt() {
+build_prompt () {
     RETVAL=$?
     prompt_begin
     prompt_status
@@ -28,6 +41,7 @@ build_prompt() {
     prompt_git
     prompt_bzr
     prompt_hg
+    prompt_tf
     prompt_virtualenv
     prompt_dir
     prompt_end

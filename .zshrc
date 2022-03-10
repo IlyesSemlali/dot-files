@@ -31,6 +31,7 @@ alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.
 unset SSH_ASKPASS
 export BAT_PAGER=''
 export SYSTEMD_PAGER=''
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 if which nvim >/dev/null 2>&1
 then
