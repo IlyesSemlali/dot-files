@@ -118,7 +118,7 @@ myLayoutHook =  lessBorders OnlyScreenFloat
                 $ windowArrange
                 $ T.toggleLayouts floats
                 $ mkToggle (NBFULL ?? NOBORDERS ?? EOT)
-                $ onWorkspaces ["www", "edit"] (monocle ||| tall)
+                $ onWorkspaces ["www", "alt", "com"] (monocle ||| tall)
                 myDefaultLayout
              where
                myDefaultLayout = tall ||| monocle
