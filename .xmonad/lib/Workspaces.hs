@@ -9,5 +9,5 @@ spaces =
                , (xK_z, "www")
                , (xK_q, "com")
                , (xK_s, "sys")
-               , (xK_e, "edit")]
+               , (xK_e, "alt")]
 
