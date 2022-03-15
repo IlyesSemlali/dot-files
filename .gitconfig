@@ -3,6 +3,7 @@
     psu = ! git push --set-upstream origin $(git branch --show-current)
     p = pull
     c = checkout
+    co = commit -a
     com = ! git commit -am \"$COMMIT_MESSAGE\"
     coma = commit --amend
     comac = commit --amend -a -C HEAD
@@ -14,6 +15,7 @@
     dr = ! git diff origin/$(git branch --show-current)
     b = branch
     br = branch -r
+    st = ! git stash -m \"$COMMIT_MESSAGE\"
 
     # Work done, interactively rebases from common ancestor
     wd = ! git rebase -i $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD))~1
