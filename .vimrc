@@ -187,6 +187,11 @@ nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 " NerdTree
 nnoremap <silent> <leader><space> :NERDTreeToggleVCS<CR>
 
+" Mergetool
+nnoremap <silent> <leader>md :MergetoolStop<CR>
+nnoremap <silent> <leader>mg :diffg<CR>
+nnoremap <silent> <leader>mp :diffp<CR>
+
 " Add borders on # based comments
 nnoremap <silent> <leader>d A<space>#<esc>yyP:s/./#/g<CR>jp:s/./#/g<CR>:nohl<CR>
 
@@ -254,3 +259,12 @@ function! s:IndTxtObj(inner)
         normal! $
     endif
 endfunction
+
+" Git mergetool
+
+function s:set_mergetool_layout(split)
+    setlocal norelativenumber
+    setlocal nonumber
+endfunction
+
+let g:MergetoolSetLayoutCallback = function('s:set_mergetool_layout')

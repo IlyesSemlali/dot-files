@@ -4,3 +4,6 @@
 .vim_session
 .zsh_history
 .dirstack
+.secrets
+.project
+**/*.orig

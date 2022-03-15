@@ -16,6 +16,8 @@
     b = branch
     br = branch -r
     st = ! git stash -m \"$COMMIT_MESSAGE\"
+    mt = mergetool
+    cp = cherry-pick
 
     # Work done, interactively rebases from common ancestor
     wd = ! git rebase -i $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD))~1
@@ -24,11 +26,14 @@
     helper = store
 
 [merge]
-    tool = vimdiff
+    tool = vim_mergetool
     conflictstyle = diff3
 
-[mergetool]
-    promt = false
+[mergetool "vim_mergetool"]
+    cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+    trustExitCode = true
+    prompt = false
+    keepBackup = false
 
 [core]
     excludesfile = ~/.gitignore_global
