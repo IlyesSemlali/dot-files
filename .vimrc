@@ -217,8 +217,8 @@ nnoremap <silent> gq <cmd>lua vim.diagnostic.setqflist()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 
 " Telescope
-nnoremap <silent> <leader>tf        <cmd>Telescope find_files<CR>
-nnoremap <silent> <leader>ff        <cmd>Telescope git_files<cr>
+nnoremap <silent> <leader>tf        <cmd>Telescope git_files<cr>
+nnoremap <silent> <leader>ff        <cmd>Telescope find_files<CR>
 nnoremap <silent> <leader>tb        <cmd>Telescope buffers<cr>
 nnoremap <silent> <leader>tg        <cmd>Telescope grep_string<cr>
 nnoremap <silent> <leader>tq        <cmd>Telescope quickfix<cr>
@@ -229,6 +229,13 @@ nnoremap <silent> <leader>tj        <cmd>Telescope jumplist<cr>
 """"""""""""""""""""""""""
 " Add some logic into it "
 """"""""""""""""""""""""""
+
+" Start in $PROJECT_ROOT if variable exists
+if $PROJECT_ROOT != ""
+    cd $PROJECT_ROOT
+endif
+
+" Fix xmonad lib loction
 
 if (match ('xmonad', expand('%:p:h') > 0))
     let ale_haskell_ghc_options='-fno-code -v0 -i ~/.xmonad/lib/'
