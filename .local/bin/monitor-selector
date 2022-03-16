@@ -3,11 +3,12 @@
 PRIMARY=$(xrandr| grep ' primary' | awk '{ print $1 }')
 SECONDARY=$(xrandr| grep ' connected' | grep -v $PRIMARY | awk '{ print $1 }')
 PRIMARY_RES=$(xrandr | grep $PRIMARY -A 20 | grep \* | head -1 | awk '{print $1}')
+PRIMARY_RES=$(xrandr | grep $SECONDARY -A 20 | grep \* | head -1 | awk '{print $1}')
 
-declare -a options=("expand left
+declare -a options=("expand above
+monitor only
 expand right
-expand above
-expand below
+expand left
 duplicate
 --disconnect--")
 
@@ -32,6 +33,11 @@ case $choice in
         ;;
     duplicate)
         xrandr --output $SECONDARY --mode $PRIMARY_RES --same-as $PRIMARY
+        refresh
+        ;;
+    only)
+        xrandr --output $PRIMARY --off
+        xrandr --output $SECONDARY --auto
         refresh
         ;;
     --disconnect--)
