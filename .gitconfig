@@ -1,3 +1,10 @@
+[include]
+    path = ~/.gitconfig.local
+
+[core]
+    pager = delta
+    excludesfile = ~/.gitignore_global
+
 [alias]
     alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
     psu = ! git push --set-upstream origin $(git branch --show-current)
@@ -7,7 +14,9 @@
     com = ! git commit -am \"$COMMIT_MESSAGE\"
     coma = commit --amend
     comac = commit --amend -a -C HEAD
+    cl = ! git clone $(xclip -o)
     r = reflog -25
+    s = status
     cb = checkout -b
     mt = mergetool
     plog = log --graph --abbrev-commit -10 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
@@ -22,9 +31,18 @@
     # Work done, interactively rebases from common ancestor
     wd = ! git rebase -i $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD))~1
 
+[pull]
+    rebase = true
+
+[init]
+    defaultBranch = main
+
 [credential]
     helper = store
 
+# Extra Tools
+
+# vim-mergetools
 [merge]
     tool = vim_mergetool
     conflictstyle = diff3
@@ -35,13 +53,29 @@
     prompt = false
     keepBackup = false
 
-[core]
-    excludesfile = ~/.gitignore_global
+# Detla
 
-[include]
-    path = ~/.gitconfig.local
+[interactive]
+    diffFilter = delta --color-only --features=interactive
 
-[pull]
-    rebase = true
-[init]
-    defaultBranch = main
+[delta]
+    features = decorations
+
+[delta "interactive"]
+    ; keep-plus-minus-markers = false
+
+[delta "decorations"]
+    line-numbers = true
+    commit-style = omit
+    file-style = omit
+
+    hunk-header-decoration-style = orange box
+    hunk-header-file-style = red
+    hunk-header-style = file
+
+    zero-style = syntax normal dim
+    minus-style = syntax normal dim strike
+    plus-style = syntax bold normal
+    line-numbers-minus-style = red bold
+    line-numbers-plus-style = green bold
+    plus-emph-style = syntax bold "#306040"
