@@ -23,7 +23,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Aliases and exports
 alias ll="ls -ltrh"
-alias git="git --no-pager"
 alias k=kubectl
 alias ct="ctags --options=$HOME/.ctags.d/terraform.ctags **/*.tf*"
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
@@ -32,6 +31,7 @@ function pj() { source "$PROJECT_ROOT/.project" }
 
 unset SSH_ASKPASS
 export BAT_PAGER=''
+export BAT_THEME='gruvbox-dark'
 export SYSTEMD_PAGER=''
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
@@ -52,4 +52,3 @@ if [ -f ~/.zshrc.local ]
 then
     source ~/.zshrc.local
 fi
-
