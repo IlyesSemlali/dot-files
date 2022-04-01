@@ -1,4 +1,5 @@
 [Added Associations]
+application/pdf=org.kde.okular.desktop;
 audio/flac=vlc.desktop;org.musicbrainz.Picard.desktop;audacity.desktop;org.kde.kdeconnect_open.desktop;
 audio/mp4=vlc.desktop;
 audio/mpeg=vlc.desktop;org.musicbrainz.Picard.desktop;audacity.desktop;org.kde.kdeconnect_open.desktop;
@@ -9,6 +10,7 @@ image/x-xcf=org.nomacs.ImageLounge.desktop;
 video/mp4=vlc.desktop;
 
 [Default Applications]
+application/pdf=org.kde.okular.desktop;
 audio/flac=vlc.desktop;
 audio/mp4=vlc.desktop;
 audio/mpeg=vlc.desktop;
