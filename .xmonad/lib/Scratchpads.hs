@@ -99,7 +99,7 @@ pads = [
     spawnVM = Config.vmCommand
     findVM = className =? "VirtualBox Machine"
 
-    spawnNetflix = "wwwwrap netflix https://netflix.com"
+    spawnNetflix = "wwwwrap netflix https://www.disneyplus.com/home"
     findNetflix   = className =? "netflix"
 
     spawnScreencast = "screencast"
