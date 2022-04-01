@@ -38,6 +38,7 @@ case $choice in
     only)
         xrandr --output $PRIMARY --off
         xrandr --output $SECONDARY --auto
+        rm ~/.lockscreen.png
         refresh
         ;;
     --disconnect--)
