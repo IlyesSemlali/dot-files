@@ -17,6 +17,8 @@ then
     # check if notifications were paused
     NOTIFICATIONS_PAUSED=$(dunstctl is-paused)
 
+    # TODO handle mic volume the same way as notifications
+
     # deactivate notifications
     echo pausing notifications
     dunstctl set-paused true
