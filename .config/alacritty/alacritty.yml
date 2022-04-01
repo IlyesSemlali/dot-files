@@ -243,6 +243,7 @@ colors:
   selection:
     text: '0x292d3e'
     background: '0xbbc5ff'
+    save_to_clipboard: false
 
   # Normal colors
   normal:
