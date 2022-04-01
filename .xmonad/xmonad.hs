@@ -123,7 +123,7 @@ myLayoutHook =  smartBorders
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll [
      -- This defines where new Windows are created
-       insertPosition Above Newer
+       insertPosition Below Newer
 
      -- Place windows on the right workspace
      , className        =? "Vivaldi-stable"                                        --> doShift "www"
@@ -150,7 +150,7 @@ myManageHook = composeAll [
      , namedScratchpadManageHook Scratchpads.pads
      , className =? "dolphin"
        <||> className =? "KeePassXC"
-                                                                                   --> doCenterFloat <+> doF W.swapUp <+> insertPosition Below Newer
+                                                                                   --> doCenterFloat <+> doF W.swapUp
      ]
        where
              role = stringProperty "WM_WINDOW_ROLE"
