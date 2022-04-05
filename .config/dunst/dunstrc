@@ -65,3 +65,8 @@ format = ""
 [ignore_stamina]
 summary = "Mode STAMINA"
 format = ""
+
+[screen_share]
+body = "*while you share your screen*"
+script = notifications
+
