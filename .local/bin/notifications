@@ -1,0 +1,41 @@
+#!/bin/bash
+
+
+STATE=~/.cache/notifications.state
+
+function enable () {
+    echo 'false' > $STATE
+    resume_from_state
+}
+
+function disable () {
+    echo 'true' > $STATE
+    resume_from_state
+}
+
+function pause () {
+    dunstctl set-paused true
+}
+
+function resume_from_state () {
+    dunstctl set-paused $(cat $STATE)
+}
+
+function test () {
+    sw-notify-send test "<b>$(date)</b> "
+}
+
+case $1 in
+    enable|disable|pause|test)
+        $1
+        ;;
+    resume)
+        resume_from_state
+        ;;
+    *)
+        pause
+        sleep 3600
+        resume_from_state
+        exit 1
+        ;;
+esac
