@@ -66,10 +66,9 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
      -- Notifications
         , ((mod5Mask, xK_Delete),                                       spawn "dunstctl close")
-        , ((mod5Mask .|. controlMask, xK_Delete),                       spawn "dunstctl history-pop")
-        , ((mod5Mask, xK_BackSpace),                                    spawn "dunstctl set-paused true")
-        , ((mod5Mask .|. controlMask, xK_BackSpace),                    spawn "dunstctl set-paused false")
-        , ((mod5Mask .|. shiftMask, xK_Return),                         spawn "dunstctl context")
+        , ((mod5Mask .|. shiftMask, xK_Delete),                         spawn "notifications enable" >> spawn "dunstctl history-pop")
+        , ((mod5Mask, xK_BackSpace),                                    spawn "notifications disable")
+        , ((mod5Mask .|. shiftMask, xK_BackSpace),                      spawn "notifications enable")
 
      -- Layouts
         , ((Config.modMask, xK_Tab),                                    sendMessage NextLayout)
