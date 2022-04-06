@@ -13,6 +13,7 @@ zstyle ':urlglobber' url-other-schema
 
 
 # Oh-My-ZSH Config
+CASE_SENSITIVE="true"
 ZSH_THEME="agnoster"
 DISABLE_UPDATE_PROMPT=true
 plugins=(git docker docker-compose terraform)
