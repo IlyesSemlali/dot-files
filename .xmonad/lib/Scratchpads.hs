@@ -82,8 +82,8 @@ pads = [
     spawnPavu  = "pavucontrol --tab=4"
     findPavu   = className=? "Pavucontrol"
 
-    spawnKeepass  = "keepassxc"
-    findKeepass   = ( "KeePassXC" `isSuffixOf` ) <$> name
+    spawnKeepass  = "keepassxc-wrapper"
+    findKeepass   = role =? "KeepassMainWindow"
 
     spawnSlack  = "slack"
     findSlack   = ( title ~? "Slack | " <||> title =? "Slack" )

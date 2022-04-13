@@ -1,0 +1,10 @@
+#!/bin/bash
+
+keepassxc &
+
+while [ -z $WINDOW_ID ]
+do
+    WINDOW_ID=$(wmctrl -l | grep ' - KeePassXC$' | awk '{print $1}')
+done
+
+xprop -id $WINDOW_ID -f WM_WINDOW_ROLE 8u -set WM_WINDOW_ROLE KeepassMainWindow
