@@ -143,7 +143,9 @@ myManageHook = composeAll [
                                                                                    --> doCenterFloat
 
      --
+     , name             =? "Vivaldi"                                               --> doCenterFloat
      , className        =? "VirtualBoxVM"                                          --> doFloat
+     , className        =? "F5 VPN"                                                --> doCenterFloat
      , isFullscreen                                                                --> doFullFloat
 
      -- Scratchpad related rules
