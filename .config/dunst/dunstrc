@@ -66,6 +66,10 @@ format = ""
 summary = "Mode STAMINA"
 format = ""
 
+[slack_icon]
+appname = Slack
+new_icon = /usr/share/icons/hicolor/512x512/apps/slack.png
+
 [screen_share]
 body = "*while you share your screen*"
 script = notifications
