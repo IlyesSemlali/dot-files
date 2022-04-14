@@ -1,0 +1,63 @@
+#!/bin/bash
+
+
+STATE=~/.cache/microphone.state
+
+FACTOR=654
+
+INTERNAL_VOLUME=20
+HEADSET_VOLUME=35
+
+MONITOR=0
+INPUT=1
+
+# Always mute monitor and set port to headset mic if available
+pacmd set-source-volume $MONITOR 0
+pacmd set-source-port alsa_input.pci-0000_00_1f.3.analog-stereo analog-input-headset-mic
+
+function set_absolute () {
+    echo $1 > ${STATE}
+    pacmd set-source-volume $INPUT $(( $1 * $FACTOR ))
+}
+
+function mute () {
+    pacmd set-source-volume $MONITOR 0
+    pacmd set-source-volume $INPUT 0
+}
+
+function resume_from_state () {
+    set_absolute $(cat ${STATE})
+}
+
+function min () {
+    if [ -f /tmp/headphones-plugged ]
+    then
+        set_absolute $( echo $HEADSET_VOLUME ' * 3 / 4 ' | bc )
+    else
+        set_absolute $( echo $HEADSET_VOLUME ' * 3 / 4 ' | bc )
+    fi
+}
+
+function max () {
+    if [ -f /tmp/headphones-plugged ]
+    then
+        set_absolute $HEADSET_VOLUME
+    else
+        set_absolute $INTERNAL_VOLUME
+    fi
+}
+
+case $1 in
+    mute|min|max)
+        $1
+        ;;
+    resume)
+        resume_from_state
+        ;;
+    set_absolute)
+        $1 $2
+        ;;
+    *)
+        exit 1
+        ;;
+esac
