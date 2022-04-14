@@ -1,0 +1,67 @@
+#!/bin/bash
+
+
+STATE=~/.cache/volume.state
+
+INTERNAL_VOLUME=65
+HEADSET_VOLUME=45
+
+function set_absolute () {
+    amixer set Master unmute ${1}%
+    save_volume
+}
+
+function save_volume () {
+    amixer sget Master | grep -o '\[[0-9]\+%\]' | sed 's/]//;s/\[//;s/%//' | head -1 > $STATE
+}
+
+function mute () {
+    amixer set Master 0%
+}
+
+function resume_from_state () {
+    set_absolute $(cat ${STATE})
+}
+
+function decrease () {
+    amixer set Master -5%
+    save_volume
+}
+
+function increase () {
+    amixer set Master unmute +5%
+    save_volume
+}
+
+function min () {
+    if [ -f /tmp/headphones-plugged ]
+    then
+        set_absolute $( echo $HEADSET_VOLUME ' * 3 / 4 ' | bc )
+    else
+        set_absolute $( echo $INTERNAL_VOLUME ' * 3 / 4 ' | bc )
+    fi
+}
+
+function max () {
+    if [ -f /tmp/headphones-plugged ]
+    then
+        set_absolute $HEADSET_VOLUME
+    else
+        set_absolute $INTERNAL_VOLUME
+    fi
+}
+
+case $1 in
+    mute|min|max)
+        $1
+        ;;
+    resume)
+        resume_from_state
+        ;;
+    set_absolute)
+        $1 $2
+        ;;
+    *)
+        exit 1
+        ;;
+esac
