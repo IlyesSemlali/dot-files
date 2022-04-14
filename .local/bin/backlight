@@ -1,0 +1,76 @@
+#!/bin/bash
+
+
+LOCK=~/.cache/backlight.lock
+STATE=~/.cache/backlight.state
+
+MIN=10
+MAX=90
+
+function set_absolute () {
+    if ! [ -e ${LOCK} ]
+    then
+        id -u > ${LOCK}
+        pkill -f '.*xbacklight.*'
+        echo $1 > ${STATE}
+        xbacklight -time 2000 -fps 15 -set $1
+        rm -f ${LOCK}
+    fi
+}
+
+function soft_transition () {
+    if ! [ -e ${LOCK} ]
+    then
+        id -u > ${LOCK}
+        pkill -f '.*xbacklight.*'
+        echo $1 > ${STATE}
+        xbacklight -time 20000 -fps 15 -set $1
+        rm -f ${LOCK}
+    fi
+}
+
+function dim () {
+    xbacklight -time 2000 -fps 15 -dec 10 -perceived
+}
+
+function resume_from_state () {
+    set_absolute $(cat ${STATE})
+}
+
+function increase () {
+    xbacklight -inc 2 -fps 30 -perceived
+    xbacklight -get > ${STATE}
+}
+
+function decrease () {
+    xbacklight -dec 2 -fps 30 -perceived
+    xbacklight -get > ${STATE}
+}
+
+function min () {
+    echo $MIN > ${STATE}
+    xbacklight -set $MIN -fps 30
+}
+
+function max () {
+    echo $MAX > ${STATE}
+    xbacklight -set $MAX -fps 30
+}
+
+case $1 in
+    dim|increase|decrease|min|max)
+        $1
+        ;;
+    resume)
+        resume_from_state
+        ;;
+    set_absolute|soft_transition)
+        $1 $2
+        ;;
+    *)
+        pause
+        sleep 3600
+        resume_from_state
+        exit 1
+        ;;
+esac
