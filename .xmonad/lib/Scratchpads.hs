@@ -56,9 +56,9 @@ fullNSP = customFloating $ W.RationalRect l t w h
 
 pads :: [NamedScratchpad]
 pads = [
-                  NS "keepass"          spawnKeepass       findKeepass       smallNSP
-                , NS "pavucontrol"      spawnPavu          findPavu          smallNSP
+                  NS "pavucontrol"      spawnPavu          findPavu          smallNSP
                 , NS "kdeconnect-sms"   spawnKSMS          findKSMS          smallNSP
+                , NS "keepass"          spawnKeepass       findKeepass       mediumNSP
                 , NS "terminal"         spawnTerm          findTerm          mediumNSP
                 , NS "slack"            spawnSlack         findSlack         mediumNSP
                 , NS "fileExplorer"     spawnFileExplorer  findFileExplorer  mediumNSP
