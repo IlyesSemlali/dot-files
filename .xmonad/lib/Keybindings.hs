@@ -123,8 +123,8 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((shiftMask, xF86XK_AudioRaiseVolume),                        spawn "microphone max")
 
         , ((controlMask, xF86XK_AudioMute),                             namedScratchpadAction Scratchpads.pads "pavucontrol")
-        , ((controlMask, xF86XK_AudioLowerVolume),                      spawn "volume increase")
-        , ((controlMask, xF86XK_AudioRaiseVolume),                      spawn "volume decrease")
+        , ((controlMask, xF86XK_AudioLowerVolume),                      spawn "volume decrease")
+        , ((controlMask, xF86XK_AudioRaiseVolume),                      spawn "volume increase")
 
         , ((0, xF86XK_MonBrightnessUp),                                 spawn "backlight increase")
         , ((0, xF86XK_MonBrightnessDown),                               spawn "backlight decrease")
