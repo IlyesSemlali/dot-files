@@ -20,9 +20,15 @@ function set_absolute () {
     pacmd set-source-volume $INPUT $(( $1 * $FACTOR ))
 }
 
+function pause () {
+    pacmd set-source-volume $MONITOR 0
+    pacmd set-source-volume $INPUT 0
+}
+
 function mute () {
     pacmd set-source-volume $MONITOR 0
     pacmd set-source-volume $INPUT 0
+    echo 0 > $STATE
 }
 
 function resume_from_state () {
@@ -48,7 +54,7 @@ function max () {
 }
 
 case $1 in
-    mute|min|max)
+    pause|mute|min|max)
         $1
         ;;
     resume)
