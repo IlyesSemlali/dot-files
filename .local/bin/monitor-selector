@@ -1,9 +1,13 @@
 #!/bin/bash
 
+kill $(cat .cache/monitor.lock)
+echo $$ > .cache/monitor.lock
+
 PRIMARY=$(xrandr| grep ' primary' | awk '{ print $1 }')
 SECONDARY=$(xrandr| grep ' connected' | grep -v $PRIMARY | awk '{ print $1 }')
-PRIMARY_RES=$(xrandr | grep $PRIMARY -A 20 | grep \* | head -1 | awk '{print $1}')
-PRIMARY_RES=$(xrandr | grep $SECONDARY -A 20 | grep \* | head -1 | awk '{print $1}')
+PRIMARY_RES=$(xrandr | grep "^$PRIMARY" -A 20 | grep \* | head -1 | awk '{print $1}')
+SECONDARY_RES=$(xrandr | grep "^$SECONDARY" -A 20 | grep \* | head -1 | awk '{print $1}')
+OFFSET=100
 
 declare -a options=("expand above
 monitor only
@@ -15,31 +19,55 @@ duplicate
 retries=7
 choice=$(echo -e "${options[@]}" | rofi -l 6 -width 13 -dmenu -p 'Monitor' | awk '{print $NF}')
 
-echo $choice
-
 function refresh() {
     xdotool key super+shift+r
-    feh --bg-fill ~/.wallpaper
+    feh -F --bg-fill ~/.wallpaper
+}
+
+function fallback () {
+    while xrandr| grep -e $SECONDARY | grep -v $PRIMARY | grep -vq disconnected
+    do
+        sleep 2
+    done
+
+    xrandr --output $SECONDARY --off
+    xrandr -s 0
+    refresh
 }
 
 case $choice in
-    left|right)
-        xrandr --output $SECONDARY --auto --${choice}-of $PRIMARY
+    right)
+        SECONDARY_HEIGHT=$(echo $SECONDARY_RES | cut -d 'x' -f2)
+        PRIMARY_WIDTH=$(echo $PRIMARY_RES | cut -d 'x' -f1)
+        xrandr --output $PRIMARY --pos 0x$(( $SECONDARY_HEIGHT - $OFFSET )) --output $SECONDARY --pos $(( PRIMARY_WIDTH ))x0
+        unset SECONDARY_HEIGHT PRIMARY_WIDTH
         refresh
+        fallback
+        ;;
+    left)
+        SECONDARY_HEIGHT=$(echo $SECONDARY_RES | cut -d 'x' -f2)
+        SECONDARY_WIDTH=$(echo $SECONDARY_RES | cut -d 'x' -f1)
+        xrandr --output $PRIMARY --pos ${SECONDARY_WIDTH}x$(( $SECONDARY_HEIGHT - $OFFSET )) --output $SECONDARY --pos 0x0
+        unset SECONDARY_HEIGHT SECONDARY_WIDTH
+        refresh
+        fallback
         ;;
     above|below)
         xrandr --output $SECONDARY --auto --${choice} $PRIMARY
         refresh
+        fallback
         ;;
     duplicate)
         xrandr --output $SECONDARY --mode $PRIMARY_RES --same-as $PRIMARY
         refresh
+        fallback
         ;;
     only)
         xrandr --output $PRIMARY --off
         xrandr --output $SECONDARY --auto
         rm ~/.lockscreen.png
         refresh
+        fallback
         ;;
     --disconnect--)
         xrandr --output $SECONDARY --off
