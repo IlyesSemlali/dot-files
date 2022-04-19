@@ -13,7 +13,7 @@ function set_absolute () {
         id -u > ${LOCK}
         pkill -f '.*xbacklight.*'
         echo $1 > ${STATE}
-        xbacklight -time 2000 -fps 15 -set $1
+        xbacklight -time 500 -fps 30 -set $1 &
         rm -f ${LOCK}
     fi
 }
@@ -24,13 +24,13 @@ function soft_transition () {
         id -u > ${LOCK}
         pkill -f '.*xbacklight.*'
         echo $1 > ${STATE}
-        xbacklight -time 20000 -fps 15 -set $1
+        xbacklight -time 20000 -fps 15 -set $1 &
         rm -f ${LOCK}
     fi
 }
 
 function dim () {
-    xbacklight -time 2000 -fps 15 -dec 10 -perceived
+    xbacklight -time 2000 -fps 30 -dec 10 -perceived &
 }
 
 function resume_from_state () {
@@ -49,12 +49,12 @@ function decrease () {
 
 function min () {
     echo $MIN > ${STATE}
-    xbacklight -set $MIN -fps 30
+    xbacklight -set $MIN -fps 30 &
 }
 
 function max () {
     echo $MAX > ${STATE}
-    xbacklight -set $MAX -fps 30
+    xbacklight -set $MAX -fps 30 &
 }
 
 case $1 in
