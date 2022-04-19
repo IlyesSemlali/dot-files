@@ -27,7 +27,7 @@ Config {
   , template = " %UnsafeStdinReader% }{ %id% | <icon=linux.xpm/> %uname% | %cpu% | %wlp59s0wi% | %default:Master% | %battery% | %date% "
 
   , commands = [
-         Run Volume "default" "Master" [ "--template", " <volumeipat> <volume> % (<status>)"
+         Run Volume "default" "Master" [ "--template", " <volumeipat> <volume> %"
                                            , "--"
                                               , "--volume-icon-pattern", "<icon=volume/volume_%%.xpm/>"
                                               , "-C", "#ABABAB"
