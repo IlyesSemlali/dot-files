@@ -102,7 +102,7 @@ myStartupHook = do
           spawnPipe "xrdb -nocpp -merge .Xresources"
           spawnPipe "kdeconnect-cli --refresh"
           spawnPipe "NOTIFY=false audio-output auto"
-          spawnPipe "NOTIFY=false volume resume"
+          spawnPipe "NOTIFY=false volume pause"
           spawnPipe "isync"
           spawnPipe Config.compositorCommand
           setWMName "LG3D"
