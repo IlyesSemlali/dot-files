@@ -16,7 +16,10 @@ then
 fi
 
 function notify () {
-    notify-send -t 1000 -i audio-volume-high Volume "" --hint="int:value:$1"
+    if ! [[ $NOTIFY == "false" ]]
+    then
+        notify-send -t 1000 -i audio-volume-high Volume "" --hint="int:value:$1"
+    fi
 }
 
 function set_absolute () {
@@ -36,7 +39,10 @@ function save_volume () {
 function pause () {
     amixer set Master 0%
     microphone pause
-    notify-send -t 1000 -i audio-volume-muted Volume ""
+    if ! [[ $NOTIFY == "false" ]]
+    then
+        notify-send -t 1000 -i audio-volume-muted Volume ""
+    fi
 }
 
 function mute () {
