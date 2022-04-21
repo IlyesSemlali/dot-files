@@ -15,18 +15,28 @@ then
     echo 'analog-output-headphones' > $HEADSET_STATE
 fi
 
+function notify () {
+    notify-send -t 1000 -i audio-volume-high Volume "" --hint="int:value:$1"
+}
+
 function set_absolute () {
     amixer set Master unmute ${1}%
     save_volume
+    notify $1
+}
+
+function get_volume () {
+    amixer sget Master | grep -o '\[[0-9]\+%\]' | sed 's/]//;s/\[//;s/%//' | head -1
 }
 
 function save_volume () {
-    amixer sget Master | grep -o '\[[0-9]\+%\]' | sed 's/]//;s/\[//;s/%//' | head -1 > $STATE
+    get_volume > $STATE
 }
 
 function pause () {
     amixer set Master 0%
     microphone pause
+    notify-send -t 1000 -i audio-volume-muted Volume ""
 }
 
 function mute () {
@@ -41,12 +51,14 @@ function resume_from_state () {
 function decrease () {
     amixer set Master 5%-
     save_volume
+    notify $(get_volume)
 }
 
 function increase () {
     amixer set Master unmute 5%+
     microphone resume
     save_volume
+    notify $(get_volume)
 }
 
 function min () {
