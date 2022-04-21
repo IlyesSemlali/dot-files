@@ -40,7 +40,7 @@ function min () {
     then
         set_absolute $( echo $HEADSET_VOLUME ' * 3 / 4 ' | bc )
     else
-        set_absolute $( echo $HEADSET_VOLUME ' * 3 / 4 ' | bc )
+        set_absolute $( echo $INTERNAL_VOLUME ' * 3 / 4 ' | bc )
     fi
 }
 
