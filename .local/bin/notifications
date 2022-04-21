@@ -22,7 +22,7 @@ function resume_from_state () {
 }
 
 function test () {
-    sw-notify-send test "<b>$(date)</b> "
+    notify-send test "<b>$(date)</b> "
 }
 
 case $1 in
