@@ -56,7 +56,7 @@ function decrease () {
 
 function increase () {
     amixer set Master unmute 5%+
-    microphone resume
+    NOTIFY=false microphone resume
     save_volume
     notify $(get_volume)
 }
@@ -68,7 +68,7 @@ function min () {
     else
         set_absolute $( echo $HEADSET_VOLUME ' * 3 / 4 ' | bc )
     fi
-    microphone resume
+    NOTIFY=false microphone resume
 }
 
 function max () {
@@ -78,7 +78,7 @@ function max () {
     else
         set_absolute $HEADSET_VOLUME
     fi
-    microphone resume
+    NOTIFY=false microphone resume
 }
 
 case $1 in
