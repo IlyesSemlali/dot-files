@@ -12,7 +12,7 @@ while true ; do
         while [[ $REMAINING < 00:20:00 ]] && acpi -b | grep -q Discharging; do
 
             acpi -b | systemd-cat -t check-battery
-            sw-notify-send -t 5100 -i battery-empty Battery "Less than 20 minutes left" -u 2
+            notify-send -t 5100 -i battery-empty Battery "Less than 20 minutes left" -u critical
 
             # renew message every 5 seconds
             sleep 5
