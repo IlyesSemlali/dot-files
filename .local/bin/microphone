@@ -16,8 +16,11 @@ pacmd set-source-volume $MONITOR 0
 pacmd set-source-port alsa_input.pci-0000_00_1f.3.analog-stereo analog-input-headset-mic
 
 function notify () {
-    DEVICE=$( pacmd list-sources | grep 'active port' | sed 's/<analog-input-//;s/>//;' | awk '{print$NF}')
-    notify-send -t 1000 -i mic-on Microphone "$DEVICE" --hint="int:value:$1"
+    if ! [[ $NOTIFY == "false" ]]
+    then
+        DEVICE=$( pacmd list-sources | grep 'active port' | sed 's/<analog-input-//;s/>//;' | awk '{print$NF}')
+        notify-send -t 1000 -i mic-on Microphone "$DEVICE" --hint="int:value:$1"
+    fi
 }
 
 function notify_mute () {
