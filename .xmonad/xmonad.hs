@@ -98,8 +98,7 @@ myStartupHook = do
           spawn "battery-check"
           spawnPipe "xrdb -nocpp -merge .Xresources"
           spawnPipe "kdeconnect-cli --refresh"
-          spawnPipe "volume resume"
-          spawnPipe "microphone resume"
+          spawnPipe "NOTIFY=false volume resume"
           spawnPipe "isync"
           spawnPipe Config.compositorCommand
           setWMName "LG3D"
