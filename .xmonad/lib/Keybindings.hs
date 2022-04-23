@@ -10,20 +10,24 @@ import XMonad
 import XMonad.Actions.CopyWindow (kill1, killAllOtherCopies)
 import XMonad.Actions.CycleWS (WSType(..))
 import XMonad.Actions.CycleWS (nextScreen, prevScreen, WSType(..))
+import XMonad.Actions.Minimize
 import XMonad.Actions.Promote
 import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
 import XMonad.Actions.WithAll (sinkAll, killAll)
 import XMonad.Hooks.ManageDocks (ToggleStruts(..))
+import XMonad.Layout.Minimize
 import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
 
+
 import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(Toggle))
 import qualified XMonad.Layout.MultiToggle as MT (Toggle(..))
+import qualified XMonad.Layout.BoringWindows as BW
 
 import Config
 import Workspaces
@@ -44,8 +48,8 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask, xK_Escape),                                 spawn "lock -f")
 
     -- Windows
-        , ((Config.modMask, xK_c),                                      kill1 >> windows W.focusUp)
-        , ((Config.modMask .|. shiftMask, xK_c),                        killAll >> windows W.focusUp)
+        , ((Config.modMask, xK_c),                                      kill1 >> BW.focusUp)
+        , ((Config.modMask .|. shiftMask, xK_c),                        killAll >> BW.focusUp)
 
     -- Floating windows
         , ((Config.modMask, xK_f),                                      sendMessage (T.Toggle "floats"))
@@ -55,8 +59,8 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Windows navigation
         , ((Config.modMask, xK_o),                                      prevScreen)
         , ((Config.modMask, xK_p),                                      nextScreen)
-        , ((Config.modMask, xK_k),                                      windows W.focusUp)
-        , ((Config.modMask, xK_j),                                      windows W.focusDown)
+        , ((Config.modMask, xK_k),                                      BW.focusUp)
+        , ((Config.modMask, xK_j),                                      BW.focusDown)
         , ((Config.modMask .|. shiftMask, xK_h),                        windows W.swapMaster)
         , ((Config.modMask .|. shiftMask, xK_k),                        windows W.swapUp)
         , ((Config.modMask .|. shiftMask, xK_j),                        windows W.swapDown)
@@ -80,13 +84,14 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask, xK_exclam),                                 sendMessage (IncMasterN 1))
         , ((Config.modMask .|. shiftMask, xK_exclam),                   sendMessage (IncMasterN (-1)))
 
-        , ((Config.modMask, xK_h),                                      windows W.focusMaster)
-        , ((Config.modMask, xK_l),                                      windows W.focusMaster >> windows W.focusDown)
+        , ((Config.modMask, xK_h),                                      BW.focusMaster)
+        , ((Config.modMask, xK_l),                                      BW.focusMaster >> BW.focusDown)
         , ((Config.modMask .|. controlMask, xK_h),                      sendMessage Shrink)
         , ((Config.modMask .|. controlMask, xK_l),                      sendMessage Expand)
         , ((Config.modMask .|. controlMask, xK_k),                      sendMessage MirrorShrink)
         , ((Config.modMask .|. controlMask, xK_j),                      sendMessage MirrorExpand)
-        , ((Config.modMask, xK_F8),                                     spawn ("monitor-selector"))
+        , ((Config.modMask, xK_m),                                      withFocused minimizeWindow)
+        , ((Config.modMask .|. shiftMask, xK_m),                        withLastMinimized maximizeWindowAndFocus)
 
     -- Scratchpads
         , ((Config.modMask, xK_F1),                                     namedScratchpadAction Scratchpads.pads "terminal")
@@ -96,6 +101,7 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((Config.modMask, xK_F5),                                     namedScratchpadAction Scratchpads.pads Config.mainScratchpad)
         , ((Config.modMask, xK_F6),                                     namedScratchpadAction Scratchpads.pads "music")
         , ((Config.modMask, xK_F7),                                     namedScratchpadAction Scratchpads.pads "screencast")
+        , ((Config.modMask, xK_F8),                                     spawn ("monitor-selector"))
         , ((controlMask .|. Config.modMask, xK_w),                      namedScratchpadAction Scratchpads.pads "virtualmachine")
         , ((controlMask .|. Config.modMask .|. shiftMask, xK_w),        spawn "killall -9 VirtualBoxVM")
 
