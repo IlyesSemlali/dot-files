@@ -121,38 +121,48 @@ myLayoutHook =  smartBorders
 
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
+-- (composition works from right to left, so the first written rule takes it)
 myManageHook = composeAll [
-     -- This defines where new Windows are created
-       insertPosition Below Newer
+-- Define where new windows are created relative to current window
+       className        =? "Alacritty"
+       <||> className   =? "Google-chrome"
+       <||> className   =? "Vivaldi-stable"
+                                                                                   --> insertPosition Below Newer
+     , insertPosition Above Newer
 
-     -- Place windows on the right workspace
-     , className        =? "Vivaldi-stable"                                        --> doShift "www"
+-- Place windows on the right workspace
+     , className        =? "Vivaldi-stable"
+       <||> className   =? "Google-chrome"
+                                                                                   --> doShift "www"
+
      , ( className      =? "Gimp.bin"       <&&> role =? "gimp-image-window-1" )   --> doShift "edit"
 
-     -- Handle File Dialogs
+-- Floating Windows
+     -- Handle file dialogs
      , ( className      =? "Vivaldi-stable" <&&> role =? "pop-up" )
        <||> role        =? "GtkFileChooserDialog"
                                                                                    --> doRectFloat (W.RationalRect (1 % 4) (1 % 4) (1 % 2) (1 % 2))
      -- "bubble" is for the "google cast" popup window
-     , isDialog <||> role =? "bubble"                                              --> doFloat
+     , isDialog
+     <||> role          =? "bubble"
+     <||> className     =? "VirtualBoxVM"
+                                                                                   --> doFloat
      , role =? "bubble"                                                            --> hasBorder False
 
-     --
+
      , className        =? "VirtualBox Manager"
        <||> className   =? "Kvantum Manager"
+       <||> className   =? "F5 VPN"
+        -- Vivaldi Profile Selector (has no specific title)
+       <||> name        =? "Vivaldi"
+       <||> className   =? "dolphin"
+       <||> className   =? "KeePassXC"
                                                                                    --> doCenterFloat
 
-     --
-     , name             =? "Vivaldi"                                               --> doCenterFloat
-     , className        =? "VirtualBoxVM"                                          --> doFloat
-     , className        =? "F5 VPN"                                                --> doCenterFloat
      , isFullscreen                                                                --> doFullFloat
 
-     -- Scratchpad related rules
+-- Scratchpad related rules
      , namedScratchpadManageHook Scratchpads.pads
-     , className =? "dolphin"
-       <||> className =? "KeePassXC"
-                                                                                   --> doCenterFloat <+> doF W.swapUp
      ]
        where
              role = stringProperty "WM_WINDOW_ROLE"
