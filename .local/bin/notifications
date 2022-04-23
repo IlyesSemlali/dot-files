@@ -1,7 +1,11 @@
 #!/bin/bash
 
-
 STATE=~/.cache/notifications.state
+
+if ! [ -f $STATE ]
+then
+    echo 'false' > $STATE
+fi
 
 function enable () {
     echo 'false' > $STATE
