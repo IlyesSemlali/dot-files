@@ -79,12 +79,12 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 -- Layouts
 tall     = renamed [Replace "tall"]
-           $ limitWindows 12
+           $ limitWindows 5
            $ mySpacing 2
            $ ResizableTall 1 (3/100) (1/2) []
 
 monocle  = renamed [Replace "monocle"]
-           $ mySpacing 4
+           $ mySpacing 2
            $ limitWindows 20 Full
 
 floats   = renamed [Replace "floats"]
