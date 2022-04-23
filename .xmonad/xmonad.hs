@@ -28,6 +28,7 @@ import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, doRectFloat)
+import XMonad.Hooks.Minimize
 import XMonad.Hooks.RefocusLast
 import XMonad.Hooks.ServerMode
 import XMonad.Hooks.SetWMName
@@ -36,6 +37,7 @@ import XMonad.Hooks.WorkspaceHistory
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
 import XMonad.Layout.Magnifier
+import XMonad.Layout.Minimize
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
 import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
 import XMonad.Layout.NoBorders
@@ -46,6 +48,7 @@ import XMonad.Layout.ShowWName
 import XMonad.Layout.SimplestFloat
 import XMonad.Layout.Spacing
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
+import qualified XMonad.Layout.BoringWindows as BW
 import qualified XMonad.Layout.MultiToggle as MT (Toggle(..))
 import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(Toggle))
 
@@ -107,6 +110,8 @@ myStartupHook = do
 
 
 myLayoutHook =  lessBorders OnlyScreenFloat
+                $ BW.boringWindows
+                $ minimize
                 $ avoidStruts
                 $ mouseResize
                 $ windowArrange
@@ -185,7 +190,8 @@ main = do
     -- Start xmonad
     xmonad $ ewmh def
         { manageHook = myManageHook <+> manageDocks
-        , handleEventHook    = serverModeEventHookCmd
+        , handleEventHook    = minimizeEventHook
+                               <+> serverModeEventHookCmd
                                <+> serverModeEventHook
                                <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn)
                                <+> docksEventHook
