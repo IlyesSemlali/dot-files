@@ -106,7 +106,7 @@ myStartupHook = do
 
 
 
-myLayoutHook =  smartBorders
+myLayoutHook =  lessBorders OnlyScreenFloat
                 $ avoidStruts
                 $ mouseResize
                 $ windowArrange
