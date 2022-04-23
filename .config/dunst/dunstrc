@@ -66,6 +66,10 @@ format = ""
 summary = "KDE Connect"
 format = ""
 
+[ignore_musicast]
+summary = "MusicCast"
+format = ""
+
 [ignore_stamina]
 summary = "Mode STAMINA"
 format = ""
