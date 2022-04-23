@@ -200,6 +200,7 @@ main = do
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor
         , focusFollowsMouse  = False
+        , clickJustFocuses   = False
         , logHook = workspaceHistoryHook
                 <+> myLogHook
                 <+> refocusLastLogHook
