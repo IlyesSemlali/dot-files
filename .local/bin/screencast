@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# TODO: move this to bin/webcam and add the same for the HDMI input device
+kill $(cat ~/.cache/screencast.pid)
+echo $$ > ~/.cache/screencast.pid
 
-kill $(cat ~/.cache/webcam.pid)
-echo $$ > ~/.cache/webcam.pid
-
-ffplay -vf hflip -fs $(v4l2-ctl --list-devices | grep -A2 Webcam | tail -2 | head -1 | sed 's/^\s*//')
+ffplay -fs $(v4l2-ctl --list-devices | grep -A2 'HDMI to U3' | tail -2 | head -1 | sed 's/^\s*//')
