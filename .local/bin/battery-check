@@ -1,18 +1,27 @@
 #!/bin/bash
 
-kill $(cat ~/.cache/battery-check.pid)
+kill $(cat ~/.cache/battery-check.pid) 2> /dev/null
 
 echo $$ > ~/.cache/battery-check.pid
+
+REMAINING=`acpi -b | grep Discharging | cut -f 5 -d " "`
 
 while true ; do
     if acpi -b | grep -q Discharging ; then
 
-        REMAINING=`acpi -b | grep Discharging | cut -f 5 -d " "`
-
         while [[ $REMAINING < 00:20:00 ]] && acpi -b | grep -q Discharging; do
+            REMAINING=$(acpi -b | grep Discharging | cut -f 5 -d " ")
+
+            HOURS=$(echo $REMAINING | awk -F ':' '{ print $1 }')
+            MINUTES=$(echo $REMAINING | awk -F ':' '{ print $2 }')
+            SECONDS=$(echo $REMAINING | awk -F ':' '{ print $3 }')
+            REMAINING_SECONDS=$(( $HOURS * 3600 + $MINUTES * 60 + $SECONDS ))
+
+            echo $REMAINING_SECONDS
+
 
             acpi -b | systemd-cat -t check-battery
-            notify-send -t 5100 -i battery-empty Battery "Less than 20 minutes left" -u critical
+            notify-send -t 5050 -i battery-empty Battery "Less than 20 minutes left" -u critical -h "int:value:$(( $REMAINING_SECONDS * 100 / 1200 ))"
 
             # renew message every 5 seconds
             sleep 5
