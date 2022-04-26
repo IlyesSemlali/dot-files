@@ -1,6 +1,26 @@
 #!/bin/bash
 
-kill $(cat ~/.cache/screencast.pid)
+kill -9 $(cat ~/.cache/screencast.pid 2> /dev/null) 2> /dev/null
 echo $$ > ~/.cache/screencast.pid
+rm -f ~/.cache/screencast.pid
 
-ffplay -fs $(v4l2-ctl --list-devices | grep -A2 'HDMI to U3' | tail -2 | head -1 | sed 's/^\s*//')
+RETRIES=10
+
+notify-send -t 2000 -i monitor "Virtual Display" "Display will start shortly..."
+
+while ! echo $PROBE | grep -q '1920x1080' && [[ $RETRIES -gt 0 ]]
+do
+    DEVICE="$(v4l2-ctl --list-devices | grep -A2 'HDMI to U3' | tail -2 | head -1 | sed 's/^\s*//')" 2> /dev/null
+    PROBE="$(ffprobe -hide_banner $DEVICE 2>&1 | tail -1)"
+    echo $PROBE
+    sleep 0.5
+    RETRIES=$(( $RETRIES - 1 ))
+done
+
+if [[ $RETRIES -gt 0 ]]
+then
+    ffplay -hide_banner -window_title screencast -autoexit -fs -an $DEVICE  2>&1
+else
+    notify-send -t 2000 -i monitor "Virtual Display" "Can't open virtual display"
+    exit 1
+fi
