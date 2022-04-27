@@ -14,7 +14,7 @@ icon_path = /home/ilyes/.icons/pumpkin_icons/status/16/:/home/ilyes/.icons/pumpk
 min_icon_size = 64
 max_icon_size = 64
 
-font = Comfortaa Light 13
+font = Noto Color Emoji 13, Comfortaa Light 13
 format = "<b>%s</b>\n\n%b"
 alignment = left
 word_wrap = yes
