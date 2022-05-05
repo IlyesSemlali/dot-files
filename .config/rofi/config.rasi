@@ -6,6 +6,7 @@ configuration {
   modi: "drun,window,ssh,combi";
   font: "comfortaa 12";
   combi-modi: "drun,window,ssh";
+  icon-theme: "pumpkin_icons";
   show-icons: true;
 }
 
