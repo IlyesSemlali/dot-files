@@ -24,7 +24,7 @@ function soft_transition () {
         id -u > ${LOCK}
         pkill -f '.*xbacklight.*'
         echo $1 > ${STATE}
-        xbacklight -time 20000 -fps 15 -set $1 &
+        xbacklight -time 20000 -fps 30 -set $1 &
         rm -f ${LOCK}
     fi
 }
