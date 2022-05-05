@@ -31,7 +31,12 @@ function home_afternoon_rainy () {
 }
 
 function home_morning_sunny () {
-    false
+    v4l2-ctl --set-ctrl backlight_compensation=0
+    v4l2-ctl --set-ctrl brightness=128
+    v4l2-ctl --set-ctrl contrast=128
+    v4l2-ctl --set-ctrl exposure_absolute=200
+    v4l2-ctl --set-ctrl saturation=128
+    v4l2-ctl --set-ctrl white_balance_temperature=4321
 }
 
 function home_afternoon_sunny () {
