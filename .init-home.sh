@@ -56,6 +56,7 @@ function configure_xmonad() {
 function install_language_servers() {
     cd ~/.local/
     yarn add ansible-language-server
+    yarn add yaml-language-server
     pip3 install --user ansible-lint
     npm i bash-language-server
     cd -
