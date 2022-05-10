@@ -12,7 +12,7 @@ require('lspconfig').yamlls.setup {
   settings = {
     yaml = {
       schemas = {
-        ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.23.0-standalone-strict/all.json"] = "/*.yaml",
+        ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.18.0-standalone-strict/all.json"] = "/*.yaml",
       },
     },
   }
