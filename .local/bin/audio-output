@@ -1,0 +1,46 @@
+#!/bin/bash
+
+AUDIO_OUTPUT_STATE=~/.cache/headset.state
+
+# Initialize state if non exsitent
+if ! [ -f $AUDIO_OUTPUT_STATE ]
+then
+    echo 'analog-output-headphones' > $AUDIO_OUTPUT_STATE
+fi
+
+
+function auto () {
+    case $(location) in
+        commute|work|away)
+            set_output headphones
+            ;;
+        home)
+            set_output speaker
+            ;;
+        *)
+            set_output headphones
+            ;;
+    esac
+}
+
+function set_output () {
+    echo analog-output-$1 > $AUDIO_OUTPUT_STATE
+    pacmd set-sink-port alsa_output.pci-0000_00_1f.3.analog-stereo $(cat $AUDIO_OUTPUT_STATE)
+}
+
+function print () {
+    echo "     Saved state: $(cat $AUDIO_OUTPUT_STATE)"
+    echo "    Actual state: $(pacmd list-sinks | grep 'active port:' | grep -o '<.*>'  | sed 's/^.//;s/.$//')"
+}
+
+case $1 in
+    speaker|headphones)
+        set_output $1
+        ;;
+    print)
+        print
+        ;;
+    auto|*)
+        auto
+        ;;
+esac
