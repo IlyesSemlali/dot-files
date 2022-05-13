@@ -1,4 +1,4 @@
 WIFI_INTERFACE='wlp59s0'
 HOME_SSID='home-ssid'
 WORK_SSID='work-ssid'
-COMMUTE_SSID='mobile-ssid'
+MOBILE_SSID='mobile-ssid'
