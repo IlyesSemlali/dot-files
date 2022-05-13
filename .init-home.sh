@@ -8,7 +8,10 @@ OBSIDIAN_VERSION="0.12.19"
 function install_vim_plugins() {
     echo "-- Installing VIM Plugins --"
     /usr/bin/vim -N -u ~/.viminitrc
-    which nvim 2>&1 > /dev/null && nvim -N -u ~/.viminitrc
+    /usr/bin/vim -N -u ~/.vim-install-plugins
+    which nvim 2>&1 > /dev/null \
+        && nvim -N -u ~/.viminitrc \
+        && nvim -N -u ~/.vim-install-plugins
 }
 
 function reset_omz() {
