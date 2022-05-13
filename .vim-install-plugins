@@ -1,0 +1,9 @@
+autocmd VimEnter * PlugInstall --sync | qa
+
+call plug#begin('~/.vim/plugged')
+
+source ~/.vim/plugins.vim
+
+call plug#end()
+
+autocmd VimEnter * PlugInstall --sync | qa
