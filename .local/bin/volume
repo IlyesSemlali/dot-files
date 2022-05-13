@@ -1,19 +1,11 @@
 #!/bin/bash
 
 
+OUTPUT_STATE=~/.cache/headset.state
 STATE=~/.cache/volume.state
-HEADSET_STATE=~/.cache/headset.state
 
-INTERNAL_VOLUME=65
+SPEAKER_VOLUME=65
 HEADSET_VOLUME=45
-
-# Fetch desired active port
-# pacmd list-sinks | grep 'active port:' | grep -o '<.*>'  | sed 's/^.//;s/.$//' > ${HEADSET_STATE}
-pacmd set-sink-port alsa_output.pci-0000_00_1f.3.analog-stereo $(cat $HEADSET_STATE)
-if ! [ -f $HEADSET_STATE ]
-then
-    echo 'analog-output-headphones' > $HEADSET_STATE
-fi
 
 function notify () {
     if ! [[ $NOTIFY == "false" ]]
@@ -68,9 +60,9 @@ function increase () {
 }
 
 function min () {
-    if grep -q 'analog-output-speaker' $HEADSET_STATE
+    if grep -q 'analog-output-speaker' $OUTPUT_STATE
     then
-        set_absolute $( echo $INTERNAL_VOLUME ' * 3 / 4 ' | bc )
+        set_absolute $( echo $SPEAKER_VOLUME ' * 3 / 4 ' | bc )
     else
         set_absolute $( echo $HEADSET_VOLUME ' * 3 / 4 ' | bc )
     fi
@@ -78,9 +70,9 @@ function min () {
 }
 
 function max () {
-    if grep -q 'analog-output-speaker' $HEADSET_STATE
+    if grep -q 'analog-output-speaker' $OUTPUT_STATE
     then
-        set_absolute $INTERNAL_VOLUME
+        set_absolute $SPEAKER_VOLUME
     else
         set_absolute $HEADSET_VOLUME
     fi
