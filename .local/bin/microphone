@@ -24,8 +24,11 @@ function notify () {
 }
 
 function notify_mute () {
-    DEVICE=$( pacmd list-sources | grep 'active port' | sed 's/<analog-input-//;s/>//;' | awk '{print$NF}')
-    notify-send -t 1000 -i mic-off Microphone "$DEVICE"
+    if ! [[ $NOTIFY == "false" ]]
+    then
+        DEVICE=$( pacmd list-sources | grep 'active port' | sed 's/<analog-input-//;s/>//;' | awk '{print$NF}')
+        notify-send -t 1000 -i mic-off Microphone "$DEVICE"
+    fi
 }
 
 function set_absolute () {
