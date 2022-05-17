@@ -1,4 +1,4 @@
 WIFI_INTERFACE='wlp59s0'
-HOME_SSID='home-ssid'
-WORK_SSID='work-ssid'
-MOBILE_SSID='mobile-ssid'
+HOME_SSID='Livebox-6E4A'
+WORK_SSID='znk-interne'
+MOBILE_SSID='Xperia'
