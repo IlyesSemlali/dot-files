@@ -101,7 +101,7 @@ myStartupHook = do
           spawn "battery-check"
           spawnPipe "xrdb -nocpp -merge .Xresources"
           spawnPipe "kdeconnect-cli --refresh"
-          spawnPipe "audio-output auto"
+          spawnPipe "NOTIFY=false audio-output auto"
           spawnPipe "NOTIFY=false volume resume"
           spawnPipe "isync"
           spawnPipe Config.compositorCommand
