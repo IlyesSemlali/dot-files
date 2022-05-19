@@ -163,6 +163,7 @@ myManageHook = composeAll [
        <||> name        =? "Vivaldi"
        <||> className   =? "dolphin"
        <||> className   =? "KeePassXC"
+       <||> className   =? "Xmessage"
                                                                                    --> doCenterFloat
 
      , isFullscreen                                                                --> doFullFloat
