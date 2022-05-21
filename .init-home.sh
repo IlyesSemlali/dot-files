@@ -63,8 +63,9 @@ function configure_xmonad() {
 }
 
 function install_language_servers() {
-    cd ~/.local/
     pip3 install --user ansible-lint
+
+    cd ~/.local/
     yarn add ansible-language-server || npm i ansible-language-server
     yarn add yaml-language-server || npm i yaml-language-server
     yarn add bash-language-server || npm i bash-language-server
@@ -72,7 +73,7 @@ function install_language_servers() {
 
     cd ~/.local/bin
     wget https://releases.hashicorp.com/terraform-ls/0.25.0/terraform-ls_0.25.0_linux_amd64.zip
-    unzip terraform-ls_0.25.0_linux_amd64.zip
+    unzip -o terraform-ls_0.25.0_linux_amd64.zip
     rm terraform-ls_0.25.0_linux_amd64.zip
     cd -
 }
