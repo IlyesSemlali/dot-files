@@ -146,6 +146,23 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in
 " editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
+" markdown-preview
+let g:mkdp_auto_start = 1
+let g:mkdp_auto_close = 1
+
+function OpenMarkdownPreview (url)
+    execute "silent ! google-chrome-stable --class=Preview --new-window --app=" . a:url . " &"
+endfunction
+let g:mkdp_browserfunc = 'OpenMarkdownPreview'
+
+let g:mkdp_markdown_css = ''
+
+let g:mkdp_port = '9999'
+let g:mkdp_page_title = 'Markdown Preview'
+let g:mkdp_filetypes = ['markdown']
+let g:mkdp_theme = 'dark'
+
+
 """"""""""""""""
 " Key Bindings "
 """"""""""""""""
