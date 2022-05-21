@@ -11,6 +11,7 @@ Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'gentoo/gentoo-syntax'
 Plug 'hashivim/vim-terraform'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'lilydjwg/colorizer'
 Plug 'machakann/vim-sandwich'
 Plug 'martinda/Jenkinsfile-vim-syntax'
