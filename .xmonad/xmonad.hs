@@ -132,6 +132,7 @@ myManageHook = composeAll [
 -- Define where new windows are created relative to current window
        className        =? "Alacritty"
        <||> className   =? "Google-chrome"
+       <||> className   =? "Preview"
        <||> className   =? "Vivaldi-stable"
                                                                                    --> insertPosition Below Newer
      , insertPosition Above Newer
