@@ -14,10 +14,13 @@ prompt_begin () {
 }
 
 prompt_tf () {
-    if [[ -d .terraform ]]
+    if which terraform 2&>1 > /dev/null
     then
-        local tf_workspace=$(terraform workspace show)
-        prompt_segment blue $CURRENT_FG $tf_workspace
+        if [[ -d .terraform ]]
+        then
+            local tf_workspace=$(terraform workspace show)
+            prompt_segment blue $CURRENT_FG $tf_workspace
+        fi
     fi
 }
 

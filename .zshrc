@@ -16,7 +16,12 @@ zstyle ':urlglobber' url-other-schema
 CASE_SENSITIVE="true"
 ZSH_THEME="agnoster"
 DISABLE_UPDATE_PROMPT=true
-plugins=(git docker docker-compose terraform)
+plugins=(git docker docker-compose)
+
+if which terraform 2>&1
+then
+    plugins+=(terraform)
+fi
 
 export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
