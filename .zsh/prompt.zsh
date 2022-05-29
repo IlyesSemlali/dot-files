@@ -14,7 +14,7 @@ prompt_begin () {
 }
 
 prompt_tf () {
-    if which terraform 2>&1 > /dev/null
+    if which terraform > /dev/null 2>&1
     then
         if [[ -d .terraform ]]
         then
