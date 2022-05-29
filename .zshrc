@@ -18,7 +18,7 @@ ZSH_THEME="agnoster"
 DISABLE_UPDATE_PROMPT=true
 plugins=(git docker docker-compose)
 
-if which terraform 2>&1
+if which terraform 2>&1 > /dev/null
 then
     plugins+=(terraform)
 fi
