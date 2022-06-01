@@ -244,6 +244,11 @@ nnoremap <silent> <leader>tm        <cmd>Telescope marks<cr>
 nnoremap <silent> <leader>tj        <cmd>Telescope jumplist<cr>
 nnoremap <silent> <leader>tr        <cmd>Telescope registers<cr>
 
+" Base64
+let g:vim_base64_disable_default_key_mappings=1
+vnoremap <silent> <leader>bd :<c-u>call base64#v_atob()<cr><esc>
+vnoremap <silent> <leader>be :<c-u>call base64#v_btoa()<cr><esc>
+
 """"""""""""""""""""""""""
 " Add some logic into it "
 """"""""""""""""""""""""""
