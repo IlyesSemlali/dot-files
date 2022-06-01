@@ -151,7 +151,7 @@ let g:mkdp_auto_start = 1
 let g:mkdp_auto_close = 1
 
 function OpenMarkdownPreview (url)
-    execute "silent ! google-chrome-stable --class=Preview --new-window --app=" . a:url . " &"
+    execute "silent ! wwwwrap Preview " . a:url . " &"
 endfunction
 let g:mkdp_browserfunc = 'OpenMarkdownPreview'
 
