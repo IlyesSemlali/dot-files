@@ -10,6 +10,8 @@ env:
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
+  #
+  WINIT_X11_SCALE_FACTOR: "1"
   TERM: xterm-256color
 
 window:
@@ -72,11 +74,8 @@ window:
     # General application class
     general: Alacritty
 
-  # GTK theme variant (Linux/BSD only)
-  #
-  # Override the variant of the GTK theme. Commonly supported values are `dark` and `light`.
-  # Set this to `None` to use the default theme variant.
-  #gtk_theme_variant: None
+  # Background opacity
+  opacity: 0.85
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -181,7 +180,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 9
+  size: 16
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -219,7 +218,7 @@ font:
 colors:
   # Default colors
   primary:
-    background: '0x292d3e'
+    background: '0x2b282a'
     foreground: '0xffffff'
 
     # Bright and dim foreground colors
@@ -319,13 +318,6 @@ colors:
 #  animation: EaseOutExpo
 #  duration: 0
 #  color: '0xffffff'
-
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-# background_opacity: 1.0
-background_opacity: 0.90
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -434,14 +426,14 @@ mouse:
     #   - (Linux/BSD) xdg-open
     #   - (Windows) explorer
     launcher:
-      program: qutebrowser
+      program: vivaldi
     #  args: []
 
     # URL modifiers
     #
     # These are the modifiers that need to be held down for opening URLs when clicking
     # on them. The available modifiers are documented in the key binding section.
-    #modifiers: None
+    modifiers: Control
 
 # Mouse bindings
 #
