@@ -32,6 +32,7 @@ precmd() {
     then
         export PROJECT_ROOT="$(git rev-parse --show-toplevel)"
         # export DIRSTACKFILE="$PROJECT_ROOT/.dirstack"
+        mkdir -p $PROJECT_ROOT
         touch $DIRSTACKFILE
         fc -R
         export HISTFILE="$PROJECT_ROOT/.zsh_history"
