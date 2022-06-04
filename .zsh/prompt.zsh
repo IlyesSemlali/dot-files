@@ -33,7 +33,7 @@ if [[ $TERM == "linux" ]]
 then
     export SEGMENT_SEPARATOR=')'
 else
-    export SEGMENT_SEPARATOR='\ue0b4'
+    export SEGMENT_SEPARATOR='\ue0b0'
 fi
 
 build_prompt () {
