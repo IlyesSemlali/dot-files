@@ -5,6 +5,8 @@ XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
 
 OBSIDIAN_VERSION="0.12.19"
 
+OS=$(get_platform | cut -d '-' -f1)
+
 function install_vim_plugins() {
     echo "-- Installing VIM Plugins --"
     /usr/bin/vim -N -u ~/.viminitrc
@@ -30,31 +32,35 @@ function _get_config_keys() {
 }
 
 function configure_dolphin() {
-    if [ ! -f ~/.config/dolphinrc ]
-    then
-        cp ~/.config/dolphinrc.tpl ~/.config/dolphinrc
+    if [[ $OS == "linux" ]]; then
+        if [ ! -f ~/.config/dolphinrc ]
+        then
+            cp ~/.config/dolphinrc.tpl ~/.config/dolphinrc
+        fi
     fi
 }
 
 function configure_xmonad() {
-    if [ ! -f $XMONAD_CONFIG ]
-    then
-        echo "-- Adding a fresh Xmonad config --"
-        sed "s/user/$USER/g" $XMONAD_CONFIG_TEMPLATE > $XMONAD_CONFIG
-    fi
-
-    for config_key in $(_get_config_keys $XMONAD_CONFIG_TEMPLATE)
-    do
-        if ! grep -q "^$config_key" $XMONAD_CONFIG
+    if [[ $OS == "linux" ]]; then
+        if [ ! -f $XMONAD_CONFIG ]
         then
-            echo "-- Adding $config_key in Xmonad configuration --"
-            grep "^$config_key" $XMONAD_CONFIG_TEMPLATE >> $XMONAD_CONFIG
+            echo "-- Adding a fresh Xmonad config --"
+            sed "s/user/$USER/g" $XMONAD_CONFIG_TEMPLATE > $XMONAD_CONFIG
         fi
-    done
 
-    cd ~/.xmonad/lib/
-    which ghc 2>&1 > /dev/null && ghc --make Config.hs
-    cd
+        for config_key in $(_get_config_keys $XMONAD_CONFIG_TEMPLATE)
+        do
+            if ! grep -q "^$config_key" $XMONAD_CONFIG
+            then
+                echo "-- Adding $config_key in Xmonad configuration --"
+                grep "^$config_key" $XMONAD_CONFIG_TEMPLATE >> $XMONAD_CONFIG
+            fi
+        done
+
+        cd ~/.xmonad/lib/
+        which ghc 2>&1 > /dev/null && ghc --make Config.hs
+        cd
+    fi
 }
 
 function install_language_servers() {
