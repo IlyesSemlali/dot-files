@@ -63,11 +63,12 @@ autocmd! bufwritepost plugins.vim source ~/.vimrc
 "       VIMPLUG       "
 """""""""""""""""""""""
 
-if has('Plug')
+try
     call plug#begin('~/.vim/plugged')
     source ~/.vim/plugins.vim
     call plug#end()
-endif
+catch
+endtry
 
 
 """""""""""""""""""""""""
