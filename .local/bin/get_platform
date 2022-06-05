@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if echo $HOME | grep -q '^/User'; then
+    os=mac
+else
+    os=linux
+fi
+
+if [[ -n $SSH_TTY ]]; then
+    connection=ssh
+else
+    connection=local
+fi
+
+echo $os-$connection
