@@ -63,11 +63,11 @@ autocmd! bufwritepost plugins.vim source ~/.vimrc
 "       VIMPLUG       "
 """""""""""""""""""""""
 
-call plug#begin('~/.vim/plugged')
-
-source ~/.vim/plugins.vim
-
-call plug#end()
+if has('Plug')
+    call plug#begin('~/.vim/plugged')
+    source ~/.vim/plugins.vim
+    call plug#end()
+endif
 
 
 """""""""""""""""""""""""
@@ -79,7 +79,12 @@ let netrw_banner=0
 
 
 " appearances
-colorscheme spaceway
+try
+    colorscheme spaceway
+catch
+    colorscheme desert
+endtry
+
 let g:airline_theme='ravenpower'
 if len(getbufinfo({'buflisted':1})) > 1
     let g:airline#extensions#tabline#enabled = 1
@@ -96,7 +101,10 @@ let g:gitgutter_enabled = 0
 
 
 " Powerline
-let g:airline_section_z = airline#section#create(["\uE0A1 " . '%{line(".")}' . " \uE0A3 " . '%{col(".")}'])
+try
+    let g:airline_section_z = airline#section#create(["\uE0A1 " . '%{line(".")}' . " \uE0A3 " . '%{col(".")}'])
+catch
+endtry
 
 
 " ALE
