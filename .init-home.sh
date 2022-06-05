@@ -3,7 +3,7 @@
 XMONAD_CONFIG_TEMPLATE="/home/$USER/.xmonad/lib/Config.hs.tpl"
 XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
 
-OBSIDIAN_VERSION="0.12.19"
+TFLS_VERSION="0.27.0"
 
 OS=$(get_platform | cut -d '-' -f1)
 
@@ -73,9 +73,14 @@ function install_language_servers() {
     cd -
 
     cd ~/.local/bin
-    wget https://releases.hashicorp.com/terraform-ls/0.25.0/terraform-ls_0.25.0_linux_amd64.zip
-    unzip -o terraform-ls_0.25.0_linux_amd64.zip
-    rm terraform-ls_0.25.0_linux_amd64.zip
+    if [[ $OS == mac ]]; then
+        tfls_release=darwin_arm64
+    else
+        tfls_release=linux_amd64
+    fi
+    wget https://releases.hashicorp.com/terraform-ls/${TFLS_VERSION}/terraform-ls_${TFLS_VERSION}_${tfls_release}.zip
+    unzip -o terraform-ls_${TFLS_VERSION}_${tfls_release}.zip
+    rm terraform-ls_${TFLS_VERSION}_${tfls_release}.zip
     cd -
 }
 
