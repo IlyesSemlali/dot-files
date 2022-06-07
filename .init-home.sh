@@ -24,7 +24,7 @@ function reset_omz() {
     touch ~/.cache/zshdirs
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --keep-zshrc --skip-chsh --unattended > /dev/null 2>&1"
     git clone https://github.com/macunha1/zsh-terraform ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/terraform
-    git -C ~ reset --hard > /dev/null 2>&1
+    # git -C ~ reset --hard > /dev/null 2>&1
 }
 
 function _get_config_keys() {
@@ -84,6 +84,12 @@ function install_language_servers() {
     cd -
 }
 
+function install_tmux_powerline () {
+    if ! [ -d ~/.local/share/tmux-powerline ]; then
+        git clone https://github.com/erikw/tmux-powerline ~/.local/share/tmux-powerline
+    fi
+}
+
 while [[ $# -gt 0 ]]
 do
     key="$1"
@@ -122,5 +128,6 @@ fi
 
 if [[ $RESET_OMZ == 'true' ]]
 then
+    install_tmux_powerline
     reset_omz
 fi
