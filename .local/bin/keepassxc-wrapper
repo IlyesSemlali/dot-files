@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat ~/.secrets/keepass | keepassxc --keyfile ~/.keepass.key --pw-stdin ~/Documents/ilyes_semlali.kdbx &
+cat ~/.secrets/keepass | keepassxc --keyfile ~/.secrets/keepass.key --pw-stdin ~/Documents/ilyes_semlali.kdbx &
 
 while [ -z $WINDOW_ID ]
 do
