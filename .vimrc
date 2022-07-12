@@ -156,7 +156,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 " markdown-preview
-let g:mkdp_auto_start = 1
+let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
 
 function OpenMarkdownPreview (url)
@@ -220,6 +220,9 @@ nnoremap <silent> <leader>mp :diffp<CR>
 
 " Add borders on # based comments
 nnoremap <silent> <leader>d A<space>#<esc>yyP:s/./#/g<CR>jp:s/./#/g<CR>:nohl<CR>
+
+" Markdown preview
+nnoremap <silent> <leader>p <Plug>MarkdownPreviewToggle
 
 
 " LSP
