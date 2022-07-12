@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PATH="$PATH:~/.local/bin/"
+
 XMONAD_CONFIG_TEMPLATE="/home/$USER/.xmonad/lib/Config.hs.tpl"
 XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
 
