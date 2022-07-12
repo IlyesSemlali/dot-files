@@ -16,12 +16,6 @@ function install_vim_plugins() {
         && nvim -N -u ~/.vim-install-plugins
 }
 
-function install_obsidian() {
-    wget https://github.com/obsidianmd/obsidian-releases/releases/download/v$OBSIDIAN_VERSION/Obsidian-$OBSIDIAN_VERSION.AppImage -O ~/.local/bin/Obsidian-$OBSIDIAN_VERSION.AppImage
-    ln -sf ~/.local/bin/{Obsidian-0.12.19.AppImage,obsidian}
-    chmod +x ~/.local/bin/Obsidian-$OBSIDIAN_VERSION.AppImage
-}
-
 function reset_omz() {
     echo "-- Installing OhMyZSH --"
 
@@ -90,7 +84,13 @@ function install_language_servers() {
     cd -
 }
 
-function install_tmux_powerline () {
+function install_tmux () {
+    # tmux TPM
+    if ! [ -d ~/.tmux/plugins/tpm ]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+
+    # tmux powerline
     if ! [ -d ~/.local/share/tmux-powerline ]; then
         git clone https://github.com/erikw/tmux-powerline ~/.local/share/tmux-powerline
     fi
@@ -109,8 +109,8 @@ do
             XMONAD='true'
             shift
             ;;
-        -o|--obsidian)
-            OBSIDIAN='true'
+        -t|--tmux)
+            TMUX='true'
             shift
             ;;
         -z|--zsh)
@@ -136,9 +136,9 @@ then
 fi
 
 
-if [[ $OBSIDIAN == 'true' ]]
+if [[ $TMUX == 'true' ]]
 then
-    install_obsidian
+    install_tmux
 fi
 
 
