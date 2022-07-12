@@ -84,7 +84,13 @@ function install_language_servers() {
     cd -
 }
 
-function install_tmux_powerline () {
+function install_tmux () {
+    # tmux TPM
+    if ! [ -d ~/.tmux/plugins/tpm ]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+
+    # tmux powerline
     if ! [ -d ~/.local/share/tmux-powerline ]; then
         git clone https://github.com/erikw/tmux-powerline ~/.local/share/tmux-powerline
     fi
@@ -101,6 +107,10 @@ do
             ;;
         -x|--xmonad)
             XMONAD='true'
+            shift
+            ;;
+        -t|--tmux)
+            TMUX='true'
             shift
             ;;
         -z|--zsh)
@@ -123,6 +133,12 @@ fi
 if [[ $XMONAD == 'true' ]]
 then
     configure_xmonad
+fi
+
+
+if [[ $TMUX == 'true' ]]
+then
+    install_tmux
 fi
 
 
