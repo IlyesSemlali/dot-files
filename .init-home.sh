@@ -5,7 +5,7 @@ PATH="$PATH:~/.local/bin/"
 XMONAD_CONFIG_TEMPLATE="/home/$USER/.xmonad/lib/Config.hs.tpl"
 XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
 
-TFLS_VERSION="0.27.0"
+TFLS_VERSION="0.28.1"
 
 OS=$(get_platform | cut -d '-' -f1)
 
