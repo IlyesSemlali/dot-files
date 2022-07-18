@@ -18,6 +18,29 @@ function install_vim_plugins() {
         && nvim -N -u ~/.vim-install-plugins
 }
 
+function install_tools() {
+    # tmux TPM
+    if ! [ -d ~/.tmux/plugins/tpm ]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+
+    # tmux powerline
+    if ! [ -d ~/.local/share/tmux-powerline ]; then
+        git clone https://github.com/erikw/tmux-powerline ~/.local/share/tmux-powerline
+    fi
+
+    # Krew
+    (
+        set -x; cd "$(mktemp -d)" &&
+        OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+        ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+        KREW="krew-${OS}_${ARCH}" &&
+        curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+        tar zxvf "${KREW}.tar.gz" &&
+        ./"${KREW}" install krew
+    )
+}
+
 function reset_omz() {
     echo "-- Installing OhMyZSH --"
 
@@ -86,17 +109,6 @@ function install_language_servers() {
     cd -
 }
 
-function install_tmux () {
-    # tmux TPM
-    if ! [ -d ~/.tmux/plugins/tpm ]; then
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    fi
-
-    # tmux powerline
-    if ! [ -d ~/.local/share/tmux-powerline ]; then
-        git clone https://github.com/erikw/tmux-powerline ~/.local/share/tmux-powerline
-    fi
-}
 
 while [[ $# -gt 0 ]]
 do
@@ -112,7 +124,7 @@ do
             shift
             ;;
         -t|--tmux)
-            TMUX='true'
+            TOOLS='true'
             shift
             ;;
         -z|--zsh)
@@ -138,9 +150,9 @@ then
 fi
 
 
-if [[ $TMUX == 'true' ]]
+if [[ $TOOLS == 'true' ]]
 then
-    install_tmux
+    install_tools
 fi
 
 
