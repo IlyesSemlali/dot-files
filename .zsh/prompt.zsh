@@ -24,6 +24,17 @@ prompt_tf () {
     fi
 }
 
+prompt_kube () {
+    if which kubectl > /dev/null 2>&1
+    then
+        if [[ -n $ZPROMPT_SHOW_KUBE ]]
+        then
+            local kube_context=$(kubectl config get-contexts -o name | cut -d '@' -f2)
+            prompt_segment cyan $CURRENT_FG $kube_context
+        fi
+    fi
+}
+
 prompt_virtualenv () {
     [[ -n ${VIRTUAL_ENV} ]] || return
     prompt_segment red $CURRENT_FG $(basename "$VIRTUAL_ENV")
@@ -45,6 +56,7 @@ build_prompt () {
     prompt_bzr
     prompt_hg
     prompt_tf
+    prompt_kube
     prompt_virtualenv
     prompt_dir
     prompt_end
