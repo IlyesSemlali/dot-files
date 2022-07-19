@@ -29,7 +29,7 @@ prompt_kube () {
     then
         if [[ -n $ZPROMPT_SHOW_KUBE ]]
         then
-            local kube_context=$(kubectl config get-contexts -o name | cut -d '@' -f2)
+            local kube_context=$(kubectl config current-context)
             prompt_segment cyan $CURRENT_FG $kube_context
         fi
     fi
