@@ -130,7 +130,7 @@ let g:startify_lists = [
 
 
 " Terraform
-let g:terraform_fmt_on_save=1
+let g:terraform_fmt_on_save=0
 
 " TagBar
 let g:tagbar_type_terraform = {
