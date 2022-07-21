@@ -39,6 +39,24 @@ function home_morning_sunny () {
     v4l2-ctl --set-ctrl white_balance_temperature=4321
 }
 
+function work_morning_sunny() {
+    v4l2-ctl --set-ctrl backlight_compensation=1
+    v4l2-ctl --set-ctrl brightness=130
+    v4l2-ctl --set-ctrl contrast=121
+    v4l2-ctl --set-ctrl exposure_absolute=200
+    v4l2-ctl --set-ctrl saturation=128
+    v4l2-ctl --set-ctrl white_balance_temperature=3850
+}
+
+function work_afternoon_sunny() {
+    v4l2-ctl --set-ctrl backlight_compensation=1
+    v4l2-ctl --set-ctrl brightness=146
+    v4l2-ctl --set-ctrl contrast=121
+    v4l2-ctl --set-ctrl exposure_absolute=240
+    v4l2-ctl --set-ctrl saturation=128
+    v4l2-ctl --set-ctrl white_balance_temperature=3953
+}
+
 function home_afternoon_sunny () {
     v4l2-ctl --set-ctrl backlight_compensation=0
     v4l2-ctl --set-ctrl brightness=128
@@ -79,5 +97,9 @@ case $1 in
         ;;
     print)
         print
+        ;;
+    camroom)
+        set_manual
+        work_${DAY_TIER}_sunny
         ;;
 esac
