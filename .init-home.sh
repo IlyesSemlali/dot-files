@@ -29,6 +29,11 @@ function install_tools() {
         git clone https://github.com/erikw/tmux-powerline ~/.local/share/tmux-powerline
     fi
 
+    # tfswitch
+    if ! which tfswitch > /dev/null 2>&1; then
+        curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | sudo bash
+    fi
+
     # Krew
     (
         set -x; cd "$(mktemp -d)" &&
