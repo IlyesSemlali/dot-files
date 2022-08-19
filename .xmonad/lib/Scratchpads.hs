@@ -10,7 +10,6 @@ import XMonad
 
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, ToggleStruts(..))
-import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, doRectFloat)
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.WorkspaceHistory
