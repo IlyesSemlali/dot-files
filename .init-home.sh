@@ -2,6 +2,8 @@
 
 PATH="$PATH:~/.local/bin/"
 
+eval $($HOME/.local/share/homebrew/bin/brew shellenv)
+
 XMONAD_CONFIG_TEMPLATE="/home/$USER/.xmonad/lib/Config.hs.tpl"
 XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
 
@@ -19,6 +21,16 @@ function install_vim_plugins() {
 }
 
 function install_tools() {
+
+    # Brew for mac
+    if ! [ -d ~/.local/homebrew ]; then
+        git clone https://github.com/Homebrew/brew ~/.local/share/homebrew || true
+    fi
+
+    eval $($HOME/.local/share/homebrew/bin/brew shellenv)
+
+    brew install rcmdnk/file/brew-file
+
     # tmux TPM
     if ! [ -d ~/.tmux/plugins/tpm ]; then
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

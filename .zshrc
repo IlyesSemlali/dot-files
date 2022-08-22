@@ -42,6 +42,9 @@ export BAT_THEME='gruvbox-dark'
 export SYSTEMD_PAGER=''
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
+
+eval $($HOME/.local/share/homebrew/bin/brew shellenv)
+
 if which nvim >/dev/null 2>&1
 then
     alias vim="nvim"
