@@ -1,0 +1,15 @@
+# To handle several version in differents projects
+brew asdf
+
+# Shell Tools
+brew git-delta
+brew jq
+brew bat
+
+# Terraform tools
+brew krew
+brew vault
+
+# Mac OS Specific packages (otherwise installed through packages)
+file ~/.config/brewfile/mac-Brewfile
+

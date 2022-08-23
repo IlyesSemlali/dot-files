@@ -63,6 +63,7 @@ Videos
 !.config/redshift/hooks/backlight.sh
 !.config/redshift/redshift.conf
 !.config/nvim/
+!.config/brewfile/
 
 
 /* VIM */
