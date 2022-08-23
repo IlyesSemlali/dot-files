@@ -1,0 +1,8 @@
+brew fzf
+brew neovim
+brew tree
+brew wget
+
+cask alacritty
+cask amethyst
+cask flycut
