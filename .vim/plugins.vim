@@ -3,7 +3,6 @@
 """""""""""""""
 
 Plug 'Gavinok/SpaceWay.vim'
-Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'ap/vim-css-color'
 Plug 'beloglazov/vim-online-thesaurus'

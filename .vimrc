@@ -97,10 +97,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " Rooter
 let g:rooter_patterns = ['.terraform', '.cloud', 'Chart.yaml']
 
-" Git Gutter
-let g:gitgutter_enabled = 0
-
-
 " Powerline
 try
     let g:airline_section_z = airline#section#create(["\uE0A1 " . '%{line(".")}' . " \uE0A3 " . '%{col(".")}'])
@@ -191,7 +187,6 @@ nnoremap <silent><leader>o :only<CR>
 nnoremap <silent><leader>vs vip:sort<CR>
 
 " git related bindings
-nnoremap <leader>gg :GitGutterToggle<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gs :Gstatus<CR>
@@ -246,7 +241,7 @@ nnoremap <silent> gq <cmd>lua vim.diagnostic.setqflist()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 
 " Telescope
-nnoremap <silent> <leader>tf        <cmd>Telescope git_files<cr>
+nnoremap <silent> <leader>gg        <cmd>Telescope git_files<cr>
 nnoremap <silent> <leader>ff        <cmd>Telescope find_files<CR>
 nnoremap <silent> <leader>tb        <cmd>Telescope buffers<cr>
 nnoremap <silent> <leader>tg        <cmd>Telescope grep_string<cr>
