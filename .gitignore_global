@@ -1,5 +1,6 @@
 .*.un~
 .terraform
+.tfstate
 .tags
 .vim_session
 .zsh_history
