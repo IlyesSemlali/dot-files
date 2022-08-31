@@ -47,6 +47,8 @@ if exists("FindRootDirectory")
     autocmd VimEnter * let &tags=FindRootDirectory() . "/.tags"
 endif
 
+autocmd BufEnter * lcd %:p:h
+
 " Pasting options (to be tested)
 set pastetoggle=<F2>
 
@@ -146,7 +148,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
-            \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+            \ execute 'NERDTreeCWD' | wincmd p | enew | endif
 
 " editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
@@ -206,7 +208,7 @@ nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " NerdTree
-nnoremap <silent> <leader><space> :NERDTreeToggleVCS<CR>
+nnoremap <silent> <leader><space> :NERDTreeCWD<CR>
 
 " Mergetool
 nnoremap <silent> <leader>md :MergetoolStop<CR>
