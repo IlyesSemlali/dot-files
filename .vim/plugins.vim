@@ -17,7 +17,7 @@ Plug 'machakann/vim-sandwich'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
-Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggleVCS' }
+Plug 'preservim/nerdtree', { 'on':  ['NERDTreeToggleVCS', 'NERDTreeCWD'] }
 Plug 'rkitover/vimpager'
 Plug 'rust-lang/rust.vim'
 Plug 'ryanoasis/vim-devicons'
