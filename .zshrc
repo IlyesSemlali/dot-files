@@ -8,6 +8,10 @@ insert_path "$HOME/.local/node_modules/.bin"
 insert_path "$HOME/.krew/bin"
 
 
+# HomeBrew
+eval $($HOME/.local/share/homebrew/bin/brew shellenv)
+
+
 # ZSH config
 autoload -U compinit && compinit
 zstyle ':urlglobber' url-other-schema
@@ -19,21 +23,14 @@ ZSH_THEME="agnoster"
 DISABLE_UPDATE_PROMPT=true
 plugins=(git docker docker-compose)
 
-if which terraform > /dev/null 2>&1
-then
-    plugins+=(terraform)
-fi
-
 export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 
 
 # Aliases and exports
 alias ll="ls -ltrh"
-alias k=kubectl
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
 alias av="ansible-vault edit"
-alias tfswitch="tfswitch -b ~/.local/bin/terraform"
 function pj() { source "$PROJECT_ROOT/.project" }
 
 unset SSH_ASKPASS
@@ -43,8 +40,11 @@ export SYSTEMD_PAGER=''
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 
+# HomeBrew
 eval $($HOME/.local/share/homebrew/bin/brew shellenv)
 
+
+#NeoVIM
 if which nvim >/dev/null 2>&1
 then
     alias vim="nvim"
@@ -58,8 +58,23 @@ fi
 source $HOME/.zsh/dirstack.zsh
 source $HOME/.zsh/prompt.zsh
 
+# Extra tools configuration
+if which terraform > /dev/null 2>&1
+then
+    alias tf=terraform
+    plugins+=(terraform)
+    alias tfswitch="tfswitch -b ~/.local/bin/terraform"
+fi
+
+if which kubectl > /dev/null 2>&1
+then
+    alias k=kubectl
+    source <(k completion zsh)
+fi
+
 if [ -f ~/.zshrc.local ]
 then
     source ~/.zshrc.local
 fi
+
 
