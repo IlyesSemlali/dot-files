@@ -43,9 +43,9 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
-if exists("FindRootDirectory")
-    autocmd VimEnter * let &tags=FindRootDirectory() . "/.tags"
-endif
+" if exists("FindRootDirectory")
+"     autocmd VimEnter * let &tags=FindRootDirectory() . "/.tags"
+" endif
 
 autocmd BufEnter * lcd %:p:h
 
@@ -258,9 +258,9 @@ let g:vim_base64_disable_default_key_mappings=1
 vnoremap <silent> <leader>bd :<c-u>call base64#v_atob()<cr><esc>
 vnoremap <silent> <leader>be :<c-u>call base64#v_btoa()<cr><esc>
 
-""""""""""""""""""""""""""
-" Add some logic into it "
-""""""""""""""""""""""""""
+"""""""""""""
+" Functions "
+"""""""""""""
 
 " Start in $PROJECT_ROOT if variable exists
 if $PROJECT_ROOT != ""
@@ -268,11 +268,11 @@ if $PROJECT_ROOT != ""
 endif
 
 " Fix xmonad lib loction
-
 if (match ('xmonad', expand('%:p:h') > 0))
     let ale_haskell_ghc_options='-fno-code -v0 -i ~/.xmonad/lib/'
 endif
 
+" Add support for inner code indent
 function! s:IndTxtObj(inner)
     let curline = line(".")
     let lastline = line("$")
@@ -300,7 +300,6 @@ function! s:IndTxtObj(inner)
 endfunction
 
 " Git mergetool
-
 function s:set_mergetool_layout(split)
     setlocal norelativenumber
     setlocal nonumber
