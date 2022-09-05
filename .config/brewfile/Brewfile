@@ -10,6 +10,10 @@ brew bat
 brew krew
 brew vault
 
+# Fonts
+tap homebrew/cask-fonts
+brew font-sauce-code-pro-nerd-font
+
 # Mac OS Specific packages (otherwise installed through packages)
 file ~/.config/brewfile/mac-Brewfile
 
