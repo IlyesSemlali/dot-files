@@ -11,8 +11,10 @@ brew krew
 brew vault
 
 # Fonts
-tap homebrew/cask-fonts
+file ~/.config/brewfile/font-taps-Brewfile
 brew font-sauce-code-pro-nerd-font
+brew --HEAD font-comfortaa
+brew --HEAD font-noto-color-emoji
 
 # Mac OS Specific packages (otherwise installed through packages)
 file ~/.config/brewfile/mac-Brewfile
