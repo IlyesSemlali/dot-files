@@ -47,6 +47,7 @@ set expandtab
 "     autocmd VimEnter * let &tags=FindRootDirectory() . "/.tags"
 " endif
 
+" Startup
 autocmd BufEnter * lcd %:p:h
 
 " Pasting options (to be tested)
