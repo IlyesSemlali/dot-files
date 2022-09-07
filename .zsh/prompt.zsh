@@ -16,7 +16,7 @@ prompt_begin () {
 prompt_tf () {
     if which terraform > /dev/null 2>&1
     then
-        if [[ -d .terraform ]]
+        if [[ -d .terraform ]] && history | tail -30 | grep -v 'grep' | grep -q ' tf '
         then
             local tf_workspace=$(terraform workspace show)
             prompt_segment blue $CURRENT_FG $tf_workspace
@@ -27,7 +27,7 @@ prompt_tf () {
 prompt_kube () {
     if which kubectl > /dev/null 2>&1
     then
-        if [[ -n $ZPROMPT_SHOW_KUBE ]]
+        if history | tail -30 | grep -v 'grep' | grep -q '\ \(k\|kubectl\)\ '
         then
             local kube_context=$(kubectl config current-context)
             prompt_segment cyan $CURRENT_FG $kube_context
