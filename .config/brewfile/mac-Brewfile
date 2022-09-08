@@ -1,5 +1,6 @@
 brew fzf
 brew neovim
+brew tmux
 brew tree
 brew wget
 
