@@ -52,13 +52,21 @@ build_prompt () {
     prompt_begin
     prompt_status
     prompt_context
-    prompt_git
-    prompt_bzr
-    prompt_hg
+
+    # Shown in tmux, only print when outside of a session
+    if [ -z $TMUX ]; then
+        prompt_git
+    fi
+
     prompt_tf
     prompt_kube
     prompt_virtualenv
-    prompt_dir
+
+    # Shown in tmux, only print when outside of a session
+    if [ -z $TMUX ]; then
+        prompt_dir
+    fi
+
     prompt_end
     prompt_sign
 }
