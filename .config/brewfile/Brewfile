@@ -10,6 +10,9 @@ brew bat
 brew krew
 brew vault
 
+# FluxCD
+brew fluxcd/tap/flux
+
 # Fonts
 file ~/.config/brewfile/font-taps-Brewfile
 brew font-sauce-code-pro-nerd-font
