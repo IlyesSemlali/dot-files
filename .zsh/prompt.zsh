@@ -51,21 +51,22 @@ build_prompt () {
     RETVAL=$?
     prompt_begin
     prompt_status
-    prompt_context
 
     # Shown in tmux, only print when outside of a session
     if [ -z $TMUX ]; then
-        prompt_git
+        prompt_context
     fi
 
-    prompt_tf
-    prompt_kube
-    prompt_virtualenv
+    prompt_git
 
     # Shown in tmux, only print when outside of a session
     if [ -z $TMUX ]; then
-        prompt_dir
+        prompt_tf
+        prompt_kube
+        prompt_virtualenv
     fi
+
+    prompt_dir
 
     prompt_end
     prompt_sign
