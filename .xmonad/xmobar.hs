@@ -12,7 +12,7 @@ Config {
   , persistent       = True    -- enable/disable hiding (True = disabled)
 
  -- appearance
-  , font            = "xft:Comfortaa Light:pixelsize=16:antialias=true:hinting=true"
+  , font            = "xft:Comfortaa:pixelsize=16:antialias=true:hinting=true"
   , additionalFonts = [ "xft:SourceCodePro:pixelsize=14:antialias=true:hinting=true"
                            , "xft:SourceCodePro:pixelsize=16:antialias=true:hinting=true"
                            , "xft:Font Awesome 5 Free:pixelsize=13"
