@@ -1,22 +1,27 @@
 #!/bin/bash
 
+# Lock mechanism
 kill $(cat .cache/monitor.lock)
 echo $$ > .cache/monitor.lock
 
+# get xrandr informations
 PRIMARY=$(xrandr| grep ' primary' | awk '{ print $1 }')
 SECONDARY=$(xrandr| grep ' connected' | grep -v $PRIMARY | awk '{ print $1 }')
 PRIMARY_RES=$(xrandr | grep "^$PRIMARY" -A 20 | grep \* | head -1 | awk '{print $1}')
 SECONDARY_RES=$(xrandr | grep "^$SECONDARY" -A 20 | grep \* | head -1 | awk '{print $1}')
 OFFSET=100
 
-declare -a options=("expand above
+# Main menu
+declare -a options=("expand
 monitor only
-expand right
-expand left
 duplicate
 --disconnect--")
 
-retries=7
+# Expansion menu
+declare -a expand_options=("above
+left
+right")
+
 choice=$(echo -e "${options[@]}" | rofi -l 6 -width 13 -dmenu -p 'Monitor' | awk '{print $NF}')
 
 function refresh() {
@@ -25,6 +30,7 @@ function refresh() {
 }
 
 function fallback () {
+    # Check if secondary monitor is still connected
     while xrandr| grep -e $SECONDARY | grep -v $PRIMARY | grep -vq disconnected
     do
         sleep 2
@@ -37,26 +43,33 @@ function fallback () {
 }
 
 case $choice in
-    right)
-        SECONDARY_HEIGHT=$(echo $SECONDARY_RES | cut -d 'x' -f2)
-        PRIMARY_WIDTH=$(echo $PRIMARY_RES | cut -d 'x' -f1)
-        xrandr --output $PRIMARY --pos 0x$(( $SECONDARY_HEIGHT - $OFFSET )) --output $SECONDARY --pos $(( PRIMARY_WIDTH ))x0
-        unset SECONDARY_HEIGHT PRIMARY_WIDTH
-        refresh
-        fallback
-        ;;
-    left)
-        SECONDARY_HEIGHT=$(echo $SECONDARY_RES | cut -d 'x' -f2)
-        SECONDARY_WIDTH=$(echo $SECONDARY_RES | cut -d 'x' -f1)
-        xrandr --output $PRIMARY --pos ${SECONDARY_WIDTH}x$(( $SECONDARY_HEIGHT - $OFFSET )) --output $SECONDARY --pos 0x0
-        unset SECONDARY_HEIGHT SECONDARY_WIDTH
-        refresh
-        fallback
-        ;;
-    above|below)
-        xrandr --output $SECONDARY --auto --${choice} $PRIMARY
-        refresh
-        fallback
+    expand)
+        # Run expansion menu
+        expansion=$(echo -e "${expand_options[@]}" | rofi -l 6 -width 13 -dmenu -p 'Monitor' | awk '{print $NF}')
+
+        case $expansion in
+        right)
+            SECONDARY_HEIGHT=$(echo $SECONDARY_RES | cut -d 'x' -f2)
+            PRIMARY_WIDTH=$(echo $PRIMARY_RES | cut -d 'x' -f1)
+            xrandr --output $PRIMARY --pos 0x$(( $SECONDARY_HEIGHT - $OFFSET )) --output $SECONDARY --pos $(( PRIMARY_WIDTH ))x0
+            unset SECONDARY_HEIGHT PRIMARY_WIDTH
+            refresh
+            fallback
+            ;;
+        left)
+            SECONDARY_HEIGHT=$(echo $SECONDARY_RES | cut -d 'x' -f2)
+            SECONDARY_WIDTH=$(echo $SECONDARY_RES | cut -d 'x' -f1)
+            xrandr --output $PRIMARY --pos ${SECONDARY_WIDTH}x$(( $SECONDARY_HEIGHT - $OFFSET )) --output $SECONDARY --pos 0x0
+            unset SECONDARY_HEIGHT SECONDARY_WIDTH
+            refresh
+            fallback
+            ;;
+        above|below)
+            xrandr --output $SECONDARY --auto --${choice} $PRIMARY
+            refresh
+            fallback
+            ;;
+        esac
         ;;
     duplicate)
         xrandr --output $SECONDARY --mode $PRIMARY_RES --same-as $PRIMARY
