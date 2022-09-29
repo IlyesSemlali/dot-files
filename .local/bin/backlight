@@ -72,9 +72,6 @@ case $1 in
         $1 $2
         ;;
     *)
-        pause
-        sleep 3600
-        resume_from_state
         exit 1
         ;;
 esac
