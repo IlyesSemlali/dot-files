@@ -32,6 +32,7 @@ function fallback () {
 
     xrandr --output $SECONDARY --off
     xrandr -s 0
+    xrandr --output $PRIMARY --auto
     refresh
 }
 
@@ -72,6 +73,7 @@ case $choice in
     --disconnect--)
         xrandr --output $SECONDARY --off
         xrandr -s 0
+        xrandr --output $PRIMARY --auto
         refresh
 
         ;;
