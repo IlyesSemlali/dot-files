@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Lock mechanism
-kill $(cat .cache/monitor.lock)
+kill $(cat .cache/monitor.lock) > /dev/null 2>&1
 echo $$ > .cache/monitor.lock
 
 # get xrandr informations
@@ -24,17 +24,71 @@ right")
 
 choice=$(echo -e "${options[@]}" | rofi -l 6 -width 13 -dmenu -p 'Monitor' | awk '{print $NF}')
 
+function check_secondary_monitor_connection() {
+    if xrandr| grep -e $SECONDARY | grep -v $PRIMARY | grep -vq disconnected
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
 function refresh() {
     xdotool key super+shift+r
     feh -F --bg-fill ~/.wallpaper
 }
 
+function monitor_output() {
+    xrandr --output $PRIMARY --off
+    xrandr --output $SECONDARY --auto
+    rm ~/.lockscreen.png
+    refresh
+    fallback
+}
+
+function laptop_output() {
+    xrandr --output $SECONDARY --off
+    xrandr -s 0
+    xrandr --output $PRIMARY --auto
+    refresh
+}
+
+function duplicate_output() {
+    xrandr --output $SECONDARY --mode $PRIMARY_RES --same-as $PRIMARY
+    refresh
+    fallback
+}
+
+function expand_output() {
+    case $1 in
+        right)
+            SECONDARY_HEIGHT=$(echo $SECONDARY_RES | cut -d 'x' -f2)
+            PRIMARY_WIDTH=$(echo $PRIMARY_RES | cut -d 'x' -f1)
+            xrandr --output $PRIMARY --pos 0x$(( $SECONDARY_HEIGHT - $OFFSET )) --output $SECONDARY --pos $(( PRIMARY_WIDTH ))x0
+            unset SECONDARY_HEIGHT PRIMARY_WIDTH
+            ;;
+        left)
+            SECONDARY_HEIGHT=$(echo $SECONDARY_RES | cut -d 'x' -f2)
+            SECONDARY_WIDTH=$(echo $SECONDARY_RES | cut -d 'x' -f1)
+            xrandr --output $PRIMARY --pos ${SECONDARY_WIDTH}x$(( $SECONDARY_HEIGHT - $OFFSET )) --output $SECONDARY --pos 0x0
+            unset SECONDARY_HEIGHT SECONDARY_WIDTH
+            ;;
+        above|below)
+            xrandr --output $SECONDARY --auto --${1} $PRIMARY
+            ;;
+    esac
+
+    refresh
+    fallback
+}
+
 function fallback () {
     # Check if secondary monitor is still connected
-    while xrandr| grep -e $SECONDARY | grep -v $PRIMARY | grep -vq disconnected
+    while check_secondary_monitor_connection
     do
-        sleep 2
+        sleep 1
     done
+    echo falling back
 
     xrandr --output $SECONDARY --off
     xrandr -s 0
@@ -44,51 +98,17 @@ function fallback () {
 
 case $choice in
     expand)
-        # Run expansion menu
         expansion=$(echo -e "${expand_options[@]}" | rofi -l 6 -width 13 -dmenu -p 'Monitor' | awk '{print $NF}')
-
-        case $expansion in
-        right)
-            SECONDARY_HEIGHT=$(echo $SECONDARY_RES | cut -d 'x' -f2)
-            PRIMARY_WIDTH=$(echo $PRIMARY_RES | cut -d 'x' -f1)
-            xrandr --output $PRIMARY --pos 0x$(( $SECONDARY_HEIGHT - $OFFSET )) --output $SECONDARY --pos $(( PRIMARY_WIDTH ))x0
-            unset SECONDARY_HEIGHT PRIMARY_WIDTH
-            refresh
-            fallback
-            ;;
-        left)
-            SECONDARY_HEIGHT=$(echo $SECONDARY_RES | cut -d 'x' -f2)
-            SECONDARY_WIDTH=$(echo $SECONDARY_RES | cut -d 'x' -f1)
-            xrandr --output $PRIMARY --pos ${SECONDARY_WIDTH}x$(( $SECONDARY_HEIGHT - $OFFSET )) --output $SECONDARY --pos 0x0
-            unset SECONDARY_HEIGHT SECONDARY_WIDTH
-            refresh
-            fallback
-            ;;
-        above|below)
-            xrandr --output $SECONDARY --auto --${choice} $PRIMARY
-            refresh
-            fallback
-            ;;
-        esac
+        expand_output $expansion
         ;;
     duplicate)
-        xrandr --output $SECONDARY --mode $PRIMARY_RES --same-as $PRIMARY
-        refresh
-        fallback
+        duplicate_output
         ;;
     only)
-        xrandr --output $PRIMARY --off
-        xrandr --output $SECONDARY --auto
-        rm ~/.lockscreen.png
-        refresh
-        fallback
+        monitor_output
         ;;
     --disconnect--)
-        xrandr --output $SECONDARY --off
-        xrandr -s 0
-        xrandr --output $PRIMARY --auto
-        refresh
-
+        laptop_output
         ;;
     *)
         exit 1
