@@ -9,6 +9,7 @@ PRIMARY=$(xrandr| grep ' primary' | awk '{ print $1 }')
 SECONDARY=$(xrandr| grep ' connected' | grep -v $PRIMARY | awk '{ print $1 }')
 PRIMARY_RES=$(xrandr | grep "^$PRIMARY" -A 20 | grep \* | head -1 | awk '{print $1}')
 SECONDARY_RES=$(xrandr | grep "^$SECONDARY" -A 20 | grep \* | head -1 | awk '{print $1}')
+VIRTUAL_RES="1920x1080"
 OFFSET=100
 
 # Main menu
@@ -20,7 +21,8 @@ duplicate
 # Expansion menu
 declare -a expand_options=("above
 left
-right")
+right
+virtual")
 
 choice=$(echo -e "${options[@]}" | rofi -l 6 -width 13 -dmenu -p 'Monitor' | awk '{print $NF}')
 
@@ -76,6 +78,9 @@ function expand_output() {
         above|below)
             xrandr --output $SECONDARY --auto --${1} $PRIMARY
             ;;
+        virtual)
+            xrandr --addmode VIRTUAL1 $SECONDARY_RES
+            xrandr --output VIRTUAL1 --mode $SECONDARY_RES --right-of $PRIMARY
     esac
 
     refresh
