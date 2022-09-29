@@ -38,21 +38,25 @@ function resume_from_state () {
 }
 
 function increase () {
+    pkill -f '.*xbacklight.*'
     xbacklight -inc 2 -fps 30 -perceived
     xbacklight -get > ${STATE}
 }
 
 function decrease () {
+    pkill -f '.*xbacklight.*'
     xbacklight -dec 2 -fps 30 -perceived
     xbacklight -get > ${STATE}
 }
 
 function min () {
+    pkill -f '.*xbacklight.*'
     echo $MIN > ${STATE}
     xbacklight -set $MIN -fps 30 &
 }
 
 function max () {
+    pkill -f '.*xbacklight.*'
     echo $MAX > ${STATE}
     xbacklight -set $MAX -fps 30 &
 }
