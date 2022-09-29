@@ -27,9 +27,13 @@ then
     pacmd set-source-volume 0 0
     pacmd set-source-volume 1 0
 
+    backlight dim
+
     # lock screen
     echo locking screen
     i3lock -n -i ~/.lockscreen.png
+
+    backlight resume
 
     # reactivate notifications if needed
     if echo $NOTIFICATIONS_PAUSED | grep -q "false"
