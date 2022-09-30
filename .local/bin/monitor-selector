@@ -84,8 +84,8 @@ function expand_output() {
             xrandr --output $SECONDARY --auto --${1} $PRIMARY
             ;;
         virtual)
-            xrandr --addmode VIRTUAL1 $SECONDARY_RES --dpi 192
-            xrandr --output VIRTUAL1 --mode $SECONDARY_RES --right-of $PRIMARY
+            xrandr --addmode VIRTUAL1 $VIRTUAL_RES --dpi 192
+            xrandr --output VIRTUAL1 --mode $VIRTUAL_RES --right-of $PRIMARY
     esac
 
     refresh
