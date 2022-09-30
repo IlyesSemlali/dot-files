@@ -62,6 +62,11 @@ function duplicate_output() {
 }
 
 function expand_output() {
+    if ! check_secondary_monitor_connection && [[ $1 -ne virtual ]]; then
+        notify-send -t 2000 -i monitor "Monitor" "Secondary monitor not connected"
+        exit 1
+    fi
+
     case $1 in
         right)
             SECONDARY_HEIGHT=$(echo $SECONDARY_RES | cut -d 'x' -f2)
@@ -79,7 +84,7 @@ function expand_output() {
             xrandr --output $SECONDARY --auto --${1} $PRIMARY
             ;;
         virtual)
-            xrandr --addmode VIRTUAL1 $SECONDARY_RES
+            xrandr --addmode VIRTUAL1 $SECONDARY_RES --dpi 192
             xrandr --output VIRTUAL1 --mode $SECONDARY_RES --right-of $PRIMARY
     esac
 
@@ -93,7 +98,7 @@ function fallback () {
     do
         sleep 1
     done
-    echo falling back
+    notify-send -t 2000 -i monitor "Monitor" "Secondary monitor disconnected"
 
     xrandr --output $SECONDARY --off
     xrandr -s 0
