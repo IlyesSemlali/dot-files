@@ -7,4 +7,5 @@ brew wget
 cask alacritty
 cask amethyst
 cask flycut
+cask keepassxc
 cask mos
