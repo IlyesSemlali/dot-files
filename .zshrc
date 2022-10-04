@@ -36,9 +36,13 @@ function pj() { source "$PROJECT_ROOT/.project" }
 unset SSH_ASKPASS
 export BAT_PAGER=''
 export BAT_THEME='gruvbox-dark'
+
 export SYSTEMD_PAGER=''
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
+export ENHANCD_DISABLE_DOT=1
+export ENHANCD_DISABLE_HOME=1
+export ENHANCD_HYPHEN_ARG='_'
 
 # HomeBrew
 eval $($HOME/.local/share/homebrew/bin/brew shellenv)
