@@ -2,9 +2,10 @@
 brew asdf
 
 # Shell Tools
+brew bat
 brew git-delta
 brew jq
-brew bat
+brew zplug
 
 # Terraform tools
 brew krew

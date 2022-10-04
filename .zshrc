@@ -57,6 +57,7 @@ fi
 
 source $HOME/.zsh/dirstack.zsh
 source $HOME/.zsh/prompt.zsh
+source $HOME/.zsh/plugins.zsh
 
 # Extra tools configuration
 if which terraform > /dev/null 2>&1
