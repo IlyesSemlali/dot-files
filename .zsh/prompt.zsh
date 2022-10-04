@@ -57,7 +57,10 @@ build_prompt () {
         prompt_context
     fi
 
-    prompt_git
+    git_dirty=$(parse_git_dirty)
+    if [[ "$(git rev-parse --show-toplevel)" != "${HOME}" || -n ${git_dirty} ]]; then
+        prompt_git
+    fi
 
     # Shown in tmux, only print when outside of a session
     if [ -z $TMUX ]; then
