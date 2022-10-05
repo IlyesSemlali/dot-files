@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 PATH="$PATH:~/.local/bin/"
 
@@ -30,6 +30,8 @@ function install_tools() {
     eval $($HOME/.local/share/homebrew/bin/brew shellenv)
 
     brew install rcmdnk/file/brew-file
+    source ~/.zshrc
+    brew file install
 
     # tmux TPM
     if ! [ -d ~/.tmux/plugins/tpm ]; then
@@ -154,6 +156,12 @@ done
 configure_dolphin
 
 
+if [[ $TOOLS == 'true' ]]
+then
+    install_tools
+fi
+
+
 if [[ $VIM == 'true' ]]
 then
     install_vim_plugins
@@ -164,12 +172,6 @@ fi
 if [[ $XMONAD == 'true' ]]
 then
     configure_xmonad
-fi
-
-
-if [[ $TOOLS == 'true' ]]
-then
-    install_tools
 fi
 
 
