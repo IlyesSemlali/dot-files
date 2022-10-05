@@ -60,7 +60,7 @@ function install_tools() {
     )
 }
 
-function reset_omz() {
+function configure_zsh() {
     echo "-- Installing OhMyZSH --"
 
     rm -rf .oh-my-zsh/
@@ -69,6 +69,10 @@ function reset_omz() {
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --keep-zshrc --skip-chsh --unattended > /dev/null 2>&1"
     git clone https://github.com/macunha1/zsh-terraform ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/terraform
     git -C ~ reset --hard > /dev/null 2>&1
+
+    if ! zplug check --verbose; then
+        zplug install
+    fi
 }
 
 function _get_config_keys() {
@@ -147,7 +151,7 @@ do
             shift
             ;;
         -z|--zsh)
-            RESET_OMZ='true'
+            CONFIGURE_ZSH='true'
             shift
             ;;
     esac
@@ -175,8 +179,8 @@ then
 fi
 
 
-if [[ $RESET_OMZ == 'true' ]]
+if [[ $CONFIGURE_ZSH == 'true' ]]
 then
     install_tmux_powerline
-    reset_omz
+    configure_zsh
 fi
