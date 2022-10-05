@@ -29,8 +29,17 @@ function install_tools() {
 
     eval $($HOME/.local/share/homebrew/bin/brew shellenv)
 
-    brew install rcmdnk/file/brew-file
+
+    brew install rcmdnk/file/brew-file || {
+        echo "openssl probably failed to install, run:"
+        echo "brew install --debug --verbose openssl@1.1"
+        echo
+        echo "and press continue when prompted"
+        exit 1
+    }
+
     source ~/.zshrc
+
     brew file install
 
     # tmux TPM
