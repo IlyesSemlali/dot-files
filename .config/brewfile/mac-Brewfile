@@ -3,6 +3,7 @@ brew neovim
 brew tmux
 brew tree
 brew wget
+brew yarn
 
 cask alacritty
 cask amethyst
