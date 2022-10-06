@@ -49,7 +49,7 @@ function install_tools() {
 
     # tmux powerline
     if ! [ -d ~/.local/share/tmux-powerline ]; then
-        git clone https://github.com/erikw/tmux-powerline ~/.local/share/tmux-powerline
+        git clone https://github.com/IlyesSemlali/tmux-powerline ~/.local/share/tmux-powerline
     fi
 
     # tfswitch
