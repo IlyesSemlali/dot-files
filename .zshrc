@@ -31,6 +31,7 @@ source $ZSH/oh-my-zsh.sh
 alias ll="ls -ltrh"
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
 alias av="ansible-vault edit"
+alias dv="cd _"
 function pj() { source "$PROJECT_ROOT/.project" }
 
 unset SSH_ASKPASS
@@ -59,7 +60,6 @@ fi
 
 # Extensions
 
-source $HOME/.zsh/dirstack.zsh
 source $HOME/.zsh/prompt.zsh
 source $HOME/.zsh/plugins.zsh
 
