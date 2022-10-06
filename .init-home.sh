@@ -190,6 +190,5 @@ fi
 
 if [[ $CONFIGURE_ZSH == 'true' ]]
 then
-    install_tmux_powerline
     configure_zsh
 fi
