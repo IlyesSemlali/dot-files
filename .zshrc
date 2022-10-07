@@ -77,6 +77,9 @@ then
     source <(k completion zsh)
 fi
 
+# ASDF Version Manager
+source $HOME/.local/share/homebrew/opt/asdf/libexec/asdf.sh
+
 if [ -f ~/.zshrc.local ]
 then
     source ~/.zshrc.local
