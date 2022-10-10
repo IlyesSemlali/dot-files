@@ -1,3 +1,0 @@
-#!/bin/bash
-
-google-chrome-stable --disable-new-profile-management --force-dark-mode --user-data-dir=$HOME/.cache/google-chrome-$1/  $2 --class=$1 --app=$2
