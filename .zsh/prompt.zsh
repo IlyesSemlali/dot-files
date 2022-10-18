@@ -63,10 +63,9 @@ build_prompt () {
     fi
 
     # Shown in tmux, only print when outside of a session
-    if [ -z $TMUX ]; then
+    if [ -n $TMUX ]; then
         prompt_tf
         prompt_kube
-        prompt_virtualenv
     fi
 
     prompt_dir
