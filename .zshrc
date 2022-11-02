@@ -6,6 +6,11 @@ source ${HOME}/.zsh/completion.zsh
 
 autoload -U compinit && compinit
 
+# Add paths to GNU tools
+for bindir in $(find $HOME/.local/share/homebrew/opt -type d -follow -name gnubin -print); do
+  insert_path "${bindir}"
+done;
+
 ##################### Beginning of OMZ #####################
 
 # TODO: use the -g alias flag for work related stuff (project-management for instance)
