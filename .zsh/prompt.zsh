@@ -64,8 +64,8 @@ build_prompt () {
         fi
     fi
 
-    # Shown in tmux, only print when outside of a session
-    if [ -n $TMUX ]; then
+    # Only show in a TMUX session
+    if [ -z $TMUX ]; then
         prompt_tf
         prompt_kube
     fi
