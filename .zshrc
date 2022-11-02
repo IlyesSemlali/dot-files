@@ -85,6 +85,10 @@ if [ -e ${GOPATH}/bin ]; then
     append_path "$GOPATH/bin"
 fi
 
+# Add paths to GNU tools
+for bindir in $(find $HOME/.local/share/homebrew/opt -type d -follow -name gnubin -print); do
+  insert_path "${bindir}"
+done;
 
 if [ -f ${HOME}/.zshrc.d/local.zsh ]
 then
