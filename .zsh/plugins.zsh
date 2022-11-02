@@ -1,5 +1,8 @@
-source ~/.local/share/homebrew/opt/zplug/init.zsh
+if [ -f $HOME/.local/share/homebrew/opt/zplug/init.zsh ]; then
 
-zplug "b4b4r07/enhancd", use:init.sh
+    source ~/.local/share/homebrew/opt/zplug/init.zsh
 
-zplug load
+    zplug "b4b4r07/enhancd", use:init.sh
+
+    zplug load
+fi
