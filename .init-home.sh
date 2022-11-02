@@ -2,7 +2,11 @@
 
 PATH="$PATH:~/.local/bin/"
 
-eval $($HOME/.local/share/homebrew/bin/brew shellenv)
+# HomeBrew
+if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
+    eval $($HOME/.local/share/homebrew/bin/brew shellenv)
+fi
+
 
 XMONAD_CONFIG_TEMPLATE="/home/$USER/.xmonad/lib/Config.hs.tpl"
 XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
@@ -26,8 +30,7 @@ function install_brew() {
         git clone https://github.com/Homebrew/brew ~/.local/share/homebrew || true
     fi
 
-    eval $($HOME/.local/share/homebrew/bin/brew shellenv)
-
+    source ~/.zshrc
 
     brew install rcmdnk/file/brew-file || {
         echo "openssl probably failed to install, run:"
