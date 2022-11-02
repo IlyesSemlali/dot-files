@@ -28,7 +28,11 @@ DISABLE_UPDATE_PROMPT=true
 plugins=(git docker docker-compose)
 
 export ZSH="$HOME/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh
+if [ -f $ZSH/oh-my-zsh.sh ]; then
+    source $ZSH/oh-my-zsh.sh
+else
+    echo "init-home: Oh-My-ZSH not installed, please run 'init-home -z'"
+fi
 
 
 # Aliases and exports
