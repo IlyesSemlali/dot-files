@@ -41,6 +41,9 @@ function install_brew() {
 
 function install_tpm() {
 
+    gnupaths="${HOME}/.cache/gnupaths"
+    rm ${gnupaths}
+
     source ~/.zshrc
 
     # tmux TPM
