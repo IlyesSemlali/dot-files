@@ -7,6 +7,10 @@ else
     echo "init-home: brew not installed, please run 'init-home -b'"
 fi
 
+# Add paths to GNU tools
+for bindir in $(find $HOME/.local/share/homebrew/opt -type d -follow -name gnubin -print); do
+  insert_path "${bindir}"
+done;
 
 # ZSH config
 autoload -U compinit && compinit
