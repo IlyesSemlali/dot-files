@@ -7,6 +7,10 @@ brew git-delta
 brew jq
 brew zplug
 
+# tools
+tap ankitpokhrel/jira-cli
+brew jira-cli
+
 # Terraform tools
 brew krew
 brew vault
