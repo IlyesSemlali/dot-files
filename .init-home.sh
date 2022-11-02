@@ -20,8 +20,7 @@ function install_vim_plugins() {
         && nvim -N -u ~/.vim-install-plugins
 }
 
-function install_tools() {
-
+function install_brew() {
     # Brew for mac
     if ! [ -d ~/.local/homebrew ]; then
         git clone https://github.com/Homebrew/brew ~/.local/share/homebrew || true
@@ -37,6 +36,9 @@ function install_tools() {
         echo "and press continue when prompted"
         exit 1
     }
+}
+
+function install_tools() {
 
     source ~/.zshrc
 
@@ -147,6 +149,10 @@ do
     key="$1"
 
     case $key in
+        -b|--brew)
+            BREW='true'
+            shift
+            ;;
         -v|--vim)
             VIM='true'
             shift
@@ -167,6 +173,11 @@ do
 done
 
 configure_dolphin
+
+if [[ $BREW == 'true' ]]
+then
+    install_brew
+fi
 
 
 if [[ $TOOLS == 'true' ]]
