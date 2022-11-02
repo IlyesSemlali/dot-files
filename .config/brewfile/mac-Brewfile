@@ -1,3 +1,13 @@
+# GNU's Not FreeBSD
+brew coreutils
+brew ed
+brew findutils
+brew gawk
+brew gnu-sed
+brew gnu-tar
+brew grep
+brew make
+
 brew fzf
 brew neovim
 brew node
