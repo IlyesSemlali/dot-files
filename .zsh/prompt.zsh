@@ -53,7 +53,7 @@ build_prompt () {
     prompt_status
 
     # Shown in tmux, only print when outside of a session
-    if [ -z $TMUX ]; then
+    if [ -z "$TMUX" ]; then
         prompt_context
     fi
 
@@ -65,7 +65,7 @@ build_prompt () {
     fi
 
     # Only show in a TMUX session
-    if [ -z $TMUX ]; then
+    if [ -n "$TMUX" ]; then
         prompt_tf
         prompt_kube
     fi
