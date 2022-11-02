@@ -9,7 +9,11 @@ insert_path "$HOME/.krew/bin"
 
 
 # HomeBrew
-eval $($HOME/.local/share/homebrew/bin/brew shellenv)
+if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
+    eval $($HOME/.local/share/homebrew/bin/brew shellenv)
+else
+    echo "init-home: brew not installed, please run 'init-home -t'"
+fi
 
 
 # ZSH config
@@ -45,10 +49,6 @@ export ENHANCD_DISABLE_DOT=1
 export ENHANCD_DISABLE_HOME=1
 export ENHANCD_HYPHEN_ARG='_'
 
-# HomeBrew
-eval $($HOME/.local/share/homebrew/bin/brew shellenv)
-
-
 #NeoVIM
 if which nvim >/dev/null 2>&1
 then
@@ -78,7 +78,11 @@ then
 fi
 
 # ASDF Version Manager
-source $HOME/.local/share/homebrew/opt/asdf/libexec/asdf.sh
+if [ -f $HOME/.local/share/homebrew/opt/asdf/libexec/asdf.sh ]; then
+    source $HOME/.local/share/homebrew/opt/asdf/libexec/asdf.sh
+else
+    echo "init-home: asdf not installed, please run 'init-home -t'"
+fi
 
 if [ -f ~/.zshrc.local ]
 then
