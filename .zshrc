@@ -62,6 +62,10 @@ else
     export EDITOR=vim
 fi
 
+# Demo mode
+if [ -z DEMO_MODE ]; then
+    export HOST=laptop
+fi
 # Extensions
 
 source $HOME/.zsh/prompt.zsh
