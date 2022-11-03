@@ -27,8 +27,10 @@ let vim_logo = [
 syntax on
 set nocompatible
 set modeline
-set relativenumber
-set nu
+if $DEMO_MODE == ""
+    set relativenumber
+    set nu
+endif
 set nobackup
 set noswapfile
 set undofile
