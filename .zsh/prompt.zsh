@@ -48,21 +48,22 @@ else
 fi
 
 build_prompt () {
-    RETVAL=$?
-    prompt_begin
-    prompt_status
+    if [ -z "$DEMO_MODE" ]; then
+        RETVAL=$?
+        prompt_begin
+        prompt_status
 
     # Shown in tmux, only print when outside of a session
     if [ -z "$TMUX" ]; then
         prompt_context
     fi
 
-    if git rev-parse --is-inside-git-dir > /dev/null 2>&1 ; then
-        git_dirty=$(parse_git_dirty)
-        if [[ "$(git rev-parse --show-toplevel)" != "${HOME}" || -n ${git_dirty} ]]; then
-            prompt_git
+        if git rev-parse --is-inside-git-dir > /dev/null 2>&1 ; then
+            git_dirty=$(parse_git_dirty)
+            if [[ "$(git rev-parse --show-toplevel)" != "${HOME}" || -n ${git_dirty} ]]; then
+                prompt_git
+            fi
         fi
-    fi
 
     # Only show in a TMUX session
     if [ -n "$TMUX" ]; then
@@ -70,8 +71,11 @@ build_prompt () {
         prompt_kube
     fi
 
-    prompt_dir
+        prompt_dir
 
-    prompt_end
-    prompt_sign
+        prompt_end
+        prompt_sign
+    else
+        prompt_sign
+    fi
 }
