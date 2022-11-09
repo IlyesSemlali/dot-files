@@ -61,6 +61,9 @@ function install_brew() {
 
 function install_tools() {
 
+    gnupaths="${HOME}/.cache/gnupaths"
+    rm ${gnupaths}
+
     source ~/.zshrc
 
     # ZPlug
