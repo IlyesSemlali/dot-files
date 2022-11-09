@@ -36,6 +36,7 @@ fi
 
 
 # Aliases and exports
+alias ls="ls --color=auto --full-time"
 alias ll="ls -ltrh"
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
 alias av="ansible-vault edit"
