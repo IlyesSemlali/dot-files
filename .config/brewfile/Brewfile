@@ -5,7 +5,6 @@ brew asdf
 brew bat
 brew git-delta
 brew jq
-brew zplug
 
 # tools
 tap ankitpokhrel/jira-cli
