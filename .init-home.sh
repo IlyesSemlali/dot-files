@@ -39,13 +39,18 @@ function install_brew() {
         echo "and press continue when prompted"
         exit 1
     }
+
+    brew file install
 }
 
 function install_tools() {
 
     source ~/.zshrc
 
-    brew file install
+    # ZPlug
+    if ! [ -d ~/.local/share/zplug ]; then
+        git clone https://github.com/zplug/zplug ~/.local/share/zplug
+    fi
 
     # tmux TPM
     if ! [ -d ~/.tmux/plugins/tpm ]; then
