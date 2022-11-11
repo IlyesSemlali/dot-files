@@ -24,11 +24,23 @@ function install_vim_plugins() {
         && nvim -N -u ~/.vim-install-plugins
 }
 
+function install_from_git() {
+    git_bin=$(which git)
+    repo=${1}
+    install_path=${2}
+
+    if [ -d ${install_path} ]; then
+        git -C ${install_path} pull
+    else
+        git clone ${repo} ${install_path}
+    fi
+    unset install_path
+    unset repo
+}
+
 function install_brew() {
     # Brew for mac
-    if ! [ -d ~/.local/homebrew ]; then
-        git clone https://github.com/Homebrew/brew ~/.local/share/homebrew || true
-    fi
+    install_from_git https://github.com/Homebrew/brew ~/.local/share/homebrew
 
     source ~/.zshrc
 
@@ -48,19 +60,13 @@ function install_tools() {
     source ~/.zshrc
 
     # ZPlug
-    if ! [ -d ~/.local/share/zplug ]; then
-        git clone https://github.com/zplug/zplug ~/.local/share/zplug
-    fi
+    install_from_git https://github.com/zplug/zplug ~/.local/share/zplug
 
     # tmux TPM
-    if ! [ -d ~/.tmux/plugins/tpm ]; then
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    fi
+    install_from_git https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
     # tmux powerline
-    if ! [ -d ~/.local/share/tmux-powerline ]; then
-        git clone https://github.com/IlyesSemlali/tmux-powerline ~/.local/share/tmux-powerline
-    fi
+    install_from_git https://github.com/IlyesSemlali/tmux-powerline ~/.local/share/tmux-powerline
 
     # tfswitch
     if ! which tfswitch > /dev/null 2>&1; then
@@ -69,7 +75,7 @@ function install_tools() {
 
     # Krew
     (
-        set -x; cd "$(mktemp -d)" &&
+        cd "$(mktemp -d)" &&
         OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
         ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
         KREW="krew-${OS}_${ARCH}" &&
@@ -86,7 +92,7 @@ function configure_zsh() {
     mkdir -p ~/.cache
     touch ~/.cache/zshdirs
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --keep-zshrc --skip-chsh --unattended > /dev/null 2>&1"
-    git clone https://github.com/macunha1/zsh-terraform ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/terraform
+    install_from_git https://github.com/macunha1/zsh-terraform ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/terraform
     git -C ~ reset --hard > /dev/null 2>&1
 
     if ! zplug check --verbose; then
