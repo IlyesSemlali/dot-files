@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-PATH="$PATH:~/.local/bin/"
-
 # HomeBrew
 if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
     eval $($HOME/.local/share/homebrew/bin/brew shellenv)
@@ -13,7 +11,7 @@ XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
 
 TFLS_VERSION="0.28.1"
 
-OS=$(get_platform | cut -d '-' -f1)
+OS=$(~/.local/bin/get_platform | cut -d '-' -f1)
 
 function install_vim_plugins() {
     echo "-- Installing VIM Plugins --"
