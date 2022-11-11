@@ -1,14 +1,35 @@
 #!/usr/bin/env zsh
 
+PATH="$PATH:~/.local/bin/"
+
 # HomeBrew
 if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
     eval $($HOME/.local/share/homebrew/bin/brew shellenv)
 fi
 
 
+XMONAD_CONFIG_TEMPLATE="/home/$USER/.xmonad/lib/Config.hs.tpl"
+XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
+
 OS=$(~/.local/bin/get_platform | cut -d '-' -f1)
 
 PATH="$PATH:~/.local/bin/"
+TFLS_VERSION="0.27.0"
+
+OS=$(get_platform | cut -d '-' -f1)
+
+function _get_config_keys() {
+	grep '=' $1 | awk '{ print $1 }' | grep -v '^[\s-]*$'
+}
+
+function install_vim_plugins() {
+    echo "-- Installing VIM Plugins --"
+    /usr/bin/vim -N -u ~/.viminitrc
+    /usr/bin/vim -N -u ~/.vim-install-plugins
+    which nvim 2>&1 > /dev/null \
+        && nvim -N -u ~/.viminitrc \
+        && nvim -N -u ~/.vim-install-plugins
+}
 
 function install_from_git() {
     git_bin=$(which git)
@@ -57,6 +78,32 @@ function install_brew() {
     }
 
     brew file install
+}
+
+function configure_dolphin() {
+	if [ ! -f ~/.config/dolphinrc ]
+	then
+		cp ~/.config/dolphinrc.tpl ~/.config/dolphinrc
+	fi
+}
+
+function configure_xmonad() {
+	if [ ! -f $XMONAD_CONFIG ]
+	then
+		echo "-- Adding a fresh Xmonad config --"
+		sed "s/user/$USER/g" $XMONAD_CONFIG_TEMPLATE > $XMONAD_CONFIG
+	fi
+
+	for config_key in $(_get_config_keys $XMONAD_CONFIG_TEMPLATE)
+	do
+		if ! grep -q "^$config_key" $XMONAD_CONFIG
+		then
+			echo "-- Adding $config_key in Xmonad configuration --"
+			grep "^$config_key" $XMONAD_CONFIG_TEMPLATE >> $XMONAD_CONFIG
+		fi
+	done
+
+	cd ~/.xmonad/lib/ && ghc --make Config.hs; cd
 }
 
 function install_tools() {
@@ -119,6 +166,10 @@ do
             BREW='true'
             shift
             ;;
+        -x|--xmonad)
+            XMONAD='true'
+            shift
+            ;;
         -v|--vim)
             VIM='true'
             shift
@@ -152,7 +203,15 @@ then
 fi
 
 
+if [[ $XMONAD == 'true' ]]
+then
+    configure_xmonad
+    configure_dolphin
+fi
+
+
 if [[ $CONFIGURE_ZSH == 'true' ]]
 then
     configure_zsh
 fi
+
