@@ -18,8 +18,8 @@ function install_vim_plugins() {
     /usr/bin/vim -N -u ~/.viminitrc
     /usr/bin/vim -N -u ~/.vim-install-plugins
     which nvim 2>&1 > /dev/null \
-        && nvim -N -u ~/.viminitrc \
-        && nvim -N -u ~/.vim-install-plugins
+        && nvim -es -N -u ~/.viminitrc \
+        && nvim -es -N -u ~/.vim-install-plugins
 }
 
 function install_from_git() {
