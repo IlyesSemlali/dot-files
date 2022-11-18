@@ -93,6 +93,8 @@ function configure_zsh() {
     install_from_git https://github.com/macunha1/zsh-terraform ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/terraform
     git -C ~ reset --hard > /dev/null 2>&1
 
+    source ~/.zshrc
+
     if ! zplug check --verbose; then
         zplug install
     fi
