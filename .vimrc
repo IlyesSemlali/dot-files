@@ -347,6 +347,7 @@ endfunction
 
 " Git mergetool
 function s:set_mergetool_layout(split)
+    setlocal noundofile
     setlocal norelativenumber
     setlocal nonumber
 endfunction
