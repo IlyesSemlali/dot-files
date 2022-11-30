@@ -20,7 +20,7 @@
     s = status
     cb = checkout -b
     mt = mergetool
-    plog = log --graph --abbrev-commit -10 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
+    plog = log --graph --abbrev-commit -30 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
     wip = ! git commit -am \"WIP: $COMMIT_MESSAGE - $(date)\"
     dr = ! git diff origin/$(git branch --show-current)
     b = branch
