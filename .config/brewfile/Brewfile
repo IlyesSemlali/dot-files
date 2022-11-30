@@ -9,6 +9,7 @@ brew jq
 # tools
 tap ankitpokhrel/jira-cli
 brew jira-cli
+brew pgcli
 
 # Terraform tools
 brew krew
