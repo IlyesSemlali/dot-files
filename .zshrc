@@ -2,6 +2,7 @@ source $HOME/.zsh/utils.zsh
 
 # PATH
 append_path "/usr/local/lib64/ruby/gems/2.5.0/bin"
+append_path "$HOME/.krew/bin"
 insert_path "$HOME/.local/bin"
 insert_path "$HOME/.local/share/npm/bin"
 insert_path "$HOME/.local/node_modules/.bin"
