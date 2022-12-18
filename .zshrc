@@ -55,6 +55,8 @@ export ENHANCD_DISABLE_DOT=1
 export ENHANCD_DISABLE_HOME=1
 export ENHANCD_HYPHEN_ARG='_'
 
+export GOPATH="~/.local/share/go"
+
 #NeoVIM
 if which nvim >/dev/null 2>&1
 then
