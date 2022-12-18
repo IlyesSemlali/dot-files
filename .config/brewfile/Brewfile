@@ -8,6 +8,7 @@ brew jq
 
 # tools
 tap ankitpokhrel/jira-cli
+brew go
 brew jira-cli
 brew pgcli
 
