@@ -64,19 +64,19 @@ return(function(use)
     -- use 'lilydjwg/colorizer'
     use 'machakann/vim-sandwich'
     use 'martinda/Jenkinsfile-vim-syntax'
-use 'mbbill/undotree'
-use 'mhinz/vim-startify'
--- use 'rkitover/vimpager'
+    use 'mbbill/undotree'
+    use 'mhinz/vim-startify'
+    -- use 'rkitover/vimpager'
     use 'rust-lang/rust.vim'
     use 'ryanoasis/vim-devicons'
-use 'samoshkin/vim-mergetool'
-use 'towolf/vim-helm'
-use 'tpope/vim-eunuch'
--- use 'vim-airline/vim-airline'
--- use 'vim-airline/vim-airline-themes'
+    use 'samoshkin/vim-mergetool'
+    use 'towolf/vim-helm'
+    use 'tpope/vim-eunuch'
+    -- use 'vim-airline/vim-airline'
+    -- use 'vim-airline/vim-airline-themes'
 
 
-use {
+    use {
         'nvim-tree/nvim-tree.lua',
         requires = {
             'nvim-tree/nvim-web-devicons', -- optional, for file icons
