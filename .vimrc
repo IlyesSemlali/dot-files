@@ -26,6 +26,7 @@ let vim_logo = [
 " Use all the greatest and latest features of VIM
 syntax on
 set nocompatible
+set noshowmode
 set modeline
 if $DEMO_MODE == ""
     set relativenumber

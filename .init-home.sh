@@ -13,13 +13,15 @@ TFLS_VERSION="0.28.1"
 
 OS=$(~/.local/bin/get_platform | cut -d '-' -f1)
 
+PATH="$PATH:~/.local/bin/"
+
 function install_vim_plugins() {
     echo "-- Installing VIM Plugins --"
     /usr/bin/vim -N -u ~/.viminitrc
     /usr/bin/vim -N -u ~/.vim-install-plugins
     which nvim 2>&1 > /dev/null \
-        && nvim -es -N -u ~/.viminitrc \
-        && nvim -es -N -u ~/.vim-install-plugins
+        rm -rf ~/.config/nvim/plugin/
+        && nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'; git checkout -- ~/.config/nvim/plugin/
 }
 
 function install_from_git() {
@@ -43,6 +45,8 @@ function install_brew() {
     source ~/.zshrc
 
     brew install rcmdnk/file/brew-file || {
+        echo
+        echo
         echo "openssl probably failed to install, run:"
         echo "brew install --debug --verbose openssl@1.1"
         echo
@@ -104,15 +108,6 @@ function _get_config_keys() {
     grep '=' $1 | awk '{ print $1 }' | grep -v '^[\s-]*$'
 }
 
-function configure_dolphin() {
-    if [[ $OS == "linux" ]]; then
-        if [ ! -f ~/.config/dolphinrc ]
-        then
-            cp ~/.config/dolphinrc.tpl ~/.config/dolphinrc
-        fi
-    fi
-}
-
 function configure_xmonad() {
     if [[ $OS == "linux" ]]; then
         if [ ! -f $XMONAD_CONFIG ]
@@ -135,28 +130,6 @@ function configure_xmonad() {
         cd
     fi
 }
-
-function install_language_servers() {
-    pip3 install --user ansible-lint
-
-    cd ~/.local/
-    yarn add ansible-language-server || npm i ansible-language-server
-    yarn add yaml-language-server || npm i yaml-language-server
-    yarn add bash-language-server || npm i bash-language-server
-    cd -
-
-    cd ~/.local/bin
-    if [[ $OS == mac ]]; then
-        tfls_release=darwin_arm64
-    else
-        tfls_release=linux_amd64
-    fi
-    wget https://releases.hashicorp.com/terraform-ls/${TFLS_VERSION}/terraform-ls_${TFLS_VERSION}_${tfls_release}.zip
-    unzip -o terraform-ls_${TFLS_VERSION}_${tfls_release}.zip
-    rm terraform-ls_${TFLS_VERSION}_${tfls_release}.zip
-    cd -
-}
-
 
 while [[ $# -gt 0 ]]
 do
@@ -186,8 +159,6 @@ do
     esac
 done
 
-configure_dolphin
-
 if [[ $BREW == 'true' ]]
 then
     install_brew
@@ -203,7 +174,6 @@ fi
 if [[ $VIM == 'true' ]]
 then
     install_vim_plugins
-    install_language_servers
 fi
 
 
