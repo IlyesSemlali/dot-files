@@ -54,6 +54,7 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 export ENHANCD_DISABLE_DOT=1
 export ENHANCD_DISABLE_HOME=1
 export ENHANCD_HYPHEN_ARG='_'
+export ENHANCD_HYPHEN_NUM=20
 
 export GOPATH="~/.local/share/go"
 
