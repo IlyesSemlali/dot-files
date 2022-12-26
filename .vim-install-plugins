@@ -1,3 +1,5 @@
+# vim: set ft=vim
+
 autocmd VimEnter * PlugInstall --sync | qa
 
 call plug#begin('~/.vim/plugged')
