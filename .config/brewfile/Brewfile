@@ -19,6 +19,7 @@ brew vault
 
 # FluxCD
 brew fluxcd/tap/flux
+brew flux
 
 # Fonts
 file ~/.config/brewfile/font-taps-Brewfile
