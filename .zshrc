@@ -55,6 +55,9 @@ export ENHANCD_DISABLE_DOT=1
 export ENHANCD_DISABLE_HOME=1
 export ENHANCD_HYPHEN_ARG='_'
 export ENHANCD_HYPHEN_NUM=20
+export ENHANCD_FILTER="fzf --border-label='Change Directory'"
+
+export FZF_DEFAULT_OPTS="--height=25 --min-height=15 --border=rounded --margin=1 --padding=1 --border-label-pos=3"
 
 export GOPATH="~/.local/share/go"
 
