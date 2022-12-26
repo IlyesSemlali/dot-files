@@ -24,7 +24,11 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd("colorscheme spaceway")
+local colorscheme_loaded,_ = pcall(vim.cmd, "colorscheme spaceway")
+if not colorscheme_loaded
+then
+	vim.cmd("colorscheme desert")
+end
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -56,11 +60,13 @@ vim.opt.spelllang="fr"
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
+-- Terraform
+vim.g.terraform_fmt_on_save = true
+
+
 -- """"""""""""""""
 -- " Key Bindings "
 -- """"""""""""""""
-
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 
 -- " NvimTree
 vim.keymap.set('n', '<leader><space>', ':NvimTreeToggle<CR>', { desc = 'Toggle NvimTree' })
