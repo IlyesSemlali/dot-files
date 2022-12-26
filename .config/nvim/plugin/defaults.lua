@@ -40,6 +40,9 @@ vim.g.loaded_netrwPlugin = 1
 -- Disable mode info since it's shown in status line
 vim.opt.showmode = false
 
+-- highlight markdown code blocks
+vim.g.markdown_fenced_languages = {'bash', 'zsh', 'sh', 'hcl', 'yaml', 'json=javascript'}
+
 -- Configure persistence
 vim.opt.backup = false
 vim.opt.swapfile = false
