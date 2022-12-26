@@ -1,31 +1,33 @@
 -- NvimTree Settings
-
-  -- OR setup with some options
-require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  actions = {
-    open_file = {
-      quit_on_open = true
-    }
-  },
-  view = {
-    adaptive_size = true,
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
+local nvimtree_loaded, nvimtree = pcall(require, "nvim-tree")
+if nvimtree_loaded
+then
+  nvimtree.setup({
+    sort_by = "case_sensitive",
+    actions = {
+      open_file = {
+        quit_on_open = true
+      }
+    },
+    view = {
+      adaptive_size = true,
+      mappings = {
+        list = {
+          { key = "u", action = "dir_up" },
+        },
       },
     },
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = false,
-  },
-})
-
+    renderer = {
+      group_empty = true,
+    },
+    filters = {
+      dotfiles = false,
+    },
+  })
+end
 
 -- TODO: use left to fold and right to unfold
+-- TODO: open tree when opening a folder
 
 -- -- NerdTree
 -- let NERDTreeQuitOnOpen=1
