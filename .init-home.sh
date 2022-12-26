@@ -17,10 +17,10 @@ PATH="$PATH:~/.local/bin/"
 
 function install_vim_plugins() {
     echo "-- Installing VIM Plugins --"
-    /usr/bin/vim -N -u ~/.viminitrc
-    /usr/bin/vim -N -u ~/.vim-install-plugins
+    # /usr/bin/vim -N -u ~/.viminitrc
+    # /usr/bin/vim -N -u ~/.vim-install-plugins
     which nvim 2>&1 > /dev/null \
-        rm -rf ~/.config/nvim/plugin/
+        && rm -rf ~/.config/nvim/plugin/ \
         && nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'; git checkout -- ~/.config/nvim/plugin/
 }
 
