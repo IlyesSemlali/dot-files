@@ -25,18 +25,20 @@ import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, s
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.InsertPosition
-import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, ToggleStruts(..))
+import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, doRectFloat)
 import XMonad.Hooks.Minimize
 import XMonad.Hooks.RefocusLast
 import XMonad.Hooks.ServerMode
+import XMonad.Hooks.StatusBar
+import XMonad.Hooks.StatusBar.PP
+
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.WorkspaceHistory
 
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
-import XMonad.Layout.Magnifier
 import XMonad.Layout.Minimize
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
 import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
@@ -56,6 +58,7 @@ import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
+import XMonad.Util.WorkspaceCompare
 import qualified XMonad.StackSet as W
 
    -- Config
@@ -191,14 +194,12 @@ main = do
     -- Launching one instance of xmobar on one monitor
     xmobarproc <- spawnPipe Config.xmobarCommand
     -- Start xmonad
-    xmonad $ ewmh def
-        { manageHook = myManageHook <+> manageDocks
+    xmonad $ ewmhFullscreen $ docks $ ewmh def
+        { manageHook = myManageHook
         , handleEventHook    = minimizeEventHook
                                <+> serverModeEventHookCmd
                                <+> serverModeEventHook
                                <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn)
-                               <+> docksEventHook
-                               <+> fullscreenEventHook
         , XMonad.modMask            = Config.modMask
         , terminal           = Config.term
         , keys               = Keybindings.bindings
@@ -225,6 +226,6 @@ main = do
                         , ppExtras  = [windowCount]                           -- # of windows current workspace
                         , ppLayout = wrap "<icon=layouts/" ".xpm/>"
                         , ppOrder  = \(ws:l:t:ex) -> [l]++ex++[ws,t]
-                        , ppSort   = fmap (namedScratchpadFilterOutWorkspace.) DO.getSortByOrder
+                        , ppSort   = fmap (filterOutWs [scratchpadWorkspaceTag].) DO.getSortByOrder
                         }
         }
