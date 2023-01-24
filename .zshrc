@@ -59,7 +59,7 @@ export ENHANCD_FILTER="fzf --border-label='Change Directory'"
 
 export FZF_DEFAULT_OPTS="--height=25 --min-height=15 --border=rounded --margin=1 --padding=1 --border-label-pos=3"
 
-export GOPATH="~/.local/share/go"
+export GOPATH="${HOME}/.local/share/go"
 
 #NeoVIM
 if which nvim >/dev/null 2>&1
