@@ -10,6 +10,7 @@ brew zoxide
 tap ankitpokhrel/jira-cli
 brew go
 brew jira-cli
+brew kubeval
 brew pgcli
 brew pre-commit
 
