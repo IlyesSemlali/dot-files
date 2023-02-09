@@ -12,6 +12,10 @@ import System.Exit (exitSuccess)
 import System.IO (hPutStrLn)
 import qualified Data.Map as M
 
+import qualified DBus as D
+import qualified DBus.Client as D
+import qualified Codec.Binary.UTF8.String as UTF8
+
 import XMonad
 import XMonad.Actions.CopyWindow (kill1, killAllOtherCopies)
 import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen)
@@ -182,15 +186,12 @@ myManageHook = composeAll [
 
 
 
-myLogHook :: X ()
-myLogHook = fadeInactiveLogHook fadeAmount
-    where fadeAmount = 1.0
-
-
-
-
 main :: IO ()
 main = do
+    -- Connect to DBus Session
+    dbus <- D.connectSession
+    D.requestName dbus (D.busName_ "org.xmonad.Log")
+      [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
     -- Launching one instance of xmobar on one monitor
     xmobarproc <- spawnPipe Config.xmobarCommand
     -- Start xmonad
@@ -212,20 +213,41 @@ main = do
         , focusFollowsMouse  = False
         , clickJustFocuses   = False
         , logHook = workspaceHistoryHook
-                <+> myLogHook
                 <+> refocusLastLogHook
-                <+> dynamicLogWithPP xmobarPP
-                        { ppOutput = \x -> hPutStrLn xmobarproc x
-                        , ppCurrent = xmobarColor "#F7C42a" ""                -- Current workspace in xmobar
-                        , ppVisible = xmobarColor "#C7A02a" ""                -- Visible but not current workspace
-                        , ppHidden = xmobarColor "#CCCCCC" ""                 -- Hidden workspaces in xmobar
-                        , ppHiddenNoWindows = xmobarColor "#828A8F" ""        -- Hidden workspaces (no windows)
-                        , ppTitle = xmobarColor "#b3afc2" "" . shorten 60     -- Title of active window in xmobar
-                        , ppSep =  "<fc=#666666> <fn=2>|</fn> </fc>"          -- Separators in xmobar
-                        , ppUrgent = xmobarColor "#C45500" ""                 -- Urgent workspace
-                        , ppExtras  = [windowCount]                           -- # of windows current workspace
-                        , ppLayout = wrap "<icon=layouts/" ".xpm/>"
-                        , ppOrder  = \(ws:l:t:ex) -> [l]++ex++[ws,t]
-                        , ppSort   = fmap (filterOutWs [scratchpadWorkspaceTag].) DO.getSortByOrder
-                        }
+                <+> dynamicLogWithPP (myLogHook dbus)
         }
+
+current = "#F7C42a"
+visible = "#C7A02a"
+hidden = "#CCCCCC"
+hiddenNoWindows = "#828A8F"
+title = "#b3afc2"
+urgent = "#C45500"
+
+myLogHook :: D.Client -> PP
+myLogHook dbus = def
+  { ppOutput = dbusOutput dbus
+    -- , ppCurrent = xmobarColor "#F7C42a" ""                -- Current workspace in xmobar
+    -- , ppVisible = xmobarColor "#C7A02a" ""                -- Visible but not current workspace
+    -- , ppHidden = xmobarColor "#CCCCCC" ""                 -- Hidden workspaces in xmobar
+    -- , ppHiddenNoWindows = xmobarColor "#828A8F" ""        -- Hidden workspaces (no windows)
+    -- , ppTitle = xmobarColor "#b3afc2" "" . shorten 60     -- Title of active window in xmobar
+    -- , ppSep =  "<fc=#666666> <fn=2>|</fn> </fc>"          -- Separators in xmobar
+    -- , ppUrgent = xmobarColor "#C45500" ""                 -- Urgent workspace
+    , ppExtras  = [windowCount]                           -- # of windows current workspace
+    -- , ppLayout = wrap "<icon=layouts/" ".xpm/>"
+    , ppOrder  = \(ws:l:t:ex) -> [l]++ex++[ws,t]
+    , ppSort   = fmap (filterOutWs [scratchpadWorkspaceTag].) DO.getSortByOrder
+  }
+
+-- Emit a DBus signal on log updates
+dbusOutput :: D.Client -> String -> IO ()
+dbusOutput dbus str = do
+    let signal = (D.signal objectPath interfaceName memberName) {
+            D.signalBody = [D.toVariant $ UTF8.decodeString str]
+        }
+    D.emit dbus signal
+  where
+    objectPath = D.objectPath_ "/org/xmonad/Log"
+    interfaceName = D.interfaceName_ "org.xmonad.Log"
+    memberName = D.memberName_ "Update"
