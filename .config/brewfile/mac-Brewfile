@@ -10,6 +10,7 @@ brew grep
 brew make
 
 brew fzf
+brew htop
 brew neovim
 brew node
 brew tmux
