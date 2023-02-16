@@ -93,13 +93,6 @@ then
     source <(k completion zsh)
 fi
 
-# ASDF Version Manager
-if [ -f $HOME/.local/share/homebrew/opt/asdf/libexec/asdf.sh ]; then
-    source $HOME/.local/share/homebrew/opt/asdf/libexec/asdf.sh
-else
-    echo "init-home: asdf not installed, please run 'init-home -t'"
-fi
-
 if [ -f ~/.zshrc.local ]
 then
     source ~/.zshrc.local
