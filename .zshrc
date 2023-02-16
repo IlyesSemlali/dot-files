@@ -11,6 +11,11 @@ fi
 # Add paths to GNU tools using cache
 gnupaths="${HOME}/.cache/gnupaths"
 
+# GoLang
+if [ -e ${GOPATH}/bin ]; then
+    append_path "$GOPATH/bin"
+fi
+
 if [ ! -e ${gnupaths} ]; then
     find ${HOME}/.local/share/homebrew/opt -type d -follow -name gnubin -print > ${gnupaths}
 fi
