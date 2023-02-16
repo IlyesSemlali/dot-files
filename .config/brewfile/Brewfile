@@ -1,6 +1,3 @@
-# To handle several version in differents projects
-brew asdf
-
 # Shell Tools
 brew bat
 brew git-delta
