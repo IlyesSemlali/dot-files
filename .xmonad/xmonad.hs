@@ -193,7 +193,7 @@ main = do
     D.requestName dbus (D.busName_ "org.xmonad.Log")
       [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
     -- Launching one instance of xmobar on one monitor
-    xmobarproc <- spawnPipe Config.xmobarCommand
+    xmobarproc <- spawnPipe Config.barCommand
     -- Start xmonad
     xmonad $ ewmhFullscreen $ docks $ ewmh def
         { manageHook = myManageHook
