@@ -15,7 +15,7 @@ editor = term ++ " -e vim "
 -- commands
 menuManager = "rofi -terminal alacritty -drun-show-actions -show drun -display-drun launch"
 wallpaperCommand = "feh --bg-fill " ++ wallpaper ++ " &"
-xmobarCommand = "xmobar -i " ++ homeDir ++ ".xmonad/xpm_stdres " ++ homeDir ++ ".xmonad/xmobar.hs"
+barCommand = "polybar desktop"
 vmCommand = "vboxmanage startvm \"Awesome Linux VM (of course)\""
 printScreenCommand = "scrot '%Y-%m-%d_%H%M%S.png' -e 'mkdir -p " ++ homeDir ++ "/Images/Screenshots/%Y-%m-%d/ && mv $f " ++ homeDir ++ "/Images/Screenshots/%Y-%m-%d/'"
 compositorCommand = "picom --experimental-backends -b"
