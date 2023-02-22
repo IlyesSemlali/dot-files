@@ -11,13 +11,13 @@ brew make
 
 brew fzf
 brew htop
+brew libpq
 brew neovim
 brew node
 brew tmux
 brew tree
 brew wget
 brew yarn
-install libpq
 
 cask alacritty
 cask amethyst
