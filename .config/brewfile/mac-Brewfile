@@ -3,7 +3,7 @@ brew coreutils
 brew ed
 brew findutils
 brew gawk
-brew gettex
+brew gettext
 brew gnu-sed
 brew gnu-tar
 brew grep
