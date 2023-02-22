@@ -16,9 +16,13 @@ brew tmux
 brew tree
 brew wget
 brew yarn
+install libpq
 
 cask alacritty
 cask amethyst
 cask flycut
 cask keepassxc
 cask mos
+
+after brew link --force libpq
+
