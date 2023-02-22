@@ -61,8 +61,10 @@ build_prompt () {
 
         if git rev-parse --is-inside-git-dir > /dev/null 2>&1 ; then
             git_dirty=$(parse_git_dirty)
-            if [[ "$(git rev-parse --show-toplevel)" != "${HOME}" || -n ${git_dirty} ]]; then
-                prompt_git
+            if [[ -n ${git_dirty} ]]; then
+                if [[ "$(git rev-parse --show-toplevel | tr '[:upper:]' '[:lower:]')" != "$(echo ${HOME}) | tr '[:upper:]' '[:lower:]')" ]]; then
+                    prompt_git
+                fi
             fi
         fi
 
