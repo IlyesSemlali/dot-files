@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PROJECT=$(find $HOME/projects -maxdepth 1 -mindepth 1 -type d -exec basename {} \;  | sort | fzf --border-label='Projets')
+
+
+if tmux has-session -t $PROJECT 2>/dev/null; then
+	tmux attach-session -t $PROJECT
+else
+	tmux new-session -t $PROJECT -c $HOME/projects/$PROJECT
+fi
