@@ -29,6 +29,7 @@
     st = ! git stash -m \"$COMMIT_MESSAGE\"
     mt = mergetool
     cp = cherry-pick
+    pp = ! git pull && git push
 
     # Work done, interactively rebases from common ancestor
     wd = ! git rebase -i $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD))~1
