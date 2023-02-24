@@ -13,7 +13,6 @@ brew fzf
 brew htop
 brew libpq
 brew neovim
-brew node
 brew tmux
 brew tree
 brew wget
@@ -27,3 +26,4 @@ cask mos
 
 after brew link --force libpq
 
+after install_node
