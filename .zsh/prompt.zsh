@@ -58,10 +58,16 @@ build_prompt () {
         if [ -z "$TMUX" ]; then
             prompt_context
         fi
-
         if git rev-parse --is-inside-git-dir > /dev/null 2>&1 ; then
             git_dirty=$(parse_git_dirty)
-            if [[ "$(git rev-parse --show-toplevel | tr '[:upper:]' '[:lower:]')" != "$(echo ${HOME}) | tr '[:upper:]' '[:lower:]')" ]]; then
+
+            if [[ $(git rev-parse --show-toplevel | tr '[:upper:]' '[:lower:]') = $(echo ${HOME} | tr '[:upper:]' '[:lower:]') ]]; then
+                if [[ -n ${git_dirty} ]]; then
+                    prompt_git
+                elif (( ${+HOME_BRANCH} )) && [[ "$(git branch --show-current)" != ${HOME_BRANCH} ]] ; then
+                    prompt_git
+                fi
+            else
                 if [[ -n ${git_dirty} ]]; then
                     prompt_git
                 fi
