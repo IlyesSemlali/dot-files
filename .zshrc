@@ -95,6 +95,11 @@ done
 
 unset gnupaths
 
+# Node Version Manager
+if [ -f ~/.local/share/homebrew/opt/nvm/nvm.sh ]; then
+    . ~/.local/share/homebrew/opt/nvm/nvm.sh
+fi
+
 if [ -f ${HOME}/.zshrc.d/local.zsh ]
 then
   source ${HOME}/.zshrc.d/local.zsh
