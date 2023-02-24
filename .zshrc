@@ -28,6 +28,11 @@ done
 
 unset gnupaths
 
+# Node Version Manager
+
+if [ -f ~/.local/share/homebrew/opt/nvm/nvm.sh ]; then
+    . ~/.local/share/homebrew/opt/nvm/nvm.sh
+fi
 
 ##################### Beginning of OMZ #####################
 
