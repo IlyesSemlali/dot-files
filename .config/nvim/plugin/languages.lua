@@ -62,9 +62,9 @@ then
     'bashls',
     'clangd',
     'gopls',
+    'lua_ls',
     'pyright',
     'rust_analyzer',
-    'sumneko_lua',
     'terraformls',
   }
 
@@ -91,9 +91,7 @@ then
 
 
   -- Configure languages
-  require('lspconfig').sumneko_lua.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
+  require'lspconfig'.lua_ls.setup {
     settings = {
       Lua = {
         runtime = {
@@ -105,7 +103,10 @@ then
         diagnostics = {
           globals = { 'vim' },
         },
-        workspace = { library = vim.api.nvim_get_runtime_file('', true) },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
         -- Do not send telemetry data containing a randomized but unique identifier
         telemetry = { enable = false },
       },
