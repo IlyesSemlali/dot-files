@@ -68,9 +68,7 @@ build_prompt () {
                     prompt_git
                 fi
             else
-                if [[ -n ${git_dirty} ]]; then
-                    prompt_git
-                fi
+                prompt_git
             fi
         fi
 
