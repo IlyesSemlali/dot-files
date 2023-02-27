@@ -134,6 +134,14 @@ then
     filetypes = { "yaml.ansible" }
   }
 
+  require('lspconfig').pyright.setup{
+    settings = {
+      pyright = {
+          typeCheckingMode = "off",
+        }
+    }
+  }
+
   require('lspconfig').yamlls.setup {
     settings = {
       yaml = {
