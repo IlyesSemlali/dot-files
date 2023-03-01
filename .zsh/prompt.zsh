@@ -29,7 +29,7 @@ prompt_kube () {
     then
         if history | tail -30 | grep -v 'grep' | grep -q '\ \(k\|kubectl\)\ ' > /dev/null 2>&1
         then
-            local kube_context=$(kubectl config current-context) 2>/dev/null
+            local kube_context=$(grep current-context | awk '{ print $2 }') 2>/dev/null
             prompt_segment cyan $CURRENT_FG $kube_context
         fi
     fi
