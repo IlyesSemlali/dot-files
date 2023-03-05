@@ -13,6 +13,7 @@ brew pgcli
 
 # Terraform tools
 brew krew
+brew terraform
 brew vault
 
 # FluxCD
