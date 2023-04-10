@@ -63,7 +63,7 @@ then
     'clangd',
     'gopls',
     'lua_ls',
-    'pyright',
+    'pylsp',
     'rust_analyzer',
     'terraformls',
   }
@@ -113,6 +113,18 @@ then
     },
   }
 
+  require'lspconfig'.pylsp.setup{
+    settings = {
+      pylsp = {
+        plugins = {
+          pycodestyle = {
+            ignore = {'W391'},
+            maxLineLength = 100
+          }
+        }
+      }
+    }
+  }
 
   require'lspconfig'.bashls.setup{}
 
