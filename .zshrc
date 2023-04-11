@@ -79,18 +79,10 @@ fi
 source $HOME/.zsh/prompt.zsh
 source $HOME/.zsh/plugins.zsh
 
-# Extra tools configuration
-if which terraform > /dev/null 2>&1
-then
-    alias tf=terraform
-    plugins+=(terraform)
-    alias tfswitch="tfswitch -b ~/.local/bin/terraform"
-fi
 
-if which kubectl > /dev/null 2>&1
+if [ -f ~/.zshrc.tools ]
 then
-    alias k=kubectl
-    source <(k completion zsh)
+    source ~/.zshrc.tools
 fi
 
 if [ -f ~/.zshrc.local ]
