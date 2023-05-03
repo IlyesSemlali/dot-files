@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 -- Remove trailing spaces when saving file
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
-  command = [[silent! %s/\s\+$//e]],
+  command = [[silent! %s/\s\+$//]],
 })
 
 -- Automatically source and re-compile packer whenever you save this init.lua
