@@ -1,11 +1,4 @@
 return(function(use)
-    -- Completion
-    -- use 'onsails/lspkind-nvim'
-    -- use 'hrsh7th/cmp-buffer'
-    -- use 'hrsh7th/cmp-cmdline'
-    -- use 'hrsh7th/cmp-vsnip'
-    -- use 'hrsh7th/vim-vsnip'
-
     -- Package manager
     use 'wbthomason/packer.nvim'
 
@@ -20,7 +13,10 @@ return(function(use)
 
     use { -- Autocompletion
         'hrsh7th/nvim-cmp',
-        requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+        requires = { 'hrsh7th/cmp-nvim-lsp',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip'
+        },
     }
 
     use { -- Highlight, edit, and navigate code
@@ -30,57 +26,67 @@ return(function(use)
         end,
     }
 
+    use { -- File Explorer
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons',
+        }
+    }
+
+
     use { -- Additional text objects via treesitter
         'nvim-treesitter/nvim-treesitter-textobjects',
         after = 'nvim-treesitter',
     }
 
-    -- Git related plugins
-    use 'tpope/vim-fugitive'
-    use 'tpope/vim-rhubarb'
-    use 'lewis6991/gitsigns.nvim'
+    use { -- Git related plugins
+        'tpope/vim-fugitive',
+        'tpope/vim-rhubarb',
+        'lewis6991/gitsigns.nvim'
+    }
 
-    use 'gavinok/spaceway.vim'
-    use 'nvim-lualine/lualine.nvim' -- Fancier statusline
-    use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
+    use { -- Make neovim fancier
+        'gavinok/spaceway.vim',
+        'lukas-reineke/indent-blankline.nvim',
+        'mhinz/vim-startify',
+        'nvim-lualine/lualine.nvim',
+        'ryanoasis/vim-devicons'
+    }
+
+    use 'editorconfig/editorconfig-vim'
     use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
     use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+    use 'mbbill/undotree'
 
     -- Fuzzy Finder (files, lsp, etc)
-    use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
+    use {
+        "nvim-telescope/telescope-file-browser.nvim",
+        requires = {
+        'nvim-telescope/telescope.nvim',
+            requires = { 'nvim-lua/plenary.nvim' }
+        }
+    }
 
     -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
 
-    -- use 'Gavinok/SpaceWay.vim'
+    -- Try one of those somtime
     -- use 'airblade/vim-rooter'
-    use 'ap/vim-css-color'
     -- use 'beloglazov/vim-online-thesaurus'
-    use 'christianrondeau/vim-base64'
-    use 'editorconfig/editorconfig-vim'
+    -- use 'christianrondeau/vim-base64' -- Do I still use this ?
+    -- use 'samoshkin/vim-mergetool' -- Broken
+    use 'ap/vim-css-color'
     use 'gentoo/gentoo-syntax'
     use 'hashivim/vim-terraform'
-    -- use 'lilydjwg/colorizer'
     use 'machakann/vim-sandwich'
     use 'martinda/Jenkinsfile-vim-syntax'
-    use 'mbbill/undotree'
-    use 'mhinz/vim-startify'
-    -- use 'rkitover/vimpager'
     use 'rust-lang/rust.vim'
-    use 'ryanoasis/vim-devicons'
-    use 'samoshkin/vim-mergetool'
     use 'towolf/vim-helm'
     use 'tpope/vim-eunuch'
     -- use 'vim-airline/vim-airline'
     -- use 'vim-airline/vim-airline-themes'
 
 
-    use {
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons', -- optional, for file icons
-        }
-    }
 
 end)
