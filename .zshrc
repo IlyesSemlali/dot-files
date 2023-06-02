@@ -27,8 +27,8 @@ done
 unset gnupaths
 
 # Node Version Manager
-if [ -f ~/.local/share/homebrew/opt/nvm/nvm.sh ]; then
-    append_path "$(find /Users/ilyes/.nvm/versions/node/ -mindepth 2 -maxdepth 2 -name bin | sort -V | tail -n 1)"
+if [ -f ${HOME}/.local/share/homebrew/opt/nvm/nvm.sh ]; then
+    source ${HOME}/.local/share/homebrew/opt/nvm/nvm.sh
 fi
 
 # ZSH config
