@@ -2,6 +2,31 @@ return(function(use)
     -- Package manager
     use 'wbthomason/packer.nvim'
 
+    use { -- Make neovim fancier
+        'editorconfig/editorconfig-vim',
+        'gavinok/spaceway.vim',
+        'lukas-reineke/indent-blankline.nvim',
+        'machakann/vim-sandwich',
+        'mbbill/undotree',
+        'mhinz/vim-startify',
+        'numToStr/Comment.nvim',
+        'nvim-lualine/lualine.nvim',
+        'ryanoasis/vim-devicons',
+        'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+    }
+
+    use { -- Telescope
+        'nvim-telescope/telescope-file-browser.nvim',
+        requires = {
+            'nvim-telescope/telescope.nvim',
+            requires = { 'nvim-lua/plenary.nvim' }
+        },
+        { 'nvim-telescope/telescope-fzf-native.nvim',
+            run = 'make',
+            cond = vim.fn.executable 'make' == 1 }
+    }
+
+
     use { -- LSP Configuration & Plugins
         'neovim/nvim-lspconfig',
         requires = {
@@ -31,35 +56,10 @@ return(function(use)
         after = 'nvim-treesitter',
     }
 
-    use { -- Git related plugins
+    use { -- Git
         'tpope/vim-fugitive',
         'tpope/vim-rhubarb',
         'lewis6991/gitsigns.nvim'
-    }
-
-    use { -- Make neovim fancier
-        'gavinok/spaceway.vim',
-        'lukas-reineke/indent-blankline.nvim',
-        'mhinz/vim-startify',
-        'nvim-lualine/lualine.nvim',
-        'ryanoasis/vim-devicons'
-    }
-
-    use 'editorconfig/editorconfig-vim'
-    use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-    use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
-    use 'mbbill/undotree'
-
-    -- Telescope
-    use {
-        "nvim-telescope/telescope-file-browser.nvim",
-        requires = {
-            'nvim-telescope/telescope.nvim',
-            requires = { 'nvim-lua/plenary.nvim' }
-        },
-        { 'nvim-telescope/telescope-fzf-native.nvim',
-            run = 'make',
-            cond = vim.fn.executable 'make' == 1 }
     }
 
 
@@ -71,13 +71,10 @@ return(function(use)
     use 'ap/vim-css-color'
     use 'gentoo/gentoo-syntax'
     use 'hashivim/vim-terraform'
-    use 'machakann/vim-sandwich'
     use 'martinda/Jenkinsfile-vim-syntax'
     use 'rust-lang/rust.vim'
     use 'towolf/vim-helm'
     use 'tpope/vim-eunuch'
-    -- use 'vim-airline/vim-airline'
-    -- use 'vim-airline/vim-airline-themes'
 
 
 
