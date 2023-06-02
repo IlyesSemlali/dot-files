@@ -26,6 +26,9 @@ return(function(use)
             cond = vim.fn.executable 'make' == 1 }
     }
 
+    use { -- shell commands (:Remove :Chmod, :Mkdir :SudoWrite ...)
+        'tpope/vim-eunuch'
+    }
 
     use { -- LSP Configuration & Plugins
         'neovim/nvim-lspconfig',
@@ -62,20 +65,21 @@ return(function(use)
         'lewis6991/gitsigns.nvim'
     }
 
+    -- Languages and Syntaxes
 
-    -- Try one of those somtime
-    -- use 'airblade/vim-rooter'
-    -- use 'beloglazov/vim-online-thesaurus'
-    -- use 'christianrondeau/vim-base64' -- Do I still use this ?
-    -- use 'samoshkin/vim-mergetool' -- Broken
     use 'ap/vim-css-color'
     use 'gentoo/gentoo-syntax'
     use 'hashivim/vim-terraform'
     use 'martinda/Jenkinsfile-vim-syntax'
     use 'rust-lang/rust.vim'
     use 'towolf/vim-helm'
-    use 'tpope/vim-eunuch'
 
+    -- Try one of those sometime:
 
+        -- use 'airblade/vim-rooter'
+        -- use 'rhysd/vim-grammarous'
+        -- use 'beloglazov/vim-online-thesaurus'
+        -- use 'christianrondeau/vim-base64' -- Do I still use this ?
+        -- use 'samoshkin/vim-mergetool' -- Broken
 
 end)
