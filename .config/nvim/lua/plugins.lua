@@ -26,14 +26,6 @@ return(function(use)
         end,
     }
 
-    use { -- File Explorer
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons',
-        }
-    }
-
-
     use { -- Additional text objects via treesitter
         'nvim-treesitter/nvim-treesitter-textobjects',
         after = 'nvim-treesitter',
@@ -58,7 +50,7 @@ return(function(use)
     use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
     use 'mbbill/undotree'
 
-    -- Fuzzy Finder (files, lsp, etc)
+    -- Telescope
     use {
         "nvim-telescope/telescope-file-browser.nvim",
         requires = {
