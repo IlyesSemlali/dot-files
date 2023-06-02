@@ -67,6 +67,11 @@ return(function(use)
 
     -- Languages and Syntaxes
 
+    use { -- Haskell
+        'neovimhaskell/haskell-vim',
+        'alx741/vim-hindent'
+    }
+
     use 'ap/vim-css-color'
     use 'gentoo/gentoo-syntax'
     use 'hashivim/vim-terraform'
