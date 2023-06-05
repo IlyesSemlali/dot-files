@@ -15,6 +15,13 @@ return(function(use)
         'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
     }
 
+    use { -- File Explorer
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons',
+        }
+    }
+
     use { -- Telescope
         'nvim-telescope/telescope-file-browser.nvim',
         requires = {
