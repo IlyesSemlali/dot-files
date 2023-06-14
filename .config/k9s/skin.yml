@@ -1,0 +1,97 @@
+# Styles...
+fg: &fg "navajowhite"
+bg: &bg "default"
+mark: &mark "orange"
+active: &active "dimgray"
+text: &text "darkgoldenrod"
+white: &white "white"
+ghost: &ghost "ghostwhite"
+dslate: &dslate "slategray"
+err: &err "darkgoldenrod"
+slate: &slate "slategray"
+gray: &gray "gray"
+
+# Skin...
+k9s:
+  body:
+    fgColor: *fg
+    bgColor: *bg
+    logoColor: *mark
+  prompt:
+    fgColor: *fg
+    bgColor: *bg
+    suggestColor: &gray
+  info:
+    fgColor: *text
+    sectionColor: *fg
+  dialog:
+    fgColor: *fg
+    bgColor: *bg
+    buttonFgColor: *fg
+    buttonBgColor: *bg
+    buttonFocusFgColor: *slate
+    buttonFocusBgColor: *white
+    labelFgColor: *ghost
+    fieldFgColor: *white
+  frame:
+    border:
+      fgColor: *fg
+      focusColor: *fg
+    menu:
+      fgColor: *fg
+      keyColor: *fg
+      numKeyColor: *text
+    crumbs:
+      fgColor: *fg
+      bgColor: *bg
+      activeColor: *active
+    status:
+      newColor: *dslate
+      modifyColor: *text
+      addColor: *ghost
+      errorColor: *err
+      highlightColor: orange
+      killColor: *slate
+      completedColor: *gray
+    title:
+      fgColor: *fg
+      highlightColor: orange
+      counterColor: *mark
+      filterColor: *slate
+  views:
+    table:
+      fgColor: *mark
+      bgColor: *bg
+      cursorBgColor: *fg
+      cursorFgColor: *bg
+      markColor: *mark
+      header:
+        fgColor: *fg
+        bgColor: *bg
+        sorterColor: *fg
+    xray:
+      fgColor: *fg
+      bgColor: *bg
+      cursorColor: *ghost
+      graphicColor: gray
+      showIcons: false
+    yaml:
+      keyColor: *ghost
+      colorColor: *slate
+      valueColor: *text
+    logs:
+      fgColor: *ghost
+      bgColor: *bg
+      indicator:
+        fgColor: *ghost
+        bgColor: *bg
+        toggleOnColor: *mark
+        toggleOffColor: gray
+    charts:
+      bgColor: default
+      defaultDialColors:
+        - *white
+        - *err
+      defaultChartColors:
+        - *white
+        - *err
