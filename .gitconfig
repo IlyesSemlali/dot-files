@@ -20,6 +20,7 @@
     s = status
     cb = checkout -b
     mt = mergetool
+    l = log -1 --format=format:%s
     plog = log --reverse --abbrev-commit -15 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
     graph = log --graph --all --abbrev-commit -50 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
     wip = ! git commit -am \"WIP: $COMMIT_MESSAGE - $(date)\"
