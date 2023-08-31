@@ -17,7 +17,7 @@
   com = ! git commit -am \"$COMMIT_MESSAGE\"
   coma = commit --amend
   comac = commit --amend -C HEAD
-  cl = ! git clone $(xclip -o)
+  cl = ! git clone $(pbpaste)
   r = reflog -25
   s = status
   cb = checkout -b
