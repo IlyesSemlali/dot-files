@@ -30,7 +30,7 @@
   coma = commit --amend
   comac = commit --amend -C HEAD
   coche = commit -a -C HEAD --date=now --edit
-  cl = ! git clone $(xclip -o)
+  cl = ! git clone $(pbpaste)
 
   r = reflog -25
   s = status
