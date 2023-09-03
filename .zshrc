@@ -28,10 +28,10 @@ done
 
 unset gnupaths
 
-# Node Version Manager
-if [ -f ${HOME}/.local/share/homebrew/opt/nvm/nvm.sh ]; then
-    source ${HOME}/.local/share/homebrew/opt/nvm/nvm.sh
-fi
+# # Node Version Manager
+# if [ -f ${HOME}/.local/share/homebrew/opt/nvm/nvm.sh ]; then # Very slow (depends on network)
+#     source ${HOME}/.local/share/homebrew/opt/nvm/nvm.sh
+# fi
 
 ##################### Beginning of OMZ #####################
 
