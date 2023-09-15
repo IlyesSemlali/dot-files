@@ -11,7 +11,7 @@ plugin:
     background: false
     args:
       - -c
-      - "flux --context $CONTEXT $([ $(kubectl --context $CONTEXT get helmreleases -n $NAMESPACE $NAME -o=custom-columns=TYPE:.spec.suspend | tail -1) = \"true\" ] && echo \"resume\" || echo \"suspend\") helmrelease -n $NAMESPACE $NAME |& less"
+      - "flux --context $CONTEXT $([ $(kubectl --context $CONTEXT get helmreleases -n $NAMESPACE $NAME -o=custom-columns=TYPE:.spec.suspend | tail -1) = \"true\" ] && echo \"resume\" || echo \"suspend\") helmrelease -n $NAMESPACE $NAME | less"
   toggle-kustomization:
     shortCut: Shift-T
     confirm: true
@@ -22,7 +22,7 @@ plugin:
     background: false
     args:
       - -c
-      - "flux --context $CONTEXT $([ $(kubectl --context $CONTEXT get kustomizations -n $NAMESPACE $NAME -o=custom-columns=TYPE:.spec.suspend | tail -1) = \"true\" ] && echo \"resume\" || echo \"suspend\") kustomization -n $NAMESPACE $NAME |& less"
+      - "flux --context $CONTEXT $([ $(kubectl --context $CONTEXT get kustomizations -n $NAMESPACE $NAME -o=custom-columns=TYPE:.spec.suspend | tail -1) = \"true\" ] && echo \"resume\" || echo \"suspend\") kustomization -n $NAMESPACE $NAME | less"
   reconcile-git:
     shortCut: Shift-R
     confirm: false
@@ -33,7 +33,7 @@ plugin:
     background: false
     args:
     - -c
-    - "flux --context $CONTEXT reconcile source git -n $NAMESPACE $NAME |& less"
+    - "flux --context $CONTEXT reconcile source git -n $NAMESPACE $NAME | less"
   reconcile-hr:
     shortCut: Shift-R
     confirm: false
@@ -44,7 +44,7 @@ plugin:
     background: false
     args:
     - -c
-    - "flux --context $CONTEXT reconcile helmrelease -n $NAMESPACE $NAME |& less"
+    - "flux --context $CONTEXT reconcile helmrelease -n $NAMESPACE $NAME | less"
   reconcile-helm-repo:
     shortCut: Shift-Z
     description: Flux reconcile
@@ -55,7 +55,7 @@ plugin:
     confirm: false
     args:
       - -c
-      - "flux reconcile source helm --context $CONTEXT -n $NAMESPACE $NAME |& less"
+      - "flux reconcile source helm --context $CONTEXT -n $NAMESPACE $NAME | less"
   reconcile-oci-repo:
     shortCut: Shift-Z
     description: Flux reconcile
@@ -66,7 +66,7 @@ plugin:
     confirm: false
     args:
       - -c
-      - "flux reconcile source oci --context $CONTEXT -n $NAMESPACE $NAME |& less"
+      - "flux reconcile source oci --context $CONTEXT -n $NAMESPACE $NAME | less"
   reconcile-ks:
     shortCut: Shift-R
     confirm: false
@@ -77,7 +77,7 @@ plugin:
     background: false
     args:
     - -c
-    - "flux --context $CONTEXT reconcile kustomization -n $NAMESPACE $NAME |& less"
+    - "flux --context $CONTEXT reconcile kustomization -n $NAMESPACE $NAME | less"
   trace:
     shortCut: Shift-A
     confirm: false
@@ -88,4 +88,4 @@ plugin:
     background: false
     args:
     - -c
-    - "flux --context $CONTEXT trace --kind `echo $RESOURCE_NAME | sed -E 's/ies$/y/' | sed -E 's/ses$/se/' | sed -E 's/(s|es)$//g'` --api-version $RESOURCE_GROUP/$RESOURCE_VERSION --namespace $NAMESPACE $NAME |& less"
+    - "flux --context $CONTEXT trace --kind `echo $RESOURCE_NAME | sed -E 's/ies$/y/' | sed -E 's/ses$/se/' | sed -E 's/(s|es)$//g'` --api-version $RESOURCE_GROUP/$RESOURCE_VERSION --namespace $NAMESPACE $NAME | less"
