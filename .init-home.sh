@@ -34,7 +34,7 @@ function install_nvchad() {
     repo="https://github.com/NvChad/NvChad"
     install_path="${HOME}/.config/nvim"
 
-    if [ -d ${install_path} ]; then
+    if [ -f ${install_path}/LICENSE ]; then
         git -C ${install_path} pull
     else
         git clone ${repo} ${install_path}
