@@ -71,8 +71,7 @@ Zenika
 !.config/nomacs/Image Lounge.conf
 !.config/redshift/hooks/backlight.sh
 !.config/redshift/redshift.conf
-!.config/nvim/
-.config/nvim/plugin/packer_compiled.lua
+!.config/nvim/lua/custom/
 !.config/brewfile/
 
 

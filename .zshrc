@@ -13,7 +13,7 @@ insert_path "$HOME/.krew/bin"
 if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
     eval $($HOME/.local/share/homebrew/bin/brew shellenv)
 else
-    echo "init-home: brew not installed, please run 'init-home -t'"
+    echo "init-home: brew not installed, please run 'init-home -b'"
 fi
 
 

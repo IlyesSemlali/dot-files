@@ -15,19 +15,24 @@ OS=$(~/.local/bin/get_platform | cut -d '-' -f1)
 
 PATH="$PATH:~/.local/bin/"
 
-function install_vim_plugins() {
-    echo "-- Installing VIM Plugins --"
-    # /usr/bin/vim -N -u ~/.viminitrc
-    # /usr/bin/vim -N -u ~/.vim-install-plugins
-    which nvim 2>&1 > /dev/null \
-        && rm -rf ~/.config/nvim/plugin/ \
-        && nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'; git checkout -- ~/.config/nvim/plugin/
-}
-
 function install_from_git() {
     git_bin=$(which git)
     repo=${1}
     install_path=${2}
+
+    if [ -d ${install_path} ]; then
+        git -C ${install_path} pull
+    else
+        git clone ${repo} ${install_path}
+    fi
+    unset install_path
+    unset repo
+}
+
+function install_nvchad() {
+    git_bin=$(which git)
+    repo="https://github.com/NvChad/NvChad"
+    install_path="${HOME}/.config/nvim"
 
     if [ -d ${install_path} ]; then
         git -C ${install_path} pull
@@ -148,7 +153,7 @@ do
             XMONAD='true'
             shift
             ;;
-        -t|--tmux)
+        -t|--tools)
             TOOLS='true'
             shift
             ;;
@@ -173,7 +178,7 @@ fi
 
 if [[ $VIM == 'true' ]]
 then
-    install_vim_plugins
+    install_nvchad
 fi
 
 

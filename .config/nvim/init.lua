@@ -1,15 +1,21 @@
--- This config is based on https://github.com/nvim-lua/kickstart.nvim
--- It is soooo great, can't believe how much it's enjoyable to use it !
+require "core"
 
--- Set <space> as the leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+local custom_init_path = vim.api.nvim_get_runtime_file("lua/custom/init.lua", false)[1]
 
-require('plugin_manager')
-require('configuration')
-require('keymaps')
-require('behavior')
-require('autocommands')
+if custom_init_path then
+  dofile(custom_init_path)
+end
 
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+require("core.utils").load_mappings()
+
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+
+-- bootstrap lazy.nvim!
+if not vim.loop.fs_stat(lazypath) then
+  require("core.bootstrap").gen_chadrc_template()
+  require("core.bootstrap").lazy(lazypath)
+end
+
+dofile(vim.g.base46_cache .. "defaults")
+vim.opt.rtp:prepend(lazypath)
+require "plugins"
