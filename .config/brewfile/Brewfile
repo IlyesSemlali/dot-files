@@ -17,7 +17,6 @@ brew go
 brew jira-cli
 brew just
 brew node
-brew kubeval
 brew pgcli
 brew pre-commit
 
