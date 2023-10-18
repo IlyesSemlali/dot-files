@@ -17,7 +17,6 @@ brew go
 brew just
 brew mise
 brew node
-brew kubeval
 brew pgcli
 brew pre-commit
 
