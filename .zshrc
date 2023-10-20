@@ -37,6 +37,7 @@ fi
 
 
 # Aliases and exports
+alias l="exa -al --level 1 --git-ignore --git --no-permissions"
 alias ls="ls --color=auto --full-time"
 alias ll="ls -ltrh"
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
@@ -51,11 +52,11 @@ export BAT_THEME='gruvbox-dark'
 export SYSTEMD_PAGER=''
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-export ENHANCD_DISABLE_DOT=1
-export ENHANCD_DISABLE_HOME=1
+export ENHANCD_ENABLE_DOT="false"
+export ENHANCD_ENABLE_HOME="false"
 export ENHANCD_HYPHEN_ARG='_'
 export ENHANCD_HYPHEN_NUM=20
-export ENHANCD_FILTER="fzf --border-label='Change Directory'"
+export ENHANCD_FILTER="fzf --border-label='Change Directory' --preview 'exa -al --level 1 --group-directories-first --git-ignore --git --no-user --no-time --no-filesize --no-permissions {}' --preview-window right,50% --height 35% --reverse --ansi"
 
 export FZF_DEFAULT_OPTS="--height=25 --min-height=15 --border=rounded --margin=1 --padding=1 --border-label-pos=3"
 
