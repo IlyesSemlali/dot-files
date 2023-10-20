@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # HomeBrew
 if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
