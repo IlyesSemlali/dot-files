@@ -53,8 +53,9 @@ export SYSTEMD_PAGER=''
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 export ENHANCD_ENABLE_DOT="false"
+export ENHANCD_ENABLE_DOUBLE_DOT="false"
 export ENHANCD_ENABLE_HOME="false"
-export ENHANCD_HYPHEN_ARG='_'
+export ENHANCD_ARG_HYPHEN='_'
 export ENHANCD_HYPHEN_NUM=20
 export ENHANCD_FILTER="fzf --border-label='Change Directory' --preview 'exa -al --level 1 --group-directories-first --git-ignore --git --no-user --no-time --no-filesize --no-permissions {}' --preview-window right,50% --height 35% --reverse --ansi"
 
