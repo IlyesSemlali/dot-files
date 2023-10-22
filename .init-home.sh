@@ -37,7 +37,9 @@ function install_nvchad() {
     if [ -f ${install_path}/LICENSE ]; then
         git -C ${install_path} pull
     else
+	rm -rf $HOME/.config/nvim
         git clone ${repo} ${install_path}
+	git checkout -- $HOME/.config/nvim
     fi
     unset install_path
     unset repo
