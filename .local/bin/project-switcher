@@ -7,7 +7,7 @@ if [ -z $TMUX ]; then
 	if tmux has-session -t $PROJECT 2>/dev/null; then
 		tmux attach-session -t $PROJECT
 	else
-		tmux new-session -t $PROJECT -c $HOME/projects/$PROJECT
+		tmux new-session -e PROJECT=$PROJECT -t $PROJECT -c $HOME/projects/$PROJECT
 	fi
 else
 	echo "[Project-Switcher] You're already in a TMux Session, you hard worker !"
