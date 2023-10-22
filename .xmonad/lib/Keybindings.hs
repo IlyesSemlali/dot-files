@@ -110,8 +110,8 @@ bindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , ((shiftMask, xF86XK_MonBrightnessUp),                  spawn "xbacklight -set 100 -fps 60")
         , ((shiftMask, xF86XK_MonBrightnessDown),                spawn "xbacklight -set 1 -fps 60")
 
-        , ((Config.modMask, xK_Control_R),                              spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'")
-        , ((0, xK_Print), spawn "scrotd")
+        , ((Config.modMask, xK_Control_R),                       spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'")
+        , ((0, xK_Print),                                        spawn Config.printScreenCommand)
         ]
         -- The following lines are needed for named scratchpads.
           where nonNSP          = WSIs (return (\ws -> W.tag ws /= "nsp"))
