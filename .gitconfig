@@ -84,3 +84,6 @@
     line-numbers-minus-style = red bold
     line-numbers-plus-style = green bold
     plus-emph-style = syntax bold "#306040"
+
+[user]
+	name = Ilyès Semlali
