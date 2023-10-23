@@ -37,9 +37,9 @@ fi
 
 
 # Aliases and exports
-alias l="exa -al --level 1 --git-ignore --git --no-permissions"
 alias ls="ls --color=auto --full-time"
-alias ll="ls -ltrh"
+alias l="ls -ltrh"
+alias ll="exa -al --level 1 --git-ignore --git --no-permissions"
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
 alias av="ansible-vault edit"
 alias dv="cd _"
