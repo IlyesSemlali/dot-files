@@ -8,5 +8,10 @@ if [ -z $PROJECT ]; then
   echo "PROJECT is not set"
   exit 1
 else
-  git -C $WORKTREE worktree add "$HOME/projects/$PROJECT/$(basename $(echo $WORKTREE))" -B $PROJECT
+  if [ -z $WORKTREE ];
+  then
+    exit 0 # It means we didn't select anything with fzf
+  else
+    git -C $WORKTREE worktree add "$HOME/projects/$PROJECT/$(basename $(echo $WORKTREE))" -B $PROJECT
+  fi
 fi
