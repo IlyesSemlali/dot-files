@@ -42,7 +42,7 @@ alias l="ls -ltrh"
 alias ll="exa -al --level 1 --git-ignore --git --no-permissions"
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
 alias av="ansible-vault edit"
-alias dv="cd _"
+alias dv="__enhancd::cd _"
 alias pj="project-switcher"
 
 unset SSH_ASKPASS
@@ -76,11 +76,12 @@ fi
 if [ -z DEMO_MODE ]; then
     export HOST=laptop
 fi
-# Extensions
 
+# Extensions
 source $HOME/.zsh/prompt.zsh
 source $HOME/.zsh/plugins.zsh
 
+unalias cd
 
 if [ -f ~/.zshrc.tools ]
 then
