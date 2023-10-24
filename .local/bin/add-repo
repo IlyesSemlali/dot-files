@@ -2,20 +2,24 @@
 
 GITREPOS="$HOME/git/"
 
-WORKTREE=$(find "$GITREPOS" -maxdepth 2 -mindepth 1 -type d | sort | fzf --border-label='Repositories')
+WORKTREES="$(find "$GITREPOS" -maxdepth 2 -mindepth 1 -type d | sort | fzf -m --border-label='Repositories')"
 
 if [ -z $PROJECT ]; then
   echo "PROJECT is not set"
   exit 1
 else
-  if [ -z $WORKTREE ];
-  then
+  if [ -z "$WORKTREES" ]; then
     exit 0 # It means we didn't select anything with fzf
+
   else
-    if [ -n $REPO_EXCLUDE_PATTERN ] && echo $WORKTREE | grep -q $REPO_EXCLUDE_PATTERN; then
-      ln -sf $WORKTREE "$HOME/projects/$PROJECT/$(basename $(echo $WORKTREE))"
-    else
-      git -C $WORKTREE worktree add "$HOME/projects/$PROJECT/$(basename $(echo $WORKTREE))" -B $PROJECT
-    fi
+    for WORKTREE in $WORKTREES; do
+
+      if [ -n $REPO_EXCLUDE_PATTERN ] && echo $WORKTREE | grep -q $REPO_EXCLUDE_PATTERN; then
+        ln -sf $WORKTREE "$HOME/projects/$PROJECT/$(basename $(echo $WORKTREE))"
+      else
+        git -C $WORKTREE worktree add "$HOME/projects/$PROJECT/$(basename $(echo $WORKTREE))" -B $PROJECT
+      fi
+
+    done
   fi
 fi
