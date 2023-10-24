@@ -44,7 +44,7 @@ local plugins = {
   },
 
   {
-    "machakann/vim-sandwich",
+    "ur4ltz/surround.nvim",
     lazy = false
   },
 
