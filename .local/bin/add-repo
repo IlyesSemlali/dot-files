@@ -12,6 +12,10 @@ else
   then
     exit 0 # It means we didn't select anything with fzf
   else
-    git -C $WORKTREE worktree add "$HOME/projects/$PROJECT/$(basename $(echo $WORKTREE))" -B $PROJECT
+    if [ -n $REPO_EXCLUDE_PATTERN ] && echo $WORKTREE | grep -q $REPO_EXCLUDE_PATTERN; then
+      ln -sf $WORKTREE "$HOME/projects/$PROJECT/$(basename $(echo $WORKTREE))"
+    else
+      git -C $WORKTREE worktree add "$HOME/projects/$PROJECT/$(basename $(echo $WORKTREE))" -B $PROJECT
+    fi
   fi
 fi
