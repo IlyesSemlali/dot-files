@@ -6,11 +6,6 @@ if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
 fi
 
 
-XMONAD_CONFIG_TEMPLATE="/home/$USER/.xmonad/lib/Config.hs.tpl"
-XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
-
-TFLS_VERSION="0.28.1"
-
 OS=$(~/.local/bin/get_platform | cut -d '-' -f1)
 
 PATH="$PATH:~/.local/bin/"
@@ -115,29 +110,6 @@ function _get_config_keys() {
     grep '=' $1 | awk '{ print $1 }' | grep -v '^[\s-]*$'
 }
 
-function configure_xmonad() {
-    if [[ $OS == "linux" ]]; then
-        if [ ! -f $XMONAD_CONFIG ]
-        then
-            echo "-- Adding a fresh Xmonad config --"
-            sed "s/user/$USER/g" $XMONAD_CONFIG_TEMPLATE > $XMONAD_CONFIG
-        fi
-
-        for config_key in $(_get_config_keys $XMONAD_CONFIG_TEMPLATE)
-        do
-            if ! grep -q "^$config_key" $XMONAD_CONFIG
-            then
-                echo "-- Adding $config_key in Xmonad configuration --"
-                grep "^$config_key" $XMONAD_CONFIG_TEMPLATE >> $XMONAD_CONFIG
-            fi
-        done
-
-        cd ~/.xmonad/lib/
-        which ghc 2>&1 > /dev/null && ghc --make Config.hs
-        cd
-    fi
-}
-
 while [[ $# -gt 0 ]]
 do
     key="$1"
@@ -149,10 +121,6 @@ do
             ;;
         -v|--vim)
             VIM='true'
-            shift
-            ;;
-        -x|--xmonad)
-            XMONAD='true'
             shift
             ;;
         -t|--tools)
@@ -181,12 +149,6 @@ fi
 if [[ $VIM == 'true' ]]
 then
     install_nvchad
-fi
-
-
-if [[ $XMONAD == 'true' ]]
-then
-    configure_xmonad
 fi
 
 
