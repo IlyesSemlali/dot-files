@@ -110,9 +110,6 @@ function install_tools() {
 
     source ~/.zshrc
 
-    # ZPlug
-    install_from_git https://github.com/zplug/zplug ~/.local/share/zplug
-
     # tmux TPM
     install_from_git https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
@@ -145,6 +142,9 @@ function configure_zsh() {
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --keep-zshrc --skip-chsh --unattended > /dev/null 2>&1"
     install_from_git https://github.com/macunha1/zsh-terraform ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/terraform
     git -C ~ reset --hard > /dev/null 2>&1
+
+    # ZPlug
+    install_from_git https://github.com/zplug/zplug ~/.local/share/zplug
 
     source ~/.zshrc
 
