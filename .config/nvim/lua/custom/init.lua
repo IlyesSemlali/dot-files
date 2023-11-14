@@ -7,8 +7,9 @@
 -- })
 
 -- Configure persistence
--- local opt = vim.opt
+local opt = vim.opt
 
+opt.clipboard = ""
 
 
 -- Restore cursor position
