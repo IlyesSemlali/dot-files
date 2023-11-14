@@ -72,6 +72,11 @@ local plugins = {
     "neovimhaskell/haskell-vim",
     lazy = false
   },
+  {
+    "hrsh7th/nvim-cmp",
+    lazy = false,
+    opts = overrides.cmp
+  },
 
   -- To make a plugin not be loaded
   -- {
@@ -89,6 +94,7 @@ local plugins = {
   {
     "xiyaowong/transparent.nvim",
     lazy = false,
+
     opts = {
       {
         enabled = false;

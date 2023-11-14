@@ -1,5 +1,19 @@
 local M = {}
 
+-- Prevent error during the initial Lazy bootstrap:
+--   Error detected while processing ~/.config/nvim/init.lua:
+--   Failed to load `custom.plugins`
+--   ~/.config/nvim/lua/custom/plugins.lua:1: loop or previous error loading module 'custom.configs.overrides'
+local cmp_ok, cmp = pcall(require, "cmp")
+
+if cmp_ok then
+  M.cmp = {
+    mapping = {
+      ["<CR>"] = nil,
+    },
+  }
+end
+
 M.treesitter = {
   ensure_installed = {
     "vim",
