@@ -9,7 +9,13 @@ local cmp_ok, cmp = pcall(require, "cmp")
 if cmp_ok then
   M.cmp = {
     mapping = {
-      ["<CR>"] = nil,
+      ["<Up>"] = cmp.mapping.select_prev_item(),
+      ["<Down>"] = cmp.mapping.select_next_item(),
+      ["<CR>"] = cmp.mapping.close(),
+      ["<C-Space>"] = cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Insert,
+        select = true,
+      },
     },
   }
 end
@@ -58,6 +64,7 @@ M.mason = {
 M.nvimtree = {
   git = {
     enable = true,
+    ignore = false,
   },
 
   renderer = {

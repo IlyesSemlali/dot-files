@@ -69,20 +69,14 @@ M.general = {
 
   s = {
     -- LuaSnip
-    ["<C-n>"] = { "<cmd>lua require'luasnip'.jump(1)<CR>", "Go to next snipped field" },
-    ["<C-N>"] = { "<cmd>lua require'luasnip'.jump(-1)<CR>", "Go to next snipped field" },
+    ["<C-j>"] = { "<cmd>lua require'luasnip'.jump(1)<CR>", "Go to next snipped field" },
+    ["<C-J>"] = { "<cmd>lua require'luasnip'.jump(-1)<CR>", "Go to next snipped field" },
   },
 
   i = {
     -- LuaSnip
-    ["<C-n>"] = { "<cmd>lua require'luasnip'.jump(1)<CR>", "Go to next snipped field" },
-    ["<C-N>"] = { "<cmd>lua require'luasnip'.jump(-1)<CR>", "Go to next snipped field" },
-
-    -- navigate within insert mode
-    ["<C-h>"] = { "<Left>", "Move left" },
-    ["<C-l>"] = { "<Right>", "Move right" },
-    ["<C-j>"] = { "<Down>", "Move down" },
-    ["<C-k>"] = { "<Up>", "Move up" },
+    ["<C-j>"] = { "<cmd>lua require'luasnip'.jump(1)<CR>", "Go to next snipped field" },
+    ["<C-J>"] = { "<cmd>lua require'luasnip'.jump(-1)<CR>", "Go to next snipped field" },
   },
 
   v = {
