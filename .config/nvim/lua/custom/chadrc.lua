@@ -1,4 +1,4 @@
----@type ChadrcConfig
+---@diagnostic disable: inject-field
 local M = {}
 
 -- Plugins
