@@ -44,7 +44,7 @@ M.general = {
     ["<leader>u"] = { "<cmd> UndotreeToggle <CR>", "Open UndoTree" },
 
     -- NVim-Tree
-    ["<leader><space>"] = { "<cmd> NvimTreeFocus <CR>", "Open NvimTree" },
+    ["<leader><space>"] = { "<cmd> NvimTreeToggle <CR>", "Toggle NvimTree" },
 
     -- switch between windows
     ["<C-h>"] = { "<C-w>h", "Window left" },
