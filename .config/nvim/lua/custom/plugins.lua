@@ -66,7 +66,7 @@ local plugins = {
 
   {
     "hashivim/vim-terraform",
-    lazy = false
+    ft = {"terraform", "hcl"}
   },
 
   {

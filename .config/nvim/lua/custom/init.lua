@@ -10,7 +10,7 @@
 local opt = vim.opt
 
 opt.clipboard = ""
-
+vim.g.terraform_fmt_on_save = 1
 
 -- Restore cursor position
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {
