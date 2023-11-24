@@ -1,15 +1,13 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
+---@diagnostic disable-next-line: different-requires
 local lspconfig = require "lspconfig"
 
 local servers = {
-  'ansiblels',
   'bashls',
-  'clangd',
-  'cssls',
-  'gopls',
   'html',
+  'ltex-ls',
   'lua_ls',
   'pylsp',
   'rust_analyzer',
@@ -35,6 +33,14 @@ lspconfig.pylsp.setup{
       }
     }
   }
+}
+
+lspconfig.ltex.setup{
+  settings = {
+    ltex = {
+      language = "en-GB",
+    },
+  },
 }
 
 lspconfig.bashls.setup{}
