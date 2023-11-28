@@ -1,15 +1,32 @@
 #!/usr/bin/env bash
 
-if [ -z $TMUX ]; then
+CACHE_FILE="$HOME/.cache/project-switcher"
 
-	PROJECT=$(find $HOME/projects -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets')
+run-tmux () {
 
-	if tmux has-session -t $PROJECT 2>/dev/null; then
-		tmux attach-session -t $PROJECT
+  project=$1
+	if tmux has-session -t $project 2>/dev/null; then
+		tmux attach-session -t $project
 	else
-		tmux new-session -e PROJECT=$PROJECT -t $PROJECT -c $HOME/projects/$PROJECT
+		tmux new-session -e PROJECT=$project -t $project -c $HOME/projects/$project
 	fi
+}
+
+# Run it once if not in tmux
+PROJECT=$(find $HOME/projects -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets')
+if [ -z $TMUX ]; then
+  run-tmux $PROJECT
 else
-	echo "[Project-Switcher] You're already in a TMux Session, you hard worker !"
+  echo $PROJECT > $CACHE_FILE
 fi
 
+
+# Then while the $CACHE_FILE is present, we need to rerun tmux
+while [ -f $CACHE_FILE ]; do
+  tmux detach-client
+
+  PROJECT=$(cat $CACHE_FILE)
+  rm $CACHE_FILE -f
+
+  run-tmux $PROJECT 2>/dev/null # TODO: remove the "nested tmux" error the proper way
+done
