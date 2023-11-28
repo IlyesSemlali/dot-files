@@ -44,6 +44,7 @@ alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.
 alias av="ansible-vault edit"
 alias dv="__enhancd::cd _"
 alias pj="project-switcher"
+alias cpj="cd ~/projects/$PROJECT/"
 
 unset SSH_ASKPASS
 export BAT_PAGER=''
@@ -93,4 +94,8 @@ then
     source ~/.zshrc.local
 fi
 
+if [ -f ~/project/$PROJECT/.project ]
+then
+    source ~/project/$PROJECT/.project
+fi
 
