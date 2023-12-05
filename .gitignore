@@ -79,7 +79,6 @@ Zenika
 
 !.vim/
 .vim/*
-!.ctags.d/terraform.ctags
 !.vim/after/
 !.vim/plugins.vim
 !.vim/undo/.gitkeep

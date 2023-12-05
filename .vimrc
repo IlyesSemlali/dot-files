@@ -132,21 +132,6 @@ let g:startify_lists = [
 " Terraform
 let g:terraform_fmt_on_save=1
 
-" TagBar
-let g:tagbar_type_terraform = {
-            \ 'ctagstype' : 'terraform',
-            \ 'kinds' : [
-                \ 'r:Resource',
-                \ 'd:Data',
-                \ 'v:Variable',
-                \ 'p:Provider',
-                \ 'm:Module',
-                \ 'o:Output',
-                \ 'f:TFVar'
-                \ ],
-                \ 'sort' : 0
-                \ }
-
 " NerdTree
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
