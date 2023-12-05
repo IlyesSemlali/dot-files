@@ -7,7 +7,7 @@ local lspconfig = require "lspconfig"
 local servers = {
   'bashls',
   'html',
-  'ltex-ls',
+  'ltex',
   'lua_ls',
   'pylsp',
   'rust_analyzer',
