@@ -69,14 +69,14 @@ M.general = {
 
   s = {
     -- LuaSnip
-    ["<C-j>"] = { "<cmd>lua require'luasnip'.jump(1)<CR>", "Go to next snipped field" },
-    ["<C-J>"] = { "<cmd>lua require'luasnip'.jump(-1)<CR>", "Go to next snipped field" },
+    ["<C-s>"] = { "<cmd>lua require'luasnip'.jump(1)<CR>", "Go to next snipped field" },
+    ["<C-S>"] = { "<cmd>lua require'luasnip'.jump(-1)<CR>", "Go to previous snipped field" },
   },
 
   i = {
     -- LuaSnip
-    ["<C-j>"] = { "<cmd>lua require'luasnip'.jump(1)<CR>", "Go to next snipped field" },
-    ["<C-J>"] = { "<cmd>lua require'luasnip'.jump(-1)<CR>", "Go to next snipped field" },
+    ["<C-s>"] = { "<cmd>lua require'luasnip'.jump(1)<CR>", "Go to next snipped field" },
+    ["<C-S>"] = { "<cmd>lua require'luasnip'.jump(-1)<CR>", "Go to previous snipped field" },
   },
 
   v = {
