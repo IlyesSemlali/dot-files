@@ -4,7 +4,7 @@ set -eo pipefail
 
 COMMIT_MSG_FILE=$1
 
-grep '^\(WIP:\ \)\?\(feat\|fix\|chore\|ci\|docs\|style\|refactor\|perf\|test\|Revert\)\((.*)\)\?:\ .\{3,80\}$' $COMMIT_MSG_FILE || \
+grep '^\(\(WIP:\ \)\?\(feat\|fix\|chore\|ci\|docs\|style\|refactor\|perf\|test\)\((.*)\)\?:\|Revert\)\ .\{3,80\}$' $COMMIT_MSG_FILE || \
     {
         echo >&2 Commit message not formatted correctly: https://www.conventionalcommits.org/en/v1.0.0/
         exit 1
