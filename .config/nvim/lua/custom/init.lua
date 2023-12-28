@@ -10,6 +10,7 @@
 local opt = vim.opt
 
 opt.clipboard = ""
+opt.relativenumber = true
 vim.g.terraform_fmt_on_save = 1
 
 -- Restore cursor position
