@@ -2,7 +2,9 @@
 
 GITREPOS="$HOME/git/"
 
-WORKTREES="$(find "$GITREPOS" -maxdepth 2 -mindepth 1 -type d | sort | fzf -m --border-label='Repositories')"
+WORKTREES="$(find "$GITREPOS" -maxdepth 3 -mindepth 2 -name '.git' -type d | \
+  sed "s/\/\.git//g" | sed "s@$GITREPOS@@g" | \
+  sort | fzf -m --border-label='Repositories')"
 
 if [ -z $PROJECT ]; then
   echo "PROJECT is not set"
