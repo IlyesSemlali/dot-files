@@ -1,27 +1,46 @@
 #!/usr/bin/env bash
 
+if [ -f .project ]; then
+  source .project
+fi
+
 GITREPOS="$HOME/git/"
+PROJECTS_DIR="$HOME/projects/"
 
 WORKTREES="$(find "$GITREPOS" -maxdepth 3 -mindepth 2 -name '.git' -type d | \
   sed "s/\/\.git//g" | sed "s@$GITREPOS@@g" | \
   sort | fzf -m --border-label='Repositories')"
 
 if [ -z $PROJECT ]; then
-  echo "PROJECT is not set"
+  echo "PROJECT env variable isn't set"
   exit 1
 else
   if [ -z "$WORKTREES" ]; then
+
     exit 0 # It means we didn't select anything with fzf
 
   else
+
     for WORKTREE in $WORKTREES; do
+      PROJECT_DIR="$PROJECTS_DIR/$PROJECT/$(basename $(echo $WORKTREE))"
 
-      if [ -n $REPO_EXCLUDE_PATTERN ] && echo $WORKTREE | grep -q $REPO_EXCLUDE_PATTERN; then
-        ln -sf $WORKTREE "$HOME/projects/$PROJECT/$(basename $(echo $WORKTREE))"
+      if echo $WORKTREE | grep -q "$REPO_EXCLUDE_PATTERN"; then
+
+        if [ -e $PROJECT_DIR ]; then
+          echo "project is already present"
+        else
+          ln -sf $GITREPOS/$WORKTREE $PROJECT_DIR
+        fi
+
       else
-        git -C $WORKTREE worktree add "$HOME/projects/$PROJECT/$(basename $(echo $WORKTREE))" -B $PROJECT
-      fi
 
+        if [ -e $PROJECT_DIR ]; then
+          echo "project is already present"
+        else
+          git -C $GITREPOS/$WORKTREE worktree add $PROJECT_DIR -B $PROJECT
+        fi
+
+      fi
     done
   fi
 fi
