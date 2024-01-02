@@ -47,8 +47,6 @@ alias pj="project-switcher"
 alias cpj="cd ~/projects/$PROJECT/"
 
 unset SSH_ASKPASS
-export BAT_PAGER=''
-export BAT_THEME='gruvbox-dark'
 
 export SYSTEMD_PAGER=''
 export VIRTUAL_ENV_DISABLE_PROMPT=1
