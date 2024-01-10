@@ -65,6 +65,8 @@
 
 [delta]
     features = decorations
+    syntax-theme = gruvbox-dark
+    paging = never
 
 [delta "interactive"]
     ; keep-plus-minus-markers = false
