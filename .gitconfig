@@ -8,6 +8,7 @@
 
 [alias]
     alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+    bsu = ! git branch --set-upstream-to=origin/$(git branch --show-current)
     psu = ! git push --set-upstream origin $(git branch --show-current)
     p = pull
     c = checkout
