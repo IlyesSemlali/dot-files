@@ -1,10 +1,11 @@
 .*.un~
+.dirstack
+.local-tests
+.project
+.secrets
+.tags
 .terraform
 .tfstate
-.tags
 .vim_session
 .zsh_history
-.dirstack
-.secrets
-.project
 **/*.orig
