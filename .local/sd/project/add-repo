@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+# adds a repo into current project
+#
+# This will either add a git worktree or a link in the
+# current project according to the REOP_EXCLUDE_PATTERN
+
+if [ -f .project ]; then
+  source .project
+fi
+
+GITREPOS="$HOME/git/"
+projects_path=${PROJECTS_PATH:-${HOME}/projects/}
+
+WORKTREES="$(find "$GITREPOS" -maxdepth 3 -mindepth 2 -name '.git' -type d | \
+  sed "s/\/\.git//g" | sed "s@$GITREPOS@@g" | \
+  sort | fzf -m --border-label='Repositories')"
+
+
+log() {
+  PURPLE='\033[0;35m'
+  GREY='\033[0;37m'
+  NC='\033[0m' # No Color
+  echo -e "${PURPLE}[add-repo]$GREY - $@${NC}"
+}
+
+gitc() {
+  git -C $GITREPOS/$WORKTREE $@
+}
+
+if [ -z $PROJECT ]; then
+  log "PROJECT env variable isn't set"
+  exit 1
+else
+  if [ -z "$WORKTREES" ]; then
+
+    exit 0 # It means we didn't select anything with fzf
+
+  else
+
+    for WORKTREE in $WORKTREES; do
+      PROJECT_DIR="${projects_path}/$PROJECT/$(basename $(echo $WORKTREE) 2>/dev/null)"
+
+      if log $WORKTREE | grep -q "$REPO_EXCLUDE_PATTERN"; then
+
+        if [ -e $PROJECT_DIR ]; then
+          log "project is already present"
+        else
+          log "linking existing directory"
+          ln -sf $GITREPOS/$WORKTREE $PROJECT_DIR
+        fi
+
+      else
+
+        if [ -e $PROJECT_DIR ]; then
+          log "project is already present"
+        else
+          gitc fetch
+          if gitc branch -r | grep -qo $PROJECT;
+          then
+            log "checking out existing remote branch"
+            gitc worktree add $PROJECT_DIR $PROJECT
+            gitc branch --set-upstream-to=origin/$PROJECT
+          else
+            log "checking out in a new branch"
+            gitc worktree add $PROJECT_DIR -b $PROJECT
+          fi
+        fi
+
+      fi
+    done
+  fi
+fi

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# creates a new project
+#
+# This will create project folders in the $PROJECTS_ARCHIVE and link it in the $PROJECTS_PATH
+# To remove it use the sd project unlink
+
+set -euo pipefail
+
+projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
+projects_path=${PROJECTS_PATH:-${HOME}/projects/}
+
+mkdir -p ${projects_archive}/${1} ${projects_path}/${1}
+ln -sf ${projects_archive}/${1} ${projects_path}/${1}

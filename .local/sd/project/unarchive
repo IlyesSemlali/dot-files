@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# unarchives a project
+#
+# This will link a project from $PROJECTS_PATH
+
+set -euo pipefail
+
+projects_path=${PROJECTS_PATH:-${HOME}/projects/}
+
+PROJECT=$(find ${projects_path} -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets')
+
+if [ -n ${PROJECT} ] && [ -l ${projects_path}/${PROJECT}]; then
+  unlink ${projects_path}/${PROJECT}
+fi

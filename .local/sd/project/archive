@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# archives a project
+#
+# This will unlink a project from $PROJECTS_PATH
+
+projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
+projects_path=${PROJECTS_PATH:-${HOME}/projects/}
+
+PROJECT=$(find ${projects_path} -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets')
+
+if [ -L ${projects_path}/${PROJECT} ]; then
+  unlink ${projects_path}/${PROJECT}
+fi
