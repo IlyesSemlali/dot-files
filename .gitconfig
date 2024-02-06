@@ -90,3 +90,5 @@
 
 [user]
 	name = Ilyès Semlali
+[tag]
+	sort = v:refname
