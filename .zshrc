@@ -17,7 +17,7 @@ zstyle ':urlglobber' url-other-schema
 CASE_SENSITIVE="true"
 ZSH_THEME="agnoster"
 DISABLE_UPDATE_PROMPT=true
-plugins=(git docker docker-compose)
+plugins=(git docker docker-compose fzf)
 
 export ZSH="$HOME/.oh-my-zsh"
 if [ -f $ZSH/oh-my-zsh.sh ]; then
