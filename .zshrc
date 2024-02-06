@@ -1,12 +1,5 @@
 source $HOME/.zsh/utils.zsh
 
-# PATH
-insert_path "$HOME/.local/bin"
-insert_path "$HOME/.local/share/npm/bin"
-insert_path "$HOME/.local/node_modules/.bin"
-insert_path "$HOME/.krew/bin"
-
-
 # HomeBrew
 if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
     eval $($HOME/.local/share/homebrew/bin/brew shellenv)
@@ -78,7 +71,14 @@ fi
 source $HOME/.zsh/prompt.zsh
 source $HOME/.zsh/plugins.zsh
 
-unalias cd
+# PATH
+insert_path "$HOME/.local/bin"
+insert_path "$HOME/.local/share/npm/bin"
+insert_path "$HOME/.local/node_modules/.bin"
+insert_path "$HOME/.krew/bin"
+
+
+unalias cd # For enhancd
 
 if [ -f ~/.zshrc.tools ]
 then
