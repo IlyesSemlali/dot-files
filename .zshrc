@@ -28,9 +28,17 @@ fi
 
 
 # Aliases and exports
-alias ls="ls --color=auto --full-time"
-alias l="ls -ltrh"
-alias ll="exa -al --level 1 --git-ignore --git --no-permissions"
+if which nvim >/dev/null 2>&1
+then
+  alias ls="exa --icons --level 1 --git-ignore --git"
+  alias l="exa -l --level 1 --git --no-permissions"
+  alias ll="exa -al --level 1 --git-ignore --git --no-permissions"
+else
+  alias ls="ls --color=auto"
+  alias l="ls --full-time -ltrh"
+  alias ll="ls --full-time -altrh"
+fi
+
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
 alias av="ansible-vault edit"
 alias dv="__enhancd::cd _"
