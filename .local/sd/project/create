@@ -10,5 +10,5 @@ set -euo pipefail
 projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/}
 
-mkdir -p ${projects_archive}/${1} ${projects_path}/${1}
-ln -sf ${projects_archive}/${1} ${projects_path}/${1}
+mkdir -p ${projects_archive}/${1} ${projects_path}
+ln -sf -t ${projects_path} ${projects_archive}/${1}
