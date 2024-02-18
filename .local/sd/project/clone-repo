@@ -10,9 +10,9 @@ if [ -f .project ]; then
   source .project
 fi
 
-GITREPOS="$HOME/git/"
+gitrepos="${GIT_REPOS}:-$HOME/git/}"
 
-DESTINATION="$(find "$GITREPOS" -maxdepth 2 -mindepth 1 -type d | \
+DESTINATION="$(find "$gitrepos" -maxdepth 3 -mindepth 1 -type d | \
   sort | fzf -m --border-label='Detination')"
 
 
