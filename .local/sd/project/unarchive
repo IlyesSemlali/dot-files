@@ -2,14 +2,13 @@
 
 # unarchives a project
 #
-# This will link a project from $PROJECTS_PATH
+# This will link a project from $PROJECTS_ARCHIVE in $PROJECTS_PATH
 
-set -euo pipefail
-
+projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/}
 
-PROJECT=$(find ${projects_path} -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets')
+PROJECT=$(find ${projects_archive} -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets')
 
-if [ -n ${PROJECT} ] && [ -l ${projects_path}/${PROJECT}]; then
-  unlink ${projects_path}/${PROJECT}
+if [ -n ${PROJECT} ] && ! [ -f ${projects_path}/${PROJECT} ]; then
+  ln -sf -t ${projects_path} ${projects_archive}/${PROJECT}
 fi
