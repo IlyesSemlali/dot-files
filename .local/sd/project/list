@@ -12,6 +12,6 @@ fi
 projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/}
 
-tree $projects_archive -dL 1
 tree $projects_path -dL 1
+tree $projects_archive -dL 1
 

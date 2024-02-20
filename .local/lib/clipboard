@@ -1,0 +1,13 @@
+# vim: set ft=bash syn=bash
+# Bash library to help unify logs accross scripts
+#
+function clip_paste(){
+  case "$(uname -s)" in
+    "Darwin")
+        pbpaste
+        ;;
+    "Linux*")
+        xclip -o
+        ;;
+  esac
+}

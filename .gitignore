@@ -109,3 +109,5 @@ Zenika
 !.local/bin/nomacs
 !.local/bin/screencast
 !.local/bin/wwwwrap
+!.local/lib/
+!.local/sd/

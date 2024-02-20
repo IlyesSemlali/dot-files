@@ -4,6 +4,8 @@
 #
 # This will link a project from $PROJECTS_ARCHIVE in $PROJECTS_PATH
 
+source ${HOME}/.local/lib/log
+
 projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/}
 
@@ -11,4 +13,5 @@ PROJECT=$(find ${projects_archive} -maxdepth 1 -mindepth 1 -type l,d -exec basen
 
 if [ -n ${PROJECT} ] && ! [ -f ${projects_path}/${PROJECT} ]; then
   ln -sf -t ${projects_path} ${projects_archive}/${PROJECT}
+  log_info "project" "unarchived ${PROJECT}"
 fi

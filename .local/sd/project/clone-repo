@@ -4,37 +4,42 @@
 #
 # Using a fzf-based menu, you can select where the
 # repo you have in you clipboard will be cloned
-#
+
+source ${HOME}/.local/lib/log
+source ${HOME}/.local/lib/clipboard
 
 if [ -f .project ]; then
   source .project
 fi
 
 gitrepos="${GIT_REPOS:-$HOME/git/}"
+repo_url=$(clip_paste)
 
-DESTINATION="$(find "$gitrepos" -maxdepth 3 -mindepth 1 -type d | \
+
+DESTINATION="$(find ~/git -maxdepth 3 -mindepth 1 \
+    -type d '!' -exec test -e '{}/*/.git' ';' -prune \
+    -type d '!' -exec test -e '{}/.git' ';' -prune \
+    -type d -print | \
   sort | fzf -m --border-label='Detination')"
 
 
-log() {
-  PURPLE='\033[0;35m'
-  GREY='\033[0;37m'
-  NC='\033[0m' # No Color
-  echo -e "${PURPLE}[add-repo]$GREY - $@${NC}"
-}
-
 if [ -z $PROJECT ]; then
-  log "PROJECT env variable isn't set"
+  log_error "project" "PROJECT env variable isn't set"
   exit 1
+
+elif echo $repo_url | grep -v "\.git$"; then
+  log_error "project" "clipboard doesn't contain a git url"
+
+fi
+
+if [ -z "$DESTINATION" ]; then
+  log_info "project" "nothing was selected"
+  exit 0 # It means we didn't select anything with fzf
+
 else
-  if [ -z "$DESTINATION" ]; then
+  pushd $DESTINATION > /dev/null
+  git clone $(clip_paste) 2> /dev/null
+  log_info "project" "git repo cloned in $(pwd)"
+  popd > /dev/null
 
-    exit 0 # It means we didn't select anything with fzf
-
-  else
-
-    pushd $DESTINATION
-    git clone $(pbpaste)
-    popd
-  fi
 fi

@@ -1,0 +1,29 @@
+# vim: set ft=bash syn=bash
+# Bash library to help unify logs accross scripts
+
+WHITE='\033[0;37m'
+BRIGHT='\033[1;37m'
+
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+PURPLE='\033[0;35m'
+
+NC='\033[0m' # No Color
+
+function log_info() {
+  if [ $# -ne 2 ]; then
+    log_error "log library" "wrong number of arguments"
+    return 1
+  else
+    echo -e "${PURPLE}[${1}]${BRIGHT} - ${WHITE}${2}${NC}"
+  fi
+}
+
+function log_error() {
+  if [ $# -ne 2 ]; then
+    log_error "log library" "wrong number of arguments"
+    return 1
+  else
+    echo -e "${PURPLE}[${1}]${BRIGHT} - ${RED}${2}${NC}"
+  fi
+}

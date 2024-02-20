@@ -4,6 +4,8 @@
 #
 # This will unlink a project from $PROJECTS_PATH
 
+source ${HOME}/.local/lib/log
+
 projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/}
 
@@ -11,4 +13,7 @@ PROJECT=$(find ${projects_path} -maxdepth 1 -mindepth 1 -type l,d -exec basename
 
 if [ -L ${projects_path}/${PROJECT} ]; then
   unlink ${projects_path}/${PROJECT}
+  log_info "project" "archived $PROJECT"
+else
+
 fi
