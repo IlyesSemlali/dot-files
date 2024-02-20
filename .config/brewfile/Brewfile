@@ -10,6 +10,7 @@ tap ankitpokhrel/jira-cli
 brew go
 brew jira-cli
 brew pgcli
+brew pre-commit
 
 # Terraform tools
 brew krew
