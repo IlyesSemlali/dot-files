@@ -11,6 +11,7 @@
     bsu = ! git branch --set-upstream-to=origin/$(git branch --show-current)
     psu = ! git push --set-upstream origin $(git branch --show-current)
     p = pull
+    pf = push --force-with-lease
     c = checkout
     co = commit -a
     com = ! git commit -am \"$COMMIT_MESSAGE\"
