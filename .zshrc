@@ -30,9 +30,9 @@ fi
 # Aliases and exports
 if which nvim >/dev/null 2>&1
 then
-  alias ls="exa --icons --level 1 --git-ignore --git"
+  alias ls="exa --icons --level 1"
   alias l="exa -l --level 1 --git --no-permissions"
-  alias ll="exa -al --level 1 --git-ignore --git --no-permissions"
+  alias ll="exa -al --level 1 --git-ignore --git"
 else
   alias ls="ls --color=auto"
   alias l="ls --full-time -ltrh"
