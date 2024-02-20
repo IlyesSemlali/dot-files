@@ -78,6 +78,10 @@ local plugins = {
     lazy = false,
     opts = overrides.cmp
   },
+  {
+    "tpope/vim-fugitive",
+    lazy = false
+  },
 
   -- To make a plugin not be loaded
   -- {
