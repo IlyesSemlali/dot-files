@@ -76,6 +76,8 @@ ignore_branches = ["main", "master"]
 [git_state]
 style = "bg:color_yellow"
 format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_yellow)]($style)'
+rebase = ''
+cherry_pick = ''
 
 [kubernetes]
 disabled = false
