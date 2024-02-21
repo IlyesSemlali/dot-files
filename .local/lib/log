@@ -11,19 +11,19 @@ PURPLE='\033[0;35m'
 NC='\033[0m' # No Color
 
 function log_info() {
-  if [ $# -ne 2 ]; then
-    log_error "log library" "wrong number of arguments"
+  if [ $# -lt 2 ]; then
+    log_error "log library" "$# arguments were passed, needs at least 2"
     return 1
   else
-    echo -e "${PURPLE}[${1}]${BRIGHT} - ${WHITE}${2}${NC}"
+    echo -e "${PURPLE}[${1}]${BRIGHT} - ${WHITE}${@:2}${NC}"
   fi
 }
 
 function log_error() {
-  if [ $# -ne 2 ]; then
-    log_error "log library" "wrong number of arguments"
+  if [ $# -lt 2 ]; then
+    log_error "log library" "$# arguments were passed, needs at least 2"
     return 1
   else
-    echo -e "${PURPLE}[${1}]${BRIGHT} - ${RED}${2}${NC}"
+    echo -e "${PURPLE}[${1}]${BRIGHT} - ${RED}${@:2}${NC}"
   fi
 }

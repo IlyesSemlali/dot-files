@@ -15,17 +15,30 @@ fi
 gitrepos=${GIT_REPOS:-$HOME/git/}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/}
 
-WORKTREES="$(find "$gitrepos" -maxdepth 4 -mindepth 2 -name '.git' -type d | \
-  sed "s/\/\.git//g" | sed "s@$gitrepos@@g" | \
-  sort | fzf -m --border-label='Repositories')"
+while getopts r:w flag
+do
+  case "${flag}" in
+    r) repo=${OPTARG};;
+    w) create_worktree=1;;
+  esac
+done
+
+
+if [ -n "${repo}" ]; then
+  WORKTREES=$(echo "${repo}" | sed "s@$gitrepos@@g")
+else
+  WORKTREES="$(find "$gitrepos" -maxdepth 4 -mindepth 2 -name '.git' -type d | \
+    sed "s/\/\.git//g" | sed "s@$gitrepos@@g" | \
+    sort | fzf -m --border-label='Repositories')"
+fi
 
 
 gitc() {
-  if git -C $gitrepos/$WORKTREE $@ 2>/dev/null; then
-    continue
+  if git -C ${gitrepos}/${WORKTREE} $@ 2>/dev/null; then
+    return
 
   else
-    log_error "project" "an error occured using git"
+    log_error "project" "error performing: git -C ${gitrepos}/${WORKTREE} $@"
 
   fi
 }
@@ -36,6 +49,7 @@ if [ -z $PROJECT ]; then
 else
   if [ -z "$WORKTREES" ]; then
 
+    log_info "project" "no repos were selected"
     exit 0 # It means we didn't select anything with fzf
 
   else
@@ -43,7 +57,7 @@ else
     for WORKTREE in $WORKTREES; do
       PROJECT_DIR="${projects_path}/$PROJECT/$(basename $(echo $WORKTREE) 2>/dev/null)"
 
-      if echo $WORKTREE | grep -q "$REPO_EXCLUDE_PATTERN"; then
+      if [ -z "${create_worktree}" ]; then
 
         if [ -e $PROJECT_DIR ]; then
           log_info "project" "project is already present"
@@ -57,12 +71,15 @@ else
         if [ -e $PROJECT_DIR ]; then
           log_info "project" "project is already present"
         else
+          log_info "project" "fetching from git"
           gitc fetch
-          if gitc branch -r | grep -qo $PROJECT;
-          then
+          if gitc branch -r | grep -o $PROJECT; then
             log_info "project" "checking out existing remote branch"
             gitc worktree add $PROJECT_DIR $PROJECT
             gitc branch --set-upstream-to=origin/$PROJECT
+          elif gitc branch | grep -o $PROJECT; then
+            log_info "project" "checking out existing local branch"
+            gitc worktree add $PROJECT_DIR $PROJECT
           else
             log_info "project" "checking out in a new branch"
             gitc worktree add $PROJECT_DIR -b $PROJECT
