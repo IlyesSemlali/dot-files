@@ -62,6 +62,7 @@ Zenika
 !.config/qt5ct/qt5ct.conf
 !.config/rofi/config.rasi
 !.config/dunst/dunstrc
+!.config/starship.toml
 !.config/dolphinrc.tpl
 !.config/GIMP/2.10/*
 !.config/GIMP/2.10/contextrc
