@@ -39,6 +39,8 @@ else
   alias ll="ls --full-time -altrh"
 fi
 
+eval "$(zoxide init zsh)"
+
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
 alias av="ansible-vault edit"
 alias pj="sd project"
@@ -48,14 +50,6 @@ unset SSH_ASKPASS
 
 export SYSTEMD_PAGER=''
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-
-export ENHANCD_COMMAND="dv"
-export ENHANCD_ENABLE_DOT="false"
-export ENHANCD_ENABLE_DOUBLE_DOT="false"
-export ENHANCD_ENABLE_HOME="true"
-export ENHANCD_ARG_HYPHEN='_'
-export ENHANCD_HYPHEN_NUM=20
-export ENHANCD_FILTER="fzf --border-label='Change Directory' --preview 'exa -al --level 1 --group-directories-first --git-ignore --git --no-user --no-time --no-filesize --no-permissions {}' --preview-window right,50% --height 35% --reverse --ansi"
 
 export FZF_DEFAULT_OPTS="--height=25 --min-height=15 --border=rounded --margin=1 --padding=1 --border-label-pos=3"
 

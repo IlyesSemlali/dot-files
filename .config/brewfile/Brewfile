@@ -4,6 +4,7 @@ brew exa
 brew git-delta
 brew jq
 brew rg
+brew zoxide
 
 # tools
 tap ankitpokhrel/jira-cli

@@ -82,6 +82,14 @@ local plugins = {
     "tpope/vim-fugitive",
     lazy = false
   },
+  {
+    "nanotee/zoxide.vim",
+    lazy = false,
+    dependencies = {
+      "junegunn/fzf",
+      lazy = false
+    }
+  },
 
   -- To make a plugin not be loaded
   -- {
