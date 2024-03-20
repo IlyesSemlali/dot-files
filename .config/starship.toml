@@ -84,7 +84,6 @@ disabled = false
 symbol = '󱃾'
 style = "fg:color_aqua"
 format = '[ $symbol $context / $namespace]($style)'
-detect_extensions = ["yaml", "yml"]
 
 [terraform]
 disabled = false
