@@ -4,8 +4,8 @@
 if which terraform > /dev/null 2>&1
 then
     alias tf=terraform
-    plugins+=(terraform)
     alias tfswitch="tfswitch -b ~/.local/bin/terraform"
+    complete -o nospace -C ${HOME}/.local/bin/terraform terraform
 fi
 
 # Kubernetes
