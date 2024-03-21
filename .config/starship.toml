@@ -4,7 +4,6 @@ format = """
 [](color_darkgrey)\
 $os\
 $username\
-$time\
 [](bg:color_yellow fg:color_darkgrey)\
 $git_state\
 [](fg:color_yellow bg:color_aqua)\
