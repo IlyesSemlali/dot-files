@@ -24,22 +24,6 @@ function install_from_git() {
     unset repo
 }
 
-function install_nvchad() {
-    git_bin=$(which git)
-    repo="https://github.com/NvChad/NvChad"
-    install_path="${HOME}/.config/nvim"
-
-    if [ -f ${install_path}/LICENSE ]; then
-        git -C ${install_path} pull
-    else
-	rm -rf $HOME/.config/nvim
-        git clone ${repo} ${install_path}
-	git checkout -- $HOME/.config/nvim
-    fi
-    unset install_path
-    unset repo
-}
-
 function install_brew() {
     # Brew for mac
     install_from_git https://github.com/Homebrew/brew ~/.local/share/homebrew
@@ -119,10 +103,6 @@ do
             BREW='true'
             shift
             ;;
-        -v|--vim)
-            VIM='true'
-            shift
-            ;;
         -t|--tools)
             TOOLS='true'
             shift
@@ -143,12 +123,6 @@ fi
 if [[ $TOOLS == 'true' ]]
 then
     install_tools
-fi
-
-
-if [[ $VIM == 'true' ]]
-then
-    install_nvchad
 fi
 
 

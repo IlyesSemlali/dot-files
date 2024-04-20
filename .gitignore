@@ -72,7 +72,8 @@ Zenika
 !.config/nomacs/Image Lounge.conf
 !.config/redshift/hooks/backlight.sh
 !.config/redshift/redshift.conf
-!.config/nvim/lua/custom/
+!.config/nvim/
+.config/nvim/lazy-lock.json
 !.config/brewfile/
 
 

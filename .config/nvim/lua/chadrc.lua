@@ -1,11 +1,9 @@
+----- This file  needs to have same structure as nvconfig.lua
+-- https://github.com/NvChad/NvChad/blob/v2.5/lua/nvconfig.lua
+
+---@type ChadrcConfig
 ---@diagnostic disable: inject-field
 local M = {}
-
--- Plugins
-M.plugins = "custom.plugins"
-
--- Mappings
-M.mappings = require "custom.mappings"
 
 -- UI
 M.ui = {
@@ -22,7 +20,7 @@ M.ui = {
     },
   },
 
-  theme = "gruvbox";
+  theme = "gruvbox",
   transparency = true,
 
   nvdash = {
@@ -55,8 +53,6 @@ M.ui = {
       { "  Mappings", "Spc c h", "NvCheatsheet" },
     },
   },
-
-
 }
 
 return M
