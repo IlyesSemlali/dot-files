@@ -1,5 +1,6 @@
 # Shell Tools
 brew bat
+brew catimg
 brew exa
 brew git-delta
 brew jq
