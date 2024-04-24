@@ -30,11 +30,13 @@ map("n", "<Esc>", ":noh<CR>", { desc = "Clear highlights" })
 map("n", "<leader>ch", "<cmd> NvCheatsheet <CR>", { desc = "Mapping cheatsheet" })
 
 -- Telescope
--- TODO: Include Telescope Keymaps:
--- https://github.com/IlyesSemlali/dot-files/blob/main/.config/nvim/plugin/telescope.lua
-map("n", "<leader>ff", "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", { desc = "Find all" })
-map("n", "<leader>fg", "<cmd> Telescope live_grep <CR>", { desc = "Live grep" })
-map("n", "<leader>e", "<cmd> Telescope live_grep <CR>", { desc = "Live grep" })
+local telescope = require "telescope.builtin"
+map("n", "<leader>ff", telescope.find_files, { desc = "Find all" })
+map("n", "<leader>fg", telescope.live_grep, { desc = "Live grep" })
+map("n", "<space>e", telescope.diagnostics)
+map("n", "[d", vim.diagnostic.goto_prev)
+map("n", "]d", vim.diagnostic.goto_next)
+map("n", "<leader>q", vim.diagnostic.setloclist)
 
 -- LuaSnip
 map({ "i", "s" }, "<C-S>", function()

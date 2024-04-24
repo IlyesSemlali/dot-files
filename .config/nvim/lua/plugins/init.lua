@@ -20,6 +20,13 @@ local plugins = {
   },
 
   {
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = require "configs.telescope",
+  },
+
+  {
     "stevearc/conform.nvim",
     lazy = false,
     opts = overrides.conform,
