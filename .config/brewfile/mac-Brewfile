@@ -14,7 +14,7 @@ brew docker
 brew fzf
 brew htop
 brew libpq
-brew neovim
+brew neovim --HEAD
 brew starship
 brew tmux
 brew tree
