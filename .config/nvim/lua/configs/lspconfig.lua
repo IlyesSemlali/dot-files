@@ -64,8 +64,26 @@ lspconfig.pyright.setup {
 lspconfig.yamlls.setup {
   settings = {
     yaml = {
+      validate = true,
+      -- disable the schema store
+      schemaStore = {
+        enable = false,
+        url = "",
+      },
+      -- manually select schemas
       schemas = {
-        ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.18.0-standalone-strict/all.json"] = "/*.yaml",
+        ["https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json"] = "docker-compose*.{yml,yaml}",
+        ["https://json.schemastore.org/github-workflow.json"] = ".github/workflows/*.{yml,yaml}",
+      },
+    },
+  },
+}
+
+lspconfig.helm_ls.setup {
+  settings = {
+    ["helm-ls"] = {
+      yamlls = {
+        path = "yaml-language-server",
       },
     },
   },

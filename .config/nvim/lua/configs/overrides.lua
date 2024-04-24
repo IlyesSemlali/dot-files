@@ -42,6 +42,13 @@ M.mason = {
     "clang-format",
 
     -- python
+
+    -- Kubernetes
+    "yaml-language-server",
+    "helm-ls",
+
+    -- Terraform
+    "terraform-ls",
   },
 
   ui = {

@@ -66,7 +66,7 @@ local plugins = {
 
   {
     "towolf/vim-helm",
-    lazy = false,
+    ft = "helm",
   },
 
   {
