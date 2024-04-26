@@ -11,6 +11,7 @@ fi
 # ZSH config
 autoload -U compinit && compinit
 zstyle ':urlglobber' url-other-schema
+bindkey \^U backward-kill-line
 
 
 # Oh-My-ZSH Config
