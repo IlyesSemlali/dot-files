@@ -39,11 +39,11 @@ else
   alias ll="ls --full-time -altrh"
 fi
 
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
 
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
-alias av="ansible-vault edit"
+alias dv="cdi"
 alias pj="sd project"
 alias cpj="cd ~/projects/$PROJECT/"
 
@@ -53,6 +53,8 @@ export SYSTEMD_PAGER=''
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 export FZF_DEFAULT_OPTS="--height=25 --min-height=15 --border=rounded --margin=1 --padding=1 --border-label-pos=3"
+
+export _ZO_FZF_OPTS="--border-label='Change Directory' --preview 'exa -al --group-directories-first --no-user --no-time --no-filesize --no-permissions {2..}' --preview-window right,40% --height 40% --reverse --ansi"
 
 export SD_ROOT="${HOME}/.local/sd"
 export SD_CAT="bat"
