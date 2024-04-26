@@ -56,6 +56,9 @@ function install_tools() {
     # tmux powerline
     install_from_git https://github.com/IlyesSemlali/tmux-powerline ~/.local/share/tmux-powerline
 
+    # fzf tab completion
+    install_from_git https://github.com/lincheney/fzf-tab-completion ~/.local/share/fzf-tab-completion
+
     # tfswitch
     if ! which tfswitch > /dev/null 2>&1; then
         curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | sudo bash
