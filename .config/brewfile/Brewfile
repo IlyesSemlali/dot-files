@@ -15,11 +15,12 @@ brew pgcli
 brew pre-commit
 
 # Infrastructure tools
+brew flux
+brew fluxcd/tap/flux
+brew gh
 brew krew
 brew tfswitch
 brew vault
-brew fluxcd/tap/flux
-brew flux
 
 # Fonts
 file ~/.config/brewfile/font-taps-Brewfile
