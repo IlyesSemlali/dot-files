@@ -14,12 +14,10 @@ brew jira-cli
 brew pgcli
 brew pre-commit
 
-# Terraform tools
+# Infrastructure tools
 brew krew
-brew terraform
+brew tfswitch
 brew vault
-
-# FluxCD
 brew fluxcd/tap/flux
 brew flux
 

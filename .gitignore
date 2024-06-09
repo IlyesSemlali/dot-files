@@ -34,12 +34,13 @@ Zenika
 !.gitignore
 !.gitignore_global
 
-!.zshrc
-!.xinitrc
-!.profile
 !.Xresources
 !.config/mimeapps.list
 !.npmrc
+!.profile
+!.tfswitch.toml
+!.xinitrc
+!.zshrc
 
 !.zsh/
 
