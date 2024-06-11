@@ -3,27 +3,28 @@
 # Terraform
 if which terraform > /dev/null 2>&1
 then
-    alias tf=terraform
-    alias tfswitch="tfswitch -b ~/.local/bin/terraform"
-    complete -o nospace -C ${HOME}/.local/bin/terraform terraform
+  alias tf=terraform
+  alias tfswitch="tfswitch -b ~/.local/bin/terraform"
+  autoload -U +X bashcompinit && bashcompinit
+  autoload -Uz compinit && compinit
+  complete -o nospace -C ~/.local/bin/terraform terraform
 fi
 
 # Kubernetes
 if which kubectl > /dev/null 2>&1
 then
-    alias k=kubectl
-    source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-    source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+  alias k=kubectl
+  source <(kubectl completion zsh)
 fi
 
 # Helm
 if which helm > /dev/null 2>&1
 then
-    source <(helm completion zsh)
+  source <(helm completion zsh)
 fi
 
 # Flux
 if which flux > /dev/null 2>&1
 then
-    source <(flux completion zsh)
+  source <(flux completion zsh)
 fi
