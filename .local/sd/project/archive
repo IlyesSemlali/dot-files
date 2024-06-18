@@ -9,9 +9,20 @@ source ${HOME}/.local/lib/log
 projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/}
 
-PROJECT=$(find ${projects_path} -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets')
+PROJECTS=$(find ${projects_path} -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf -m --border-label='Projets')
 
-if [ -L ${projects_path}/${PROJECT} ]; then
-  unlink ${projects_path}/${PROJECT}
-  log_info "project" "archived $PROJECT"
+if [ -z "$PROJECTS" ]; then
+
+  log_info "project" "no project were selected"
+  exit 0 # It means we didn't select anything with fzf
+
+else
+
+  for PROJECT in $PROJECTS; do
+    if [ -L ${projects_path}/${PROJECT} ]; then
+      unlink ${projects_path}/${PROJECT}
+      log_info "project" "archived $PROJECT"
+    fi
+
+  done
 fi

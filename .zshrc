@@ -1,8 +1,8 @@
-source $HOME/.zsh/utils.zsh
+source ${HOME}/.zsh/utils.zsh
 
 # HomeBrew
-if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
-    eval $($HOME/.local/share/homebrew/bin/brew shellenv)
+if [ -f ${HOME}/.local/share/homebrew/bin/brew ]; then
+    eval $(${HOME}/.local/share/homebrew/bin/brew shellenv)
 else
     echo "init-home: brew not installed, please run 'init-home -b'"
 fi
@@ -19,9 +19,9 @@ CASE_SENSITIVE="true"
 DISABLE_UPDATE_PROMPT=true
 plugins=(git docker docker-compose fzf)
 
-export ZSH="$HOME/.oh-my-zsh"
-if [ -f $ZSH/oh-my-zsh.sh ]; then
-    source $ZSH/oh-my-zsh.sh
+export ZSH="${HOME}/.oh-my-zsh"
+if [ -f ${ZSH}/oh-my-zsh.sh ]; then
+    source ${ZSH}/oh-my-zsh.sh
 else
     echo "init-home: Oh-My-ZSH not installed, please run 'init-home -z'"
 fi
@@ -42,16 +42,10 @@ fi
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
 
-if [[ -v PROJECT ]]; then
-  export _ZO_DATA_DIR="${HOME}/projects/$PROJECT/.project.d"
-  export HISTFILE="${HOME}/projects/$PROJECT/.project.d/zsh_history"
-  source "${HOME}/projects/$PROJECT/.project.d/zshrc"
-fi
-
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
 alias dv="cdi"
 alias pj="sd project"
-alias cpj="cd ~/projects/$PROJECT/"
+alias cpj="cd ${HOME}/projects/$PROJECT/"
 
 unset SSH_ASKPASS
 
@@ -82,27 +76,19 @@ if [ -z DEMO_MODE ]; then
 fi
 
 # Extensions
-source $HOME/.zsh/plugins.zsh
+source ${HOME}/.zsh/plugins.zsh
 
 # PATH
-insert_path "$HOME/.local/bin"
-insert_path "$HOME/.local/share/npm/bin"
-insert_path "$HOME/.local/node_modules/.bin"
-insert_path "$HOME/.krew/bin"
+insert_path "${HOME}/.local/bin"
+insert_path "${HOME}/.local/share/npm/bin"
+insert_path "${HOME}/.local/node_modules/.bin"
+insert_path "${HOME}/.krew/bin"
 
 
-if [ -f ~/.zshrc.tools ]
+if [ -f ${HOME}/.zshrc.d/local.zsh ]
 then
-    source ~/.zshrc.tools
+    source ${HOME}/.zshrc.d/local.zsh
 fi
 
-if [ -f ~/.zshrc.local ]
-then
-    source ~/.zshrc.local
-fi
-
-if [ -f ~/project/$PROJECT/.project ]
-then
-    source ~/project/$PROJECT/.project
-fi
-
+source ${HOME}/.zshrc.tools
+source ${HOME}/.zshrc.d/project-management.zsh

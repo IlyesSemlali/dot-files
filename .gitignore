@@ -41,6 +41,7 @@ Zenika
 !.tfswitch.toml
 !.xinitrc
 !.zshrc
+!.zshrc.d
 
 !.zsh/
 
