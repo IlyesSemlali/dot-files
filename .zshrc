@@ -1,10 +1,11 @@
 source ${HOME}/.zsh/utils.zsh
 
 # HomeBrew
-if [ -f ${HOME}/.local/share/homebrew/bin/brew ]; then
-    eval $(${HOME}/.local/share/homebrew/bin/brew shellenv)
+if [ -f ${HOME}/.local/share/homebrew/bin/brew ]
+then
+  eval $(${HOME}/.local/share/homebrew/bin/brew shellenv)
 else
-    echo "init-home: brew not installed, please run 'init-home -b'"
+  echo "init-home: brew not installed, please run 'init-home -b'"
 fi
 
 
@@ -20,10 +21,11 @@ DISABLE_UPDATE_PROMPT=true
 plugins=(git docker docker-compose fzf)
 
 export ZSH="${HOME}/.oh-my-zsh"
-if [ -f ${ZSH}/oh-my-zsh.sh ]; then
-    source ${ZSH}/oh-my-zsh.sh
+if [ -f ${ZSH}/oh-my-zsh.sh ]
+then
+  source ${ZSH}/oh-my-zsh.sh
 else
-    echo "init-home: Oh-My-ZSH not installed, please run 'init-home -z'"
+  echo "init-home: Oh-My-ZSH not installed, please run 'init-home -z'"
 fi
 
 
@@ -64,15 +66,16 @@ export GOPATH="${HOME}/.local/share/go"
 #NeoVIM
 if which nvim >/dev/null 2>&1
 then
-    alias vim="nvim"
-    export EDITOR=nvim
+  alias vim="nvim"
+  export EDITOR=nvim
 else
-    export EDITOR=vim
+  export EDITOR=vim
 fi
 
 # Demo mode
-if [ -z DEMO_MODE ]; then
-    export HOST=laptop
+if [ -z DEMO_MODE ]
+then
+  export HOST=laptop
 fi
 
 # Extensions
@@ -87,7 +90,7 @@ insert_path "${HOME}/.krew/bin"
 
 if [ -f ${HOME}/.zshrc.d/local.zsh ]
 then
-    source ${HOME}/.zshrc.d/local.zsh
+  source ${HOME}/.zshrc.d/local.zsh
 fi
 
 source ${HOME}/.zshrc.tools
