@@ -11,10 +11,10 @@ projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/}
 project_template="${HOME}/.local/share/project_template"
 
-mkdir -p ${projects_archive}/${1} ${projects_path}
+mkdir -p ${projects_archive}/${1}/.project.d ${projects_path}
 
 if [ -f ${project_template} ]; then
-  cp ${project_template} ${projects_archive}/${1}/.project
+  cp ${project_template} ${projects_archive}/${1}/.project.d/zshrc
 fi
 
 if [ -z $1 ]; then

@@ -42,6 +42,12 @@ fi
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
 
+if [[ -v PROJECT ]]; then
+  export _ZO_DATA_DIR="${HOME}/projects/$PROJECT/.project.d"
+  export HISTFILE="${HOME}/projects/$PROJECT/.project.d/zsh_history"
+  source "${HOME}/projects/$PROJECT/.project.d/zshrc"
+fi
+
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
 alias dv="cdi"
 alias pj="sd project"
