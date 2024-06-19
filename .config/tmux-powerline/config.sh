@@ -37,11 +37,12 @@ TMUX_POWERLINE_WINDOW_STATUS_FORMAT=(
 # Format: segment_name background_color foreground_color [non_default_separator]
 
 TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-  "vcs_branch $TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR $TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR" \
+  "project $TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR $TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
+  # "project $TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR $TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR" \
 )
 
 TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
-  "tmux_session_info $TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR $TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+  "vcs_branch $TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR $TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
   "time $TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR $TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
 )
 
@@ -55,9 +56,9 @@ export TMUX_POWERLINE_PATCHED_FONT_IN_USE="true"
 export TMUX_POWERLINE_THEME="default"
 
 # Overlay directory to look for themes. There you can put your own themes outside the repo. Fallback will still be the "themes" directory in the repo.
-export TMUX_POWERLINE_DIR_USER_THEMES=""
+export TMUX_POWERLINE_DIR_USER_THEMES="${HOME}/.config/tmux-powerline/themes/"
 # Overlay directory to look for segments. There you can put your own segments outside the repo. Fallback will still be the "segments" directory in the repo.
-export TMUX_POWERLINE_DIR_USER_SEGMENTS=""
+export TMUX_POWERLINE_DIR_USER_SEGMENTS="${HOME}/.config/tmux-powerline/segments/"
 
 # Only use the session name
 export TMUX_POWERLINE_SEG_TMUX_SESSION_INFO_FORMAT='#S'
