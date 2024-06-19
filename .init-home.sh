@@ -52,9 +52,6 @@ function install_tools() {
 
     # tmux TPM
     install_from_git https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-    # tmux powerline
-    install_from_git https://github.com/erikw/tmux-powerline ~/.local/share/tmux-powerline
 }
 
 function configure_zsh() {
