@@ -70,7 +70,7 @@ truncation_symbol = "…/"
 symbol = ""
 style = "bg:color_aqua"
 format = '[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)'
-ignore_branches = ["main", "master"]
+ignore_branches = ["linux", "mac-os"]
 
 [git_state]
 style = "bg:color_yellow"
