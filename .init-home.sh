@@ -52,6 +52,8 @@ function install_tools() {
 
     # tmux TPM
     install_from_git https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    ${HOME}/.tmux/plugins/tpm/bin/clean_plugins
+    ${HOME}/.tmux/plugins/tpm/bin/install_plugins
 }
 
 function configure_zsh() {
