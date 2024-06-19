@@ -54,7 +54,7 @@ function install_tools() {
     install_from_git https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
     # tmux powerline
-    install_from_git https://github.com/IlyesSemlali/tmux-powerline ~/.local/share/tmux-powerline
+    install_from_git https://github.com/erikw/tmux-powerline ~/.local/share/tmux-powerline
 
     # tfswitch
     if ! which tfswitch > /dev/null 2>&1; then
