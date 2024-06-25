@@ -42,6 +42,7 @@ Zenika
 !.xinitrc
 !.zshrc
 !.zshrc.d
+.zshrc.d/local.zsh
 
 !.zsh/
 
