@@ -1,95 +1,95 @@
 [include]
-    path = ~/.gitconfig.local
+  path = ~/.gitconfig.local
 
 [core]
-    pager = delta
-    excludesfile = ~/.gitignore_global
-    hooksPath =  ~/.git-hooks/
+  pager = delta
+  excludesfile = ~/.gitignore_global
+  hooksPath =  ~/.git-hooks/
 
 [alias]
-    alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
-    bsu = ! git branch --set-upstream-to=origin/$(git branch --show-current)
-    psu = ! git push --set-upstream origin $(git branch --show-current)
-    p = pull
-    pf = push --force-with-lease
-    c = checkout
-    co = commit -a
-    com = ! git commit -am \"$COMMIT_MESSAGE\"
-    coma = commit --amend
-    comac = commit --amend -C HEAD
-    cl = ! git clone $(xclip -o)
-    r = reflog -25
-    s = status
-    cb = checkout -b
-    mt = mergetool
-    l = log -1 --format=format:%s
-    lh = log -1 --format=%h
-    plog = log --reverse --abbrev-commit -15 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
-    graph = log --graph --all --abbrev-commit -50 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
-    wip = ! git commit -am \"WIP: $COMMIT_MESSAGE - $(date)\"
-    dr = ! git diff origin/$(git branch --show-current)
-    b = branch
-    br = branch -r
-    st = ! git stash -m \"$COMMIT_MESSAGE\"
-    mt = mergetool
-    cp = cherry-pick
-    pp = ! git pull && git push
+  alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+  bsu = ! git branch --set-upstream-to=origin/$(git branch --show-current)
+  psu = ! git push --set-upstream origin $(git branch --show-current)
+  p = pull
+  pf = push --force-with-lease
+  c = checkout
+  co = commit -a
+  com = ! git commit -am \"$COMMIT_MESSAGE\"
+  coma = commit --amend
+  comac = commit --amend -C HEAD
+  cl = ! git clone $(xclip -o)
+  r = reflog -25
+  s = status
+  cb = checkout -b
+  mt = mergetool
+  l = log -1 --format=format:%s
+  lh = log -1 --format=%h
+  plog = log --reverse --abbrev-commit -15 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
+  graph = log --graph --all --abbrev-commit -50 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
+  wip = ! git commit -am \"WIP: $COMMIT_MESSAGE - $(date)\"
+  dr = ! git diff origin/$(git branch --show-current)
+  b = branch
+  br = branch -r
+  st = ! git stash -m \"$COMMIT_MESSAGE\"
+  mt = mergetool
+  cp = cherry-pick
+  pp = ! git pull && git push
 
     # Work done, interactively rebases from common ancestor
-    wd = ! git rebase -i $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD))~1
+  wd = ! git rebase -i $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD))~1
 
 [pull]
-    rebase = true
+  rebase = true
 
 [init]
-    defaultBranch = main
+  defaultBranch = main
 
 [credential]
-    helper = store
+  helper = store
 
 # Extra Tools
 
 # vim-mergetools
 [merge]
-    tool = vim_mergetool
-    conflictstyle = diff3
+  tool = vim_mergetool
+  conflictstyle = diff3
 
 [mergetool "vim_mergetool"]
-    cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
-    trustExitCode = true
-    prompt = false
-    keepBackup = false
+  cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+  trustExitCode = true
+  prompt = false
+  keepBackup = false
 
 # Detla
 
 [interactive]
-    diffFilter = delta --color-only --features=interactive
+  diffFilter = delta --color-only --features=interactive
 
 [delta]
-    features = decorations
-    syntax-theme = gruvbox-dark
-    paging = never
+  features = decorations
+  syntax-theme = gruvbox-dark
+  paging = never
 
 [delta "interactive"]
     ; keep-plus-minus-markers = false
 
 [delta "decorations"]
-    line-numbers = true
-    commit-style = omit
-    file-style = omit
+  line-numbers = true
+  commit-style = omit
+  file-style = omit
 
-    hunk-header-decoration-style = orange box
-    hunk-header-file-style = red
-    hunk-header-style = file
+  hunk-header-decoration-style = orange box
+  hunk-header-file-style = red
+  hunk-header-style = file
 
-    zero-style = syntax normal dim
-    minus-style = syntax normal dim strike
-    plus-style = syntax bold normal
-    line-numbers-minus-style = red bold
-    line-numbers-plus-style = green bold
-    plus-emph-style = syntax bold "#306040"
+  zero-style = syntax normal dim
+  minus-style = syntax normal dim strike
+  plus-style = syntax bold normal
+  line-numbers-minus-style = red bold
+  line-numbers-plus-style = green bold
+  plus-emph-style = syntax bold "#306040"
 
 [user]
-	name = Ilyès Semlali
+  name = Ilyès Semlali
 [tag]
-	sort = v:refname
+  sort = v:refname
