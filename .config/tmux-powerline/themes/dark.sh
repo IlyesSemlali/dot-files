@@ -50,6 +50,7 @@ if [ -z "$TMUX_POWERLINE_WINDOW_STATUS_FORMAT" ]; then
     "#[$(format regular)]" \
 
       " #W "
+      "${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}"
     )
 fi
 
