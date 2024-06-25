@@ -51,11 +51,17 @@
 
 # vim-mergetools
 [merge]
-  tool = vim_mergetool
+  tool = nvimdiff
   conflictstyle = diff3
 
-[mergetool "vim_mergetool"]
+[mergetool "vimdiff"]
   cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+  trustExitCode = true
+  prompt = false
+  keepBackup = false
+
+[mergetool "nvimdiff"]
+  layout = "LOCAL,BASE,REMOTE / MERGED"
   trustExitCode = true
   prompt = false
   keepBackup = false
