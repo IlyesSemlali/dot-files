@@ -6,6 +6,12 @@
 # Opens a FZF menu to select the project you need to switch to. It will also open a TMUX
 # session for that project and source the ".project" file (useful to setup specific tools)
 
+if [ ${#} -eq 0 ]; then
+  SEARCH_TERM=""
+else
+  SEARCH_TERM="-q ${@}"
+fi
+
 projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/}
 
@@ -22,7 +28,7 @@ run-tmux () {
 }
 
 # Run it once if not in tmux
-PROJECT=$(find ${projects_path} -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets')
+PROJECT=$(find ${projects_path} -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets' ${SEARCH_TERM})
 if [ -z $TMUX ]; then
   run-tmux $PROJECT
 else
