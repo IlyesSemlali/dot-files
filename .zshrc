@@ -32,9 +32,9 @@ fi
 # Aliases and exports
 if which nvim >/dev/null 2>&1
 then
-  alias ls="exa --icons --level 1"
-  alias l="exa -l --level 1 --git --no-permissions"
-  alias ll="exa -al --level 1 --git-ignore --git"
+  alias ls="eza --icons --level 1"
+  alias l="eza -l --level 1 --git --no-permissions"
+  alias ll="eza -al --level 1 --git-ignore --git"
 else
   alias ls="ls --color=auto"
   alias l="ls --full-time -ltrh"
@@ -58,7 +58,7 @@ export FZF_DEFAULT_OPTS="--height=25 --min-height=15 --border=rounded --margin=1
 
 export K9S_CONFIG_DIR="$HOME/.config/k9s/"
 
-export _ZO_FZF_OPTS="--border-label='Change Directory' --preview 'exa -al --group-directories-first --no-user --no-time --no-filesize --no-permissions {2..}' --preview-window right,40% --height 40% --reverse --ansi"
+export _ZO_FZF_OPTS="--border-label='Change Directory' --preview 'eza -al --group-directories-first --no-user --no-time --no-filesize --no-permissions {2..}' --preview-window right,40% --height 40% --reverse --ansi"
 
 export SD_ROOT="${HOME}/.local/sd"
 export SD_CAT="bat"

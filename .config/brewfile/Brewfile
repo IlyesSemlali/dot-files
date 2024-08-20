@@ -1,7 +1,7 @@
 # Shell Tools
 brew bat
 brew catimg
-brew exa
+brew eza
 brew git-delta
 brew jq
 brew rg
