@@ -6,17 +6,11 @@
 # Opens a FZF menu to select the project you need to switch to. It will also open a TMUX
 # session for that project and source the ".project" file (useful to setup specific tools)
 
-set +x
-
-if [ ${#} -eq 0 ]; then
-  SEARCH_TERM=()
-else
-  SEARCH_TERM=(-q "${@}")
-fi
+source "${HOME}/.local/lib/log"
 
 projects_path="${PROJECTS_PATH:-${HOME}/projects/}"
-
 CACHE_FILE="$HOME/.cache/project-switcher"
+
 
 run-tmux () {
 
@@ -28,9 +22,28 @@ run-tmux () {
 	fi
 }
 
-# Run it once if not in tmux
-PROJECT=$(find "${projects_path}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets' "${SEARCH_TERM[@]}")
+if [ ${#} -eq 0 ]; then
+  SEARCH_TERM=()
+else
+  SEARCH_TERM=(-q "${@}")
+fi
 
+SEARCH_RESULTS=$(find "${projects_path}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort)
+
+if [ "$(echo "${SEARCH_RESULTS}" | fzf --filter "${@}" | wc -l)" -eq 1 ] && [ ${#} -ne 0 ]
+then
+  PROJECT=$(echo "${SEARCH_RESULTS}" | fzf --filter "${@}")
+else
+  PROJECT=$(echo "${SEARCH_RESULTS}"| sort | fzf --border-label='Projets' "${SEARCH_TERM[@]}")
+fi
+
+if [ -z "${PROJECT}" ]; then
+  log_error "project" "not project was selected"
+else
+  echo "${PROJECT}" > "${CACHE_FILE}"
+fi
+
+# Run it once if not in tmux
 if [ -z "${TMUX}" ]; then
   run-tmux "${PROJECT}"
 else
@@ -38,12 +51,12 @@ else
 fi
 
 
-# Then while the $CACHE_FILE is present, we need to rerun tmux
+# Then while the $CACHE_FILE is present, rerun tmux
 while [ -f "${CACHE_FILE}" ]; do
   tmux detach-client
 
   PROJECT=$(cat "${CACHE_FILE}")
   rm "${CACHE_FILE}" -f
 
-  run-tmux "${PROJECT}" 2>/dev/null # TODO: remove the "nested tmux" error the proper way
+  run-tmux "${PROJECT}" 2>/dev/null # remove the "nested tmux" error
 done
