@@ -5,21 +5,16 @@
 # Using a fzf-based menu, you can select where the
 # repo you have in you clipboard will be cloned
 
-source ${HOME}/.local/lib/log
-source ${HOME}/.local/lib/clipboard
+source "${HOME}/.local/lib/log"
+source "${HOME}/.local/lib/clipboard"
 
-if [ -f .project ]; then
-  source .project
-fi
-
-gitrepos="${GIT_REPOS:-$HOME/git/}"
 repo_url="$(clip_paste)"
 
-if [ -z ${PROJECT} ]; then
+if [ -z "${PROJECT}" ]; then
   log_error "project" "PROJECT env variable isn't set"
   exit 1
 
-elif echo ${repo_url} | grep -qv "\.git$"; then
+elif echo "${repo_url}" | grep -qv "\.git$"; then
   log_error "project" "clipboard doesn't contain a git url"
   exit 1
 
@@ -31,6 +26,7 @@ do
   case "${flag}" in
     l) location=${OPTARG};;
     w) create_worktree=1;;
+    *) continue;;
   esac
 done
 
@@ -51,18 +47,18 @@ if [ -z "${DESTINATION}" ]; then
   exit 0 # It means we didn't select anything with fzf
 
 else
-  pushd ${DESTINATION} > /dev/null
-  git clone $(clip_paste) 2> /dev/null
+  pushd "${DESTINATION}" > /dev/null || return
+  git clone "$(clip_paste)" 2> /dev/null
   log_info "project" "git repo cloned in $(pwd)"
-  popd > /dev/null
+  popd > /dev/null || return
 
 
-  repo_arg="-r ${DESTINATION}/$(echo ${repo_url} | grep -o '/.*\.git' | sed 's/\(\/\|\.git\)//g')"
+  repo_args=(-r "${DESTINATION}/$(echo "${repo_url}" | grep -o '/.*\.git' | sed 's/\(\/\|\.git\)//g')")
   if [ -n "${create_worktree}" ]; then
     worktree_arg="-w"
   else
     worktree_arg=""
   fi
 
-  ${SD_ROOT}/project/add-repo ${repo_arg} ${worktree_arg}
+  "${SD_ROOT}/project/add-repo" "${repo_args[@]}" "${worktree_arg}"
 fi

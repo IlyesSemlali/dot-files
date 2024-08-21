@@ -4,12 +4,11 @@
 #
 # This will unlink a project from $PROJECTS_PATH
 
-source ${HOME}/.local/lib/log
+source "${HOME}/.local/lib/log"
 
-projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
-projects_path=${PROJECTS_PATH:-${HOME}/projects/}
+projects_path="${PROJECTS_PATH:-${HOME}/projects/}"
 
-PROJECTS=$(find ${projects_path} -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf -m --border-label='Projets')
+PROJECTS=$(find "${projects_path}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf -m --border-label='Projets')
 
 if [ -z "$PROJECTS" ]; then
 
@@ -19,8 +18,8 @@ if [ -z "$PROJECTS" ]; then
 else
 
   for PROJECT in $PROJECTS; do
-    if [ -L ${projects_path}/${PROJECT} ]; then
-      unlink ${projects_path}/${PROJECT}
+    if [ -L "${projects_path}/${PROJECT}" ]; then
+      unlink "${projects_path}/${PROJECT}"
       log_info "project" "archived $PROJECT"
     fi
 

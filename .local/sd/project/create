@@ -5,26 +5,26 @@
 # This will create project folders in the $PROJECTS_ARCHIVE and link it in the $PROJECTS_PATH
 # To remove it use the sd project unlink
 
-source ${HOME}/.local/lib/log
+source "${HOME}/.local/lib/log"
 
 projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/}
 project_template="${HOME}/.local/share/project_template"
 
-mkdir -p ${projects_archive}/${1}/.project.d ${projects_path}
+mkdir -p "${projects_archive}/${1}/.project.d" "${projects_path}"
 
-if [ -f ${project_template} ]; then
-  cp ${project_template} ${projects_archive}/${1}/.project.d/zshrc
+if [ -f "${project_template}" ]; then
+  cp "${project_template}" "${projects_archive}/${1}/.project.d/zshrc"
 fi
 
-if [ -z $1 ]; then
+if [ -z "${1}" ]; then
   log_error "project" "no project name was specified"
   exit 1
 fi
 
-if ln -sf -t ${projects_path} ${projects_archive}/${1}; then
-  log_info "project" "successfully created project $1"
+if ln -sf -t "${projects_path}" "${projects_archive}/${1}"; then
+  log_info "project" "successfully created project ${1}"
 else
-  log_error "project" "couldn't create project $1"
+  log_error "project" "couldn't create project ${1}"
   exit 1
 fi

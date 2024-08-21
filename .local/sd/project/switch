@@ -6,42 +6,44 @@
 # Opens a FZF menu to select the project you need to switch to. It will also open a TMUX
 # session for that project and source the ".project" file (useful to setup specific tools)
 
+set +x
+
 if [ ${#} -eq 0 ]; then
-  SEARCH_TERM=""
+  SEARCH_TERM=()
 else
-  SEARCH_TERM="-q ${@}"
+  SEARCH_TERM=(-q "${@}")
 fi
 
-projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
-projects_path=${PROJECTS_PATH:-${HOME}/projects/}
+projects_path="${PROJECTS_PATH:-${HOME}/projects/}"
 
 CACHE_FILE="$HOME/.cache/project-switcher"
 
 run-tmux () {
 
-  project=$1
-	if tmux has-session -t $project 2>/dev/null; then
-		tmux attach-session -t $project
+  project=${1}
+	if tmux has-session -t "${project}" 2>/dev/null; then
+		tmux attach-session -t "${project}"
 	else
-		tmux new-session -e PROJECT=$project -t $project -c ${projects_path}/$project
+		tmux new-session -e PROJECT="${project}" -t "${project}" -c "${projects_path}/${project}"
 	fi
 }
 
 # Run it once if not in tmux
-PROJECT=$(find ${projects_path} -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets' ${SEARCH_TERM})
-if [ -z $TMUX ]; then
-  run-tmux $PROJECT
+PROJECT=$(find "${projects_path}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets' "${SEARCH_TERM[@]}")
+
+if [ -z "${TMUX}" ]; then
+  run-tmux "${PROJECT}"
 else
-  echo $PROJECT > $CACHE_FILE
+  echo "${PROJECT}" > "${CACHE_FILE}"
 fi
 
 
 # Then while the $CACHE_FILE is present, we need to rerun tmux
-while [ -f $CACHE_FILE ]; do
+while [ -f "${CACHE_FILE}" ]; do
   tmux detach-client
 
-  PROJECT=$(cat $CACHE_FILE)
-  rm $CACHE_FILE -f
+  PROJECT=$(cat "${CACHE_FILE}")
+  rm "${CACHE_FILE}" -f
 
-  run-tmux $PROJECT 2>/dev/null # TODO: remove the "nested tmux" error the proper way
+  run-tmux "${PROJECT}" 2>/dev/null # TODO: remove the "nested tmux" error the proper way
 done

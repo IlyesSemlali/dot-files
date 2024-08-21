@@ -5,13 +5,9 @@
 # This will either add a git worktree or a link in the
 # current project according to the REOP_EXCLUDE_PATTERN
 
-if [ -f .project ]; then
-  source .project
-fi
-
 projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/}
 
-tree $projects_path -dL 1
-tree $projects_archive -dL 1
+tree "${projects_path}" -dL 1
+tree "${projects_archive}" -dL 1
 
