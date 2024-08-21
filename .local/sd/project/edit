@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# edits a project source file
+
+source "${HOME}/.local/lib/log"
+
+
+projects_path="${PROJECTS_PATH:-${HOME}/projects/}"
+
+if $EDITOR "${projects_path}/${PROJECT}/.project.d/zshrc"
+then
+  log_info "project" "edited project ${PROJECT}"
+else
+  log_error "project" "couln't edit project ${PROJECT}"
+fi
