@@ -7,56 +7,105 @@
 # session for that project and source the ".project" file (useful to setup specific tools)
 
 source "${HOME}/.local/lib/log"
+echo "" >> "${HOME}/projectlog"
 
 projects_path="${PROJECTS_PATH:-${HOME}/projects/}"
-CACHE_FILE="$HOME/.cache/project-switcher"
 
+LOCK_FILE="${HOME}/.cache/project/lock"
+CACHE_FILE="${HOME}/.cache/project/cache"
+LAST_PROJECT_FILE="${HOME}/.cache/project/last"
+
+mkdir -p "${HOME}/.cache/project"
+ACTIVE_PROJECTS=$(find "${projects_path}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort)
 
 run-tmux () {
 
-  project=${1}
-	if tmux has-session -t "${project}" 2>/dev/null; then
-		tmux attach-session -t "${project}"
-	else
-		tmux new-session -e PROJECT="${project}" -t "${project}" -c "${projects_path}/${project}"
-	fi
+  if [ -z "${1}" ]
+  then
+    log_error "project" "$(date) empty parameter" >> "${HOME}/projectlog"
+
+  else
+    project=${1}
+
+    if tmux has-session -t "${project}" 2>/dev/null; then
+      log_info "project" "$(date) attaching session: ${project}" >> "${HOME}/projectlog"
+      tmux attach-session -x -t "${project}" > /dev/null 2>&1 # remove the "nested tmux" error
+
+    else
+      log_info "project" "$(date) creating session: ${project}" >> "${HOME}/projectlog"
+      tmux new-session -e PROJECT="${project}" -t "${project}" -c "${projects_path}/${project}" > /dev/null 2>&1 # remove the "nested tmux" error
+
+    fi
+
+    # log_info "project" "$(date) exiting session: ${project}" >> "${HOME}/projectlog"
+  fi
 }
 
+
+# Handle the search term param
 if [ ${#} -eq 0 ]; then
+  # log_info "project" "$(date) no args were provided" >> "${HOME}/projectlog"
   SEARCH_TERM=()
+  PROJECT=$(echo "${ACTIVE_PROJECTS}"| sort | fzf --border-label='Projets')
 else
   SEARCH_TERM=(-q "${@}")
+  case "$1" in
+    "-")
+      if [ -f "${LAST_PROJECT_FILE}" ]
+      then
+        PROJECT=$(cat "${LAST_PROJECT_FILE}")
+        log_info "project" "$(date) using last project: ${PROJECT}" >> "${HOME}/projectlog"
+      else
+        log_error "project" "no last project was found"
+        exit 1
+      fi
+      ;;
+    *)
+      # log_info "project" "$(date) using search term" >> "${HOME}/projectlog"
+
+      if [ "$(echo "${ACTIVE_PROJECTS}" | fzf --filter "${@}" | wc -l)" -eq 1 ] && [ ${#} -ne 0 ]
+      then
+        PROJECT=$(echo "${ACTIVE_PROJECTS}" | fzf --filter "${@}")
+      else
+        PROJECT=$(echo "${ACTIVE_PROJECTS}"| sort | fzf --border-label='Projets' "${SEARCH_TERM[@]}")
+      fi
+      ;;
+  esac
 fi
 
-SEARCH_RESULTS=$(find "${projects_path}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort)
+log_info "project" "$(date) setting cache with: ${PROJECT}" >> "${HOME}/projectlog"
+echo "${PROJECT}" > "${CACHE_FILE}"
 
-if [ "$(echo "${SEARCH_RESULTS}" | fzf --filter "${@}" | wc -l)" -eq 1 ] && [ ${#} -ne 0 ]
+if [ -n "${TMUX}" ]
 then
-  PROJECT=$(echo "${SEARCH_RESULTS}" | fzf --filter "${@}")
-else
-  PROJECT=$(echo "${SEARCH_RESULTS}"| sort | fzf --border-label='Projets' "${SEARCH_TERM[@]}")
+  log_info "project" "$(date) detaching tmux" >> "${HOME}/projectlog"
+  tmux detach-client > /dev/null 2>&1
+
 fi
 
-if [ -z "${PROJECT}" ]; then
-  log_error "project" "not project was selected"
-else
-  echo "${PROJECT}" > "${CACHE_FILE}"
+
+# Only the first instance of this script should be able to run tmux
+# the subsequent one only run the selector
+
+if ! [ -f "${LOCK_FILE}" ]
+then
+  log_info "project" "$(date) locking loop" >> "${HOME}/projectlog"
+  echo "$$" > "${LOCK_FILE}"
 fi
 
-# Run it once if not in tmux
-if [ -z "${TMUX}" ]; then
+while [[ "$(cat "${LOCK_FILE}")" == "$$" ]] && [ -f "${CACHE_FILE}" ] ; do
+  log_info "project" "$(date) starting tmux loop" >> "${HOME}/projectlog"
+  PROJECT="$(cat "${CACHE_FILE}")"
+
+  rm "${CACHE_FILE}"
   run-tmux "${PROJECT}"
-else
-  echo "${PROJECT}" > "${CACHE_FILE}"
+  echo "${PROJECT}" > "${LAST_PROJECT_FILE}"
+done
+
+# Unlock after ctrl-D
+if [[ "$(cat "${LOCK_FILE}")" == "$$" ]]
+then
+  log_info "project" "$(date) unlocking loop" >> "${HOME}/projectlog"
+  rm "${LOCK_FILE}"
 fi
 
-
-# Then while the $CACHE_FILE is present, rerun tmux
-while [ -f "${CACHE_FILE}" ]; do
-  tmux detach-client
-
-  PROJECT=$(cat "${CACHE_FILE}")
-  rm "${CACHE_FILE}" -f
-
-  run-tmux "${PROJECT}" 2>/dev/null # remove the "nested tmux" error
-done
