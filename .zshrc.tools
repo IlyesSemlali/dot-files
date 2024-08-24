@@ -4,7 +4,6 @@
 if which terraform > /dev/null 2>&1
 then
   alias tf=terraform
-  alias tfswitch="tfswitch -b ~/.local/bin/terraform"
   autoload -U +X bashcompinit && bashcompinit
   autoload -Uz compinit && compinit
   complete -o nospace -C ~/.local/bin/terraform terraform
