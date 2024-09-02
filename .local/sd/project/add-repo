@@ -22,7 +22,7 @@ done
 
 
 if [ -n "${repo}" ]; then
-  WORKTREES="${repo//gitrepos//})"
+  WORKTREES="${repo//gitrepos//}"
 else
   WORKTREES="$(find "$gitrepos" -maxdepth 4 -mindepth 2 -name '.git' -type d | \
     sed "s/\/\.git//g" | sed "s@$gitrepos@@g" | \
