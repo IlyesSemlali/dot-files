@@ -8,8 +8,8 @@
 source "${HOME}/.local/lib/log"
 source "${HOME}/.local/lib/clipboard"
 
-gitrepos=${GIT_REPOS:-$HOME/git/}
-projects_path=${PROJECTS_PATH:-${HOME}/projects/}
+gitrepos=${GIT_REPOS:-$HOME/git}
+projects_path=${PROJECTS_PATH:-${HOME}/projects}
 
 while getopts r:w flag
 do
@@ -22,7 +22,7 @@ done
 
 
 if [ -n "${repo}" ]; then
-  WORKTREES="${repo//gitrepos//}"
+  WORKTREES="${repo//gitrepos/}"
 else
   WORKTREES="$(find "$gitrepos" -maxdepth 4 -mindepth 2 -name '.git' -type d | \
     sed "s/\/\.git//g" | sed "s@$gitrepos@@g" | \
@@ -60,7 +60,8 @@ else
           log_info "project" "project is already present"
         else
           log_info "project" "linking existing directory"
-          ln -sf "${gitrepos}/${WORKTREE}" "$PROJECT_DIR"
+          echo ln -sf "${gitrepos}/${WORKTREE}" "$PROJECT_DIR"
+          # ln -sf "${gitrepos}/${WORKTREE}" "$PROJECT_DIR"
         fi
 
       else

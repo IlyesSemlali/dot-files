@@ -6,7 +6,7 @@
 
 source "${HOME}/.local/lib/log"
 
-projects_path="${PROJECTS_PATH:-${HOME}/projects/}"
+projects_path="${PROJECTS_PATH:-${HOME}/projects}"
 
 PROJECTS=$(find "${projects_path}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf -m --border-label='Projets')
 

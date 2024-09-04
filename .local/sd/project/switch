@@ -9,7 +9,7 @@
 source "${HOME}/.local/lib/log"
 echo "" >> "${HOME}/projectlog"
 
-projects_path="${PROJECTS_PATH:-${HOME}/projects/}"
+projects_path="${PROJECTS_PATH:-${HOME}/projects}"
 
 LOCK_FILE="${HOME}/.cache/project/lock"
 CACHE_FILE="${HOME}/.cache/project/cache"

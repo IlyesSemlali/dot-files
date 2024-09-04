@@ -8,7 +8,7 @@
 source "${HOME}/.local/lib/log"
 
 projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
-projects_path=${PROJECTS_PATH:-${HOME}/projects/}
+projects_path=${PROJECTS_PATH:-${HOME}/projects}
 project_template="${HOME}/.local/share/project_template"
 
 mkdir -p "${projects_archive}/${1}/.project.d" "${projects_path}"
