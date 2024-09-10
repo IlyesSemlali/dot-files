@@ -7,11 +7,11 @@
 # session for that project and source the ".project" file (useful to setup specific tools)
 
 source "${HOME}/.local/lib/log"
-echo "" >> "${HOME}/projectlog"
 
 projects_path="${PROJECTS_PATH:-${HOME}/projects}"
 
 LOCK_FILE="${HOME}/.cache/project/lock"
+LOG_FILE="/tmp/projectlog"
 CACHE_FILE="${HOME}/.cache/project/cache"
 LAST_PROJECT_FILE="${HOME}/.cache/project/last"
 
@@ -22,29 +22,29 @@ run-tmux () {
 
   if [ -z "${1}" ]
   then
-    log_error "project" "$(date) empty parameter" >> "${HOME}/projectlog"
+    log_error "project" "$(date) empty parameter" >> "${LOG_FILE}"
 
   else
     project=${1}
 
     if tmux has-session -t "${project}" 2>/dev/null; then
-      log_info "project" "$(date) attaching session: ${project}" >> "${HOME}/projectlog"
+      log_info "project" "$(date) attaching session: ${project}" >> "${LOG_FILE}"
       tmux attach-session -x -t "${project}" > /dev/null 2>&1 # remove the "nested tmux" error
 
     else
-      log_info "project" "$(date) creating session: ${project}" >> "${HOME}/projectlog"
+      log_info "project" "$(date) creating session: ${project}" >> "${LOG_FILE}"
       tmux new-session -e PROJECT="${project}" -t "${project}" -c "${projects_path}/${project}" > /dev/null 2>&1 # remove the "nested tmux" error
 
     fi
 
-    # log_info "project" "$(date) exiting session: ${project}" >> "${HOME}/projectlog"
+    # log_info "project" "$(date) exiting session: ${project}" >> "${LOG_FILE}"
   fi
 }
 
 
 # Handle the search term param
 if [ ${#} -eq 0 ]; then
-  # log_info "project" "$(date) no args were provided" >> "${HOME}/projectlog"
+  # log_info "project" "$(date) no args were provided" >> "${LOG_FILE}"
   SEARCH_TERM=()
   PROJECT=$(echo "${ACTIVE_PROJECTS}"| sort | fzf --border-label='Projets')
 else
@@ -54,14 +54,14 @@ else
       if [ -f "${LAST_PROJECT_FILE}" ]
       then
         PROJECT=$(cat "${LAST_PROJECT_FILE}")
-        log_info "project" "$(date) using last project: ${PROJECT}" >> "${HOME}/projectlog"
+        log_info "project" "$(date) using last project: ${PROJECT}" >> "${LOG_FILE}"
       else
         log_error "project" "no last project was found"
         exit 1
       fi
       ;;
     *)
-      # log_info "project" "$(date) using search term" >> "${HOME}/projectlog"
+      # log_info "project" "$(date) using search term" >> "${LOG_FILE}"
 
       if [ "$(echo "${ACTIVE_PROJECTS}" | fzf --filter "${@}" | wc -l)" -eq 1 ] && [ ${#} -ne 0 ]
       then
@@ -73,12 +73,12 @@ else
   esac
 fi
 
-log_info "project" "$(date) setting cache with: ${PROJECT}" >> "${HOME}/projectlog"
+log_info "project" "$(date) setting cache with: ${PROJECT}" >> "${LOG_FILE}"
 echo "${PROJECT}" > "${CACHE_FILE}"
 
 if [ -n "${TMUX}" ]
 then
-  log_info "project" "$(date) detaching tmux" >> "${HOME}/projectlog"
+  log_info "project" "$(date) detaching tmux" >> "${LOG_FILE}"
   tmux detach-client > /dev/null 2>&1
 
 fi
@@ -89,12 +89,12 @@ fi
 
 if ! [ -f "${LOCK_FILE}" ]
 then
-  log_info "project" "$(date) locking loop" >> "${HOME}/projectlog"
+  log_info "project" "$(date) locking loop" >> "${LOG_FILE}"
   echo "$$" > "${LOCK_FILE}"
 fi
 
 while [[ "$(cat "${LOCK_FILE}")" == "$$" ]] && [ -f "${CACHE_FILE}" ] ; do
-  log_info "project" "$(date) starting tmux loop" >> "${HOME}/projectlog"
+  log_info "project" "$(date) starting tmux loop" >> "${LOG_FILE}"
   PROJECT="$(cat "${CACHE_FILE}")"
 
   rm "${CACHE_FILE}"
@@ -105,7 +105,7 @@ done
 # Unlock after ctrl-D
 if [[ "$(cat "${LOCK_FILE}")" == "$$" ]]
 then
-  log_info "project" "$(date) unlocking loop" >> "${HOME}/projectlog"
+  log_info "project" "$(date) unlocking loop" >> "${LOG_FILE}"
   rm "${LOCK_FILE}"
 fi
 
