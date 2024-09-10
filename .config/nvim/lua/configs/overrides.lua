@@ -32,6 +32,9 @@ M.mason = {
     "lua-language-server",
     "stylua",
 
+    -- Text
+    "ltex-ls",
+
     -- web dev
     "css-lsp",
     "html-lsp",
@@ -41,7 +44,14 @@ M.mason = {
     "clangd",
     "clang-format",
 
+    -- bash
+    "shellcheck",
+    "bash-language-server",
+
     -- python
+    "black",
+    "pyright",
+    "python-lsp-server",
 
     -- Kubernetes
     "yaml-language-server",
