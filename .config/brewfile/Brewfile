@@ -27,6 +27,3 @@ brew font-sauce-code-pro-nerd-font
 brew --HEAD font-comfortaa
 brew --HEAD font-noto-color-emoji
 
-# Mac OS Specific packages (otherwise installed through packages)
-file ~/.config/brewfile/mac-Brewfile
-
