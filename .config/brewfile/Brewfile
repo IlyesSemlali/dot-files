@@ -21,9 +21,3 @@ brew gh
 brew krew
 brew vault
 
-# Fonts
-file ~/.config/brewfile/font-taps-Brewfile
-brew font-sauce-code-pro-nerd-font
-brew --HEAD font-comfortaa
-brew --HEAD font-noto-color-emoji
-
