@@ -60,7 +60,7 @@ else
           log_info "project" "project is already present"
         else
           log_info "project" "linking existing directory"
-          echo ln -sf "${gitrepos}/${WORKTREE}" "$PROJECT_DIR"
+          ln -sf "${gitrepos}/${WORKTREE}" "$PROJECT_DIR"
           # ln -sf "${gitrepos}/${WORKTREE}" "$PROJECT_DIR"
         fi
 
