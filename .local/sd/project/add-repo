@@ -26,6 +26,7 @@ if [ -n "${repo}" ]; then
 else
   WORKTREES="$(find "$gitrepos" -maxdepth 4 -mindepth 2 -name '.git' -type d | \
     sed "s/\/\.git//g" | sed "s@$gitrepos@@g" | \
+    sed "s/^\///g" | \
     sort | fzf -m --border-label='Repositories')"
 fi
 
@@ -61,7 +62,6 @@ else
         else
           log_info "project" "linking existing directory"
           ln -sf "${gitrepos}/${WORKTREE}" "$PROJECT_DIR"
-          # ln -sf "${gitrepos}/${WORKTREE}" "$PROJECT_DIR"
         fi
 
       else

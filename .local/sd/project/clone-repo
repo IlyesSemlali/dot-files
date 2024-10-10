@@ -8,6 +8,8 @@
 source "${HOME}/.local/lib/log"
 source "${HOME}/.local/lib/clipboard"
 
+gitrepos=${GIT_REPOS:-$HOME/git}
+
 repo_url="$(clip_paste)"
 
 if [ -z "${PROJECT}" ]; then
@@ -60,5 +62,5 @@ else
     worktree_arg=""
   fi
 
-  "${SD_ROOT}/project/add-repo" "${repo_args[@]}" "${worktree_arg}"
+  "${SD_ROOT}/project/add-repo" $(echo "${repo_args[@]}" | sed "s|${gitrepos}/||") "${worktree_arg}"
 fi
