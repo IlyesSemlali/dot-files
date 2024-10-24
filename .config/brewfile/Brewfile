@@ -19,6 +19,7 @@ brew mise
 brew node
 brew pgcli
 brew pre-commit
+brew watch
 
 # Infrastructure tools
 brew gh
