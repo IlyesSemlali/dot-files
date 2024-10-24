@@ -13,6 +13,7 @@ brew go
 brew jira-cli
 brew pgcli
 brew pre-commit
+brew watch
 
 # Infrastructure tools
 brew flux
