@@ -1,8 +1,6 @@
 # # TODO: Add comment for each completion style and tidy this mess up
 #
 # zstyle ':urlglobber' url-other-schema
-zstyle ':completion:*:*:*:*:*' menu select
-
 # # case insensitive (all), partial-word and substring completion
 # zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
 #
@@ -49,4 +47,7 @@ zstyle ':completion:*' matcher-list \
 
 # Zsh to use the same colors as ls
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  # zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+
+# Show selected completion item
+zstyle ':completion:*:*:*:*:*' menu select
 
