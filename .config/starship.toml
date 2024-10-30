@@ -81,8 +81,8 @@ cherry_pick = ''
 [kubernetes]
 disabled = false
 symbol = '󱃾'
-style = "fg:color_aqua"
-format = '[ $symbol $context / $namespace]($style)'
+style = "fg:color_blue"
+format = '[ $symbol $context \($namespace\)]($style)'
 
 [terraform]
 disabled = false
