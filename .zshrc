@@ -204,6 +204,9 @@ export SD_CAT="bat"
 
 export GOPATH="${HOME}/.local/share/go"
 
+# Themes for ls and tree using sharkdp/vivid
+(( $+commands[vivid] )) && export LS_COLORS="$(vivid generate gruvbox-dark)" 2>/dev/null
+
 #NeoVIM
 if which nvim >/dev/null 2>&1
 then

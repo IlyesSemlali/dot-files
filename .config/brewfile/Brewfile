@@ -5,6 +5,7 @@ brew eza
 brew git-delta
 brew jq
 brew rg
+brew vivid
 brew zoxide
 
 # tools
