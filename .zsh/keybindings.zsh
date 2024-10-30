@@ -113,3 +113,6 @@ bindkey '^[^[[C' emacs-forward-word
 bindkey '^[^[[D' emacs-backward-word
 bindkey \^U backward-kill-line
 
+# Delete path componenents instead of whole argument "bash-style"
+autoload -Uz select-word-style
+select-word-style bash
