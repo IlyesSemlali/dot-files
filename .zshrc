@@ -216,12 +216,6 @@ else
   export EDITOR=vim
 fi
 
-# Demo mode
-if [ -z DEMO_MODE ]
-then
-  export HOST=laptop
-fi
-
 # PATH
 insert_path "${HOME}/.local/bin"
 insert_path "${HOME}/.local/share/npm/bin"
