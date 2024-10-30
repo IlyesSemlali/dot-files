@@ -5,6 +5,7 @@
 .secrets
 .tags
 .terraform
+*.nocommit.*
 .tfstate
 .vim_session
 .zsh_history
