@@ -2,9 +2,8 @@ source ${HOME}/.zsh/plugin-manager.zsh
 source ${HOME}/.zsh/utils.zsh
 source ${HOME}/.zsh/options.zsh
 source ${HOME}/.zsh/homebrew.zsh
-source ${HOME}/.zsh/completion.zsh
 
-autoload -U compinit && compinit
+# autoload -U compinit && compinit
 
 ##################### Beginning of OMZ #####################
 
@@ -205,7 +204,7 @@ export SD_CAT="bat"
 export GOPATH="${HOME}/.local/share/go"
 
 # Themes for ls and tree using sharkdp/vivid
-(( $+commands[vivid] )) && export LS_COLORS="$(vivid generate gruvbox-dark)" 2>/dev/null
+(( $+commands[vivid] )) && export LS_COLORS="$(vivid generate ${HOME}/.themes/gruvbox-dark/vivid.yaml)" 2>/dev/null
 
 #NeoVIM
 if which nvim >/dev/null 2>&1
@@ -228,5 +227,6 @@ then
   source ${HOME}/.zshrc.d/local.zsh
 fi
 
+source ${HOME}/.zsh/completion.zsh
 source ${HOME}/.zshrc.tools
 source ${HOME}/.zshrc.d/project-management.zsh

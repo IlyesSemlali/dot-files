@@ -38,6 +38,7 @@ Zenika
 !.config/mimeapps.list
 !.npmrc
 !.profile
+!.themes/
 !.tfswitch.toml
 !.xinitrc
 !.zshrc
