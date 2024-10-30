@@ -44,4 +44,7 @@ zstyle ':completion:*' list-colors ''
 # # }
 # # compdef _dirs d
 
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' matcher-list \
+    'm:{[:lower:]}={[:upper:]}' \
+    '+r:|[._-]=* r:|=*' \
+    '+l:|=*'
