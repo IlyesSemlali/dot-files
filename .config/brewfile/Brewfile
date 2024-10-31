@@ -16,14 +16,11 @@ brew pgcli
 brew pre-commit
 
 # Infrastructure tools
-brew flux
-brew fluxcd/tap/flux
 brew gh
 brew krew
 brew vault
 
 # Fonts
-file ~/.config/brewfile/font-taps-Brewfile
 brew font-sauce-code-pro-nerd-font
 brew --HEAD font-comfortaa
 brew --HEAD font-noto-color-emoji
