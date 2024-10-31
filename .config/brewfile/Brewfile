@@ -18,7 +18,6 @@ brew pre-commit
 # Infrastructure tools
 brew gh
 brew krew
-brew vault
 
 # Fonts
 brew font-sauce-code-pro-nerd-font
