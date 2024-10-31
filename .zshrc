@@ -3,8 +3,6 @@ source ${HOME}/.zsh/utils.zsh
 source ${HOME}/.zsh/options.zsh
 source ${HOME}/.zsh/homebrew.zsh
 
-# autoload -U compinit && compinit
-
 ##################### Beginning of OMZ #####################
 
 # TODO: use the -g alias flag for work related stuff (project-management for instance)
@@ -51,8 +49,10 @@ fi
 
 
 
+###############################
+##### Aliases and exports #####
+###############################
 
-# Aliases and exports
 if which nvim >/dev/null 2>&1
 then
   alias ls="eza --icons --level 1"
@@ -63,9 +63,6 @@ else
   alias l="ls --full-time -ltrh"
   alias ll="ls --full-time -altrh"
 fi
-
-eval "$(zoxide init --cmd cd zsh)"
-eval "$(starship init zsh)"
 
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
 alias dv="cdi"
@@ -88,8 +85,23 @@ export SD_CAT="bat"
 
 export GOPATH="${HOME}/.local/share/go"
 
+###############################
+
+
+#####################################
+##### Shell customization tools #####
+#####################################
+
+# Starship prompt
+(( $+commands[starship] )) && eval "$(starship init zsh)" || export PS1="-> "
+
+# Fuzzy-find CD replacement
+(( $+commands[zoxide] )) && eval "$(zoxide init --cmd cd zsh)"
+
 # Themes for ls and tree using sharkdp/vivid
 (( $+commands[vivid] )) && export LS_COLORS="$(vivid generate ${HOME}/.themes/gruvbox-dark/vivid.yaml)" 2>/dev/null
+
+#####################################
 
 #NeoVIM
 if which nvim >/dev/null 2>&1
