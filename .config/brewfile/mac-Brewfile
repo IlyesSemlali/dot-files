@@ -12,7 +12,7 @@ brew make
 brew fzf
 brew htop
 brew libpq
-brew neovim --HEAD
+brew neovim
 brew starship
 brew tmux
 brew tree
