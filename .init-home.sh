@@ -6,8 +6,6 @@ if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
 fi
 
 
-OS=$(~/.local/bin/get_platform | cut -d '-' -f1)
-
 PATH="$PATH:~/.local/bin/"
 
 function install_from_git() {
@@ -43,12 +41,9 @@ function install_brew() {
     brew file install
 }
 
-function install_tools() {
+function install_tpm() {
 
     source ~/.zshrc
-
-    # ZPlug
-    install_from_git https://github.com/zplug/zplug ~/.local/share/zplug
 
     # tmux TPM
     install_from_git https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -56,59 +51,5 @@ function install_tools() {
     ${HOME}/.tmux/plugins/tpm/bin/install_plugins
 }
 
-function configure_zsh() {
-    echo "-- Installing OhMyZSH --"
-
-    rm -rf .oh-my-zsh/
-    mkdir -p ~/.cache
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --keep-zshrc --skip-chsh --unattended > /dev/null 2>&1"
-    install_from_git https://github.com/macunha1/zsh-terraform ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/terraform
-    git -C ~ reset --hard > /dev/null 2>&1
-
-    source ~/.zshrc
-
-    if ! zplug check --verbose; then
-        zplug install
-    fi
-}
-
-function _get_config_keys() {
-    grep '=' $1 | awk '{ print $1 }' | grep -v '^[\s-]*$'
-}
-
-while [[ $# -gt 0 ]]
-do
-    key="$1"
-
-    case $key in
-        -b|--brew)
-            BREW='true'
-            shift
-            ;;
-        -t|--tools)
-            TOOLS='true'
-            shift
-            ;;
-        -z|--zsh)
-            CONFIGURE_ZSH='true'
-            shift
-            ;;
-    esac
-done
-
-if [[ $BREW == 'true' ]]
-then
-    install_brew
-fi
-
-
-if [[ $TOOLS == 'true' ]]
-then
-    install_tools
-fi
-
-
-if [[ $CONFIGURE_ZSH == 'true' ]]
-then
-    configure_zsh
-fi
+install_brew
+install_tpm
