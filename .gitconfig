@@ -67,8 +67,7 @@
   prompt = false
   keepBackup = false
 
-# Detla
-
+# Delta
 [interactive]
   diffFilter = delta --color-only --features=interactive
 
@@ -96,7 +95,15 @@
   line-numbers-plus-style = green bold
   plus-emph-style = syntax bold "#306040"
 
+[color "status"]
+  header = white italic
+  branch = magenta italic
+  added = green bold
+  changed = yellow bold
+  untracked = white dim italic
+
 [user]
   name = Ilyès Semlali
+
 [tag]
   sort = v:refname
