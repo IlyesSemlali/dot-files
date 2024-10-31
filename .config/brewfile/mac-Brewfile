@@ -9,8 +9,6 @@ brew gnu-tar
 brew grep
 brew make
 
-brew colima
-brew docker
 brew fzf
 brew htop
 brew libpq
