@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+source "${HOME}/.local/lib/log"
+
 # HomeBrew
 if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
     eval $($HOME/.local/share/homebrew/bin/brew shellenv)
@@ -29,13 +31,9 @@ function install_brew() {
     source ~/.zshrc
 
     brew install rcmdnk/file/brew-file || {
-        echo
-        echo
-        echo "openssl probably failed to install, run:"
-        echo "brew install --debug --verbose openssl@1.1"
-        echo
-        echo "and press continue when prompted"
-        exit 1
+        log_error "init" "openssl probably failed to install, run:
+        brew install --debug --verbose openssl@1.1
+        and press continue when prompted"
     }
 
     brew file install
@@ -51,5 +49,5 @@ function install_tpm() {
     ${HOME}/.tmux/plugins/tpm/bin/install_plugins
 }
 
-install_brew
 install_tpm
+install_brew

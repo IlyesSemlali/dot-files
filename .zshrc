@@ -1,3 +1,5 @@
+source "${HOME}/.local/lib/log"
+
 source ${HOME}/.zsh/plugin-manager.zsh
 source ${HOME}/.zsh/utils.zsh
 source ${HOME}/.zsh/options.zsh
