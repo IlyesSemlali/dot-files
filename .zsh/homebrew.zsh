@@ -1,4 +1,3 @@
-
 # HomeBrew
 if [ -f ${HOME}/.local/share/homebrew/bin/brew ]
 then

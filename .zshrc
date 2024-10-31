@@ -3,6 +3,11 @@ source ${HOME}/.zsh/utils.zsh
 source ${HOME}/.zsh/options.zsh
 source ${HOME}/.zsh/homebrew.zsh
 
+# GoLang
+if [ -e ${GOPATH}/bin ]; then
+    append_path "$GOPATH/bin"
+fi
+
 ##################### Beginning of OMZ #####################
 
 # TODO: use the -g alias flag for work related stuff (project-management for instance)
@@ -99,7 +104,7 @@ export GOPATH="${HOME}/.local/share/go"
 (( $+commands[zoxide] )) && eval "$(zoxide init --cmd cd zsh)"
 
 # Themes for ls and tree using sharkdp/vivid
-(( $+commands[vivid] )) && export LS_COLORS="$(vivid generate ${HOME}/.themes/gruvbox-dark/vivid.yaml)" 2>/dev/null
+(( $+commands[vivid] )) && export LS_COLORS="$(vivid generate ${HOME}/.themes/gruvbox-dark/vivid.yaml)"
 
 #####################################
 
