@@ -21,7 +21,6 @@ brew wget
 brew yarn
 
 cask alacritty
-cask amethyst
 cask flycut
 cask keepassxc
 cask mos
