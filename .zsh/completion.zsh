@@ -51,3 +51,5 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  # zstyle ':completion:*:*
 # Show selected completion item
 zstyle ':completion:*:*:*:*:*' menu select
 
+export ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
+export ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
