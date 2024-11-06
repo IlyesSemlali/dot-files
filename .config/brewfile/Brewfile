@@ -4,6 +4,7 @@ brew catimg
 brew eza
 brew git-delta
 brew jq
+brew pre-commit
 brew rg
 brew vivid
 brew yq

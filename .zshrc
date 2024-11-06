@@ -92,6 +92,8 @@ export SD_CAT="bat"
 
 export GOPATH="${HOME}/.local/share/go"
 
+export PRE_COMMIT_ALLOW_NO_CONFIG=1
+
 ###############################
 
 

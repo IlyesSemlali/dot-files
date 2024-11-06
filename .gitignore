@@ -30,9 +30,11 @@ Zenika
 !.README.md
 !.init-home.sh
 
+!.git-hooks
 !.gitconfig
 !.gitignore
 !.gitignore_global
+!.pre-commit-config.yaml
 
 !.Xresources
 !.config/mimeapps.list

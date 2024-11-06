@@ -4,7 +4,7 @@
 
 # start templated
 INSTALL_PYTHON=/Users/mac-Z17ISEML/.local/share/homebrew/opt/pre-commit/libexec/bin/python3.13
-ARGS=(hook-impl --config=.pre-commit-config.yaml --hook-type=commit-msg)
+ARGS=(hook-impl --config=.pre-commit-config.yaml --hook-type=pre-commit)
 # end templated
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
