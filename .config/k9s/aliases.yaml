@@ -1,5 +1,5 @@
 aliases:
-  dp: deployments
+  dep: deployments
   sec: v1/secrets
   jo: jobs
   cr: clusterroles
@@ -7,3 +7,5 @@ aliases:
   ro: roles
   rb: rolebindings
   np: networkpolicies
+  ks: kustomization
+  hr: helmrelease
