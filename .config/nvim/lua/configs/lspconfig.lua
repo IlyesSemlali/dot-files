@@ -40,7 +40,7 @@ lspconfig.pylsp.setup {
 lspconfig.ltex.setup {
   settings = {
     ltex = {
-      language = "en-GB",
+      language = "en-US",
     },
   },
 }
