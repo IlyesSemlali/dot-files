@@ -33,10 +33,13 @@ function install_brew() {
   brew file install
 }
 
-function install_tpm() {
+function install_apt() {
+    # Install from APT
+    sudo apt update
+    sudo apt install nvim bat zsh exa zoxide fzf node
+}
 
-  gnupaths="${HOME}/.cache/gnupaths"
-  rm ${gnupaths}
+function install_tpm() {
 
   source ~/.zshrc
 
@@ -46,6 +49,7 @@ function install_tpm() {
   ${HOME}/.tmux/plugins/tpm/bin/install_plugins
 }
 
+install_apt
 install_tpm
 if [[ "$(uname)" == "Darwin" ]]; then
   install_brew
