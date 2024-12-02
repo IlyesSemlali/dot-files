@@ -35,7 +35,7 @@ function install_brew() {
 
 function install_apt() {
     sudo apt update
-    sudo apt install -y bat fzf zsh gpg nodejs starship
+    sudo apt install -y bat fzf zsh gpg nodejs build-essential
     sudo snap install --beta nvim --classic
 
     # Install zoxide
