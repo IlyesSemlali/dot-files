@@ -35,10 +35,15 @@ function install_brew() {
 
 function install_apt() {
     sudo apt update
-    sudo apt install -y bat fzf zsh gpg neovim nodejs
+    sudo apt install -y bat fzf zsh gpg neovim nodejs starship
 
     # Install zoxide
     curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
+    # Install starship
+    curl -sS https://starship.rs/install.sh -o install-starhip.sh
+    sudo sh ./install-starhip.sh -y
+    rm -f install_name_tool.sh
 
     # Install eza
     sudo mkdir -p /etc/apt/keyrings
