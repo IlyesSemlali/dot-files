@@ -33,10 +33,13 @@ function install_brew() {
   brew file install
 }
 
-function install_tpm() {
+function install_apt() {
+    # Install from APT
+    sudo apt update
+    sudo apt install nvim bat zsh exa zoxide fzf node
+}
 
-  gnupaths="${HOME}/.cache/gnupaths"
-  rm ${gnupaths}
+function install_tpm() {
 
   source ~/.zshrc
 
@@ -44,34 +47,6 @@ function install_tpm() {
   install_from_git https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   ${HOME}/.tmux/plugins/tpm/bin/clean_plugins
   ${HOME}/.tmux/plugins/tpm/bin/install_plugins
-}
-
-function _get_config_keys() {
-    grep '=' $1 | awk '{ print $1 }' | grep -v '^[\s-]*$'
-}
-
-function configure_xmonad() {
-    XMONAD_CONFIG_TEMPLATE="/home/$USER/.xmonad/lib/Config.hs.tpl"
-    XMONAD_CONFIG="/home/$USER/.xmonad/lib/Config.hs"
-
-    if [ ! -f $XMONAD_CONFIG ]
-    then
-        echo "-- Adding a fresh Xmonad config --"
-        sed "s/user/$USER/g" $XMONAD_CONFIG_TEMPLATE > $XMONAD_CONFIG
-    fi
-
-    for config_key in $(_get_config_keys $XMONAD_CONFIG_TEMPLATE)
-    do
-        if ! grep -q "^$config_key" $XMONAD_CONFIG
-        then
-            echo "-- Adding $config_key in Xmonad configuration --"
-            grep "^$config_key" $XMONAD_CONFIG_TEMPLATE >> $XMONAD_CONFIG
-        fi
-    done
-
-    cd ~/.xmonad/lib/
-    which ghc 2>&1 > /dev/null && ghc --make Config.hs
-    cd
 }
 
 install_tpm
