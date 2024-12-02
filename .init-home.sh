@@ -35,7 +35,8 @@ function install_brew() {
 
 function install_apt() {
     sudo apt update
-    sudo apt install -y bat fzf zsh gpg neovim nodejs starship
+    sudo apt install -y bat fzf zsh gpg nodejs starship
+    sudo snap install --beta nvim --classic
 
     # Install zoxide
     curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
