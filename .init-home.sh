@@ -24,19 +24,10 @@ function install_from_git() {
     unset repo
 }
 
-function install_brew() {
-    # Brew for mac
-    install_from_git https://github.com/Homebrew/brew ~/.local/share/homebrew
-
-    source ~/.zshrc
-
-    brew install rcmdnk/file/brew-file || {
-        log_error "init" "openssl probably failed to install, run:
-        brew install --debug --verbose openssl@1.1
-        and press continue when prompted"
-    }
-
-    brew file install
+function install_apt() {
+    # Install from APT
+    sudo apt update
+    sudo apt install nvim bat zsh exa zoxide fzf node
 }
 
 function install_tpm() {
@@ -49,5 +40,5 @@ function install_tpm() {
     ${HOME}/.tmux/plugins/tpm/bin/install_plugins
 }
 
+install_apt
 install_tpm
-install_brew
