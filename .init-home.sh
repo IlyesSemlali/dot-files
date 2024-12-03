@@ -6,7 +6,7 @@ PATH="$PATH:~/.local/bin/"
 
 function install_apt() {
     sudo apt update
-    sudo apt install -y bat fzf zsh gpg nodejs build-essential
+    sudo apt install -y bat fzf zsh gpg nodejs build-essential ripgrep
     sudo snap install --beta nvim --classic
 
     # Install zoxide
