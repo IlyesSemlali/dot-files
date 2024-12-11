@@ -1,8 +1,0 @@
-#!/bin/bash
-
-arch -x86_64 brew uninstall nvm
-arch -x86_64 brew install nvm
-
-mkdir -p ~/.nvm
-. ~/.local/share/homebrew/opt/nvm/nvm.sh
-nvm install node --lts
