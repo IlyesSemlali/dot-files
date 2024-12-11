@@ -13,6 +13,7 @@ brew fzf
 brew htop
 brew libpq
 brew neovim
+brew node
 brew starship
 brew tmux
 brew tree
@@ -26,5 +27,3 @@ cask keepassxc
 cask mos
 
 after brew link --force libpq
-
-after install_node
