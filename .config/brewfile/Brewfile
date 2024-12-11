@@ -25,7 +25,3 @@ brew krew
 cask font-sauce-code-pro-nerd-font
 cask font-comfortaa
 cask font-noto-color-emoji
-
-# Mac OS Specific packages (otherwise installed through packages)
-file ~/.config/brewfile/mac-Brewfile
-
