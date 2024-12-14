@@ -44,12 +44,12 @@ map("n", "<leader>cd", vim.lsp.buf.definition, { desc = "LSP: Go to definition" 
 map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "LSP: Rename" })
 
 -- LuaSnip
-map({ "i", "s" }, "<C-S>", function()
-  require("luasnip").jump(1)
+map({ "i", "s" }, "<C-H>", function()
+  require("luasnip").jump(-1)
 end, { silent = true })
 
-map({ "i", "s" }, "<C-X>", function()
-  require("luasnip").jump(-1)
+map({ "i", "s" }, "<C-L>", function()
+  require("luasnip").jump(1)
 end, { silent = true })
 
 -- Undo-Tree
