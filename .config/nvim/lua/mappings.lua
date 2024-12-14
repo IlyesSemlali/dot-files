@@ -31,12 +31,17 @@ map("n", "<leader>ch", "<cmd> NvCheatsheet <CR>", { desc = "Mapping cheatsheet" 
 
 -- Telescope
 local telescope = require "telescope.builtin"
+map("n", "<leader>ch", telescope.keymaps, { desc = "Key Mappings" })
 map("n", "<leader>ff", telescope.find_files, { desc = "Find all" })
 map("n", "<leader>fg", telescope.live_grep, { desc = "Live grep" })
-map("n", "<space>e", telescope.diagnostics)
-map("n", "[d", vim.diagnostic.goto_prev)
-map("n", "]d", vim.diagnostic.goto_next)
-map("n", "<leader>q", vim.diagnostic.setloclist)
+map("n", "<space>fd", telescope.diagnostics, { desc = "Diagnostics" })
+
+-- LSP Actions
+map("n", "<leader>ce", vim.diagnostic.goto_next, { desc = "Diagnostics: next error" })
+map("n", "<leader>cE", vim.diagnostic.goto_prev, { desc = "Diagnostics: previous error" })
+map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Diagnostics: set loclist" })
+map("n", "<leader>cd", vim.lsp.buf.definition, { desc = "LSP: Go to definition" })
+map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "LSP: Rename" })
 
 -- LuaSnip
 map({ "i", "s" }, "<C-S>", function()
