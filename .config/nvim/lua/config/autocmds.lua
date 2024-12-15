@@ -19,11 +19,3 @@ autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[silent! %s/\s\+$//]],
 })
-
--- Automatically close NvimTree on quit
--- from https://github.com/nvim-tree/nvim-tree.lua/wiki/Auto-Close
-autocmd({ "QuitPre" }, {
-  callback = function()
-    vim.cmd "NvimTreeClose"
-  end,
-})
