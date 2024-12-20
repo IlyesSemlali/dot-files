@@ -1,7 +1,7 @@
 # Gruvbox-dark from:
 # https://github.com/morhetz/gruvbox?tab=readme-ov-file#palette
 [colors.bright]
-black    = "0x1d2021" # Gruvbox-dark bg0_h
+black    = "0x2d3031" # Gruvbox-dark bg0_h # brighter by 4
 red      = "0x0b4934" # Gruvbox-dark red (2nd row)
 green    = "0xb8bb26" # Gruvbox-dark green (2nd row)
 yellow   = "0xfabd2f" # Gruvbox-dark yellow (2nd row)
@@ -21,7 +21,7 @@ cyan     = "0x689d6a" # Gruvbox-dark aqua (1st row)
 white    = "0xfbf1c7" # Gruvbox-dark fg
 
 [colors.primary]
-background = "0x211e1e" # Custom
+background = "0x1d1b1b" # Custom
 foreground = "0xfbf1c7" # Gruvbox-dark fg0
 
 [colors.selection]
