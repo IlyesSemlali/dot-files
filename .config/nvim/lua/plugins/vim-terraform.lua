@@ -1,6 +1,7 @@
 return {
 	{
 		"hashivim/vim-terraform",
-		ft = { "terraform", "hcl" },
+		-- we also enable markdown for the fenced code
+		ft = { "markdown", "terraform", "hcl" },
 	},
 }

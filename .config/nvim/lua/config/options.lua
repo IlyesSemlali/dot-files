@@ -4,6 +4,13 @@ local global = vim.g
 -- Native Options
 global.mapleader = " "
 global.maplocalleader = "\\"
+global.markdown_fenced_languages = {
+	"bash",
+	"json",
+	"python",
+	"terraform",
+	"yaml",
+}
 
 option.number = true
 option.relativenumber = true
