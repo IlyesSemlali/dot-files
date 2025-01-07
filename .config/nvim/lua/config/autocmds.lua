@@ -11,3 +11,13 @@ autocmd({ "BufWritePre" }, {
 	pattern = { "*" },
 	command = [[silent! %s/\s\+$//]],
 })
+
+-- Open help pages in new tabs
+autocmd({ "BufEnter" }, {
+	pattern = { "*.txt" },
+	callback = function()
+		if vim.bo.filetype == "help" then
+			vim.cmd("wincmd T")
+		end
+	end,
+})
