@@ -10,7 +10,7 @@ return {
 					timeout_ms = 1000,
 				},
 				formatters_by_ft = {
-					json = { "fixjson" },
+					json = { "jq" },
 					lua = { "stylua" },
 					python = { "black" },
 					terraform = { "terraform_fmt" },
