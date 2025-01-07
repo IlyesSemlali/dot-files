@@ -1,3 +1,5 @@
+-- The null-ls is a complement to Mason and allows to install automatically
+-- formatters (which Mason cannot do on its own)
 return {
 	{
 		"jay-babu/mason-null-ls.nvim",

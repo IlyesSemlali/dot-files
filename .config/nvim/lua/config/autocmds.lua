@@ -11,3 +11,9 @@ autocmd({ "BufWritePre" }, {
 	pattern = { "*" },
 	command = [[silent! %s/\s\+$//]],
 })
+
+-- Focus on previous buffer when closing the current one
+autocmd({ "BufDelete" }, {
+	pattern = { "*" },
+	command = [[silent! bprevious]],
+})

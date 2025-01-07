@@ -1,3 +1,5 @@
+-- Gitsigns adds git signs in the number column, and more importantly
+-- adds git related commands such as: diff, stage_hunk, blame line...
 return {
 	{
 		"lewis6991/gitsigns.nvim",

@@ -1,5 +1,8 @@
-local lspconfig = require("lspconfig")
+-- The LSP Config will configure NVim's builtin LSP capabilities with the matching default
+-- (and overriden) parameters (what happens on LSP Server attach, their capabilities and so on).
+-- To install LSP Servers use Mason, which is configured in ~/.config/nvim/lua/plugins/mason.lua
 
+local lspconfig = require("lspconfig")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities.textDocument.completion.completionItem = {
