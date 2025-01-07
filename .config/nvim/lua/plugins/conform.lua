@@ -14,7 +14,6 @@ return {
 					lua = { "stylua" },
 					python = { "black" },
 					terraform = { "terraform_fmt" },
-					["*"] = { "injected" },
 				},
 			})
 			vim.api.nvim_create_autocmd("BufWritePre", {
