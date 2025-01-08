@@ -6,7 +6,7 @@ return {
 			vim.o.showmode = false
 			require("lualine").setup({
 				options = {
-					disabled_filetypes = { "diff", "undotree", "NvimTree" },
+					globalstatus = true,
 				},
 			})
 		end,
