@@ -4,7 +4,6 @@ source ${HOME}/.zsh/utils.zsh
 source ${HOME}/.zshrc.d/plugin-manager.zsh
 source ${HOME}/.zshrc.d/options.zsh
 source ${HOME}/.zshrc.d/homebrew.zsh
-source ${HOME}/.zshrc.d/mini-omz.zsh
 
 ###############################
 ##### Aliases and exports #####
@@ -13,12 +12,12 @@ source ${HOME}/.zshrc.d/mini-omz.zsh
 if which eza >/dev/null 2>&1
 then
   alias ls="eza --icons --level 1"
-  alias l="eza -l --level 1 --git --no-permissions"
-  alias ll="eza -al --level 1 --git-ignore --git"
+  alias  l="eza --git-ignore --git --no-user --no-permissions --level 1 -l"
+  alias ll="eza --git --no-user --no-permissions --level 1 -l"
+  alias la="eza --git-ignore --git --level 1 -al"
 else
-  alias ls="ls --color=auto"
-  alias l="ls --full-time -ltrh"
-  alias ll="ls --full-time -altrh"
+  alias l='ls --color=auto -lh'
+  alias ll='ls --color=auto -lah'
 fi
 
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
