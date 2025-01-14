@@ -60,7 +60,7 @@ fi
 ##### Aliases and exports #####
 ###############################
 
-if which nvim >/dev/null 2>&1
+if which eza >/dev/null 2>&1
 then
   alias ls="eza --icons --level 1"
   alias l="eza -l --level 1 --git --no-permissions"
