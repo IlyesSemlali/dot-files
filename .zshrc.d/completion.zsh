@@ -1,3 +1,7 @@
+# Check if compinit/complete is loaded
+command -v compinit >/dev/null || {
+	autoload -Uz +X compinit && compinit
+}
 # # TODO: Add comment for each completion style and tidy this mess up
 #
 # zstyle ':urlglobber' url-other-schema
@@ -53,3 +57,36 @@ zstyle ':completion:*:*:*:*:*' menu select
 
 export ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
 export ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
+
+# Delta
+compdef _gnu_generic delta
+
+# Terraform
+if which terraform > /dev/null 2>&1
+then
+  command -v complete >/dev/null || {
+    autoload -U +X bashcompinit && bashcompinit
+  }
+
+  alias tf=terraform
+  complete -o nospace -C ~/.local/bin/terraform terraform
+fi
+
+# Kubernetes
+if which kubectl > /dev/null 2>&1
+then
+  alias k=kubectl
+  source <(kubectl completion zsh)
+fi
+
+# Helm
+if which helm > /dev/null 2>&1
+then
+  source <(helm completion zsh)
+fi
+
+# Flux
+if which flux > /dev/null 2>&1
+then
+  source <(flux completion zsh)
+fi
