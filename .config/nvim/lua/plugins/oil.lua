@@ -1,6 +1,8 @@
 -- This is the file manager, can be used as a project
 -- tree, but it's supposably best to use Telescope for
 -- file navigation
+--
+-- TODO: Set highlight colors to match eza
 return {
 	{
 		"stevearc/oil.nvim",
