@@ -68,12 +68,12 @@ return {
 			})
 
 			local builtin = require("telescope.builtin")
-			map("n", "<leader>ch", builtin.keymaps, { desc = "Key Mappings" })
-			map("n", "<leader>fo", builtin.oldfiles, { desc = "Old Files" })
-			map("n", "<leader>ff", builtin.find_files, { desc = "Find all" })
-			map("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
-			map("n", "<leader>fd", builtin.diagnostics, { desc = "Diagnostics" })
-			map("n", "<leader>fr", builtin.registers, { desc = "Show Registers" })
+			map("n", "<leader>ch", builtin.keymaps, { desc = "Telescope: Key Mappings" })
+			map("n", "<leader>fo", builtin.oldfiles, { desc = "Telescope: Old Files" })
+			map("n", "<leader>ff", builtin.find_files, { desc = "Telescope: Find all" })
+			map("n", "<leader>fg", builtin.live_grep, { desc = "Telescope: Live grep" })
+			map("n", "<leader>fd", builtin.diagnostics, { desc = "Telescope: Diagnostics" })
+			map("n", "<leader>fr", builtin.registers, { desc = "Telescope: Show Registers" })
 		end,
 	},
 }

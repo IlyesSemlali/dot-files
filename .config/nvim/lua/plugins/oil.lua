@@ -41,7 +41,7 @@ return {
 
 			map("n", "<leader><space>", function()
 				require("oil").open_float()
-			end, { silent = true })
+			end, { silent = true, desc = "Oil: Open in a floating window" })
 		end,
 	},
 }

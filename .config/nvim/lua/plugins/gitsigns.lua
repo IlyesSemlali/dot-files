@@ -5,43 +5,45 @@ return {
 		"lewis6991/gitsigns.nvim",
 		lazy = false,
 		config = function()
-			-- local map = vim.keymap.set
+			local map = vim.keymap.set
 
 			local gitsigns = require("gitsigns")
-			local function map(mode, l, r, opts)
-				opts = opts or {}
-				vim.keymap.set(mode, l, r, opts)
-			end
+			-- local function map(mode, l, r, opts)
+			-- 	opts = opts or {}
+			-- 	vim.keymap.set(mode, l, r, opts)
+			-- end
 
 			gitsigns.setup()
 
-			-- TODO: add descriptions to all these new mappings
-			map("n", "<leader>gs", gitsigns.stage_hunk)
+			map("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Git: stage buffer" })
+			map("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Git: stage hunk" })
 			map("v", "<leader>gs", function()
 				gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-			end)
+			end, { desc = "Git: stage hunk" })
 
-			map("n", "<leader>gr", gitsigns.reset_hunk)
+			map("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Git: reset buffer" })
+			map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Git: reset hunk" })
 			map("v", "<leader>gr", function()
 				gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-			end)
+			end, { desc = "Git: reset hunk" })
 
-			map("n", "<leader>gu", gitsigns.undo_stage_hunk)
-			map("n", "<leader>gp", gitsigns.preview_hunk_inline)
+			map("n", "<leader>gp", gitsigns.preview_hunk_inline, { desc = "Git: preview hunk" })
 
-			map("n", "<leader>gS", gitsigns.stage_buffer)
-			map("n", "<leader>gR", gitsigns.reset_buffer)
+			map("n", "<C-p>", function()
+				gitsigns.nav_hunk("prev")
+			end, { desc = "Git: previous hunk" })
+
+			map("n", "<C-n>", function()
+				gitsigns.nav_hunk("next")
+			end, { desc = "Git: next hunk" })
 
 			map("n", "<leader>gb", function()
 				gitsigns.blame_line({ full = true })
-			end)
+			end, { desc = "Git: blame" })
 
-			-- map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
-			map("n", "<leader>gd", gitsigns.diffthis)
-
-			map("n", "<leader>gD", function()
+			map("n", "<leader>gd", function()
 				gitsigns.diffthis("~")
-			end)
+			end, { desc = "Git: diff" })
 		end,
 	},
 }
