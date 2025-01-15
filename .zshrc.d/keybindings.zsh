@@ -104,11 +104,6 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
-# emacs keybindings
-bindkey -e
-
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
 bindkey '^[^[[C' emacs-forward-word
 bindkey '^[^[[D' emacs-backward-word
 bindkey \^U backward-kill-line
