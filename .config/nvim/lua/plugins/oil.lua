@@ -18,7 +18,7 @@ return {
 					["<C-h>"] = { "actions.select", opts = { horizontal = true } },
 					["<C-t>"] = { "actions.select", opts = { tab = true } },
 					["<C-p>"] = "actions.preview",
-					["<Leader><Space>"] = { "actions.close", mode = "n" },
+					["<Esc>"] = { "actions.close", mode = "n" },
 					["-"] = { "actions.parent", mode = "n" },
 					["_"] = { "actions.open_cwd", mode = "n" },
 					["<C-.>"] = { "actions.toggle_hidden", mode = "n" },
@@ -39,9 +39,13 @@ return {
 				},
 			})
 
-			map("n", "<leader><space>", function()
+			map("n", "-", function()
 				require("oil").open_float()
-			end, { silent = true, desc = "Oil: Open in a floating window" })
+			end, { silent = true, desc = "Oil: Open file's parent directory" })
+
+			map("n", "_", function()
+				require("oil").open_float(vim.fn.getcwd())
+			end, { silent = true, desc = "Oil: Open working directory" })
 		end,
 	},
 }
