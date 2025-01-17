@@ -3,6 +3,7 @@ source "${HOME}/.local/lib/log"
 source ${HOME}/.zsh/utils.zsh
 source ${HOME}/.zshrc.d/plugin-manager.zsh
 source ${HOME}/.zshrc.d/options.zsh
+source ${HOME}/.zshrc.d/homebrew.zsh
 
 ###############################
 ##### Aliases and exports #####
