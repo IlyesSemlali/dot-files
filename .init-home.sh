@@ -2,12 +2,6 @@
 
 source "${HOME}/.local/lib/log"
 
-# HomeBrew
-if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
-    eval $($HOME/.local/share/homebrew/bin/brew shellenv)
-fi
-
-
 PATH="$PATH:~/.local/bin/"
 
 function install_from_git() {
@@ -22,21 +16,6 @@ function install_from_git() {
     fi
     unset install_path
     unset repo
-}
-
-function install_brew() {
-    # Brew for mac
-    install_from_git https://github.com/Homebrew/brew ~/.local/share/homebrew
-
-    source ~/.zshrc
-
-    brew install rcmdnk/file/brew-file || {
-        log_error "init" "openssl probably failed to install, run:
-        brew install --debug --verbose openssl@1.1
-        and press continue when prompted"
-    }
-
-    brew file install
 }
 
 function install_tpm() {
@@ -78,5 +57,4 @@ function configure_xmonad() {
 }
 
 install_tpm
-install_brew
 configure_xmonad
