@@ -18,9 +18,6 @@ return {
 					-- lua
 					"lua_ls",
 
-          -- Nix
-          "nil_ls",
-
 					-- Text
 					"ltex",
 

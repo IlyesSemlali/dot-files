@@ -30,7 +30,6 @@ local servers = {
 	"html",
 	"ltex",
 	"lua_ls",
-  "nil",
 	"rust_analyzer",
 	"terraformls",
 }
