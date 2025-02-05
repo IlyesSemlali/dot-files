@@ -17,6 +17,7 @@ brew jira-cli
 brew node
 brew pgcli
 brew pre-commit
+brew warrensbox/tap/tfswitch
 brew watch
 
 # Infrastructure tools
