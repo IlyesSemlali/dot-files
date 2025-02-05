@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# unlocks project manager
+#
+# This will remove project lock if no session is running
+
+source "${HOME}/.local/lib/log"
+
+if [ "$(tmux list-sessions | wc -l)" -gt 0 ]; then
+
+  log_error "project" "sessions are currently running, keeping lock in place"
+
+else
+
+  rm ~/.cache/project/lock
+  log_info "project" "lock removed"
+
+fi
