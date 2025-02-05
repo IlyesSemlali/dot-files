@@ -11,7 +11,7 @@ source "${HOME}/.local/lib/log"
 projects_path="${PROJECTS_PATH:-${HOME}/projects}"
 
 LOCK_FILE="${HOME}/.cache/project/lock"
-LOG_FILE="/tmp/projectlog"
+LOG_FILE="/tmp/${USER}-projectlog"
 CACHE_FILE="${HOME}/.cache/project/cache"
 LAST_PROJECT_FILE="${HOME}/.cache/project/last"
 
