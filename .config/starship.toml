@@ -4,14 +4,14 @@ format = """
 [](color_bg1)\
 $os\
 $username\
-[](bg:color_yellow fg:color_bg1)\
+[►](bg:color_yellow fg:color_bg1)\
 $git_state\
 $git_status\
-[](fg:color_yellow bg:color_aqua)\
+[►](fg:color_yellow bg:color_aqua)\
 $git_branch\
-[](fg:color_aqua bg:color_gray)\
+[►](fg:color_aqua bg:color_gray)\
 $directory\
-[](fg:color_gray)\
+[►](fg:color_gray)\
 $kubernetes\
 $terraform\
 $line_break$character"""
@@ -32,7 +32,7 @@ color_orange   = '#d65d0e'
 color_gray     = '#665c54'
 
 [os]
-disabled = false
+disabled = true
 style = "bg:color_bg1 fg:color_fg0"
 format = "[ $symbol]($style)"
 
@@ -71,9 +71,9 @@ truncation_symbol = "…/"
 [git_state]
 style = "bg:color_yellow"
 format = '[ $state( $progress_current of $progress_total) (fg:color_fg0 bg:color_yellow)]($style)'
-rebase = ''
-bisect = '󰃻'
-cherry_pick = ''
+rebase = 'R'
+bisect = 'B'
+cherry_pick = 'C'
 
 [git_status]
 style = "bg:color_yellow"
@@ -92,27 +92,27 @@ ignore_branches = ["linux", "mac-os"]
 disabled = false
 symbol = '󱃾'
 style = "fg:color_blue"
-format = '[ $symbol $context \($namespace\)]($style)'
+format = '[ $context \($namespace\)]($style)'
 
 [terraform]
 disabled = false
 style = "fg:color_purple"
-format = '[  $version]($style) '
+format = '[ $version]($style) '
 
 [time]
 disabled = false
 time_format = "%R"
 style = "bg:color_bg1"
-format = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'
+format = '[[⏲  $time ](fg:color_fg0 bg:color_bg1)]($style)'
 
 [line_break]
 disabled = false
 
 [character]
 disabled = false
-success_symbol = '[ ](bold fg:color_green)'
-error_symbol = '[ ](bold fg:color_red)'
-vimcmd_symbol = '[ ](bold fg:color_green)'
-vimcmd_replace_one_symbol = '[ ](bold fg:color_purple)'
-vimcmd_replace_symbol = '[ ](bold fg:color_purple)'
-vimcmd_visual_symbol = '[ ](bold fg:color_yellow)'
+success_symbol = '[ ↪](bold fg:color_green)'
+error_symbol = '[ ↪](bold fg:color_red)'
+vimcmd_symbol = '[ ↪](bold fg:color_green)'
+vimcmd_replace_one_symbol = '[ ↪](bold fg:color_purple)'
+vimcmd_replace_symbol = '[ ↪](bold fg:color_purple)'
+vimcmd_visual_symbol = '[ ↪](bold fg:color_yellow)'
