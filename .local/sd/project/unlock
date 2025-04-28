@@ -6,13 +6,13 @@
 
 source "${HOME}/.local/lib/log"
 
-if [ "$(tmux list-sessions | wc -l)" -gt 0 ]; then
-
+if [ "$(tmux list-sessions >/dev/null 2>&1 | wc -l )" -gt 0 ]
+then
   log_error "project" "sessions are currently running, keeping lock in place"
 
 else
 
-  rm ~/.cache/project/lock
+  rm -f ~/.cache/project/lock
   log_info "project" "lock removed"
 
 fi
