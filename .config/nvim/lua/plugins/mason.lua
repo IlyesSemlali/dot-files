@@ -3,45 +3,45 @@
 -- and configured in conform (~/.config/nvim/lua/plugins/conform.lua)
 
 return {
-	{
-		"williamboman/mason.nvim",
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		opts = function()
-			require("mason").setup()
-			require("mason-lspconfig").setup({
+  {
+    "williamboman/mason.nvim",
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    opts = function()
+      require("mason").setup()
+      require("mason-lspconfig").setup {
 
-				-- List of available lspconfigs are present here:
-				-- https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#available-lsp-servers
-				ensure_installed = {
-					-- lua
-					"lua_ls",
+        -- List of available lspconfigs are present here:
+        -- https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#available-lsp-servers
+        ensure_installed = {
+          -- lua
+          "lua_ls",
 
           -- Nix
           "nil_ls",
 
-					-- Text
-					"ltex",
+          -- Text
+          "ltex",
 
-					-- bash
-					"bashls",
+          -- bash
+          "bashls",
 
-					-- python
-					"pyright",
-					"pylsp",
+          -- python
+          "pyright",
+          "pylsp",
 
-					-- Ansible
-					"ansiblels",
+          -- Ansible
+          "ansiblels",
 
-					-- Kubernetes
-					"yamlls",
-					"helm_ls",
+          -- Kubernetes
+          "yamlls",
+          "helm_ls",
 
-					-- Terraform
-					"terraformls",
-				},
-			})
-		end,
-	},
+          -- Terraform
+          "terraformls",
+        },
+      }
+    end,
+  },
 }

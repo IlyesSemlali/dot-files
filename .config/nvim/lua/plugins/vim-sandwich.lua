@@ -1,6 +1,6 @@
 return {
-	{
-		"machakann/vim-sandwich",
-		lazy = false,
-	},
+  {
+    "machakann/vim-sandwich",
+    lazy = false,
+  },
 }
