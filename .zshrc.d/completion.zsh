@@ -1,6 +1,6 @@
 # Load compinit only once
 command -v compinit >/dev/null || {
-	autoload -Uz +X compinit && compinit
+	autoload -Uz +X compinit && compinit -u
 }
 
 
@@ -36,7 +36,7 @@ compdef _gnu_generic delta
 if which terraform > /dev/null 2>&1
 then
   command -v complete >/dev/null || {
-    autoload -U +X bashcompinit && bashcompinit
+    autoload -U +X bashcompinit && bashcompinit -u
   }
 
   alias tf=terraform
