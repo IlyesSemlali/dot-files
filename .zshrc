@@ -23,6 +23,7 @@ alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.
 alias dv="cdi"
 alias pj="sd project"
 alias cpj="cd ${HOME}/projects/$PROJECT/"
+alias -g spj="source ${HOME}/projects/$PROJECT/.project.d/zshrc"
 
 unset SSH_ASKPASS
 
