@@ -5,11 +5,11 @@ local global = vim.g
 global.mapleader = " "
 global.maplocalleader = "\\"
 global.markdown_fenced_languages = {
-  "bash",
-  "json",
-  "python",
-  "terraform",
-  "yaml",
+	"bash",
+	"json",
+	"python",
+	"terraform",
+	"yaml",
 }
 
 option.number = true
