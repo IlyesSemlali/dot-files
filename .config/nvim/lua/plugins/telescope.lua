@@ -18,17 +18,17 @@ return {
 						height = 0.9,
 						width = 0.9,
 
-						preview_cutoff = 20,
-						preview_width = 70,
 						prompt_position = "bottom",
 						bottom_pane = {
 							height = 25,
 							preview_cutoff = 120,
 							prompt_position = "top",
+							preview_width = 70,
 						},
 						center = {
 							height = 0.6,
 							preview_cutoff = 40,
+							preview_width = 70,
 							prompt_position = "top",
 							width = 0.5,
 						},
@@ -39,6 +39,7 @@ return {
 						-- },
 						horizontal = {
 							preview_cutoff = 120,
+							preview_width = 70,
 						},
 						vertical = {},
 					},
