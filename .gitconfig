@@ -81,6 +81,7 @@
 
 [delta "decorations"]
   line-numbers = true
+  tabs = 2
   commit-style = omit
   file-style = omit
 
