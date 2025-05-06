@@ -57,20 +57,30 @@ lspconfig.pylsp.setup({
 	},
 })
 
+local lang
+if not os.getenv("LTEX_LANG") then
+	lang = "auto"
+else
+	lang = os.getenv("LTEX_LANG")
+end
+
 lspconfig.ltex.setup({
 	capabilities = capabilities,
-	-- If you need to disable a specific rule, set the log level to debug for the LSP:
-	-- on_attach = function()
-	-- 	vim.lsp.set_log_level("debug")
-	-- end,
+	on_attach = function()
+		-- If you need to disable a specific rule, set the log level to debug for the LSP:
+		-- vim.lsp.set_log_level("debug")
+
+		require("ltex_extra").setup({
+			path = vim.fn.expand("~") .. "/.local/share/ltex",
+		})
+	end,
 
 	settings = {
 		ltex = {
-			language = "auto",
+			language = lang,
 			disabledRules = {
 				["fr"] = { "FRENCH_WHITESPACE" },
 			},
-			--
 		},
 	},
 })

@@ -122,3 +122,9 @@ Zenika
 !.local/bin/wwwwrap
 !.local/lib/
 !.local/sd/
+
+!.local/share/
+.local/share/*
+!.local/share/ltex/
+.local/share/ltex/*
+!.local/share/ltex/ltex.dictionary.*
