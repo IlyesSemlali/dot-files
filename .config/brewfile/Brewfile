@@ -21,6 +21,7 @@ brew pre-commit
 # Infrastructure tools
 brew gh
 brew krew
+brew tflint
 
 # Fonts
 cask font-sauce-code-pro-nerd-font
