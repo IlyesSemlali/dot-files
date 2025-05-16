@@ -4,8 +4,12 @@ return {
 		lazy = false,
 		config = function()
 			local global = vim.g
-			local recipes = global["sandwich#default_recipes"]
 
+			-- Load default recipes
+			vim.cmd("runtime macros/sandwich/recipes.vim")
+			local recipes = global["sandwich#default_recipes"] or {}
+
+			-- Add your custom recipe
 			table.insert(recipes, {
 				buns = { "*", "*" },
 				kind = { "add", "replace" },
@@ -14,6 +18,7 @@ return {
 				linewise = 0,
 			})
 
+			-- Assign final recipe list
 			global["sandwich#recipes"] = recipes
 		end,
 	},
