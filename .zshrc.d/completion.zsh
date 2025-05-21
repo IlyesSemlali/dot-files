@@ -61,3 +61,10 @@ if which flux > /dev/null 2>&1
 then
   source <(flux completion zsh)
 fi
+
+# Just
+if which just > /dev/null 2>&1
+then
+  source <(just --completions zsh)
+fi
+
