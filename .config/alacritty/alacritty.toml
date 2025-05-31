@@ -17,7 +17,7 @@ style = "Medium"
 style = "Light Italic"
 
 [font.normal]
-family = "SourceCodePro"
+family = "SauceCodePro Nerd Font"
 style = "Regular"
 
 [font.offset]
