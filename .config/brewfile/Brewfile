@@ -12,6 +12,7 @@ brew zoxide
 
 # tools
 tap ankitpokhrel/jira-cli
+brew borgbackup
 brew go
 brew just
 brew mise
