@@ -27,3 +27,16 @@ function log_error() {
     echo -e "${PURPLE}[${1}]${BRIGHT} - ${RED}${@:2}${NC}"
   fi
 }
+
+function log_debug() {
+  if [ -z "$DEBUG" ]; then
+    return 0
+  fi
+
+  if [ $# -lt 2 ]; then
+    log_error "log library" "$# arguments were passed, needs at least 2"
+    return 1
+  else
+    echo -e "${PURPLE}[${1}]${BRIGHT} - ${PURPLE}${@:2}${NC}"
+  fi
+}
