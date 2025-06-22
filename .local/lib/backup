@@ -1,0 +1,270 @@
+# vim: set ft=bash
+# Bash library to handle backups
+
+source "${HOME}/.local/lib/log"
+
+
+function check_if_declared() {
+  if [ $# -ne 1 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+  else
+    backup_name=${1}
+  fi
+
+  BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
+
+  if yq -e '.backups | has("'${backup_name}'")' ${BACKUP_CONFIG_FILE} &>/dev/null; then
+    return 0
+  else
+    log_error "backup" "${backup_name} not declared in ${BACKUP_CONFIG_FILE}"
+    return 1
+  fi
+}
+
+function config_read_path () {
+  if [ $# -ne 1 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+  else
+    backup_name=${1}
+  fi
+
+  BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
+
+  echo $(yq '.backups["'${backup_name}'"] | .path // (. | key)' ${BACKUP_CONFIG_FILE})
+  unset backup_name
+}
+
+
+function config_read_basedir () {
+  if [ $# -ne 1 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+  else
+    backup_name=${1}
+  fi
+
+  BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
+
+  echo $(yq '.backups["'${repo_name}'"] | .basedir // strenv(HOME)' ${BACKUP_CONFIG_FILE})
+}
+
+
+function config_read_excludes () {
+  if [ $# -ne 1 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+  else
+    backup_name=${1}
+  fi
+
+  BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
+
+  echo $(yq '.backups["'${repo_name}'"] | .excludes // strenv(HOME) + "/" + (. | key)' ${BACKUP_CONFIG_FILE})
+}
+
+
+function init_repo() {
+  if [ $# -ne 1 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+  else
+    backup_name=${1}
+  fi
+
+  if (borg check "${BORG_REPO}/${backup_name}" &>/dev/null); then
+    log_info "backup" "the \"${backup_name}\" repo already exists"
+
+  elif (borg init --encryption none "${BORG_REPO}/${backup_name}" &>/dev/null); then
+    log_info "backup" "successfully created the \"${backup_name}\" repo"
+
+  else
+    log_error "backup" "couldn't create ${backup_name} repo"
+    exit 1
+  fi
+}
+
+
+function create_archive () {
+  # Number of seconds since midnight
+  # to differenciate multiple archives in the same day
+  eval "$(date +'today=%F now=%s')"
+  midnight=$(date -d "$today 0" +%s)
+
+  if [ $# -eq 1 ]; then
+
+    backup_name=${1}
+    archive_name="$(hostname -s)-$(date --iso-8601)-$((now - midnight))"
+
+  elif [ $# -eq 2 ]; then
+    backup_name=${1}
+    archive_name=${2}
+
+  else
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+
+  fi
+
+  path=$(config_read_path ${backup_name})
+  basedir=$(config_read_basedir ${backup_name})
+
+  if [ "${backup_name}" != "home" ]; then
+    check_if_declared ${backup_name} || exit 1
+  fi
+
+
+  if (
+    cd ${basedir} 2> /dev/null || (log_error "backup" "couldn't change directory to ${basedir}" && exit 1)
+    borg create --compression lzma "${BORG_REPO}/${backup_name}::${archive_name}" ${path}
+  )
+  then
+    log_info "backup" "successfully created archive ${BORG_REPO}/${backup_name}::${archive_name}"
+
+  else
+    log_error "backup" "couldn't create archive ${BORG_REPO}/${backup_name}::${archive_name}"
+    exit 1
+
+  fi
+}
+
+
+function list_archives () {
+  if [ $# -ne 1 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+  fi
+
+  repo_name=${1}
+
+  if (borg list --json "${BORG_REPO}/${repo_name}" | yq '.archives[] | .name' )
+  then
+    true
+  else
+    log_error "backup" "couldn't fetch archives list for ${repo_name}"
+    exit 1
+  fi
+}
+
+
+function print_archive_details () {
+  if [ $# -ne 2 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+  fi
+
+  repo_name=${1}
+  archive_name=${2}
+
+  if (borg info "${BORG_REPO}/${repo_name}::${archive_name}")
+  then
+    true
+  else
+    log_error "backup" "couldn't fetch details for ${archive_name}"
+    exit 1
+  fi
+}
+
+
+function mount_repo () {
+  if [ $# -ne 1 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+  fi
+
+  repo_name=${1}
+
+  if (borg mount "${BORG_REPO}/${repo_name}")
+  then
+    true
+  else
+    log_error "backup" "couldn't mount ${repo_name}"
+    exit 1
+  fi
+}
+
+
+function find_archived_file () {
+  log_error "backup" "not implemented yet"
+  # TODO:
+  #       - mount repo
+  #       - fuzzy find file
+  #       - output a json with a list of archives and the full name of that file
+}
+
+
+function restore_archive () {
+  if [ $# -ne 2 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+
+  else
+    backup_name=${1}
+    archive_name=${2}
+  fi
+
+  path=$(config_read_path ${backup_name})
+  basedir=$(config_read_basedir ${backup_name})
+
+  if [ "${backup_name}" != "home" ]; then
+    check_if_declared ${backup_name} || exit 1
+  fi
+
+
+  if (
+    cd ${basedir} 2> /dev/null \
+      || (log_error "backup" "couldn't change directory to ${basedir}" && exit 1)
+
+    create_archive ${backup_name} "pre-restore-${archive_name}-$(date --iso-8601=seconds)"
+
+    borg extract --verbose "${BORG_REPO}/${backup_name}::${archive_name}"
+  )
+  then
+    log_info "backup" "successfully restored from ${BORG_REPO}/${backup_name}::${archive_name}"
+
+  else
+    log_error "backup" "couldn't restore from ${BORG_REPO}/${backup_name}::${archive_name}"
+    exit 1
+
+  fi
+}
+
+
+function restore_file () {
+  if [ $# -ne 3 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+
+  else
+    backup_name=${1}
+    archive_name=${2}
+    file_name=${3}
+  fi
+
+  path=$(config_read_path ${backup_name})
+  basedir=$(config_read_basedir ${backup_name})
+
+  if [ "${backup_name}" != "home" ]; then
+    check_if_declared ${backup_name} || exit 1
+  fi
+
+
+  if (
+    cd ${basedir} 2> /dev/null \
+      || (log_error "backup" "couldn't change directory to ${basedir}" && exit 1)
+
+    mv "${path}/${file_name}"{,.pre-restore-${archive_name}} 2>/dev/null \
+      || log_debug "backup" "${path}/${file_name} wasn't present before"
+
+    borg extract "${BORG_REPO}/${backup_name}::${archive_name}" "${path}/${file_name}"
+  )
+  then
+    log_info "backup" "successfully restored file ${file_name} from ${BORG_REPO}/${backup_name}::${archive_name}"
+
+  else
+    log_info "backup" "couldn't restore file ${file_name} from ${BORG_REPO}/${backup_name}::${archive_name}"
+    exit 1
+
+  fi
+}

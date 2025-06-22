@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+# lists backups
+
+source "${HOME}/.local/lib/log"
+source "${HOME}/.local/lib/backup"
+
+BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
+
+${HOME}/.local/sd/backup/check || exit 1
+
+while getopts :i flag
+do
+  case "${flag}" in
+    i)
+      interactive=1
+      shift
+      ;;
+    *)
+      continue
+      ;;
+  esac
+done
+
+backup_name=${1}
+
+if [ -n "${backup_name}" ]; then
+  case "${backup_name}" in
+    home)
+      continue
+      ;;
+    *)
+      check_if_declared ${backup_name} || exit 1
+      ;;
+  esac
+
+  if [ -n "${interactive}" ]; then
+    archive=$(list_archives ${backup_name} | fzf -m --border-label='Backups')
+    print_details ${backup_name} ${archive}
+  else
+    echo "${backup_name}:"
+    list_archives ${backup_name} | sed 's/^/  /'
+  fi
+
+else
+  if [ -n "${interactive}" ]; then
+    # TODO: implement interactive mode here
+    log_error "backup" "interactive mode isn't available yet in this mode"
+  fi
+
+  for backup in home $(yq '.backups | keys | .[]' ${BACKUP_CONFIG_FILE}); do
+    echo "${backup}:"
+    list_archives ${backup} | sed 's/^/  /'
+  done
+fi
+
