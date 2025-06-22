@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# creates a new backup archive with Borg
+#
+# This will create a new backup in the $BORG_REPO/${name} repository
+
+source "${HOME}/.local/lib/log"
+source "${HOME}/.local/lib/backup"
+
+${HOME}/.local/sd/backup/check || exit 1
+
+if [ -z "${1}" ]; then
+  log_error "backup" "no backup was specified"
+  exit 1
+else
+  backup_name=${1}
+fi
+
+while getopts :a flag
+do
+  case "${flag}" in
+    a)
+      all=1
+      ;;
+    *)
+      log_error "backup" "unsupported argument: ${1}"
+      ;;
+  esac
+
+done
+
+if [ -n "${all}" ]; then
+  for backup in home $(config_list_backups); do
+    create_archive ${backup}
+  done
+
+else
+  create_archive ${backup_name}
+
+fi
