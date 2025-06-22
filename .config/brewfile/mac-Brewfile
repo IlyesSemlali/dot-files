@@ -24,6 +24,9 @@ brew yarn
 cask alacritty
 cask flycut
 cask keepassxc
+cask macfuse
 cask mos
+
+brew borgbackup/tap/borgbackup-fuse
 
 after brew link --force libpq
