@@ -25,14 +25,7 @@ done
 backup_name=${1}
 
 if [ -n "${backup_name}" ]; then
-  case "${backup_name}" in
-    home)
-      continue
-      ;;
-    *)
-      check_if_declared ${backup_name} || exit 1
-      ;;
-  esac
+  check_if_declared ${backup_name} || exit 1
 
   if [ -n "${interactive}" ]; then
     archive=$(list_archives ${backup_name} | fzf -m --border-label='Backups')
@@ -48,7 +41,7 @@ else
     log_error "backup" "interactive mode isn't available yet in this mode"
   fi
 
-  for backup in home $(yq '.backups | keys | .[]' ${BACKUP_CONFIG_FILE}); do
+  for backup in $(yq '.backups | keys | .[]' ${BACKUP_CONFIG_FILE}); do
     echo "${backup}:"
     list_archives ${backup} | sed 's/^/  /'
   done

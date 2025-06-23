@@ -30,7 +30,7 @@ do
 done
 
 if [ -n "${all}" ]; then
-  for backup in home $(config_list_backups); do
+  for backup in $(config_list_backups); do
     create_archive ${backup}
   done
 

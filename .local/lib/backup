@@ -4,6 +4,24 @@
 source "${HOME}/.local/lib/log"
 
 
+function generate_config () {
+  BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
+
+  yq '
+  {
+    "backups" : .backups
+    + { "home" : { "basedir" : "~", "path" : "."}}
+    | map_values(
+      (.basedir = .basedir // "~"),
+      (.path = (.path // key) + "/"),
+      (.excludes = (.excludes // []))
+    ),
+    "excludes" : .excludes
+  }
+  ' ${BACKUP_CONFIG_FILE}
+}
+
+
 function check_if_declared() {
   if [ $# -ne 1 ]; then
     log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
@@ -12,15 +30,14 @@ function check_if_declared() {
     backup_name=${1}
   fi
 
-  BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
-
-  if yq -e '.backups | has("'${backup_name}'")' ${BACKUP_CONFIG_FILE} &>/dev/null; then
+  if yq -e '.backups | has("'${backup_name}'")' <(generate_config) &>/dev/null; then
     return 0
   else
-    log_error "backup" "${backup_name} not declared in ${BACKUP_CONFIG_FILE}"
+    log_error "backup" "${backup_name} not declared in <(generate_config)"
     return 1
   fi
 }
+
 
 function config_read_path () {
   if [ $# -ne 1 ]; then
@@ -30,10 +47,9 @@ function config_read_path () {
     backup_name=${1}
   fi
 
-  BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
+  check_if_declared ${backup_name}
 
-  echo $(yq '.backups["'${backup_name}'"] | .path // (. | key)' ${BACKUP_CONFIG_FILE})
-  unset backup_name
+  echo $(yq '.backups["'${backup_name}'"].path | sub("~", strenv(HOME))' <(generate_config))
 }
 
 
@@ -45,9 +61,28 @@ function config_read_basedir () {
     backup_name=${1}
   fi
 
-  BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
+  check_if_declared ${backup_name}
 
-  echo $(yq '.backups["'${repo_name}'"] | .basedir // strenv(HOME)' ${BACKUP_CONFIG_FILE})
+  echo $(yq '.backups["'${backup_name}'"].basedir | sub("~", strenv(HOME))' <(generate_config))
+}
+
+
+function config_read_fullpath () {
+  if [ $# -ne 1 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+  else
+    backup_name=${1}
+  fi
+
+  check_if_declared ${backup_name}
+
+  echo $(yq '
+  .backups["'${backup_name}'"]
+  | .basedir + "/" + .path
+  | sub("~", strenv(HOME))
+  | sub("/./?$", "")
+  ' <(generate_config))
 }
 
 
@@ -59,9 +94,29 @@ function config_read_excludes () {
     backup_name=${1}
   fi
 
-  BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
+  check_if_declared ${backup_name}
 
-  echo $(yq '.backups["'${repo_name}'"] | .excludes // strenv(HOME) + "/" + (. | key)' ${BACKUP_CONFIG_FILE})
+  yq '
+  .excludes +
+  (.backups["'${backup_name}'"].excludes | map(sub("^", "'$(config_read_fullpath ${backup_name})'"))) +
+  [(
+    .backups
+    | del(.'${backup_name}')
+    | .[]
+    | .basedir + "/" + .path
+  )]
+  | map(sub("~", strenv(HOME)))
+  | map(sub("/$", ""))
+  | map(sub("/\.$", ""))
+  | unique
+  | .[]
+  | select(. | ((test("^/") | not) or test("^'$(config_read_fullpath ${backup_name})'")))
+  | select(. | (test("'$(config_read_basedir ${backup_name})'") | not) or (test("^/$") | not))
+  | select(. | test("^/$") | not)
+  | select(. | test("^$") | not)
+  | sub("^'$(config_read_basedir ${backup_name})'/", "")
+  ' <(generate_config)
+
 }
 
 
@@ -117,7 +172,7 @@ function create_archive () {
 
   if (
     cd ${basedir} 2> /dev/null || (log_error "backup" "couldn't change directory to ${basedir}" && exit 1)
-    borg create --compression lzma "${BORG_REPO}/${backup_name}::${archive_name}" ${path}
+    borg create --compression lzma "${BORG_REPO}/${backup_name}::${archive_name}" --exclude-from <(config_read_excludes ${backup_name}) ${path}
   )
   then
     log_info "backup" "successfully created archive ${BORG_REPO}/${backup_name}::${archive_name}"
@@ -216,7 +271,7 @@ function restore_archive () {
     cd ${basedir} 2> /dev/null \
       || (log_error "backup" "couldn't change directory to ${basedir}" && exit 1)
 
-    create_archive ${backup_name} "pre-restore-${archive_name}-$(date --iso-8601=seconds)"
+    create_archive ${backup_name} "pre-restore-${archive_name}-$(date --iso-8601=seconds)" --exclude-from <(config_read_excludes ${backup_name})
 
     borg extract --verbose "${BORG_REPO}/${backup_name}::${archive_name}"
   )
