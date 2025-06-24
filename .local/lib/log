@@ -24,7 +24,7 @@ function log_error() {
     log_error "log library" "$# arguments were passed, needs at least 2"
     return 1
   else
-    echo -e "${PURPLE}[${1}]${BRIGHT} - ${RED}${@:2}${NC}"
+    echo -e "${PURPLE}[${1}]${BRIGHT} - ${RED}${@:2}${NC}" >&2
   fi
 }
 
@@ -37,6 +37,6 @@ function log_debug() {
     log_error "log library" "$# arguments were passed, needs at least 2"
     return 1
   else
-    echo -e "${PURPLE}[${1}]${BRIGHT} - ${PURPLE}${@:2}${NC}"
+    echo -e "${PURPLE}[${1}]${BRIGHT} - ${PURPLE}${@:2}${NC}" >&2
   fi
 }
