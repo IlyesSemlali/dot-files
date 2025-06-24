@@ -1,4 +1,4 @@
-# vim: set ft=bash syn=bash
+# vim: ft=bash
 # Bash library to help unify logs accross scripts
 
 WHITE='\033[0;37m'

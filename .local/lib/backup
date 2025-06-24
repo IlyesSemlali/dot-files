@@ -1,4 +1,4 @@
-# vim: set ft=bash
+# vim: ft=bash
 # Bash library to handle backups
 
 source "${HOME}/.local/lib/log"
