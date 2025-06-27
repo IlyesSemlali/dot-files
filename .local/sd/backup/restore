@@ -7,23 +7,52 @@ source "${HOME}/.local/lib/backup"
 
 BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
 
-if [ $# -ne 3 ]; then
-  log_error "backup" "wrong number of arguments"
-  exit 1
-else
+if [ $# -eq 3 ]; then
   backup_name=${1}
   archive_name=${2}
+
   if [ ${3} == "-a" ]; then
     all=1
   else
     path=${3}
   fi
+
+elif [ $# -eq 1 ] || [ $# -eq 2 ]; then
+  backup_name=${1}
+  archived_path_file="$(mktemp)"
+
+  if [ -n "$2" ] && [ ${2} == '-a' ]; then
+    path_to_restore=$(config_read_fullpath ${backup_name})
+    archive_name=$(get_last_archive ${backup_name})
+
+  elif ! (find_archived_path "${backup_name}" > ${archived_path_file}); then
+    log_error "backup" "couldn't determine archive and path"
+    exit 1
+
+  else
+    path_to_restore=$(yq '.path' ${archived_path_file})
+    archive_name=$(yq '.archives[]' ${archived_path_file} | fzf --border-label='Archive')
+
+  fi
+
+  rm ${archived_path_file}
+
+else
+  log_error "backup" "wrong number of arguments: $#"
+  exit 1
+
 fi
 
-${HOME}/.local/sd/backup/check -r ${backup_name} || exit 1
+if [ -z "${path_to_restore}" ] || [ -z "${archive_name}" ]; then
+  log_error "backup" "couldn't determine archive and path"
+  exit 1
 
-if [ -n "${all}" ]; then
-  restore_archive ${backup_name} ${archive_name}
 else
-  restore_file ${backup_name} ${archive_name} ${path}
+  check_borg_repo_var && check_repo ${backup_name} || exit 1
+
+  if ! (restore_path "${backup_name}" "${archive_name}" "${path_to_restore}"); then
+    log_error "backup" "restoration failed with this command:\n\t\trestore_path ${backup_name} ${archive_name} ${path_to_restore}"
+    exit 1
+
+  fi
 fi

@@ -7,7 +7,7 @@
 source "${HOME}/.local/lib/log"
 source "${HOME}/.local/lib/backup"
 
-${HOME}/.local/sd/backup/check || exit 1
+check_borg_repo_var || exit 1
 
 if [ -z "${1}" ]; then
   log_error "backup" "no backup was specified"
@@ -31,10 +31,12 @@ done
 
 if [ -n "${all}" ]; then
   for backup in $(config_list_backups); do
+    check_repo ${backup_name} || exit 1
     create_archive ${backup}
   done
 
 else
+  check_repo ${backup_name} || exit 1
   create_archive ${backup_name}
 
 fi
