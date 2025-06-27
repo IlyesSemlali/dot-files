@@ -4,7 +4,8 @@
 source "${HOME}/.local/lib/log"
 
 
-function generate_config () {
+function generate_config() {
+  log_debug "backup-lib" "calling ${FUNCNAME}"
   BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
 
   yq '
@@ -23,6 +24,7 @@ function generate_config () {
 
 
 function check_if_declared() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
   if [ $# -ne 1 ]; then
     log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
     return 1
@@ -39,7 +41,37 @@ function check_if_declared() {
 }
 
 
-function config_read_path () {
+function check_borg_repo_var() {
+  log_debug "backup-lib" "calling ${0}"
+
+  if [ -z "${BORG_REPO}" ]; then
+    log_error "backup" "\$BORG_REPO isn't set"
+    return 1
+  else
+    log_debug "backup" "\$BORG_REPO is set"
+  fi
+
+  if [[ "${BORG_REPO}" =~ ^(ssh://[0-9a-z]*(@[0-9a-z]*)?(:[0-9]*)?)?(/[0-9A-Za-z]*)*$ ]]; then
+    log_debug "backup" "\$BORG_REPO matches pattern"
+  else
+    log_error "backup" "\$BORG_REPO doesn't match pattern"
+    return 1
+  fi
+}
+
+function check_repo() {
+if [ -n "${repo}" ]; then
+  if borg check --bypass-lock --repository-only "${BORG_REPO}/${repo}"; then
+    log_debug "backup" "host connection is OK"
+  else
+    log_error "backup" "couldn't connect to host"
+    return 1
+  fi
+fi
+}
+
+function config_read_path() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
   if [ $# -ne 1 ]; then
     log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
     return 1
@@ -53,7 +85,8 @@ function config_read_path () {
 }
 
 
-function config_read_basedir () {
+function config_read_basedir() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
   if [ $# -ne 1 ]; then
     log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
     return 1
@@ -67,7 +100,8 @@ function config_read_basedir () {
 }
 
 
-function config_read_fullpath () {
+function config_read_fullpath() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
   if [ $# -ne 1 ]; then
     log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
     return 1
@@ -86,7 +120,8 @@ function config_read_fullpath () {
 }
 
 
-function config_read_excludes () {
+function config_read_excludes() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
   if [ $# -ne 1 ]; then
     log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
     return 1
@@ -96,31 +131,51 @@ function config_read_excludes () {
 
   check_if_declared ${backup_name}
 
-  yq '
-  .excludes +
-  (.backups["'${backup_name}'"].excludes | map(sub("^", "'$(config_read_fullpath ${backup_name})'"))) +
-  [(
-    .backups
-    | del(.'${backup_name}')
-    | .[]
-    | .basedir + "/" + .path
-  )]
-  | map(sub("~", strenv(HOME)))
-  | map(sub("/$", ""))
-  | map(sub("/\.$", ""))
-  | unique
-  | .[]
-  | select(. | ((test("^/") | not) or test("^'$(config_read_fullpath ${backup_name})'")))
-  | select(. | (test("'$(config_read_basedir ${backup_name})'") | not) or (test("^/$") | not))
-  | select(. | test("^/$") | not)
-  | select(. | test("^$") | not)
-  | sub("^'$(config_read_basedir ${backup_name})'/", "")
-  ' <(generate_config)
+  # YQ Request pattern:
+  # - Merge all exclusion sources
+  # - Expand paths
+  # - Filter out unrelated paths
+  # - Filter out basedir
 
+  yq '
+  (
+    [.excludes[]
+    ] +
+    [.backups["'${backup_name}'"].excludes[] | sub("^", "'$(config_read_fullpath ${backup_name})'")] +
+    [.backups
+      | del(.'${backup_name}')
+      | .[]
+      | .basedir + "/" + .path
+    ]
+    | map(sub("~", strenv(HOME)))
+    | map(sub("/$", ""))
+    | map(sub("/\.$", ""))
+  )
+  | .[]
+  | select(
+      (test("^'$(config_read_basedir ${backup_name})'") and test("^/")) or
+      (test("^/") | not)
+    )
+  | select(test("^'$(config_read_basedir ${backup_name})'$") | not )
+  | sub("'$(config_read_basedir ${backup_name})'/", "")
+  ' <(generate_config)
 }
 
 
+function get_last_archive() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
+  if [ $# -ne 1 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+  else
+    backup_name=${1}
+  fi
+
+  borg list "${BORG_REPO}/${backup_name}" --last 1 --json | jq -r '.archives[].name'
+}
+
 function init_repo() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
   if [ $# -ne 1 ]; then
     log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
     return 1
@@ -136,12 +191,13 @@ function init_repo() {
 
   else
     log_error "backup" "couldn't create ${backup_name} repo"
-    exit 1
+    return 1
   fi
 }
 
 
-function create_archive () {
+function create_archive() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
   # Number of seconds since midnight
   # to differenciate multiple archives in the same day
   eval "$(date +'today=%F now=%s')"
@@ -166,26 +222,27 @@ function create_archive () {
   basedir=$(config_read_basedir ${backup_name})
 
   if [ "${backup_name}" != "home" ]; then
-    check_if_declared ${backup_name} || exit 1
+    check_if_declared ${backup_name} || return 1
   fi
 
 
   if (
-    cd ${basedir} 2> /dev/null || (log_error "backup" "couldn't change directory to ${basedir}" && exit 1)
-    borg create --compression lzma "${BORG_REPO}/${backup_name}::${archive_name}" --exclude-from <(config_read_excludes ${backup_name}) ${path}
+    cd ${basedir} 2> /dev/null || (log_error "backup" "couldn't change directory to ${basedir}" && return 1)
+    borg create --stats --list --filter ACME --compression lzma "${BORG_REPO}/${backup_name}::${archive_name}" --exclude-from <(config_read_excludes ${backup_name}) ${path}
   )
   then
     log_info "backup" "successfully created archive ${BORG_REPO}/${backup_name}::${archive_name}"
 
   else
     log_error "backup" "couldn't create archive ${BORG_REPO}/${backup_name}::${archive_name}"
-    exit 1
+    return 1
 
   fi
 }
 
 
-function list_archives () {
+function list_archives() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
   if [ $# -ne 1 ]; then
     log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
     return 1
@@ -198,12 +255,13 @@ function list_archives () {
     true
   else
     log_error "backup" "couldn't fetch archives list for ${repo_name}"
-    exit 1
+    return 1
   fi
 }
 
 
-function print_archive_details () {
+function print_archive_details() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
   if [ $# -ne 2 ]; then
     log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
     return 1
@@ -217,39 +275,88 @@ function print_archive_details () {
     true
   else
     log_error "backup" "couldn't fetch details for ${archive_name}"
-    exit 1
+    return 1
   fi
 }
 
 
-function mount_repo () {
+function mount_repo() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
   if [ $# -ne 1 ]; then
     log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
     return 1
   fi
 
   repo_name=${1}
+  borg_mount_path="${BORG_MOUNT_PATH:-${HOME}/Backups}/${repo_name}"
 
-  if (borg mount "${BORG_REPO}/${repo_name}")
-  then
-    true
-  else
+  if ! (
+    mkdir -p ${borg_mount_path}
+    mount | grep -q ${borg_mount_path} \
+      || borg mount "${BORG_REPO}/${repo_name}" ${borg_mount_path}
+
+  ); then
     log_error "backup" "couldn't mount ${repo_name}"
-    exit 1
+    return 1
   fi
 }
 
 
-function find_archived_file () {
-  log_error "backup" "not implemented yet"
-  # TODO:
-  #       - mount repo
-  #       - fuzzy find file
-  #       - output a json with a list of archives and the full name of that file
+function unmount_repo() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
+  if [ $# -ne 1 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+  fi
+
+  backup_name=${1}
+  borg_mount_path="${BORG_MOUNT_PATH:-${HOME}/Backups}/${backup_name}"
+
+  if ! (
+    borg umount "${borg_mount_path}"
+  ); then
+    log_error "backup" "couldn't unmount ${backup_name}"
+    return 1
+  fi
 }
 
 
-function restore_archive () {
+function find_archived_path() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
+  if [ $# -ne 1 ]; then
+    log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
+    return 1
+  fi
+
+  backup_name=${1}
+  borg_mount_path="${BORG_MOUNT_PATH:-${HOME}/Backups}/${backup_name}"
+
+  if (mount_repo ${backup_name}); then
+
+    backup_path=$(find "${BORG_MOUNT_PATH}/${backup_name}" \
+      | sed "s@${borg_mount_path}/[a-zA-Z0-9_-]*/@@" \
+      | sort -ru \
+      | grep -v "^${borg_mount_path}" \
+      | fzf -border-label='Archived Files'
+    )
+
+    (
+      echo "path: ${backup_path}"
+      echo "archives:"
+      find ${borg_mount_path} -wholename "*${backup_path}" \
+        | sed 's/^/ - /' \
+        | sed 's@'"/${backup_path}"'$@@' \
+        | sed 's@'"${borg_mount_path}"'/@@'
+    ) | yq
+
+  fi
+
+  unmount_repo ${backup_name}
+}
+
+
+function restore_archive() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
   if [ $# -ne 2 ]; then
     log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
     return 1
@@ -259,17 +366,17 @@ function restore_archive () {
     archive_name=${2}
   fi
 
-  path=$(config_read_path ${backup_name})
+  backup_path=$(config_read_path ${backup_name})
   basedir=$(config_read_basedir ${backup_name})
 
   if [ "${backup_name}" != "home" ]; then
-    check_if_declared ${backup_name} || exit 1
+    check_if_declared ${backup_name} || return 1
   fi
 
 
   if (
     cd ${basedir} 2> /dev/null \
-      || (log_error "backup" "couldn't change directory to ${basedir}" && exit 1)
+      || (log_error "backup" "couldn't change directory to ${basedir}" && return 1)
 
     create_archive ${backup_name} "pre-restore-${archive_name}-$(date --iso-8601=seconds)" --exclude-from <(config_read_excludes ${backup_name})
 
@@ -280,13 +387,14 @@ function restore_archive () {
 
   else
     log_error "backup" "couldn't restore from ${BORG_REPO}/${backup_name}::${archive_name}"
-    exit 1
+    return 1
 
   fi
 }
 
 
-function restore_file () {
+function restore_path() {
+  log_debug "backup-lib" "calling ${FUNCNAME} with $@"
   if [ $# -ne 3 ]; then
     log_debug "backup-lib" "${FUNCNAME}: wrong number of arguments: $#"
     return 1
@@ -294,32 +402,31 @@ function restore_file () {
   else
     backup_name=${1}
     archive_name=${2}
-    file_name=${3}
+    backup_path=${3}
   fi
 
-  path=$(config_read_path ${backup_name})
   basedir=$(config_read_basedir ${backup_name})
 
   if [ "${backup_name}" != "home" ]; then
-    check_if_declared ${backup_name} || exit 1
+    check_if_declared ${backup_name} || return 1
   fi
 
 
   if (
     cd ${basedir} 2> /dev/null \
-      || (log_error "backup" "couldn't change directory to ${basedir}" && exit 1)
+      || (log_error "backup" "couldn't change directory to ${basedir}" && return 1)
 
-    mv "${path}/${file_name}"{,.pre-restore-${archive_name}} 2>/dev/null \
-      || log_debug "backup" "${path}/${file_name} wasn't present before"
+    mv "${backup_path}"{,.pre-restore-${archive_name}} 2>/dev/null \
+      || log_debug "backup" "${backup_path} wasn't present before"
 
-    borg extract "${BORG_REPO}/${backup_name}::${archive_name}" "${path}/${file_name}"
+    borg extract --list "${BORG_REPO}/${backup_name}::${archive_name}" "${backup_path}"
   )
   then
     log_info "backup" "successfully restored file ${file_name} from ${BORG_REPO}/${backup_name}::${archive_name}"
 
   else
     log_info "backup" "couldn't restore file ${file_name} from ${BORG_REPO}/${backup_name}::${archive_name}"
-    exit 1
+    return 1
 
   fi
 }

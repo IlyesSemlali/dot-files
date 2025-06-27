@@ -7,7 +7,7 @@ source "${HOME}/.local/lib/backup"
 
 BACKUP_CONFIG_FILE=${BACKUP_CONFIG_FILE:-~/.config/backups.yaml}
 
-${HOME}/.local/sd/backup/check || exit 1
+check_borg_repo_var || exit 1
 
 while getopts :i flag
 do
