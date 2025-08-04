@@ -75,6 +75,7 @@ insert_path "${HOME}/.local/bin"
 insert_path "${HOME}/.local/share/npm/bin"
 insert_path "${HOME}/.local/node_modules/.bin"
 insert_path "${HOME}/.krew/bin"
+append_path "${HOME}/.local/share/nvim/mason/bin"
 
 # GoLang
 if [ -e ${GOPATH}/bin ]; then
