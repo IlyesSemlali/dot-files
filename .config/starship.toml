@@ -37,18 +37,19 @@ style = "bg:color_bg1 fg:color_fg0"
 format = "[ $symbol]($style)"
 
 [os.symbols]
-Ubuntu = "󰕈"
-Macos = "󰀵"
-Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
 Alpine = ""
 Arch = "󰣇"
 CentOS = ""
 Debian = "󰣚"
+Fedora = "󰣛"
+Gentoo = "󰣨"
+Linux = "󰌽"
+Macos = "󰀵"
 NixOS = ""
-Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
+Redhat = "󱄛"
+Ubuntu = "󰕈"
+Windows = "󰖳"
 
 [username]
 show_always = true
