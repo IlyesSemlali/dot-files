@@ -90,5 +90,6 @@ then
 fi
 
 source ${HOME}/.zshrc.d/completion.zsh
+source ${HOME}/.zshrc.d/tools.zsh
 source ${HOME}/.zshrc.d/keybindings.zsh
 source ${HOME}/.zshrc.d/project-management.zsh
