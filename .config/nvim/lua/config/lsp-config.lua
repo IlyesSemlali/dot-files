@@ -2,7 +2,7 @@
 -- (and overriden) parameters (what happens on LSP Server attach, their capabilities and so on).
 -- To install LSP Servers use Mason, which is configured in ~/.config/nvim/lua/plugins/mason.lua
 
-local lspconfig = require("lspconfig")
+local lspconfig = vim.lsp.config
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 capabilities.textDocument.completion.completionItem = {
@@ -39,12 +39,12 @@ local servers = {
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
+	lspconfig(lsp, {
 		capabilities = capabilities,
 	})
 end
 
-lspconfig.ltex.setup({
+lspconfig("ltex", {
 	capabilities = capabilities,
 	-- If you need to disable a specific rule, set the log level to debug for the LSP:
 	-- on_attach = function()
@@ -62,17 +62,17 @@ lspconfig.ltex.setup({
 	},
 })
 
-lspconfig.ansiblels.setup({
+lspconfig("ansiblels", {
 	capabilities = capabilities,
 
 	filetypes = { "yaml.ansible" },
 })
 
-lspconfig.ruff.setup({
+lspconfig("ruff", {
 	capabilities = capabilities,
 })
 
-require("lspconfig").pylsp.setup({
+lspconfig("pylsp", {
 	capabilities = capabilities,
 
 	settings = {
@@ -95,7 +95,7 @@ require("lspconfig").pylsp.setup({
 	},
 })
 
-lspconfig.yamlls.setup({
+lspconfig("yamlls", {
 	capabilities = capabilities,
 
 	settings = {
@@ -115,7 +115,7 @@ lspconfig.yamlls.setup({
 	},
 })
 
-lspconfig.helm_ls.setup({
+lspconfig("helm_ls", {
 	capabilities = capabilities,
 
 	settings = {
