@@ -3,14 +3,10 @@
 -- and configured in conform (~/.config/nvim/lua/plugins/conform.lua)
 
 return {
-	{
-		"williamboman/mason.nvim",
-		opts = function()
-			require("mason").setup({
-				ui = {
-					border = "rounded",
-				},
-			})
-		end,
+	"mason-org/mason-lspconfig.nvim",
+	opts = {},
+	dependencies = {
+		{ "mason-org/mason.nvim", opts = {} },
+		"neovim/nvim-lspconfig",
 	},
 }

@@ -20,6 +20,7 @@ return {
 					"ruff",
 					"stylua",
 					"terraform_fmt",
+					"yaml-language-server",
 				},
 			})
 		end,
