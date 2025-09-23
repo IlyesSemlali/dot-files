@@ -83,6 +83,7 @@ Zenika
 !.config/redshift/redshift.conf
 !.config/nvim/
 .config/nvim/lazy-lock.json
+.config/nvim/lua/config/custom.lua
 !.config/tmux-powerline
 
 
