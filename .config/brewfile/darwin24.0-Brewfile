@@ -1,0 +1,29 @@
+# GNU's Not FreeBSD
+brew coreutils
+brew ed
+brew findutils
+brew gawk
+brew gettext
+brew gnu-sed
+brew gnu-tar
+brew grep
+brew make
+
+brew fzf
+brew htop
+brew neovim
+brew node
+brew rust
+brew starship
+brew tmux
+brew tree
+brew wget
+brew yarn
+
+cask alacritty
+cask flycut
+cask keepassxc
+cask macfuse
+cask mos
+
+brew borgbackup/tap/borgbackup-fuse
