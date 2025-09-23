@@ -13,11 +13,8 @@ brew zoxide
 # tools
 tap ankitpokhrel/jira-cli
 brew go
-brew jira-cli
 brew just
-brew mise
 brew node
-brew pgcli
 brew pre-commit
 
 # Infrastructure tools
@@ -29,3 +26,7 @@ brew tflint
 cask font-sauce-code-pro-nerd-font
 cask font-comfortaa
 cask font-noto-color-emoji
+
+# Optional files (OS or work related)
+main ~/.config/brewfile/$OSTYPE-Brewfile
+main ~/.config/brewfile/work-Brewfile
