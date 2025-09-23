@@ -1,0 +1,8 @@
+brew jira-cli
+brew libpq
+brew mise
+brew pgcli
+brew watch
+cask gcloud-cli
+
+after brew link --force libpq
