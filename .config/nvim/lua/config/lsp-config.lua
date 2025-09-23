@@ -119,6 +119,8 @@ lspconfig("yamlls", {
 	},
 })
 
+vim.lsp.enable("yamlls")
+
 lspconfig("helm_ls", {
 	capabilities = capabilities,
 
