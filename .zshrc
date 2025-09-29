@@ -28,6 +28,9 @@ alias -g spj="source ${HOME}/projects/$PROJECT/.project.d/zshrc"
 
 unset SSH_ASKPASS
 
+# Send raw chars to terminal (render colors)
+export LESS="-r"
+
 export SYSTEMD_PAGER=''
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
