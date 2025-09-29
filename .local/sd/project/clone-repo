@@ -62,5 +62,5 @@ else
     worktree_arg=""
   fi
 
-  "${SD_ROOT}/project/add-repo" $(echo "${repo_args[@]}" | sed "s|${gitrepos}/||") "${worktree_arg}"
+  "${SD_ROOT}/project/add-repo" $(echo "${repo_args[@]}" | sed "s|${gitrepos}/||;s/\.git$//;s/\/\//\//g") "${worktree_arg}"
 fi
