@@ -17,13 +17,12 @@ return {
 					-- ["g?"] = { "actions.show_help", mode = "n" },
 					["<CR>"] = { "actions.select", opts = { close = true } },
 					["<C-v>"] = { "actions.select", opts = { vertical = true } },
-					["<C-h>"] = { "actions.select", opts = { horizontal = true } },
 					["<C-t>"] = { "actions.select", opts = { tab = true } },
 					["<C-p>"] = "actions.preview",
 					["<Esc>"] = { "actions.close", mode = "n" },
 					["-"] = { "actions.parent", mode = "n" },
 					["_"] = { "actions.open_cwd", mode = "n" },
-					["<C-.>"] = { "actions.toggle_hidden", mode = "n" },
+					["<C-h>"] = { "actions.toggle_hidden", mode = "n" },
 				},
 				float = {
 					-- Padding around the floating window
