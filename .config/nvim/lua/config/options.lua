@@ -26,3 +26,9 @@ option.shiftwidth = 2 -- Number of spaces inserted when indenting
 
 -- Plugin Options
 global.lastplace_ignore = "gitcommit,gitrebase" -- farmergreg/vim-lastplace
+
+-- Disable unused providers (for nvim development)
+global.loaded_node_provider = 0
+global.loaded_perl_provider = 0
+global.loaded_python3_provider = 0
+global.loaded_ruby_provider = 0
