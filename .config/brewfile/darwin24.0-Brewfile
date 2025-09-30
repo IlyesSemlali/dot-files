@@ -13,6 +13,7 @@ brew fzf
 brew htop
 brew neovim
 brew node
+brew ripgrep
 brew rust
 brew starship
 brew tmux
