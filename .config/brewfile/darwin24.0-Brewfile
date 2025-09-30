@@ -11,6 +11,7 @@ brew make
 
 brew fzf
 brew htop
+brew luarocks
 brew neovim
 brew node
 brew ripgrep
