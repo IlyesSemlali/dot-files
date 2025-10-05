@@ -19,6 +19,7 @@ brew rust
 brew starship
 brew tmux
 brew tree
+brew watch
 brew wget
 brew yarn
 
