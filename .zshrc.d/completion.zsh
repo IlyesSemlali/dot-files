@@ -68,3 +68,15 @@ then
   source <(just --completions zsh)
 fi
 
+# Mise
+if which mise > /dev/null 2>&1
+then
+  source <(mise completion zsh)
+fi
+
+# UV
+if which uv > /dev/null 2>&1
+then
+  eval "$(uv generate-shell-completion zsh)"
+fi
+

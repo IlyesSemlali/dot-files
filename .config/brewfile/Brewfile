@@ -14,13 +14,12 @@ brew zoxide
 tap ankitpokhrel/jira-cli
 brew go
 brew just
-brew node
+brew mise
 brew pre-commit
 
 # Infrastructure tools
 brew gh
 brew krew
-brew tflint
 
 # Fonts
 cask font-sauce-code-pro-nerd-font
