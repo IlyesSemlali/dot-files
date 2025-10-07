@@ -1,4 +1,5 @@
 # GNU's Not FreeBSD
+brew bash
 brew coreutils
 brew ed
 brew findutils
