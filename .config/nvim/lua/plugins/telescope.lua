@@ -76,6 +76,7 @@ return {
 			map("n", "<leader>fg", builtin.live_grep, { desc = "Telescope: Live grep" })
 			map("n", "<leader>fd", builtin.diagnostics, { desc = "Telescope: Diagnostics" })
 			map("n", "<leader>fr", builtin.registers, { desc = "Telescope: Show Registers" })
+			map("n", "<leader>fm", builtin.marks, { desc = "Telescope: Marks" })
 		end,
 	},
 }
