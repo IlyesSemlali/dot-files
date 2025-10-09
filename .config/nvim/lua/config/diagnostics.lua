@@ -1,7 +1,3 @@
-vim.o.signcolumn = "yes"
--- To use the number column for diagnostics and git status
--- vim.o.signcolumn = "number"
-
 local diagnostic_config = {
 	signs = {
 		text = {
@@ -10,6 +6,7 @@ local diagnostic_config = {
 			[vim.diagnostic.severity.HINT] = "󱡁",
 			[vim.diagnostic.severity.INFO] = "",
 		},
+		priority = 20,
 	},
 }
 

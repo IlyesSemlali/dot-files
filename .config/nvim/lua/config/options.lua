@@ -14,6 +14,8 @@ global.markdown_fenced_languages = {
 
 option.number = true
 option.relativenumber = true
+option.signcolumn = "auto:1-2"
+
 option.whichwrap = "bs"
 
 option.clipboard = ""
