@@ -1,33 +1,11 @@
 # GNU's Not FreeBSD
-brew bash
-brew coreutils
-brew ed
-brew findutils
-brew gawk
-brew gettext
-brew gnu-sed
-brew gnu-tar
-brew grep
-brew make
 
-brew fzf
-brew htop
-brew luarocks
-brew neovim
-brew node
-brew ripgrep
-brew rust
-brew starship
-brew tmux
-brew tree
-brew watch
-brew wget
-brew yarn
+brew "luarocks"
+brew "node"
+brew "rust"
+brew "yarn"
+# brew "krew" # TODO: move this to mise[cloud tools]
 
-cask alacritty
-cask flycut
-cask keepassxc
-cask macfuse
-cask mos
-
-brew borgbackup/tap/borgbackup-fuse
+# Work tools
+brew "gh"
+tap "ankitpokhrel/jira-cli"
