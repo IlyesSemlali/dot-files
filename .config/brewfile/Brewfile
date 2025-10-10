@@ -1,31 +1,49 @@
+# Brew is used to install only packages that are meant to
+# bring MacOS to the same level of features as what a Linux
+# distribution would have
+#
+# For development tools, packages are installed through mise
+
+
 # Shell Tools
-brew bat
-brew catimg
-brew eza
-brew git-delta
-brew jq
-brew pre-commit
-brew rg
-brew vivid
-brew yq
-brew zoxide
+brew "bash"
+brew "bat"
+brew "catimg"
+brew "coreutils"
+brew "ed"
+brew "eza"
+brew "findutils"
+brew "fzf"
+brew "gawk"
+brew "gettext"
+brew "git-delta"
+brew "gnu-sed"
+brew "gnu-tar"
+brew "grep"
+brew "gpg"
+brew "htop"
+brew "make"
+brew "neovim"
+brew "starship"
+brew "tmux"
+brew "tree"
+brew "vivid"
+brew "watch"
+brew "wget"
+brew "zoxide"
 
 # tools
-tap ankitpokhrel/jira-cli
-brew go
-brew just
-brew mise
-brew pre-commit
+brew "borgbackup/tap/borgbackup-fuse"
+brew "mise"
+brew "pre-commit"
 
-# Infrastructure tools
-brew gh
-brew krew
+# Graphical Tools
+cask "alacritty"
+cask "keepassxc"
+cask "macfuse"
+cask "mos"
 
 # Fonts
-cask font-sauce-code-pro-nerd-font
-cask font-comfortaa
-cask font-noto-color-emoji
-
-# Optional files (OS or work related)
-main ~/.config/brewfile/$OSTYPE-Brewfile
-main ~/.config/brewfile/work-Brewfile
+cask "font-sauce-code-pro-nerd-font"
+cask "font-comfortaa"
+cask "font-noto-color-emoji"
