@@ -14,6 +14,9 @@ return {
 					lua = { "stylua" },
 					python = { "ruff" },
 					terraform = { "terraform_fmt" },
+					toml = { "taplo" },
+					yaml = { "yamlfmt" },
+					["*"] = { "trim_whitespace", "trim_newlines" },
 				},
 			})
 			vim.api.nvim_create_autocmd("BufWritePre", {

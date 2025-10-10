@@ -19,8 +19,10 @@ return {
 					"python-lsp-server",
 					"ruff",
 					"stylua",
+					"taplo",
 					"terraform_fmt",
 					"yaml-language-server",
+					"yamlfmt",
 				},
 			})
 		end,
