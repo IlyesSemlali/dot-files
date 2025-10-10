@@ -31,6 +31,7 @@ vim.lsp.handlers["$/progress"] = function() end
 local servers = {
 	"bashls",
 	"html",
+	"jinja_lsp",
 	"ltex",
 	"lua_ls",
 	"rust_analyzer",
@@ -60,6 +61,18 @@ lspconfig("ltex", {
 			--
 		},
 	},
+})
+
+lspconfig("terraformls", {
+	capabilities = capabilities,
+
+	filetypes = { "terraform", "tf.jinja" },
+})
+
+lspconfig("jinja_lsp", {
+	capabilities = capabilities,
+
+	filetypes = { "tf.jinja" },
 })
 
 lspconfig("ansiblels", {

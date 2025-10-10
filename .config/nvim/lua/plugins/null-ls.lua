@@ -15,6 +15,7 @@ return {
 				automatic_installation = true,
 				ensure_installed = {
 					"black",
+					"jinja-lsp",
 					"jq",
 					"python-lsp-server",
 					"ruff",

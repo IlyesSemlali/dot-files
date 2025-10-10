@@ -13,3 +13,5 @@ local custom_config = vim.fn.stdpath("config") .. "/lua/config/custom.lua"
 if vim.fn.filereadable(custom_config) == 1 then
 	require("config.custom")
 end
+
+require("config.filetypes")

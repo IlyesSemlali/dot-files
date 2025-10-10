@@ -1,48 +1,53 @@
 return {
-  {
+	{
 
-    "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
-    build = ":TSUpdate",
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
+		build = ":TSUpdate",
 
-    config = function()
-      require("nvim-treesitter.configs").setup {
-        ensure_installed = {
-          "c",
-          "css",
-          "html",
-          "javascript",
-          "lua",
-          "markdown",
-          "markdown_inline",
-          "python",
-          "tsx",
-          "typescript",
-          "vim",
-        },
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = {
+					"c",
+					"css",
+					"hcl",
+					"html",
+					"javascript",
+					"jinja",
+					"jinja_inline",
+					"lua",
+					"markdown",
+					"markdown_inline",
+					"nix",
+					"python",
+					"tsx",
+					"typescript",
+					"vim",
+				},
 
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              ["ic"] = "@class.inner",
-            },
-          },
-        },
+				highlight = {
+					enable = true,
+				},
 
-        indent = {
-          enable = true,
-          -- disable = {
-          --   "python"
-          -- },
-        },
-      }
-    end,
-  },
+				textobjects = {
+					select = {
+						enable = true,
+						lookahead = true,
+						keymaps = {
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							["ac"] = "@class.outer",
+							["ic"] = "@class.inner",
+						},
+					},
+				},
+
+				indent = {
+					enable = false,
+				},
+			})
+		end,
+	},
 }
