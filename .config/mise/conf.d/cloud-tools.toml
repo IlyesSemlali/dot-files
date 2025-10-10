@@ -1,0 +1,16 @@
+[tools]
+
+# Kube
+kubectl = "latest"
+krew = "latest"
+terraform = ""
+
+# Data Parsing
+yq = "latest"
+jq = "latest"
+
+# Build Tools
+just = "latest"
+
+# Git
+pre-commit = "latest"
