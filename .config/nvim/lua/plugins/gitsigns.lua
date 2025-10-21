@@ -15,6 +15,9 @@ return {
 
 			gitsigns.setup({
 				sign_priority = 80,
+				preview_config = {
+					border = "rounded",
+				},
 			})
 
 			map("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Git: stage buffer" })
