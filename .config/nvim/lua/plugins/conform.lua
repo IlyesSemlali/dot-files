@@ -13,6 +13,7 @@ return {
 					json = { "jq" },
 					lua = { "stylua" },
 					python = { "ruff" },
+					sh = { "shfmt" },
 					terraform = { "terraform_fmt" },
 					toml = { "taplo" },
 					yaml = { "yamlfmt" },

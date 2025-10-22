@@ -19,6 +19,7 @@ return {
 					"jq",
 					"python-lsp-server",
 					"ruff",
+					"shfmt",
 					"stylua",
 					"taplo",
 					"terraform_fmt",
