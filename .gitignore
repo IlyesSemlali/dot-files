@@ -87,6 +87,7 @@ Zenika
 .config/nvim/lazy-lock.json
 .config/nvim/lua/config/custom.lua
 !.config/tmux-powerline
+!.config/yamlfmt/
 
 
 /* VIM */
