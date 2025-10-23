@@ -40,32 +40,32 @@ then
   }
 
   alias tf=terraform
-  complete -o nospace -C ~/.local/bin/terraform terraform
+  lazyload terraform -- 'complete -o nospace -C ~/.local/bin/terraform terraform'
 fi
 
 # Kubernetes
 if which kubectl > /dev/null 2>&1
 then
   alias k=kubectl
-  source <(kubectl completion zsh)
+  lazyload kubectl -- 'source <(kubectl completion zsh)'
 fi
 
 # Helm
 if which helm > /dev/null 2>&1
 then
-  source <(helm completion zsh)
+  lazyload helm -- 'source <(helm completion zsh)'
 fi
 
 # Flux
 if which flux > /dev/null 2>&1
 then
-  source <(flux completion zsh)
+  lazyload flux -- 'source <(flux completion zsh)'
 fi
 
 # Just
 if which just > /dev/null 2>&1
 then
-  source <(just --completions zsh)
+  lazyload just -- 'source <(just --completions zsh)'
 fi
 
 # Mise
@@ -77,6 +77,5 @@ fi
 # UV
 if which uv > /dev/null 2>&1
 then
-  eval "$(uv generate-shell-completion zsh)"
+  lazyload uv -- 'eval "$(uv generate-shell-completion zsh)"'
 fi
-

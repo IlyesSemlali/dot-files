@@ -15,3 +15,4 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light ianthehenry/sd
+zinit light qoomon/zsh-lazyload
