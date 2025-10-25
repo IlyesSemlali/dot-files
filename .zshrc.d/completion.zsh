@@ -56,6 +56,13 @@ then
   lazyload helm -- 'source <(helm completion zsh)'
 fi
 
+# Gcloud
+if which gcloud > /dev/null 2>&1
+then
+  lazyload gcloud -- 'source "`gcloud info --format="value(installation.sdk_root)"`/completion.zsh.inc" && source "${GCLOUD_SDK_ROOT}/path.zsh.inc"'
+fi
+
+
 # Flux
 if which flux > /dev/null 2>&1
 then
