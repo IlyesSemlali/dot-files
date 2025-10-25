@@ -7,12 +7,10 @@ SAVEHIST=2000
 HISTSIZE=2000
 HISTFILE=$HOME/.zsh_history
 
-
-
 setopt HIST_IGNORE_DUPS SHARE_HISTORY HIST_FCNTL_LOCK
-unsetopt menu_complete   # do not autoselect the first completion entry
+unsetopt menu_complete # do not autoselect the first completion entry
 unsetopt flowcontrol
-setopt auto_menu         # show completion menu on successive tab press
+setopt auto_menu # show completion menu on successive tab press
 setopt complete_in_word
 setopt always_to_end
 
@@ -29,7 +27,6 @@ setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history          # share command history data
-setopt multios              # enable redirect to multiple streams: echo >file1 >file2
-setopt long_list_jobs       # show long list format job notifications
-setopt interactivecomments  # recognize comments
-
+setopt multios                # enable redirect to multiple streams: echo >file1 >file2
+setopt long_list_jobs         # show long list format job notifications
+setopt interactivecomments    # recognize comments

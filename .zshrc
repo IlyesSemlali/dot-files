@@ -9,15 +9,14 @@ source ${HOME}/.zshrc.d/homebrew.zsh
 ##### Aliases and exports #####
 ###############################
 
-if which eza >/dev/null 2>&1
-then
-  alias ls="eza --icons --level 1"
-  alias  l="eza --git-ignore --git --no-user --no-permissions --level 1 -l"
-  alias ll="eza --git --no-user --no-permissions --level 1 -l"
-  alias la="eza --git-ignore --git --level 1 -al"
+if which eza >/dev/null 2>&1; then
+	alias ls="eza --icons --level 1"
+	alias l="eza --git-ignore --git --no-user --no-permissions --level 1 -l"
+	alias ll="eza --git --no-user --no-permissions --level 1 -l"
+	alias la="eza --git-ignore --git --level 1 -al"
 else
-  alias l='ls --color=auto -lh'
-  alias ll='ls --color=auto -lah'
+	alias l='ls --color=auto -lh'
+	alias ll='ls --color=auto -lah'
 fi
 
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
@@ -49,29 +48,27 @@ export PRE_COMMIT_ALLOW_NO_CONFIG=1
 
 ###############################
 
-
 #####################################
 ##### Shell customization tools #####
 #####################################
 
 # Starship prompt
-(( $+commands[starship] )) && eval "$(starship init zsh)" || export PS1="-> "
+(($ + commands[starship])) && eval "$(starship init zsh)" || export PS1="-> "
 
 # Fuzzy-find CD replacement
-(( $+commands[zoxide] )) && eval "$(zoxide init --cmd cd zsh)"
+(($ + commands[zoxide])) && eval "$(zoxide init --cmd cd zsh)"
 
 # Themes for ls and tree using sharkdp/vivid
-(( $+commands[vivid] )) && export LS_COLORS="$(vivid generate ${HOME}/.themes/gruvbox-dark/vivid.yaml)"
+(($ + commands[vivid])) && export LS_COLORS="$(vivid generate ${HOME}/.themes/gruvbox-dark/vivid.yaml)"
 
 #####################################
 
 #NeoVIM
-if which nvim >/dev/null 2>&1
-then
-  alias vim="nvim"
-  export EDITOR=nvim
+if which nvim >/dev/null 2>&1; then
+	alias vim="nvim"
+	export EDITOR=nvim
 else
-  export EDITOR=vim
+	export EDITOR=vim
 fi
 
 # PATH
@@ -83,13 +80,11 @@ append_path "${HOME}/.local/share/nvim/mason/bin"
 
 # GoLang
 if [ -e ${GOPATH}/bin ]; then
-    append_path "$GOPATH/bin"
+	append_path "$GOPATH/bin"
 fi
 
-
-if [ -f ${HOME}/.zshrc.d/local.zsh ]
-then
-  source ${HOME}/.zshrc.d/local.zsh
+if [ -f ${HOME}/.zshrc.d/local.zsh ]; then
+	source ${HOME}/.zshrc.d/local.zsh
 fi
 
 source ${HOME}/.zshrc.d/completion.zsh
