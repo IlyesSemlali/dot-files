@@ -1,6 +1,6 @@
 return {
-  {
-    "farmergreg/vim-lastplace",
-    lazy = false,
-  },
+	{
+		"farmergreg/vim-lastplace",
+		lazy = false,
+	},
 }

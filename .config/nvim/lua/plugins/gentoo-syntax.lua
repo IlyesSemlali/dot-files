@@ -1,6 +1,6 @@
 return {
-  {
-    "gentoo/gentoo-syntax",
-    lazy = false,
-  },
+	{
+		"gentoo/gentoo-syntax",
+		lazy = false,
+	},
 }
