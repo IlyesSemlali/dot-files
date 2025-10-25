@@ -3,7 +3,7 @@
 # Kube
 kubectl = "latest"
 krew = "latest"
-terraform = ""
+terraform = "latest"
 
 # Data Parsing
 yq = "latest"
