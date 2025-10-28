@@ -17,7 +17,7 @@ return {
 					terraform = { "terraform_fmt" },
 					toml = { "taplo" },
 					yaml = { "yamlfmt" },
-					zsh = { "shfmt" },
+					-- zsh = { "shfmt" },
 					["*"] = { "trim_whitespace", "trim_newlines" },
 				},
 			})
