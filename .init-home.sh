@@ -3,7 +3,7 @@
 source "${HOME}/.local/lib/log"
 
 # HomeBrew
-if [ -f $HOME/.local/share/homebrew/bin/brew ]; then
+if [[ "$(uname)" == "Darwin" ]]; then
     eval $($HOME/.local/share/homebrew/bin/brew shellenv)
 fi
 
@@ -53,4 +53,6 @@ function install_tpm() {
 }
 
 install_tpm
-install_brew
+if [[ "$(uname)" == "Darwin" ]]; then
+  install_brew
+fi
