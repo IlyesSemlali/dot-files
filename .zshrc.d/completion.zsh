@@ -40,7 +40,7 @@ then
   }
 
   alias tf=terraform
-  lazyload terraform -- 'complete -o nospace -C ~/.local/bin/terraform terraform'
+  lazyload terraform -- 'complete -o nospace -C terraform terraform'
 fi
 
 # Kubernetes
@@ -59,7 +59,7 @@ fi
 # Gcloud
 if which gcloud > /dev/null 2>&1
 then
-  lazyload gcloud -- 'source "`gcloud info --format="value(installation.sdk_root)"`/completion.zsh.inc" && source "${GCLOUD_SDK_ROOT}/path.zsh.inc"'
+  lazyload gcloud -- 'export GCLOUD_SDK_ROOT=`gcloud info --format="value(installation.sdk_root)"`; source "${GCLOUD_SDK_ROOT}/completion.zsh.inc" && source "${GCLOUD_SDK_ROOT}/path.zsh.inc"'
 fi
 
 
