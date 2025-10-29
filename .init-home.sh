@@ -30,12 +30,7 @@ function install_brew() {
 
     source ~/.zshrc
 
-    brew install rcmdnk/file/brew-file || {
-        log_error "init" "openssl probably failed to install, run:
-        brew install --debug --verbose openssl@1.1
-        and press continue when prompted"
-    }
-
+    brew install rcmdnk/file/brew-file
     brew file install
 }
 
