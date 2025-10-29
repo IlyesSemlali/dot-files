@@ -5,6 +5,9 @@
 local lspconfig = vim.lsp.config
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+vim.lsp.set_log_level("off") -- Turns off Logs on LSP
+-- vim.lsp.set_log_level("debug") -- Turns on Logs on LSP
+
 capabilities.textDocument.completion.completionItem = {
 	documentationFormat = { "markdown", "plaintext" },
 	snippetSupport = true,
