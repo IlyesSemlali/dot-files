@@ -12,10 +12,10 @@ map("n", "<C-j>", "<C-w>j", { desc = "Window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "Window up" })
 
 -- Indentation
-map("v", "<", "<gv", { desc = "Indent line" })
+map("v", "<", "<gv", { desc = "Unindent line" })
 map("v", ">", ">gv", { desc = "Indent line" })
 
 -- LSP
 map("n", "<leader>ca", function()
 	vim.lsp.buf.code_action()
-end, { desc = "LSP Code Actions" })
+end, { desc = "LSP: Code Actions" })
