@@ -38,6 +38,9 @@ return {
 						return conf
 					end,
 				},
+				confirmation = {
+					border = "rounded",
+				},
 			})
 
 			map("n", "-", function()
