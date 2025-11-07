@@ -23,6 +23,7 @@ return {
 					"nix",
 					"python",
 					"tsx",
+					"terraform",
 					"typescript",
 					"vim",
 				},
