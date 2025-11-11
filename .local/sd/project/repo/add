@@ -26,9 +26,9 @@ while getopts r:w flag; do
 done
 
 if [ -n "${repo}" ]; then
-  WORKTREES="${repo//gitrepos/}"
+  WORKTREES=$(echo ${repo} | sed "s@${gitrepos}\(/\)\?@@")
 else
-  WORKTREES="$(find "$gitrepos" -maxdepth 5 -mindepth 2 -name '.git' -type d |
+  WORKTREES="$(find "${gitrepos}" -maxdepth 5 -mindepth 2 -name '.git' -type d |
     sed "s/\/\.git//g" | sed "s@$gitrepos@@g" |
     sed "s/^\///g" |
     sort | fzf -m --border-label='Repositories')"
@@ -52,7 +52,7 @@ if [ -z "${WORKTREES}" ]; then
 else
 
   for WORKTREE in ${WORKTREES}; do
-    PROJECT_DIR="${projects_path}/$PROJECT/$(basename "${WORKTREE}" 2>/dev/null)"
+    PROJECT_DIR="${projects_path}/${PROJECT}/$(basename "${WORKTREE}" 2>/dev/null)"
 
     if [ -z "${create_worktree}" ]; then
 
@@ -60,7 +60,7 @@ else
         log_info "project" "project is already present"
       else
         log_info "project" "linking existing directory"
-        ln -sf "${gitrepos}/${WORKTREE}" "$PROJECT_DIR"
+        ln -sf "${gitrepos}/${WORKTREE}" "${PROJECT_DIR}"
       fi
 
     else
