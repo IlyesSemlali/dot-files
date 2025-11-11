@@ -7,7 +7,7 @@
 source "${HOME}/.local/lib/log"
 
 CURRENT_ORG="$(cat ${HOME}/.cache/project/organization)"
-projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${CURRENT_ORG}/subjects}
+projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${CURRENT_ORG}}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/${CURRENT_ORG}}
 
 # Handle the search term param

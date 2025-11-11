@@ -1,0 +1,5 @@
+[tools]
+
+# required for cookiecutter
+pipx = "latest"
+"pipx:cookiecutter" = "latest"

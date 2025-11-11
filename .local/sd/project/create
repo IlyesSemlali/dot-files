@@ -2,30 +2,37 @@
 
 # creates a new project
 #
-# This will create project folders in the $PROJECTS_ARCHIVE and link it in the $PROJECTS_PATH
-# To remove it use the sd project unlink
+# If lauched with an argument, it will be used to create a project using it as a name
+# otherwise you'll be prompted to select a template (if there's any)
 
 source "${HOME}/.local/lib/log"
 
 CURRENT_ORG="$(cat ${HOME}/.cache/project/organization)"
-projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${CURRENT_ORG}/subjects}
+projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${CURRENT_ORG}}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/${CURRENT_ORG}}
 projects_templates_path=${PROJECTS_TEMPLATES_PATH:-${HOME}/work/${CURRENT_ORG}/.templates/}
 
-# TODO: use organization based templates (for trainings for instance)
-# TODO: use fzf to select a template
-project_template="${HOME}/.local/share/project_template"
+mkdir -p "${projects_path}"
 
-# TODO: check if project hasn't already been created yet
-mkdir -p "${projects_archive}/${1}/.project.d" "${projects_path}"
+if [ -n "${1}" ]; then
+  mkdir -p "${projects_archive}/${1}/.project.d"
 
-if [ -f "${project_template}" ]; then
-  cp "${project_template}" "${projects_archive}/${1}/.project.d/zshrc"
-fi
+else
+  if [ -d "${projects_templates_path}" ]; then
+    project_template="$(find ${projects_templates_path} -mindepth 1 -maxdepth 1 | sort | fzf --border-label='Project Template' --with-nth '7' --delimiter '/')"
 
-if [ -z "${1}" ]; then
-  log_error "project" "no project name was specified"
-  exit 1
+  fi
+  # TODO: check if project hasn't already been created yet
+  if [ -d ${project_template} ]; then
+    pushd ${projects_path}
+    cookiecutter ${project_template}
+    popd
+
+  else
+
+    log_error "project" "couldn't create project with a template"
+    exit 1
+  fi
 fi
 
 if ln -sf -t "${projects_path}" "${projects_archive}/${1}"; then
