@@ -8,7 +8,8 @@
 source "${HOME}/.local/lib/log"
 source "${HOME}/.local/lib/clipboard"
 
-gitrepos=${GIT_REPOS:-$HOME/git}
+CURRENT_ORG="$(cat ${HOME}/.cache/project/organization)"
+gitrepos=${GIT_REPOS:-${HOME}/git/${CURRENT_ORG}}
 
 repo_url="$(clip_paste)"
 
@@ -22,38 +23,33 @@ elif echo "${repo_url}" | grep -qv "\.git$"; then
 
 fi
 
-
-while getopts l:w flag
-do
+while getopts l:w flag; do
   case "${flag}" in
-    l) location=${OPTARG};;
-    w) create_worktree=1;;
-    *) continue;;
+  l) location=${OPTARG} ;;
+  w) create_worktree=1 ;;
+  *) continue ;;
   esac
 done
 
-
 if [ -z "${location}" ]; then
   DESTINATION="$(find ${gitrepos} -maxdepth 3 -mindepth 1 \
-      -type d '!' -exec test -e '{}/*/.git' ';' -prune \
-      -type d '!' -exec test -e '{}/.git' ';' -prune \
-      -type d -print | \
+    -type d '!' -exec test -e '{}/*/.git' ';' -prune \
+    -type d '!' -exec test -e '{}/.git' ';' -prune \
+    -type d -print |
     sort | fzf -m --border-label='Detination')"
 else
   DESTINATION=${location}
 fi
-
 
 if [ -z "${DESTINATION}" ]; then
   log_info "project" "no destination was defined"
   exit 0 # It means we didn't select anything with fzf
 
 else
-  pushd "${DESTINATION}" > /dev/null || return
-  git clone "$(clip_paste)" 2> /dev/null
+  pushd "${DESTINATION}" >/dev/null || return
+  git clone "$(clip_paste)" 2>/dev/null
   log_info "project" "git repo cloned in $(pwd)"
-  popd > /dev/null || return
-
+  popd >/dev/null || return
 
   repo_args=(-r "${DESTINATION}/$(echo "${repo_url}" | grep -o '/.*\.git' | sed 's/\(\/\|\.git\)//g')")
   if [ -n "${create_worktree}" ]; then

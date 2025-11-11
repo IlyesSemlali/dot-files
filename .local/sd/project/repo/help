@@ -1,0 +1,5 @@
+manages git repositories
+
+Wraps git repositories clone, move add and more
+based on organizations and projets to follow the right
+directory structure

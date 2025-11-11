@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# lists organizations
+#
+# This will show organizations that are created in $ORG_PATH
+
+org_path=${ORG_PATH:-${HOME}/work}
+
+tree "${org_path}" -dL 1

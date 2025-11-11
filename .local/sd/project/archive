@@ -6,9 +6,17 @@
 
 source "${HOME}/.local/lib/log"
 
-projects_path="${PROJECTS_PATH:-${HOME}/projects}"
+CURRENT_ORG="$(cat ${HOME}/.cache/project/organization)"
+projects_path=${PROJECTS_PATH:-${HOME}/projects/${CURRENT_ORG}}
 
-PROJECTS=$(find "${projects_path}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf -m --border-label='Projets')
+# Handle the search term param
+if [ ${#} -eq 0 ]; then
+  SEARCH_TERM=()
+else
+  SEARCH_TERM=(-q "${@}")
+fi
+
+PROJECTS=$(find "${projects_path}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \; | sort | fzf -m --border-label='Projets' "${SEARCH_TERM[@]}")
 
 if [ -z "$PROJECTS" ]; then
 
@@ -17,6 +25,7 @@ if [ -z "$PROJECTS" ]; then
 
 else
 
+  # TODO: lock git worktree
   for PROJECT in $PROJECTS; do
     if [ -L "${projects_path}/${PROJECT}" ]; then
       unlink "${projects_path}/${PROJECT}"

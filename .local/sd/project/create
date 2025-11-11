@@ -7,10 +7,16 @@
 
 source "${HOME}/.local/lib/log"
 
-projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
-projects_path=${PROJECTS_PATH:-${HOME}/projects}
+CURRENT_ORG="$(cat ${HOME}/.cache/project/organization)"
+projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${CURRENT_ORG}/subjects}
+projects_path=${PROJECTS_PATH:-${HOME}/projects/${CURRENT_ORG}}
+projects_templates_path=${PROJECTS_TEMPLATES_PATH:-${HOME}/work/${CURRENT_ORG}/.templates/}
+
+# TODO: use organization based templates (for trainings for instance)
+# TODO: use fzf to select a template
 project_template="${HOME}/.local/share/project_template"
 
+# TODO: check if project hasn't already been created yet
 mkdir -p "${projects_archive}/${1}/.project.d" "${projects_path}"
 
 if [ -f "${project_template}" ]; then

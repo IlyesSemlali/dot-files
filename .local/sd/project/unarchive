@@ -6,10 +6,18 @@
 
 source "${HOME}/.local/lib/log"
 
-projects_archive="${PROJECTS_ARCHIVE:-${HOME}/work/subjects}"
-projects_path="${PROJECTS_PATH:-${HOME}/projects}"
+CURRENT_ORG="$(cat ${HOME}/.cache/project/organization)"
+projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${CURRENT_ORG}/subjects}
+projects_path=${PROJECTS_PATH:-${HOME}/projects/${CURRENT_ORG}}
 
-PROJECT=$(find "${projects_archive}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \;  | sort | fzf --border-label='Projets')
+# Handle the search term param
+if [ ${#} -eq 0 ]; then
+  SEARCH_TERM=()
+else
+  SEARCH_TERM=(-q "${@}")
+fi
+
+PROJECT=$(find "${projects_archive}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \; | sort | fzf --border-label='Projets' "${SEARCH_TERM[@]}")
 
 if [ -n "${PROJECT}" ] && ! [ -f "${projects_path}/${PROJECT}" ]; then
   ln -sf -t "${projects_path}" "${projects_archive}/${PROJECT}"

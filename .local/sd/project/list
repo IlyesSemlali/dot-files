@@ -5,9 +5,9 @@
 # This will either add a git worktree or a link in the
 # current project according to the REOP_EXCLUDE_PATTERN
 
-projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/subjects}
-projects_path=${PROJECTS_PATH:-${HOME}/projects}
+CURRENT_ORG="$(cat ${HOME}/.cache/project/organization)"
+projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${CURRENT_ORG}/subjects}
+projects_path=${PROJECTS_PATH:-${HOME}/projects/${CURRENT_ORG}}
 
 tree "${projects_path}" -dL 1
 tree "${projects_archive}" -dL 1
-

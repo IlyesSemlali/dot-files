@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# creates a new organization
+#
+# This will create organization folders in $ORGANIZATIONS
+# To remove it use the sd project org remove
+
+source "${HOME}/.local/lib/log"
+
+org_path=${ORG_PATH:-${HOME}/work}
+gitrepos=${GIT_REPOS:-${HOME}/git/${CURRENT_ORG}}
+
+mkdir -p "${org_path}/${1}"
+mkdir -p "${gitrepos}/${1}"
+
+if [ -z "${1}" ]; then
+  log_error "project" "no organization name has been specified"
+  exit 1
+fi
