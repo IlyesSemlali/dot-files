@@ -8,12 +8,19 @@
 source "${HOME}/.local/lib/log"
 
 org_path=${ORG_PATH:-${HOME}/work}
-gitrepos=${GIT_REPOS:-${HOME}/git/${CURRENT_ORG}}
 
-mkdir -p "${org_path}/${1}"
-mkdir -p "${gitrepos}/${1}"
-
-if [ -z "${1}" ]; then
-  log_error "project" "no organization name has been specified"
+if [ -n "${1}" ]; then
+  CURRENT_ORG="${1}"
+else
+  log_error "project" "no organization name has been provided"
   exit 1
 fi
+
+gitrepos=${GIT_REPOS:-${HOME}/git/${CURRENT_ORG}}
+projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${CURRENT_ORG}}
+projects_path=${PROJECTS_PATH:-${HOME}/projects/${CURRENT_ORG}}
+
+mkdir -p \
+  "${projects_path}" \
+  "${projects_archive}" \
+  "${gitrepos}"
