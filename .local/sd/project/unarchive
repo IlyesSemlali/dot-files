@@ -17,9 +17,11 @@ else
   SEARCH_TERM=(-q "${@}")
 fi
 
-PROJECT=$(find "${projects_archive}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \; | sort | fzf --border-label='Projets' "${SEARCH_TERM[@]}")
+PROJECTS=$(find "${projects_archive}" -maxdepth 1 -mindepth 1 -type l,d -exec basename {} \; | sort | fzf -m --border-label='Projets' "${SEARCH_TERM[@]}")
 
-if [ -n "${PROJECT}" ] && ! [ -f "${projects_path}/${PROJECT}" ]; then
-  ln -sf -t "${projects_path}" "${projects_archive}/${PROJECT}"
-  log_info "project" "unarchived ${PROJECT}"
-fi
+for PROJECT in ${PROJECTS}; do
+  if [ -n "${PROJECT}" ] && ! [ -f "${projects_path}/${PROJECT}" ]; then
+    ln -sf -t "${projects_path}" "${projects_archive}/${PROJECT}"
+    log_info "project" "unarchived ${PROJECT}"
+  fi
+done
