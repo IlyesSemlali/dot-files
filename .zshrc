@@ -24,9 +24,6 @@ fi
 
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
 alias dv="cdi"
-alias pj="sd project"
-alias cpj="cd ${HOME}/projects/$(cat ${HOME}/.cache/project/organization)/${PROJECT}/"
-alias -g spj="source ${HOME}/projects/$(cat ${HOME}/.cache/project/organization)/${PROJECT}/.project.d/zshrc"
 
 unset SSH_ASKPASS
 

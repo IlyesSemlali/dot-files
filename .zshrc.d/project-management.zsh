@@ -1,17 +1,19 @@
 # Project management
 
-if [[ -v PROJECT ]]; then
-	export _ZO_DATA_DIR="${HOME}/projects/$PROJECT/.project.d"
-	export HISTFILE="${HOME}/projects/$PROJECT/.project.d/zsh_history"
+ACTIVE_ORGANIZATION="${HOME}/.cache/project/organization"
 
-	if [[ -f "${HOME}/projects/$PROJECT/.project.d/zshrc" ]]; then
-		source "${HOME}/projects/$PROJECT/.project.d/zshrc"
+alias pj="sd project"
+alias cpj="cd ${HOME}/projects/$(cat ${HOME}/.cache/project/organization)/${PROJECT}/"
+alias -g spj="source ${HOME}/projects/$(cat ${HOME}/.cache/project/organization)/${PROJECT}/.project.d/zshrc"
+
+if [[ -v PROJECT ]]; then
+	export _ZO_DATA_DIR="${HOME}/projects/${ACTIVE_ORGANIZATION}/${PROJECT}/.project.d"
+	export HISTFILE="${HOME}/projects/${ACTIVE_ORGANIZATION}/${PROJECT}/.project.d/zsh_history"
+
+	if [[ -f "${HOME}/projects/${ACTIVE_ORGANIZATION}/${PROJECT}/.project.d/zshrc" ]]; then
+		source "${HOME}/projects/${ACTIVE_ORGANIZATION}/${PROJECT}/.project.d/zshrc"
 	fi
 
-fi
-
-if [ -f ${HOME}/project/$PROJECT/.project ]; then
-	source ${HOME}/project/$PROJECT/.project
 fi
 
 # TODO: understand how compdef works to implement it later
