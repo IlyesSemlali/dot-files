@@ -8,8 +8,8 @@
 source "${HOME}/.local/lib/log"
 source "${HOME}/.local/lib/clipboard"
 
-CURRENT_ORG="$(cat ${HOME}/.cache/project/organization)"
-gitrepos=${GIT_REPOS:-${HOME}/git/${CURRENT_ORG}}
+ACTIVE_ORGANIZATION="$(cat ${HOME}/.cache/project/organization)"
+gitrepos=${GIT_REPOS:-${HOME}/git/${ACTIVE_ORGANIZATION}}
 
 repo_url="$(clip_paste)"
 

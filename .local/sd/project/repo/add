@@ -8,9 +8,9 @@
 source "${HOME}/.local/lib/log"
 source "${HOME}/.local/lib/clipboard"
 
-CURRENT_ORG="$(cat ${HOME}/.cache/project/organization)"
-projects_path=${PROJECTS_PATH:-${HOME}/projects/${CURRENT_ORG}}
-gitrepos=${GIT_REPOS:-$HOME/git/${CURRENT_ORG}}
+ACTIVE_ORGANIZATION="$(cat ${HOME}/.cache/project/organization)"
+projects_path=${PROJECTS_PATH:-${HOME}/projects/${ACTIVE_ORGANIZATION}}
+gitrepos=${GIT_REPOS:-$HOME/git/${ACTIVE_ORGANIZATION}}
 
 if [ -z "${PROJECT}" ]; then
   log_error "project" "PROJECT env variable isn't set"

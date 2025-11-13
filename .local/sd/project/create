@@ -7,10 +7,10 @@
 
 source "${HOME}/.local/lib/log"
 
-CURRENT_ORG="$(cat ${HOME}/.cache/project/organization)"
-projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${CURRENT_ORG}}
-projects_path=${PROJECTS_PATH:-${HOME}/projects/${CURRENT_ORG}}
-projects_templates_path=${PROJECTS_TEMPLATES_PATH:-${HOME}/work/${CURRENT_ORG}/.templates/}
+ACTIVE_ORGANIZATION="$(cat ${HOME}/.cache/project/organization)"
+projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${ACTIVE_ORGANIZATION}}
+projects_path=${PROJECTS_PATH:-${HOME}/projects/${ACTIVE_ORGANIZATION}}
+projects_templates_path=${PROJECTS_TEMPLATES_PATH:-${HOME}/work/${ACTIVE_ORGANIZATION}/.templates/}
 
 mkdir -p "${projects_path}"
 

@@ -4,8 +4,8 @@
 
 source "${HOME}/.local/lib/log"
 
-CURRENT_ORG="$(cat ${HOME}/.cache/project/organization)"
-projects_path=${PROJECTS_PATH:-${HOME}/projects/${CURRENT_ORG}}
+ACTIVE_ORGANIZATION="$(cat ${HOME}/.cache/project/organization)"
+projects_path=${PROJECTS_PATH:-${HOME}/projects/${ACTIVE_ORGANIZATION}}
 
 if $EDITOR "${projects_path}/${PROJECT}/.project.d/zshrc"; then
   log_info "project" "edited project ${PROJECT}"

@@ -7,20 +7,20 @@
 
 source "${HOME}/.local/lib/log"
 
-org_path=${ORG_PATH:-${HOME}/work}
-
 if [ -n "${1}" ]; then
-  CURRENT_ORG="${1}"
+  ACTIVE_ORGANIZATION="${1}"
 else
   log_error "project" "no organization name has been provided"
   exit 1
 fi
 
-gitrepos=${GIT_REPOS:-${HOME}/git/${CURRENT_ORG}}
-projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${CURRENT_ORG}}
-projects_path=${PROJECTS_PATH:-${HOME}/projects/${CURRENT_ORG}}
+gitrepos=${GIT_REPOS:-${HOME}/git/${ACTIVE_ORGANIZATION}}
+projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${ACTIVE_ORGANIZATION}}
+projects_path=${PROJECTS_PATH:-${HOME}/projects/${ACTIVE_ORGANIZATION}}
+projects_cache="${HOME}/.cache/project/${ACTIVE_ORGANIZATION}"
 
 mkdir -p \
+  "${projects_cache}" \
   "${projects_path}" \
   "${projects_archive}" \
   "${gitrepos}"

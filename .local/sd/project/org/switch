@@ -2,6 +2,9 @@
 
 # switches organizations
 
+# TODO: also switch to last project
+# (in the process of adding this feature)
+
 source "${HOME}/.local/lib/log"
 
 org_path=${ORG_PATH:-${HOME}/work}
