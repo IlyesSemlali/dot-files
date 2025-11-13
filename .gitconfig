@@ -108,3 +108,6 @@
 
 [tag]
   sort = v:refname
+
+[advice]
+	skippedCherryPicks = false
