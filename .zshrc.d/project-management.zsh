@@ -1,10 +1,10 @@
 # Project management
 
-ACTIVE_ORGANIZATION="${HOME}/.cache/project/organization"
+export ACTIVE_ORGANIZATION="$(cat ${HOME}/.cache/project/organization)"
 
 alias pj="sd project"
-alias cpj="cd ${HOME}/projects/$(cat ${HOME}/.cache/project/organization)/${PROJECT}/"
-alias -g spj="source ${HOME}/projects/$(cat ${HOME}/.cache/project/organization)/${PROJECT}/.project.d/zshrc"
+alias cpj="cd ${HOME}/projects/${ACTIVE_ORGANIZATION}/${PROJECT}/"
+alias -g spj="source ${HOME}/projects/${ACTIVE_ORGANIZATION}/${PROJECT}/.project.d/zshrc"
 
 if [[ -v PROJECT ]]; then
 	export _ZO_DATA_DIR="${HOME}/projects/${ACTIVE_ORGANIZATION}/${PROJECT}/.project.d"
