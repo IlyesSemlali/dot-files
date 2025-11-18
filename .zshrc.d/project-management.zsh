@@ -1,6 +1,7 @@
 # Project management
 
 export ACTIVE_ORGANIZATION="$(cat ${HOME}/.cache/project/organization)"
+export PROJECT_DIR="${HOME}/projects/${ACTIVE_ORGANIZATION}/${PROJECT}"
 
 alias pj="sd project"
 alias cpj="cd ${HOME}/projects/${ACTIVE_ORGANIZATION}/${PROJECT}/"
