@@ -17,6 +17,7 @@
   com = ! git commit -am \"$COMMIT_MESSAGE\"
   coma = commit --amend
   comac = commit --amend -C HEAD
+  coche = commit -a -C HEAD --date=now --edit
   cl = ! git clone $(xclip -o)
   r = reflog -25
   s = status
