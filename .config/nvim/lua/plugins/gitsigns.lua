@@ -15,6 +15,7 @@ return {
 
 			gitsigns.setup({
 				sign_priority = 80,
+				debounce_time = 200,
 				preview_config = {
 					border = "rounded",
 				},
