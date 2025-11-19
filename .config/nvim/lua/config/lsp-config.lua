@@ -49,6 +49,12 @@ for _, lsp in ipairs(servers) do
 end
 
 lspconfig("ltex", {
+	filetypes = {
+		"gitcommit",
+		"latex",
+		"markdown",
+		"tex",
+	},
 	capabilities = capabilities,
 	-- If you need to disable a specific rule, set the log level to debug for the LSP:
 	-- on_attach = function()
