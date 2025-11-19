@@ -10,6 +10,7 @@ return {
 					timeout_ms = 1000,
 				},
 				formatters_by_ft = {
+					html = { "superhtml" },
 					json = { "jq" },
 					lua = { "stylua" },
 					python = { "ruff_format" },

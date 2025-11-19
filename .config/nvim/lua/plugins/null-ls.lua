@@ -22,6 +22,7 @@ return {
 					"ruff",
 					"shfmt",
 					"stylua",
+					"superhtml",
 					"taplo",
 					"terraform_fmt",
 					"yaml-language-server",
