@@ -86,3 +86,9 @@ if which uv > /dev/null 2>&1
 then
   lazyload uv -- 'eval "$(uv generate-shell-completion zsh)"'
 fi
+
+# YQ
+if which yq > /dev/null 2>&1
+then
+  eval "$(yq completion zsh)"
+fi
