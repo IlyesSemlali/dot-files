@@ -5,6 +5,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-fzf-native.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
 		},
 
 		config = function()
@@ -14,38 +15,60 @@ return {
 			telescope.setup({
 
 				defaults = {
+					path_display = { "smart" },
+					scroll_strategy = "limit",
+
 					layout_config = {
+
 						height = 0.9,
 						width = 0.9,
 
-						prompt_position = "bottom",
 						bottom_pane = {
-							height = 25,
-							preview_cutoff = 120,
-							prompt_position = "top",
-							preview_width = 65,
+							height = 0.33,
+							preview_width = 0.6,
 						},
+
 						center = {
 							height = 0.6,
 							preview_cutoff = 40,
 							preview_width = 0.6,
-							prompt_position = "top",
 							width = 0.5,
 						},
-						-- cursor = {
-						-- 	height = 0.9,
-						-- 	preview_cutoff = 40,
-						-- 	width = 0.8,
-						-- },
+
+						cursor = {
+							height = 5,
+							width = 10,
+						},
+
 						horizontal = {
 							preview_cutoff = 120,
-							preview_width = 60,
+							preview_width = 0.6,
+							padding = 5,
 						},
-						vertical = {},
+
+						vertical = {
+							height = 0.7,
+							width = 0.5,
+							preview_height = 0.6,
+						},
 					},
 				},
 
 				pickers = {
+
+					buffers = {
+						layout_strategy = "bottom_pane",
+						preview = false,
+					},
+
+					oldfiles = {
+						layout_strategy = "vertical",
+					},
+
+					lsp_references = {
+						layout_strategy = "bottom_pane",
+					},
+
 					diagnostics = {
 						layout_strategy = "bottom_pane",
 
@@ -65,10 +88,27 @@ return {
 						}),
 					},
 				},
-				extensions = {},
+
+				extensions = {
+					["ui-select"] = {
+						layout_strategy = "cursor",
+
+						layout_config = {
+							cursor = {
+								layout_strategy = "vertical",
+								prompt_position = "top",
+								width = 0.35,
+								height = 0.30,
+							},
+						},
+						previewer = false,
+					},
+				},
 			})
 
 			local builtin = require("telescope.builtin")
+			require("telescope").load_extension("ui-select")
+
 			map("n", "<leader><space>", builtin.buffers, { desc = "Telescope: Buffers" })
 			map("n", "<leader>ch", builtin.keymaps, { desc = "Telescope: Key Mappings" })
 			map("n", "<leader>ff", builtin.find_files, { desc = "Telescope: Files" })
@@ -77,6 +117,7 @@ return {
 			map("n", "<leader>fd", builtin.diagnostics, { desc = "Telescope: Diagnostics" })
 			map("n", "<leader>fr", builtin.registers, { desc = "Telescope: Show Registers" })
 			map("n", "<leader>fm", builtin.marks, { desc = "Telescope: Marks" })
+			map("n", "<leader>cf", builtin.lsp_references, { desc = "LSP: Find references" })
 		end,
 	},
 }
