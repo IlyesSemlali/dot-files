@@ -25,13 +25,13 @@ elif [ $# -eq 1 ] || [ $# -eq 2 ]; then
     path_to_restore=$(config_read_fullpath ${backup_name})
     archive_name=$(get_last_archive ${backup_name})
 
-  elif ! (find_archived_path "${backup_name}" > ${archived_path_file}); then
+  elif ! (find_archived_path "${backup_name}" >${archived_path_file}); then
     log_error "backup" "couldn't determine archive and path"
     exit 1
 
   else
     path_to_restore=$(yq '.path' ${archived_path_file})
-    archive_name=$(yq '.archives[]' ${archived_path_file} | fzf --border-label='Archive')
+    archive_name=$(yq '.archives[]' ${archived_path_file} | fzf --tmux=center --border-label='Archive')
 
   fi
 

@@ -19,7 +19,7 @@ if [ -n "${1}" ]; then
 
 else
   if [ -d "${projects_templates_path}" ]; then
-    project_template="$(find ${projects_templates_path} -mindepth 1 -maxdepth 1 | sort | fzf --border-label='Project Template' --with-nth '7' --delimiter '/')"
+    project_template="$(find ${projects_templates_path} -mindepth 1 -maxdepth 1 | sort | fzf --tmux=center --border-label='Project Template' --with-nth '7' --delimiter '/')"
 
   fi
   # TODO: check if project hasn't already been created yet
