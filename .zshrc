@@ -1,4 +1,11 @@
 source "${HOME}/.local/lib/log"
+#
+# # PowerLevel10k prompt
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+[[ ! -f ~/.zshrc.d/p10k.zsh ]] || source ~/.zshrc.d/p10k.zsh
 
 source ${HOME}/.zsh/utils.zsh
 source ${HOME}/.zshrc.d/plugin-manager.zsh
@@ -51,9 +58,6 @@ export PRE_COMMIT_ALLOW_NO_CONFIG=1
 #####################################
 ##### Shell customization tools #####
 #####################################
-
-# Starship prompt
-(( $+commands[starship] )) && eval "$(starship init zsh)" || export PS1="-> "
 
 # Fuzzy-find CD replacement
 (( $+commands[zoxide])) && eval "$(zoxide init --cmd cd zsh)"
