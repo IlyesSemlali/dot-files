@@ -1,6 +1,7 @@
 [general]
 import = [
-    "~/.themes/gruvbox-dark/alacritty.toml"
+  "~/.themes/gruvbox-dark/alacritty.toml", # Fallback on dark theme
+  "~/.themes/current/alacritty.toml",      # Selected theme
 ]
 
 [env]

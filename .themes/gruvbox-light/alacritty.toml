@@ -1,0 +1,30 @@
+# Gruvbox-light from:
+# https://github.com/morhetz/gruvbox?tab=readme-ov-file#palette
+
+[colors.normal]
+black = "0xf2e5bc"   # Gruvbox-light bg3 (ANSI 0, for contrast)
+red = "0xcc241d"     # Gruvbox-light red (Normal)
+green = "0xa9b665"   # Gruvbox-light green (Normal)
+yellow = "0xdb9241"  # Gruvbox-light yellow (Normal)
+blue = "0x83a598"    # Gruvbox-light blue (Normal)
+magenta = "0xd3869b" # Gruvbox-light purple (Normal)
+cyan = "0x89b656"    # Gruvbox-light aqua (Normal)
+white = "0x3c3836"   # Gruvbox-light fg0 (ANSI 7)
+
+[colors.bright]
+black = "0x928374"   # Gruvbox-light gray
+red = "0x9d0006"     # Gruvbox-light red (Bright)
+green = "0x79740e"   # Gruvbox-light green (Bright)
+yellow = "0xb57614"  # Gruvbox-light yellow (Bright)
+blue = "0x076678"    # Gruvbox-light blue (Bright)
+magenta = "0x8f3f71" # Gruvbox-light purple (Bright)
+cyan = "0x427b58"    # Gruvbox-light aqua (Bright)
+white = "0x928374"   # Gruvbox-light gray (ANSI 8 / fg4)
+
+[colors.primary]
+background = "0xfbf1c7" # Gruvbox-light bg0
+foreground = "0x3c3836" # Gruvbox-light fg0
+
+[colors.selection]
+background = "0x665c54" # Gruvbox-light dim shade for visibility
+text = "0xfbf1c7"       # Gruvbox-light bg0

@@ -1,0 +1,6 @@
+; vim: ft=gitconfig
+; tune using the `delta --show-config` command
+
+[delta "theme"]
+  syntax-theme = gruvbox-dark
+  blame-palette = "#000000" "#1d2021" "#282828" "#3c3836"

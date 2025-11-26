@@ -63,7 +63,13 @@ export PRE_COMMIT_ALLOW_NO_CONFIG=1
 (( $+commands[zoxide])) && eval "$(zoxide init --cmd cd zsh)"
 
 # Themes for ls and tree using sharkdp/vivid
-(( $+commands[vivid])) && export LS_COLORS="$(vivid generate ${HOME}/.themes/gruvbox-dark/vivid.yaml)"
+if (( $+commands[vivid])); then
+  if [ -f ${HOME}/.themes/current/vivid.yaml ]; then
+    export LS_COLORS="$(vivid generate ${HOME}/.themes/current/vivid.yaml)"
+  else
+    export LS_COLORS="$(vivid generate ${HOME}/.themes/gruvbox-dark/vivid.yaml)"
+  fi
+fi
 
 #####################################
 

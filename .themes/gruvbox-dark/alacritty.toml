@@ -1,24 +1,24 @@
 # Gruvbox-dark from:
 # https://github.com/morhetz/gruvbox?tab=readme-ov-file#palette
-[colors.bright]
-black    = "0x2d3031" # Gruvbox-dark bg0_h # brighter by 4
-red      = "0x0b4934" # Gruvbox-dark red (2nd row)
-green    = "0xb8bb26" # Gruvbox-dark green (2nd row)
-yellow   = "0xfabd2f" # Gruvbox-dark yellow (2nd row)
-blue     = "0x83a598" # Gruvbox-dark blue (2nd row)
-magenta  = "0xd3869b" # Gruvbox-dark purple (2nd row)
-cyan     = "0x8ec07c" # Gruvbox-dark aqua (2nd row)
-white    = "0xfbf1c7" # Gruvbox-dark fg
-
 [colors.normal]
-black    = "0x1d2021" # Gruvbox-dark bg0_h
-red      = "0xcc241d" # Gruvbox-dark red (1st row)
-green    = "0x98971a" # Gruvbox-dark green (1st row)
-yellow   = "0xd79921" # Gruvbox-dark yellow (1st row)
-blue     = "0x458588" # Gruvbox-dark blue (1st row)
-magenta  = "0xb16286" # Gruvbox-dark purple (1st row)
-cyan     = "0x689d6a" # Gruvbox-dark aqua (1st row)
-white    = "0xfbf1c7" # Gruvbox-dark fg
+black = "0x1d2021"   # Gruvbox-dark bg0_h
+red = "0xcc241d"     # Gruvbox-dark red (1st row)
+green = "0x98971a"   # Gruvbox-dark green (1st row)
+yellow = "0xd79921"  # Gruvbox-dark yellow (1st row)
+blue = "0x458588"    # Gruvbox-dark blue (1st row)
+magenta = "0xb16286" # Gruvbox-dark purple (1st row)
+cyan = "0x689d6a"    # Gruvbox-dark aqua (1st row)
+white = "0xfbf1c7"   # Gruvbox-dark fg
+
+[colors.bright]
+black = "0x928374"   # Gruvbox-dark gray
+red = "0x0b4934"     # Gruvbox-dark red (2nd row)
+green = "0xb8bb26"   # Gruvbox-dark green (2nd row)
+yellow = "0xfabd2f"  # Gruvbox-dark yellow (2nd row)
+blue = "0x83a598"    # Gruvbox-dark blue (2nd row)
+magenta = "0xd3869b" # Gruvbox-dark purple (2nd row)
+cyan = "0x8ec07c"    # Gruvbox-dark aqua (2nd row)
+white = "0xfbf1c7"   # Gruvbox-dark fg
 
 [colors.primary]
 background = "0x1d1b1b" # Custom
@@ -27,4 +27,3 @@ foreground = "0xfbf1c7" # Gruvbox-dark fg0
 [colors.selection]
 background = "0xbbc5ff"
 text = "0x292d3e"
-

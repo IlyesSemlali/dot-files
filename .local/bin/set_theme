@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Validate argument
+if [[ "$1" != "dark" && "$1" != "light" ]]; then
+  echo "Usage: $0 [dark|light]"
+  exit 1
+fi
+
+TARGET_THEME="$1"
+OS="$(uname -s)"
+
+if [[ "$OS" == "Darwin" ]]; then
+  # ==========================================
+  # macOS
+  # ==========================================
+  if [[ "$TARGET_THEME" == "dark" ]]; then
+    osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
+  else
+    osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
+  fi
+
+elif [[ "$OS" == "Linux" ]]; then
+  # ==========================================
+  # Linux
+  # ==========================================
+
+  # Check for GNOME
+  if [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]]; then
+    if [[ "$TARGET_THEME" == "dark" ]]; then
+      gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+      # Optional: Force legacy GTK3 theme if needed
+      # gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+    else
+      gsettings set org.gnome.desktop.interface color-scheme 'default'
+      # Optional: Force legacy GTK3 theme if needed
+      # gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+    fi
+
+  # Check for KDE Plasma
+  elif [[ "$XDG_CURRENT_DESKTOP" == *"KDE"* ]]; then
+    # Note: These are the standard Breeze identifiers.
+    # If you use a custom theme, replace the strings below.
+    if [[ "$TARGET_THEME" == "dark" ]]; then
+      lookandfeeltool -a org.kde.breezedark.desktop
+    else
+      lookandfeeltool -a org.kde.breeze.desktop
+    fi
+
+  else
+    echo "Unsupported Desktop Environment: $XDG_CURRENT_DESKTOP"
+    exit 1
+  fi
+
+else
+  echo "Unsupported Operating System: $OS"
+  exit 1
+fi

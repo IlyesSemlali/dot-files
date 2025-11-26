@@ -1,5 +1,7 @@
 [include]
   path = ~/.gitconfig.local
+  path = ~/.themes/gruvbox-light/delta.gitconfig
+  path = ~/.themes/current/delta.gitconfig
 
 [core]
   pager = delta
@@ -68,41 +70,79 @@
   prompt = false
   keepBackup = false
 
-# Delta
-[interactive]
-  diffFilter = delta --color-only --features=interactive
-
 [delta]
-  features = decorations
-  syntax-theme = gruvbox-dark
+  features = gruvbox theme
   paging = never
 
-[delta "interactive"]
-    ; keep-plus-minus-markers = false
+[delta "gruvbox"]
+  # tune using the `delta --show-config` command
 
-[delta "decorations"]
+  # file
+  file-style = 12 bold
+  file-added-label = [+]
+  file-copied-label = [==]
+  file-modified-label = [*]
+  file-removed-label = [-]
+  file-renamed-label = [->]
+  file-decoration-style = 10
+
+  # grep results
+  grep-file-style               = 12 bold
+  grep-line-number-style        = 11
+
+
+  # no hunk headers
+  hunk-label = "***"
+  hunk-header-style = line-number
+
+  # line numbers
   line-numbers = true
-  tabs = 2
-  commit-style = omit
-  file-style = omit
+  line-numbers-left-style = 8
+  line-numbers-right-style = 8
+  line-numbers-minus-style = 9
+  line-numbers-plus-style = 10
+  line-numbers-zero-style = 8
+  line-numbers-left-format = " {nm:>3} │"
+  line-numbers-right-format = " {np:>3} │"
 
-  hunk-header-decoration-style = orange box
-  hunk-header-file-style = red
-  hunk-header-style = file
+  # empty lines changes
+  minus-empty-line-marker-style = normal
+  plus-empty-line-marker-style = normal
 
-  zero-style = syntax normal dim
-  minus-style = syntax normal dim strike
-  plus-style = syntax bold normal
-  line-numbers-minus-style = red bold
-  line-numbers-plus-style = green bold
-  plus-emph-style = syntax bold "#306040"
+  # diff contents
+  zero-style = italic
+  inline-hint-style = syntax
+  minus-style = 9
+  minus-non-emph-style = 9
+  minus-emph-style = 9 ul
+  plus-style = syntax
+  plus-non-emph-style = syntax
+  plus-emph-style = 10 ul
+  whitespace-error-style = 9 reverse
+
+  # commit hash
+  commit-decoration-style = normal box
+  commit-style = 9 italic
+
+  # blame
+  blame-code-style = syntax
+  blame-format = "{author:>18} ({commit:>8}) {timestamp:<13} "
+  blame-palette = "#000000" "#1d2021" "#282828" "#3c3836"
+
+  # merge conflicts
+  merge-conflict-begin-symbol = ⌃
+  merge-conflict-end-symbol = ⌄
+  merge-conflict-ours-diff-header-style = "#fabd2f" bold
+  merge-conflict-theirs-diff-header-style = "#fabd2f" bold overline
+  merge-conflict-ours-diff-header-decoration-style = ''
+  merge-conflict-theirs-diff-header-decoration-style = ''
 
 [color "status"]
-  header = white italic
-  branch = magenta italic
+  header = italic
+  branch = blue bold
   added = green bold
   changed = yellow bold
-  untracked = white dim italic
+  untracked = dim italic
 
 [user]
   name = Ilyès Semlali

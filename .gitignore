@@ -122,6 +122,7 @@ Zenika
 !.local/bin/monitor-selector
 !.local/bin/nomacs
 !.local/bin/screencast
+!.local/bin/set_theme
 !.local/bin/wwwwrap
 !.local/lib/
 !.local/sd/
