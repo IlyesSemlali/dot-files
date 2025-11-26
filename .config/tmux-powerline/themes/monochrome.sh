@@ -106,15 +106,14 @@ fi
 # shellcheck disable=SC1143,SC2128
 if [ -z "$TMUX_POWERLINE_LEFT_STATUS_SEGMENTS" ]; then
   TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-    "project ${color_alt_bg} ${color_alt_fg} ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}"
-    "vcs_branch ${color_alt_bg} ${color_alt_fg}"
+    "project ${color_alt_bg} ${color_alt_fg}"
   )
 fi
 
 # shellcheck disable=SC1143,SC2128
 if [ -z "$TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS" ]; then
   TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
-    "vcs_rootpath ${color_alt_bg} ${color_alt_fg}"
-    "time ${color_alt_bg} ${color_alt_fg} ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
+    "vcs_rootpath ${color_bg} ${color_fg}"
+    "time ${color_alt_bg} ${color_alt_fg}"
   )
 fi
