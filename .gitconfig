@@ -78,7 +78,7 @@
   # tune using the `delta --show-config` command
 
   # file
-  file-style = 12 bold
+  file-style = 12 bold box
   file-added-label = [+]
   file-copied-label = [==]
   file-modified-label = [*]
