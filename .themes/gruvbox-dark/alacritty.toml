@@ -12,7 +12,7 @@ white = "0xfbf1c7"   # Gruvbox-dark fg
 
 [colors.bright]
 black = "0x928374"   # Gruvbox-dark gray
-red = "0x0b4934"     # Gruvbox-dark red (2nd row)
+red = "0xfb4934"     # Gruvbox-dark red (2nd row)
 green = "0xb8bb26"   # Gruvbox-dark green (2nd row)
 yellow = "0xfabd2f"  # Gruvbox-dark yellow (2nd row)
 blue = "0x83a598"    # Gruvbox-dark blue (2nd row)
