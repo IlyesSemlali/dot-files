@@ -42,6 +42,7 @@ Zenika
 !.npmrc
 !.profile
 !.themes/
+.themes/current/
 !.tfswitch.toml
 !.xinitrc
 !.zshrc
