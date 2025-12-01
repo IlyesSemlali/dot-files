@@ -1,8 +1,9 @@
 [tools]
 
 # Kube
-kubectl = "latest"
+k9s = "latest"
 krew = "latest"
+kubectl = "latest"
 terraform = "latest"
 
 # Data Parsing
