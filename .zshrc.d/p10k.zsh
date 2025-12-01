@@ -116,6 +116,7 @@ add-zsh-hook precmd _print_history_separator
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last
   typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
   typeset -g POWERLEVEL9K_SHORTEN_DELIMITER='.../'
+  typeset -g POWERLEVEL9K_DIR_CLASSES=() # Disable dir icons
   typeset -g POWERLEVEL9K_DIR_HYPERLINK=false
 
   # --- GIT (VCS) - Custom Formatter ---
