@@ -137,11 +137,15 @@
   merge-conflict-ours-diff-header-decoration-style = ''
   merge-conflict-theirs-diff-header-decoration-style = ''
 
+[color "branch"]
+  remote = yellow
+  current = blue
+
 [color "status"]
   header = italic
-  branch = blue bold
-  added = green bold
-  changed = yellow bold
+  branch = blue italic
+  added = green
+  changed = yellow
   untracked = dim italic
 
 [user]
