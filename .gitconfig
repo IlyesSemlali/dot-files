@@ -10,36 +10,43 @@
 
 [alias]
   alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+
+  b = branch
+  br = branch -r
   bsu = ! git branch --set-upstream-to=origin/$(git branch --show-current)
-  psu = ! git push --set-upstream origin $(git branch --show-current)
+
+  c = checkout
+  mt = mergetool
+  cp = cherry-pick
+
   p = pull
   pf = push --force-with-lease
-  c = checkout
+  pp = ! git pull && git push
+  psu = ! git push --set-upstream origin $(git branch --show-current)
+
   co = commit -a
   com = ! git commit -am \"$COMMIT_MESSAGE\"
   coma = commit --amend
   comac = commit --amend -C HEAD
   coche = commit -a -C HEAD --date=now --edit
   cl = ! git clone $(xclip -o)
+
   r = reflog -25
   s = status
   cb = checkout -b
-  mt = mergetool
+
   l = log -1 --format=format:%s
   ll = ! git log -1 | bat
   lh = log -1 --format=%h
   plog = log --reverse --abbrev-commit -15 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
   slog = log --reverse --abbrev-commit -15 --decorate --format=format:'%C(white)%ci%C(reset) %C(yellow)%s%C(reset) %C(dim white)%an%C(reset)%d%C(reset)'
   graph = log --graph --all --abbrev-commit -50 --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset)%n          %C(red)%an%C(reset) %C(dim white)(%ar)%C(reset)%d%C(reset)%n'
-  dr = ! git diff origin/$(git branch --show-current)
-  b = branch
-  br = branch -r
-  st = ! git stash -m \"$COMMIT_MESSAGE\"
-  mt = mergetool
-  cp = cherry-pick
-  pp = ! git pull && git push
 
-    # Work done, interactively rebases from common ancestor
+  dr = ! git diff origin/$(git branch --show-current)
+
+  st = ! git stash -m \"$COMMIT_MESSAGE\"
+
+  # Work done, interactively rebases from common ancestor
   wd = ! git rebase -i $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD))~1
 
 [pull]
