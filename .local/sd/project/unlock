@@ -6,13 +6,15 @@
 
 source "${HOME}/.local/lib/log"
 
-if [ "$(tmux list-sessions >/dev/null 2>&1 | wc -l )" -gt 0 ]
-then
+ACTIVE_ORGANIZATION="$(cat ${HOME}/.cache/project/organization)"
+LOCK_FILE="${HOME}/.cache/project/${ACTIVE_ORGANIZATION}/lock"
+
+if [ "$(tmux list-sessions >/dev/null 2>&1 | wc -l)" -gt 0 ]; then
   log_error "project" "sessions are currently running, keeping lock in place"
 
 else
 
-  rm -f ~/.cache/project/lock
+  rm -f "${LOCK_FILE}"
   log_info "project" "lock removed"
 
 fi

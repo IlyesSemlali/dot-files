@@ -58,7 +58,7 @@ else
     fi
     ;;
   *)
-    # log_info "project" "$(date) using search term" >> "${LOG_FILE}"
+    log_info "project" "$(date) using search term" >>"${LOG_FILE}"
 
     if [ "$(echo "${ACTIVE_PROJECTS}" | fzf --tmux=center --filter "${@}" | wc -l)" -eq 1 ] && [ ${#} -ne 0 ]; then
       PROJECT=$(echo "${ACTIVE_PROJECTS}" | fzf --tmux=center --filter "${@}")
