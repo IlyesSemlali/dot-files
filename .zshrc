@@ -44,7 +44,11 @@ export FZF_DEFAULT_OPTS="--height=25 --min-height=15 --border=rounded --margin=1
 
 export K9S_CONFIG_DIR="$HOME/.config/k9s/"
 
-export _ZO_FZF_OPTS="--border-label='Change Directory' --preview 'eza -al --group-directories-first --no-user --no-time --no-filesize --no-permissions {2..}' --preview-window right,40% --height 40% --reverse --ansi"
+export _ZO_FZF_OPTS="--border-label='Change Directory'
+  --preview 'eza -al --group-directories-first --no-user --no-time --no-filesize --no-permissions {2..}'
+  --bind 'ctrl-a:reload(zoxide edit increment {2..})'
+  --bind 'ctrl-x:reload(zoxide edit decrement {2..})'
+  --preview-window right,40% --height 40% --reverse --ansi"
 
 export SD_ROOT="${HOME}/.local/sd"
 export SD_CAT="bat"
