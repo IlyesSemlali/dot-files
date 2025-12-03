@@ -25,6 +25,7 @@
   psu = ! git push --set-upstream origin $(git branch --show-current)
 
   co = commit -a
+  cor = ! git commit -aeF $(git rev-parse --git-dir)/COMMIT_EDITMSG
   com = ! git commit -am \"$COMMIT_MESSAGE\"
   coma = commit --amend
   comac = commit --amend -C HEAD
