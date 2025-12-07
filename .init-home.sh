@@ -41,11 +41,6 @@ function install_apt() {
     # Install zoxide
     curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
-    # Install starship
-    curl -sS https://starship.rs/install.sh -o install-starhip.sh
-    sudo sh ./install-starhip.sh -y
-    rm -f install_name_tool.sh
-
     # Install eza
     sudo mkdir -p /etc/apt/keyrings
     wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
