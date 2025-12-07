@@ -50,3 +50,4 @@ install_tpm
 if [[ "$(uname)" == "Darwin" ]]; then
   install_brew
 fi
+mise install
