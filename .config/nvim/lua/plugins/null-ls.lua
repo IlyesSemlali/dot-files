@@ -19,7 +19,6 @@ return {
 					"jinja-lsp",
 					"jq",
 					"python-lsp-server",
-					"ruff",
 					"shfmt",
 					"stylua",
 					"superhtml",

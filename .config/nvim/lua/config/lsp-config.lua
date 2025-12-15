@@ -117,10 +117,6 @@ lspconfig("lua_ls", {
 	},
 })
 
-lspconfig("ruff", {
-	capabilities = capabilities,
-})
-
 lspconfig("pylsp", {
 	capabilities = capabilities,
 
