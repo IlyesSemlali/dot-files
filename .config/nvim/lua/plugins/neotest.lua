@@ -7,11 +7,15 @@ return {
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
 
+			-- Requirements for the 'debug nearest test' command
+			"mfussenegger/nvim-dap",
+
 			-- Adapters
 			"nvim-neotest/neotest-python",
 		},
 		config = function()
 			require("neotest").setup({
+				dap = { justMyCode = false },
 				floating = {
 					border = "rounded",
 				},
@@ -50,6 +54,13 @@ return {
 					require("neotest").output.open({ enter = true })
 				end,
 				desc = "Tests: show output",
+			},
+			{
+				"<leader>td",
+				function()
+					require("neotest").run.run({ strategy = "dap" })
+				end,
+				desc = "Tests: debug nearest test",
 			},
 		},
 	},
