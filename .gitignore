@@ -76,6 +76,8 @@ Zenika
 !.config/GIMP/2.10/contextrc
 !.config/GIMP/2.10/devicerc
 !.config/GIMP/2.10/gimprc
+!.config/gh
+.config/gh/hosts.yml
 !.config/htop/htoprc
 !.config/k9s/
 .config/k9s/clusters
