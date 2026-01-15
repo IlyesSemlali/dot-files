@@ -40,7 +40,12 @@ export LESS="-r"
 export SYSTEMD_PAGER=''
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-export FZF_DEFAULT_OPTS="--height=25 --min-height=15 --border=rounded --margin=1 --padding=1 --border-label-pos=3"
+if [ -z "$TMUX" ]
+then
+  export FZF_DEFAULT_OPTS='--tmux=center,80%,60% --margin=1 --padding=1 --height=25 --min-height=15 --border=rounded --border-label-pos=3'
+else
+  export FZF_DEFAULT_OPTS='--tmux=center,80%,60% --margin=0 --padding=0'
+fi
 
 export K9S_CONFIG_DIR="$HOME/.config/k9s/"
 

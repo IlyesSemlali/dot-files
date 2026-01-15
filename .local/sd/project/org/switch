@@ -18,13 +18,13 @@ ORGANIZATIONS=$(find "${org_path}" -maxdepth 1 -mindepth 1 -type d -exec basenam
 # Handle the search term param
 if [ ${#} -eq 0 ]; then
   SEARCH_TERM=()
-  ORGANIZATION=$(echo "${ORGANIZATIONS}" | sort | fzf --tmux=center --border-label='Organizations')
+  ORGANIZATION=$(echo "${ORGANIZATIONS}" | sort | fzf --border-label='Organizations')
 else
   SEARCH_TERM=(-q "${@}")
-  if [ "$(echo "${ORGANIZATIONS}" | fzf --tmux=center --filter "${@}" | wc -l)" -eq 1 ] && [ ${#} -ne 0 ]; then
-    ORGANIZATION=$(echo "${ORGANIZATIONS}" | fzf --tmux=center --filter "${@}")
+  if [ "$(echo "${ORGANIZATIONS}" | fzf --filter "${@}" | wc -l)" -eq 1 ] && [ ${#} -ne 0 ]; then
+    ORGANIZATION=$(echo "${ORGANIZATIONS}" | fzf --filter "${@}")
   else
-    ORGANIZATION=$(echo "${ORGANIZATIONS}" | sort | fzf --tmux=center --border-label='Organizations' "${SEARCH_TERM[@]}")
+    ORGANIZATION=$(echo "${ORGANIZATIONS}" | sort | fzf --border-label='Organizations' "${SEARCH_TERM[@]}")
   fi
 fi
 

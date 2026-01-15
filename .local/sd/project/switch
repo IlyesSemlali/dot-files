@@ -44,7 +44,7 @@ run-tmux() {
 if [ ${#} -eq 0 ]; then
   # log_info "project" "$(date) no args were provided" >> "${LOG_FILE}"
   SEARCH_TERM=()
-  PROJECT=$(echo "${ACTIVE_PROJECTS}" | sort | fzf --tmux=center --border-label='Projets')
+  PROJECT=$(echo "${ACTIVE_PROJECTS}" | sort | fzf --border-label='Projets')
 else
   SEARCH_TERM=(-q "${@}")
   case "$1" in
@@ -60,10 +60,10 @@ else
   *)
     log_info "project" "$(date) using search term" >>"${LOG_FILE}"
 
-    if [ "$(echo "${ACTIVE_PROJECTS}" | fzf --tmux=center --filter "${@}" | wc -l)" -eq 1 ] && [ ${#} -ne 0 ]; then
-      PROJECT=$(echo "${ACTIVE_PROJECTS}" | fzf --tmux=center --filter "${@}")
+    if [ "$(echo "${ACTIVE_PROJECTS}" | fzf --filter "${@}" | wc -l)" -eq 1 ] && [ ${#} -ne 0 ]; then
+      PROJECT=$(echo "${ACTIVE_PROJECTS}" | fzf --filter "${@}")
     else
-      PROJECT=$(echo "${ACTIVE_PROJECTS}" | sort | fzf --tmux=center --border-label='Projets' "${SEARCH_TERM[@]}")
+      PROJECT=$(echo "${ACTIVE_PROJECTS}" | sort | fzf --border-label='Projets' "${SEARCH_TERM[@]}")
     fi
     ;;
   esac

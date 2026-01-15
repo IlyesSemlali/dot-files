@@ -31,7 +31,7 @@ elif [ $# -eq 1 ] || [ $# -eq 2 ]; then
 
   else
     path_to_restore=$(yq '.path' ${archived_path_file})
-    archive_name=$(yq '.archives[]' ${archived_path_file} | fzf --tmux=center --border-label='Archive')
+    archive_name=$(yq '.archives[]' ${archived_path_file} | fzf --border-label='Archive')
 
   fi
 
