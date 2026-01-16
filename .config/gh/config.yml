@@ -8,7 +8,7 @@ git_protocol: https
 editor:
 
 # When to interactively prompt. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
-prompt: disabled
+prompt: enabled
 
 # Preference for editor-based interactive prompting. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
 prefer_editor_prompt: disabled
