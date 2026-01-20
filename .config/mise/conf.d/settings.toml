@@ -2,8 +2,8 @@
 experimental = true
 
 trusted_config_paths = [
-    '~/work/',
-    '~/git/',
+  '~/work/',
+  '~/git/',
 ]
 
 [tools]
