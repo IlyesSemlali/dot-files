@@ -21,6 +21,7 @@ pager:
 aliases:
   co: pr checkout
   lastrun: '!gh run watch $(gh run list --workflow $1 | head -1 | awk -F "\t" "{ print \$7 }")'
+  wid: '!gh run list --workflow $1 | head -1 | awk -F "\t" "{ print \$7 }"'
   pr-url: pr view --json url -q ".url"
 
 # The path to a unix socket through which to send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
