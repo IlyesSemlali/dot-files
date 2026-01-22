@@ -7,7 +7,6 @@ kubectl = "latest"
 terraform = "latest"
 
 # Data Parsing
-yq = "latest"
 jq = "latest"
 
 # Build Tools
