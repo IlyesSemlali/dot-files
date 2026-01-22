@@ -81,6 +81,7 @@
 [delta]
   features = gruvbox theme
   paging = never
+  tabs = 2
 
 [delta "gruvbox"]
   # tune using the `delta --show-config` command
