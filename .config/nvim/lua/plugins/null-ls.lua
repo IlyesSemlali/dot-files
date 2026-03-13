@@ -16,6 +16,7 @@ return {
 				ensure_installed = {
 					"bash-language-server",
 					"black",
+					"hclfmt",
 					"jinja-lsp",
 					"jq",
 					"python-lsp-server",
