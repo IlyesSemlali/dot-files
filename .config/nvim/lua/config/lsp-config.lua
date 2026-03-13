@@ -3,7 +3,8 @@
 -- To install LSP Servers use Mason, which is configured in ~/.config/nvim/lua/plugins/mason.lua
 
 local lspconfig = vim.lsp.config
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 vim.lsp.set_log_level("off") -- Turns off Logs on LSP
 -- vim.lsp.set_log_level("debug") -- Turns on Logs on LSP
