@@ -2,6 +2,7 @@
 require("config.options")
 require("config.mappings")
 require("config.autocmds")
+require("config.transparency")
 
 -- Plugin based configurations
 require("config.lazy")

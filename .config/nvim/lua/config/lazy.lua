@@ -24,6 +24,7 @@ require("lazy").setup({
 	},
 
 	ui = {
+		backdrop = 100,
 		border = "rounded",
 		size = {
 			width = 0.8,
