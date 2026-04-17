@@ -32,7 +32,7 @@ while getopts l:w flag; do
 done
 
 if [ -z "${location}" ]; then
-  DESTINATION="$(find ${gitrepos} -maxdepth 3 -mindepth 1 \
+  DESTINATION="$(find ${gitrepos} -maxdepth 3 -mindepth 0 \
     -type d '!' -exec test -e '{}/*/.git' ';' -prune \
     -type d '!' -exec test -e '{}/.git' ';' -prune \
     -type d -print |
