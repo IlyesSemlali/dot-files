@@ -6,8 +6,8 @@ local lspconfig = vim.lsp.config
 -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-vim.lsp.set_log_level("off") -- Turns off Logs on LSP
--- vim.lsp.set_log_level("debug") -- Turns on Logs on LSP
+vim.lsp.log.set_level("off") -- Turns off Logs on LSP
+-- vim.lsp.log.set_level("debug") -- Turns on Logs on LSP
 
 capabilities.textDocument.completion.completionItem = {
 	documentationFormat = { "markdown", "plaintext" },
@@ -59,7 +59,7 @@ lspconfig("ltex", {
 	capabilities = capabilities,
 	-- If you need to disable a specific rule, set the log level to debug for the LSP:
 	-- on_attach = function()
-	-- 	vim.lsp.set_log_level("debug")
+	-- 	vim.lsp.log.set_level("debug")
 	-- end,
 
 	settings = {
