@@ -15,4 +15,5 @@ if vim.fn.filereadable(custom_config) == 1 then
 	require("config.custom")
 end
 
+require("config.clipboard")
 require("config.filetypes")
