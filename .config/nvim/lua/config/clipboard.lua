@@ -19,5 +19,4 @@ if vim.loop.os_uname().sysname == "Darwin" then
 	}
 end
 
--- Map standard yanks to the system clipboard
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = ""
