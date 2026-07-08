@@ -6,4 +6,6 @@
 
 org_path=${ORG_PATH:-${HOME}/work}
 
+mkdir -p "${org_path}"
+
 tree "${org_path}" -dL 1

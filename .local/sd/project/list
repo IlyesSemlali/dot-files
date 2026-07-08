@@ -2,12 +2,17 @@
 
 # lists available projects
 #
-# This will either add a git worktree or a link in the
-# current project according to the REOP_EXCLUDE_PATTERN
+# This will list all projects for a given organization
 
-ACTIVE_ORGANIZATION="$(cat ${HOME}/.cache/project/organization)"
+source "${HOME}/.local/lib/log"
+
+ACTIVE_ORGANIZATION="$(cat ${HOME}/.cache/project/organization 2>/dev/null)"
 projects_archive=${PROJECTS_ARCHIVE:-${HOME}/work/${ACTIVE_ORGANIZATION}}
 projects_path=${PROJECTS_PATH:-${HOME}/projects/${ACTIVE_ORGANIZATION}}
 
-tree "${projects_path}" -dL 1
-tree "${projects_archive}" -dL 1
+if [ -n "${ACTIVE_ORGANIZATION}" ]; then
+  tree "${projects_path}" -dL 1
+  tree "${projects_archive}" -dL 1
+else
+  log_error "project" "no organization has been set"
+fi
