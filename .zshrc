@@ -97,6 +97,11 @@ insert_path "${HOME}/.local/node_modules/.bin"
 insert_path "${HOME}/.krew/bin"
 append_path "${HOME}/.local/share/nvim/mason/bin"
 
+if which snap >/dev/null 2>&1; then
+  insert_path "/snap/bin"
+fi
+
+
 # GoLang
 if [ -e ${GOPATH}/bin ]; then
   append_path "$GOPATH/bin"
