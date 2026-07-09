@@ -6,7 +6,7 @@ function clip_paste(){
     "Darwin")
         pbpaste
         ;;
-    "Linux*")
+    "Linux")
         xclip -o
         ;;
   esac
