@@ -1,13 +1,13 @@
 # vim: ft=bash
 # Bash library to help unify logs accross scripts
 #
-function clip_paste(){
+function clip_paste() {
   case "$(uname -s)" in
-    "Darwin")
-        pbpaste
-        ;;
-    "Linux")
-        xclip -o
-        ;;
+  "Darwin")
+    pbpaste
+    ;;
+  "Linux")
+    xclip -o
+    ;;
   esac
 }
