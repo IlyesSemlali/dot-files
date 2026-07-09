@@ -3,11 +3,19 @@
 #
 function clip_paste() {
   case "$(uname -s)" in
+
   "Darwin")
     pbpaste
     ;;
+
   "Linux")
-    xclip -o
+    session_type="$(loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type | awk -F "=" '{print $2}')"
+    if [[ "${session_type}" == "wayland" ]]; then
+      wl-paste
+    else
+      xclip -o
+    fi
     ;;
+
   esac
 }
