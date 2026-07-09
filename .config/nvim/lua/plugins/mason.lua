@@ -6,11 +6,15 @@ return {
 	"mason-org/mason-lspconfig.nvim",
 	opts = {},
 	dependencies = {
-		{ "mason-org/mason.nvim", opts = {
-			ui = {
-				border = "rounded",
+		{
+			"mason-org/mason.nvim",
+			opts = {
+				PATH = "append",
+				ui = {
+					border = "rounded",
+				},
 			},
-		} },
+		},
 		"neovim/nvim-lspconfig",
 	},
 }
