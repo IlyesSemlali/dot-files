@@ -10,6 +10,7 @@ return {
 					timeout_ms = 1000,
 				},
 				formatters_by_ft = {
+					bash = { "shfmt" },
 					hcl = { "terragrunt_hclfmt" },
 					html = { "superhtml" },
 					json = { "jq" },
