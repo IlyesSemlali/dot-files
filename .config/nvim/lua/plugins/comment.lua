@@ -1,26 +1,14 @@
 return {
-	-- Comment Context from Treesitter
-	{
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		opts = {
-			enable_autocmd = false,
-		},
-	},
+	"numToStr/Comment.nvim",
+	opts = function()
+		return {
+			pre_hook = function(ctx)
+				-- Determine whether to use line or block commentstring
+				local type = ctx.ctype == require("Comment.utils").ctype.blockwise and "block" or "line"
 
-	-- Comment Plugin
-	{
-		"numToStr/Comment.nvim",
-		dependencies = {
-			"JoosepAlviste/nvim-ts-context-commentstring",
-		},
-		opts = function()
-			-- Defers the 'require' statement until plugin loads to prevent errors
-			local ts_context_integration = require("ts_context_commentstring.integrations.comment_nvim")
-
-			return {
-				pre_hook = ts_context_integration.create_pre_hook(),
-			}
-		end,
-	},
+				-- Use Neovim's native 0.10+ commentstring detection API
+				return vim.filetype.get_option(vim.bo.filetype, "commentstring")
+			end,
+		}
+	end,
 }
