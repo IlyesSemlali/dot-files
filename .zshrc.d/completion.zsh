@@ -17,8 +17,8 @@ zstyle ':completion:*' cache-path $ZSH_CACHE_DIR
 # Match partial words, case insensitively
 zstyle ':completion:*' matcher-list \
     'm:{[:lower:]}={[:upper:]}' \
-    '+r:|[._-]=* r:|=*' \
-    '+l:|=*'
+    'r:|[._-]=* r:|=*' \
+    'l:|=* r:|=*'
 
 # Zsh to use the same colors as ls
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  # zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
