@@ -19,7 +19,7 @@ return {
 						function()
 							local loaded, yaml_nvim = pcall(require, "yaml_nvim")
 							if loaded then
-								return yaml_nvim.get_yaml_key_and_value()
+								return yaml_nvim.get_yaml_key()
 							else
 								return ""
 							end
