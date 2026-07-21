@@ -47,11 +47,17 @@ if [ -z "${DESTINATION}" ]; then
 
 else
   pushd "${DESTINATION}" >/dev/null || return
-  git clone "$(clip_paste)" 2>/dev/null
-  log_info "project" "git repo cloned in $(pwd)"
-  popd >/dev/null || return
 
-  repo_args=(-r "${DESTINATION}/$(echo "${repo_url}" | grep -o '/.*\.git' | sed 's/\(\/\|\.git\)//g')")
+  if git clone "$(clip_paste)" 2>/dev/null; then
+    log_info "project" "git repo cloned in $(pwd)"
+    popd >/dev/null || return
+  else
+    log_error "project" "couldn't clone repo $(clip_paste)"
+    exit 1
+  fi
+
+  repo_args=(-r "${DESTINATION}/$(echo "${repo_url}" | awk -F '/' '{ print $NF }' | sed 's/\(\/\|\.git\)//g')")
+
   if [ -n "${create_worktree}" ]; then
     worktree_arg="-w"
   else
