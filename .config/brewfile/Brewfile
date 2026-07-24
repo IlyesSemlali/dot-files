@@ -38,6 +38,7 @@ brew "pre-commit"
 
 # Graphical Tools
 cask "alacritty"
+cask "claude-code"
 cask "keepassxc"
 cask "macfuse"
 cask "mos"
