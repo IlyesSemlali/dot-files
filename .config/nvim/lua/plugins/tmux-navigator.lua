@@ -2,6 +2,9 @@ return {
 	"aserowy/tmux.nvim",
 	config = function()
 		require("tmux").setup({
+
+			-- this features causes nvim to be sluggish when in tmux
+			copy_sync = false,
 			navigation = {
 				cycle_navigation = false,
 				enable_default_keybindings = true,
