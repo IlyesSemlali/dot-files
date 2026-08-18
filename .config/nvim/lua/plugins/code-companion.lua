@@ -7,14 +7,13 @@ return {
 		},
 		opts = {
 			interactions = {
-				-- Chat uses ACP: no per-token billing, auth via `claude login`
+				-- Inline uses ACP: auth via `claude login`
 				chat = {
 					adapter = "claude_code",
 				},
-				-- Inline uses HTTP: ACP doesn't support streaming buffer diffs
-				-- Requires $ANTHROPIC_API_KEY (personal or enterprise workspace key)
+				-- Inline uses ACP: auth via `claude login`
 				inline = {
-					adapter = "anthropic",
+					adapter = "claude_code",
 				},
 			},
 			display = {
@@ -23,7 +22,7 @@ return {
 				},
 			},
 			adapters = {
-				-- 1. ACP adapter — tunnels through Claude Code CLI (claude login)
+				-- ACP adapter — tunnels through Claude Code CLI (claude login)
 				--    Supports: chat, multi-file edits
 				--    Does NOT support: inline buffer diffs
 				acp = {
@@ -32,23 +31,6 @@ return {
 							env = {
 								-- Populated automatically by `claude login`
 								CLAUDE_CODE_OAUTH_TOKEN = "CLAUDE_CODE_OAUTH_TOKEN",
-							},
-						})
-					end,
-				},
-				-- 2. HTTP adapter — standard Anthropic API
-				--    Used only for inline (<leader>ci), since ACP can't do inline
-				--    Set $ANTHROPIC_API_KEY to your personal or enterprise API key
-				http = {
-					anthropic = function()
-						return require("codecompanion.adapters").extend("anthropic", {
-							env = {
-								api_key = "ANTHROPIC_API_KEY",
-							},
-							schema = {
-								model = {
-									default = "claude-sonnet-5",
-								},
 							},
 						})
 					end,
