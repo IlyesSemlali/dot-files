@@ -51,7 +51,6 @@ end
 
 lspconfig("ltex", {
 	filetypes = {
-		"gitcommit",
 		"latex",
 		"markdown",
 		"tex",
@@ -64,14 +63,56 @@ lspconfig("ltex", {
 
 	settings = {
 		ltex = {
-			language = "auto",
+			-- Starting default; config.ltex detects French vs. English per
+			-- buffer and switches this live (ltex-ls's own "auto" mode covers
+			-- every LanguageTool language and drops spellchecking, so we
+			-- restrict detection ourselves to just these two).
+			language = "en-US",
 			disabledRules = {
 				["fr"] = { "FRENCH_WHITESPACE" },
 			},
-			--
 		},
 	},
 })
+
+-- gitcommit gets its own ltex client/settings, deliberately kept separate
+-- from the one above: ltex-ls settings apply to the whole running server, so
+-- disabling rules here would also silence real mistakes in markdown/latex
+-- prose. Conventional Commits' `type(scope): subject` header trips two rules
+-- that were confirmed empirically with ltex-cli against sample commit
+-- messages (see below for how it flags each):
+--   en-US: UPPERCASE_SENTENCE_START ("feat: add x" - "feat" isn't capitalized)
+--          SPACE_BEFORE_PARENTHESIS ("feat(auth)" - wants "feat (auth)")
+--   fr:    UPPERCASE_SENTENCE_START (same, for a lowercase French subject)
+--          PARENTHESES              (French analogue of SPACE_BEFORE_PARENTHESIS)
+-- FRENCH_WHITESPACE (no space before ":") is carried over from the ltex
+-- config above for the same reason it's disabled there.
+lspconfig("ltex_gitcommit", {
+	cmd = { "ltex-ls" },
+	filetypes = { "gitcommit" },
+	root_dir = vim.uv.cwd(),
+	capabilities = capabilities,
+	settings = {
+		ltex = {
+			-- ltex-ls's own default `enabled` list doesn't include
+			-- "gitcommit" at all, so without this it silently checks
+			-- nothing here (confirmed live: client attaches fine, zero
+			-- diagnostics ever, even for plain misspellings).
+			enabled = { "gitcommit" },
+			language = "en-US",
+			disabledRules = {
+				["en-US"] = { "UPPERCASE_SENTENCE_START", "SPACE_BEFORE_PARENTHESIS" },
+				["fr"] = { "FRENCH_WHITESPACE", "UPPERCASE_SENTENCE_START", "PARENTHESES" },
+			},
+		},
+	},
+})
+-- Not a real Mason package name, so mason-lspconfig's automatic_enable
+-- never turns it on by itself.
+vim.lsp.enable("ltex_gitcommit")
+
+-- Detects French vs. English per buffer and switches ltex-ls's language live.
+require("config.ltex").setup()
 
 lspconfig("terraformls", {
 	capabilities = capabilities,
