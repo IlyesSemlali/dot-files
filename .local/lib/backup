@@ -51,7 +51,7 @@ function check_borg_repo_var() {
     log_debug "backup" "\$BORG_REPO is set"
   fi
 
-  if [[ "${BORG_REPO}" =~ ^(ssh://[0-9a-z]*(@[0-9a-z]*)?(:[0-9]*)?)?(/[0-9A-Za-z]*)*$ ]]; then
+  if [[ "${BORG_REPO}" =~ ^(ssh://[0-9A-Za-z_.-]*(@[0-9A-Za-z_.-]*)?(:[0-9]*)?)?(/[0-9A-Za-z_.-]*)*$ ]]; then
     log_debug "backup" "\$BORG_REPO matches pattern"
   else
     log_error "backup" "\$BORG_REPO doesn't match pattern"
