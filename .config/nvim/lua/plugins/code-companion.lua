@@ -45,13 +45,6 @@ return {
 				desc = "CodeCompanion: Toggle Chat",
 				mode = { "n", "v" },
 			},
-			-- Open action palette (explain, refactor, generate tests, …)
-			{
-				"<leader>ca",
-				"<cmd>CodeCompanionActions<cr>",
-				desc = "CodeCompanion: Action Palette",
-				mode = { "n", "v" },
-			},
 			-- Inline prompt: streams diff directly into the buffer (uses HTTP / API key)
 			{ "<leader>ci", "<cmd>CodeCompanion<cr>", desc = "CodeCompanion: Inline Prompt", mode = { "n", "v" } },
 		},
