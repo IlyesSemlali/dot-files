@@ -11,3 +11,5 @@
 .vim_session
 .zsh_history
 **/*.orig
+
+**/.claude/settings.local.json
