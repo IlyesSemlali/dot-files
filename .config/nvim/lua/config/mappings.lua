@@ -15,6 +15,9 @@ map("n", "<C-k>", "<C-w>k", { desc = "Window up" })
 map("v", "<", "<gv", { desc = "Unindent line" })
 map("v", ">", ">gv", { desc = "Indent line" })
 
+--
+map("v", "gs", ":sort<CR>", { desc = "Sort selection" })
+
 -- LSP
 map("n", "<leader>ca", function()
 	vim.lsp.buf.code_action()
