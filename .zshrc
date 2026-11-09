@@ -31,6 +31,7 @@ fi
 
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.terraform} --exclude .zsh_history'
 alias dv="cdi"
+alias cr='cd "$(git rev-parse --show-toplevel)"'
 
 unset SSH_ASKPASS
 
