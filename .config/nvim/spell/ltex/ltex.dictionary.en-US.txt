@@ -1,0 +1,12 @@
+nvim
+tex
+gitcommit
+hardcoded
+ltex-ls
+Neovim
+filetype
+overridable
+headlessly
+LTeX
+LazyVim
+gitignored
