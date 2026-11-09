@@ -118,6 +118,12 @@ lspconfig("terraformls", {
 	capabilities = capabilities,
 
 	filetypes = { "terraform", "tf.jinja" },
+
+	-- Disable syntax highlighting from the LSP, since TreeSitter's
+	-- one is better and matches bat's colorscheme
+	on_attach = function(client)
+		client.server_capabilities.semanticTokensProvider = nil
+	end,
 })
 
 lspconfig("jinja_lsp", {

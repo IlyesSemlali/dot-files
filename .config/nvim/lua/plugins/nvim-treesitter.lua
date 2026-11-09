@@ -8,6 +8,8 @@ return {
 
 		config = function()
 			vim.treesitter.language.register("bash", "sh")
+			vim.treesitter.language.register("hcl", "terraform")
+			vim.treesitter.language.register("hcl", "terraform-vars")
 
 			require("nvim-treesitter").setup()
 
