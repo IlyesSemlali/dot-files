@@ -1,0 +1,1 @@
+{"rule":"AUX_AVOIR_VCONJ","sentence":"^\\QLe discours à avoir doit être discuté avec la DA pour garantir une fin propre et sereine\\E$"}
